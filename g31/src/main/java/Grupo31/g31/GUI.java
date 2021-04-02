@@ -49,6 +49,7 @@ public class GUI {
 		frame.add(upperP, BorderLayout.NORTH);
 		frame.add(lowerP, BorderLayout.CENTER);
 		System.out.println("ola");
+		System.out.println("adeus");
 	}
 
 	public void open() {
