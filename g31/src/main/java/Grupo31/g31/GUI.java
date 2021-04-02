@@ -27,7 +27,7 @@ public class GUI {
 		frame.setLayout(new BorderLayout());
 		addFrameContent();
 	}
-	//as
+	 
 	private void addFrameContent() {
 		JPanel upperP = new JPanel();
 		JPanel lowerP = new JPanel();
@@ -48,7 +48,7 @@ public class GUI {
 
 		frame.add(upperP, BorderLayout.NORTH);
 		frame.add(lowerP, BorderLayout.CENTER);
-
+		System.out.println("ola");
 	}
 
 	public void open() {
