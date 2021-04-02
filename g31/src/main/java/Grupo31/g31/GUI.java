@@ -27,7 +27,7 @@ public class GUI {
 		frame.setLayout(new BorderLayout());
 		addFrameContent();
 	}
-	
+	//as
 	private void addFrameContent() {
 		JPanel upperP = new JPanel();
 		JPanel lowerP = new JPanel();
