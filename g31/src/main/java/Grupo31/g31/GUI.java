@@ -48,7 +48,7 @@ public class GUI {
 
 		frame.add(upperP, BorderLayout.NORTH);
 		frame.add(lowerP, BorderLayout.CENTER);
-		System.out.println("ines  ");
+		System.out.println("carol");
 
 	}
 
