@@ -1,57 +1,97 @@
 package Grupo31.g31;
 
-import java.io.*;
-import java.awt.*;
-import javax.swing.*;
-import java.awt.event.*;
-import javax.swing.filechooser.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class ImportExcel extends GUI{
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.text.html.HTMLDocument.Iterator;
 
-	public static void main(String[]args){
-		JFrame frame = new JFrame();
-		frame.setLayout(null);
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Workbook;
 
+public class ImportExcel {
+	public static String keep = "";
+
+	public static void chooseFile() {
+		JFileChooser fileChooser = new JFileChooser();
+		int returnValue = fileChooser.showOpenDialog(null);
+		if (returnValue == JFileChooser.APPROVE_OPTION) {
+			File selectedFile = fileChooser.getSelectedFile();
+
+			keep = selectedFile.getName();
+			System.out.println(keep);
+		}
+	}
+	
+	private static String cellToString(HSSFCell cell) {
+		CellType type = cell.getCellType();
+		Object result;
+		switch (type) {
+		case NUMERIC: 
+			result = cell.getNumericCellValue();
+			break;
+		case STRING :
+			result = cell.getStringCellValue();
+			break;
+		default:
+			throw new RuntimeException("there are no support for this type of cell");
+		}
+		return result.toString();
+	}
+	
+	public static void main(String[] args) throws IOException {
+
+		// File Openner
+		JFrame.setDefaultLookAndFeelDecorated(true);
+		JDialog.setDefaultLookAndFeelDecorated(true);
+		JFrame frame = new JFrame("JComboBox Test");
+		frame.setLayout(new FlowLayout());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setTitle("Select File for Linking");
-				frame.setSize(400, 100);
-				Container container = frame.getContentPane();
-				container.setLayout(new GridBagLayout());
+		JButton button = new JButton("Select File");
 
-				final JTextField text=new JTextField(20);
+		button.addActionListener(new ActionListener() {
 
-				JButton b=new JButton("Select File");
-				text.setBounds(20,20,120,20);
-				b.setBounds(150,20,80,20);
+			public void actionPerformed(ActionEvent ae) {
+				chooseFile();
+			}
+		});
+		frame.add(button);
+		frame.pack();
+		frame.setVisible(true);
+		// end of the File opener
+		// read from excel
 
-				// b.setText("<html><font color="blue">Select File</font></html>");
-				b.setHorizontalAlignment(SwingConstants.LEFT);
-				//b.setBorderPainted(false);
-				//b.setOpaque(false);
-				// b.setBackground(Color.lightGray);
-				b.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e){
-						JFileChooser fc = new JFileChooser();
-						fc.addChoosableFileFilter(new OnlyExt());
+		chooseFile(); // <- make sure that the file is chosen
 
-						int returnval = fc.showOpenDialog(null);
-						if (returnval == JFileChooser.APPROVE_OPTION) {
-							File file = fc.getSelectedFile();
-							text.setText(file.getPath());
-						}
-					}
-				});
-				container.add(text);
-				container.add(b);
-				frame.setVisible(true);
-	}
-}
+		File excel = new File(keep);
 
-class OnlyExt extends javax.swing.filechooser.FileFilter{
-	public boolean accept(File file) {
-		if (file.isDirectory()) return false;
-		String name = file.getName().toLowerCase();
-		return (name.endsWith(".xls"));
-	}
-	public String getDescription() { return "Excel ( *.xls)"; }
+		FileInputStream fis = new FileInputStream(excel);
+		HSSFWorkbook wb = new HSSFWorkbook(fis);
+
+
+		String sheetName = "Assignments"; //if my tempsheet start with "sheetname" thats okay
+
+		for (int i = 0; i < wb.getNumberOfSheets() - 1; i++) {
+			HSSFSheet tmpSheet = wb.getSheetAt(i);
+			if (tmpSheet.getSheetName().startsWith(sheetName)) {
+
+			} else {
+				wb.removeSheetAt(i);
+			}
+		}
+
+
+	}// end of the main
 }
