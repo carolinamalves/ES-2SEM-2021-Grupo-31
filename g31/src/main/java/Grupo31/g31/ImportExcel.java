@@ -1,97 +1,142 @@
 package Grupo31.g31;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.awt.FlowLayout;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.text.html.HTMLDocument.Iterator;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.CellType;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Workbook;
+import jxl.Cell;
+import jxl.Sheet;
+import jxl.Workbook;
+import jxl.read.biff.BiffException;
 
-public class ImportExcel {
-	public static String keep = "";
+public class ImportExcel extends JFrame{  
 
-	public static void chooseFile() {
-		JFileChooser fileChooser = new JFileChooser();
-		int returnValue = fileChooser.showOpenDialog(null);
-		if (returnValue == JFileChooser.APPROVE_OPTION) {
-			File selectedFile = fileChooser.getSelectedFile();
-
-			keep = selectedFile.getName();
-			System.out.println(keep);
-		}
-	}
+	static JTable table;
+	static JScrollPane scroll;
+	static Vector headers = new Vector();
+	static DefaultTableModel model = null;
+	static Vector data = new Vector();
+	static JButton jbClick;
+	static JFileChooser jChooser;
 	
-	private static String cellToString(HSSFCell cell) {
-		CellType type = cell.getCellType();
-		Object result;
-		switch (type) {
-		case NUMERIC: 
-			result = cell.getNumericCellValue();
-			break;
-		case STRING :
-			result = cell.getStringCellValue();
-			break;
-		default:
-			throw new RuntimeException("there are no support for this type of cell");
-		}
-		return result.toString();
-	}
-	
-	public static void main(String[] args) throws IOException {
+	static int tableWidth = 0;
+	static int tableHeight = 0;
 
-		// File Openner
-		JFrame.setDefaultLookAndFeelDecorated(true);
-		JDialog.setDefaultLookAndFeelDecorated(true);
-		JFrame frame = new JFrame("JComboBox Test");
-		frame.setLayout(new FlowLayout());
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		JButton button = new JButton("Select File");
+	public ImportExcel() {
+		super("Import Excel To JTable");
+		
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		JPanel buttonPanel = new JPanel();
+		buttonPanel.setBackground(Color.white);
+		jChooser = new JFileChooser();
+		jbClick = new JButton("Select Excel File");
+		buttonPanel.add(jbClick, BorderLayout.CENTER);
+		jbClick.addActionListener(new ActionListener() {
 
-		button.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				jChooser.showOpenDialog(null);
 
-			public void actionPerformed(ActionEvent ae) {
-				chooseFile();
+				File file = jChooser.getSelectedFile();
+				if (!file.getName().endsWith("xls")) {
+					JOptionPane.showMessageDialog(null, "Please select only Excel file.", "Error", JOptionPane.ERROR_MESSAGE);
+				} else {
+					fillData(file);
+					model = new DefaultTableModel(data, headers);
+					tableWidth = model.getColumnCount() * 150;
+					tableHeight = model.getRowCount() * 25;
+					table.setPreferredSize(new Dimension(tableWidth, tableHeight));
+
+					table.setModel(model);
+				}
 			}
 		});
-		frame.add(button);
-		frame.pack();
-		frame.setVisible(true);
-		// end of the File opener
-		// read from excel
 
-		chooseFile(); // <- make sure that the file is chosen
+		table = new JTable();
+		table.setAutoCreateRowSorter(true);
+		model = new DefaultTableModel(data, headers);
 
-		File excel = new File(keep);
+		table.setModel(model);
+		table.setBackground(Color.pink);
 
-		FileInputStream fis = new FileInputStream(excel);
-		HSSFWorkbook wb = new HSSFWorkbook(fis);
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		table.setEnabled(false);
+		table.setRowHeight(25);
+		table.setRowMargin(4);
 
+		tableWidth = model.getColumnCount() * 150;
+		tableHeight = model.getRowCount() * 25;
+		table.setPreferredSize(new Dimension(tableWidth, tableHeight));
 
-		String sheetName = "sheetName.xlsx"; //if my tempsheet start with "sheetname" thats okay
+		scroll = new JScrollPane(table);
+		scroll.setBackground(Color.pink);
+		scroll.setPreferredSize(new Dimension(300, 300));
+		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		getContentPane().add(buttonPanel, BorderLayout.NORTH);
+		getContentPane().add(scroll, BorderLayout.CENTER);
+		setSize(600, 600);
+		setResizable(true);
+		setVisible(true);
+	}
 
-		for (int i = 0; i < wb.getNumberOfSheets() - 1; i++) {
-			HSSFSheet tmpSheet = wb.getSheetAt(i);
-			if (tmpSheet.getSheetName().startsWith(sheetName)) {
+	/**
+	 * Fill JTable with Excel file data.
+	 *
+	 * @param file file :contains xls file to display in jTable
+	 */
+	
+	void fillData(File file) {
 
-			} else {
-				wb.removeSheetAt(i);
+		Workbook workbook = null;
+		try {
+			try {
+				workbook = Workbook.getWorkbook(file);
+			} catch (IOException ex) {
+				Logger.getLogger(ImportExcel.class.getName()).log(Level.SEVERE, null, ex);
 			}
+			Sheet sheet = workbook.getSheet(0);
+
+			headers.clear();
+			for (int i = 0; i < sheet.getColumns(); i++) {
+				Cell cell1 = sheet.getCell(i, 0);
+				headers.add(cell1.getContents());
+			}
+
+			data.clear();
+			for (int j = 1; j < sheet.getRows(); j++) {
+				Vector d = new Vector();
+				for (int i = 0; i < sheet.getColumns(); i++) {
+
+					Cell cell = sheet.getCell(i, j);
+
+					d.add(cell.getContents());
+				}
+				d.add("\n");
+				data.add(d);
+			}
+		} catch (BiffException e) {
+			e.printStackTrace();
 		}
+	}
 
-
-	}// end of the main
+	public static void main(String[] args) {
+		new ImportExcel();
+	}
 }
