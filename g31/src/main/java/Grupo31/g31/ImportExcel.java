@@ -29,26 +29,24 @@ public class ImportExcel extends JFrame{
 
 	static JTable table;
 	static JScrollPane scroll;
-	// header is Vector contains table Column
 	static Vector headers = new Vector();
-	// Model is used to construct JTable
 	static DefaultTableModel model = null;
-	// data is Vector contains Data from Excel File
 	static Vector data = new Vector();
 	static JButton jbClick;
 	static JFileChooser jChooser;
-	static int tableWidth = 0; // set the tableWidth
-	static int tableHeight = 0; // set the tableHeight
+	
+	static int tableWidth = 0;
+	static int tableHeight = 0;
 
 	public ImportExcel() {
 		super("Import Excel To JTable");
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setBackground(Color.white);
 		jChooser = new JFileChooser();
 		jbClick = new JButton("Select Excel File");
 		buttonPanel.add(jbClick, BorderLayout.CENTER);
-		// Show Button Click Event
 		jbClick.addActionListener(new ActionListener() {
 
 			@Override
@@ -57,19 +55,13 @@ public class ImportExcel extends JFrame{
 
 				File file = jChooser.getSelectedFile();
 				if (!file.getName().endsWith("xls")) {
-					JOptionPane.showMessageDialog(null,
-							"Please select only Excel file.",
-							"Error", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Please select only Excel file.", "Error", JOptionPane.ERROR_MESSAGE);
 				} else {
 					fillData(file);
-					model = new DefaultTableModel(data,
-							headers);
-					tableWidth = model.getColumnCount()
-							* 150;
-					tableHeight = model.getRowCount()
-							* 25;
-					table.setPreferredSize(new Dimension(
-							tableWidth, tableHeight));
+					model = new DefaultTableModel(data, headers);
+					tableWidth = model.getColumnCount() * 150;
+					tableHeight = model.getRowCount() * 25;
+					table.setPreferredSize(new Dimension(tableWidth, tableHeight));
 
 					table.setModel(model);
 				}
@@ -90,20 +82,15 @@ public class ImportExcel extends JFrame{
 
 		tableWidth = model.getColumnCount() * 150;
 		tableHeight = model.getRowCount() * 25;
-		table.setPreferredSize(new Dimension(
-				tableWidth, tableHeight));
+		table.setPreferredSize(new Dimension(tableWidth, tableHeight));
 
 		scroll = new JScrollPane(table);
 		scroll.setBackground(Color.pink);
 		scroll.setPreferredSize(new Dimension(300, 300));
-		scroll.setHorizontalScrollBarPolicy(
-				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		scroll.setVerticalScrollBarPolicy(
-				JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-		getContentPane().add(buttonPanel,
-				BorderLayout.NORTH);
-		getContentPane().add(scroll,
-				BorderLayout.CENTER);
+		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		getContentPane().add(buttonPanel, BorderLayout.NORTH);
+		getContentPane().add(scroll, BorderLayout.CENTER);
 		setSize(600, 600);
 		setResizable(true);
 		setVisible(true);
