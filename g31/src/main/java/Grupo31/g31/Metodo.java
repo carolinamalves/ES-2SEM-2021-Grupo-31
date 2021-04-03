@@ -1,39 +1,38 @@
 package Grupo31.g31;
 
-
 public class Metodo {
-	 int MethodId;
-	 String name_package;
-	 String name_class;
-	 String name_method;
-	 int Nom_Class;
-	 int Loc_Class;
-	 int Wmc_Class;
-	 boolean is_God_Class;
-	 int Loc_Method;
-	 int CYCLO_method;
-	 boolean is_Long_Method;
-		
-	 public int getMethodId() {
+	int MethodId;
+	String name_package;
+	String name_class;
+	String name_method;
+	int Nom_Class;
+	int Loc_Class;
+	int Wmc_Class;
+	boolean is_God_Class;
+	int Loc_Method;
+	int CYCLO_method;
+	boolean is_Long_Method;
+
+	public int getMethodId() {
 		return MethodId;
-	 }
-		
-	 public void setMethodId(int methodId) {
+	}
+
+	public void setMethodId(int methodId) {
 		MethodId = methodId;
-	 }
-		
-	 public String getName_package() {
+	}
+
+	public String getName_package() {
 		return name_package;
-	 }
+	}
 
 	public void setName_package(String name_package) {
 		this.name_package = name_package;
 	}
-		
+
 	public String getName_class() {
 		return name_class;
 	}
-		
+
 	public void setName_class(String name_class) {
 		this.name_class = name_class;
 	}
@@ -41,39 +40,39 @@ public class Metodo {
 	public String getName_method() {
 		return name_method;
 	}
-		
+
 	public void setName_method(String name_method) {
 		this.name_method = name_method;
 	}
-		
+
 	public int getNom_Class() {
 		return Nom_Class;
 	}
-		
+
 	public void setNom_Class(int nom_Class) {
 		Nom_Class = nom_Class;
 	}
-		
+
 	public int getLoc_Class() {
 		return Loc_Class;
 	}
-		
+
 	public void setLoc_Class(int loc_Class) {
 		Loc_Class = loc_Class;
 	}
-		
+
 	public int getWmc_Class() {
 		return Wmc_Class;
 	}
-		
+
 	public void setWmc_Class(int wmc_Class) {
 		Wmc_Class = wmc_Class;
 	}
-		
+
 	public boolean isIs_God_Class() {
 		return is_God_Class;
 	}
-		
+
 	public void setIs_God_Class(boolean is_God_Class) {
 		this.is_God_Class = is_God_Class;
 	}
@@ -93,17 +92,17 @@ public class Metodo {
 	public void setCYCLO_method(int cYCLO_method) {
 		CYCLO_method = cYCLO_method;
 	}
-		
+
 	public boolean isIs_Long_Method() {
 		return is_Long_Method;
 	}
-		
+
 	public void setIs_Long_Method(boolean is_Long_Method) {
 		this.is_Long_Method = is_Long_Method;
 	}
 
-	 public Metodo(int MethodId,String name_package,String name_class,String name_method,int Nom_Class,int Loc_Class,
-	 int Wmc_Class,int Loc_Method,int CYCLO_method) {
+	public Metodo(int MethodId,String name_package,String name_class,String name_method,int Nom_Class,int Loc_Class,
+			int Wmc_Class,int Loc_Method,int CYCLO_method) {
 		this.MethodId=MethodId;
 		this.name_package=name_package;
 		this.name_class=name_class;
@@ -114,8 +113,4 @@ public class Metodo {
 		this.Loc_Method=Loc_Method;
 		this.CYCLO_method=CYCLO_method;
 	}
-		 
-		 
-		 
-	
 }
