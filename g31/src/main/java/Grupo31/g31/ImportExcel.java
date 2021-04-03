@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -20,10 +21,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import jxl.Cell;
-import jxl.Sheet;
-import jxl.Workbook;
-import jxl.read.biff.BiffException;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 public class ImportExcel extends JFrame{  
 
@@ -34,13 +35,13 @@ public class ImportExcel extends JFrame{
 	static Vector data = new Vector();
 	static JButton jbClick;
 	static JFileChooser jChooser;
-	
+
 	static int tableWidth = 0;
 	static int tableHeight = 0;
 
 	public ImportExcel() {
 		super("Import Excel To JTable");
-		
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setBackground(Color.white);
@@ -73,7 +74,7 @@ public class ImportExcel extends JFrame{
 		model = new DefaultTableModel(data, headers);
 
 		table.setModel(model);
-		table.setBackground(Color.pink);
+		table.setBackground(Color.white);
 
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		table.setEnabled(false);
@@ -96,45 +97,64 @@ public class ImportExcel extends JFrame{
 		setVisible(true);
 	}
 
-	/**
-	 * Fill JTable with Excel file data.
-	 *
-	 * @param file file :contains xls file to display in jTable
-	 */
-	
-	void fillData(File file) {
-
-		Workbook workbook = null;
+	void fillData(File file)
+	{
+		int index=-1;
+		HSSFWorkbook workbook = null;
 		try {
 			try {
-				workbook = Workbook.getWorkbook(file);
-			} catch (IOException ex) {
-				Logger.getLogger(ImportExcel.class.getName()).log(Level.SEVERE, null, ex);
+				FileInputStream inputStream = new FileInputStream (file);
+				workbook = new HSSFWorkbook(inputStream);
 			}
-			Sheet sheet = workbook.getSheet(0);
-
-			headers.clear();
-			for (int i = 0; i < sheet.getColumns(); i++) {
-				Cell cell1 = sheet.getCell(i, 0);
-				headers.add(cell1.getContents());
+			catch (IOException ex)
+			{
+				Logger.getLogger(ImportExcel.class. getName()).log(Level.SEVERE, null, ex);
 			}
 
-			data.clear();
-			for (int j = 1; j < sheet.getRows(); j++) {
-				Vector d = new Vector();
-				for (int i = 0; i < sheet.getColumns(); i++) {
+			String[] strs=new String[workbook.getNumberOfSheets()];
+			//get all sheet names from selected workbook
+			for (int i = 0; i < strs.length; i++) {
+				strs[i]= workbook.getSheetName(i); }
+			JFrame frame = new JFrame("Input Dialog");
 
-					Cell cell = sheet.getCell(i, j);
+			String selectedsheet = (String) JOptionPane.showInputDialog(
+					frame, "Which worksheet you want to import ?", "Select Worksheet",
+					JOptionPane.QUESTION_MESSAGE, null, strs, strs[0]);
 
-					d.add(cell.getContents());
+			if (selectedsheet!=null) {
+				for (int i = 0; i < strs.length; i++)
+				{
+					if (workbook.getSheetName(i).equalsIgnoreCase(selectedsheet))
+						index=i; }
+				HSSFSheet sheet = workbook.getSheetAt(index);
+				HSSFRow row=sheet.getRow(0);
+
+				headers.clear();
+				for (int i = 0; i < row.getLastCellNum(); i++)
+				{
+					HSSFCell cell1 = row.getCell(i);
+					headers.add(cell1.toString());
 				}
-				d.add("\n");
-				data.add(d);
+
+				data.clear();
+				for (int j = 1; j < sheet.getLastRowNum() + 1; j++)
+				{
+					Vector d = new Vector();
+					row=sheet.getRow(j);
+					int noofrows=row.getLastCellNum();
+					for (int i = 0; i < noofrows; i++)
+					{    //To handle empty excel cells 
+						HSSFCell cell=row.getCell(i,
+								org.apache.poi.ss.usermodel.Row.MissingCellPolicy.CREATE_NULL_AS_BLANK);
+						d.add(cell.toString());
+					}
+					d.add("\n");
+					data.add(d);
+				}
 			}
-		} catch (BiffException e) {
-			e.printStackTrace();
+			else { return; }
 		}
-	}
+		catch (Exception e) { e.printStackTrace(); } }
 
 	public static void main(String[] args) {
 		new ImportExcel();
