@@ -109,10 +109,7 @@ public class ImportExcel extends JFrame{
 			try {
 				workbook = Workbook.getWorkbook(file);
 			} catch (IOException ex) {
-				Logger.getLogger(
-						ImportExcel.class.
-						getName()).log(Level.SEVERE,
-								null, ex);
+				Logger.getLogger(ImportExcel.class.getName()).log(Level.SEVERE, null, ex);
 			}
 			Sheet sheet = workbook.getSheet(0);
 
