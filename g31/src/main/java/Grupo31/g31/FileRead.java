@@ -4,10 +4,10 @@ package Grupo31.g31;
 
 import java.io.*;
 import java.awt.*;
-import javax.swing.*;
 
 
-class FileRead extends JFrame {
+
+class FileRead {
 	
 
 	static File name;
@@ -54,11 +54,12 @@ public 	FileRead(){
     	}
     }
 
-    totalLines= lines + totalLines;
+    totalLines= lines + emptyLines;
     
     System.out.println("number of lines:" + lines);
     System.out.println("number of lines:" + emptyLines);
-   
+    System.out.println("number of lines:" + totalLines);
+    
     in.close();
     }catch (Exception e){
       System.err.println("Error: " + e.getMessage());
