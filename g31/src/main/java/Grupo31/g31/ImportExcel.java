@@ -81,7 +81,7 @@ public class ImportExcel {
 		HSSFWorkbook wb = new HSSFWorkbook(fis);
 
 
-		String sheetName = "Code_Smells.xlsx"; //if my tempsheet start with "sheetname" thats okay
+		String sheetName = "sheetName.xlsx"; //if my tempsheet start with "sheetname" thats okay
 
 		for (int i = 0; i < wb.getNumberOfSheets() - 1; i++) {
 			HSSFSheet tmpSheet = wb.getSheetAt(i);
