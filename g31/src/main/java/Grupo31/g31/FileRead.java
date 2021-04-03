@@ -4,16 +4,16 @@ package Grupo31.g31;
 
 import java.io.*;
 import java.awt.*;
-import javax.swing.*;
 
 
-class FileRead extends JFrame {
+
+class FileRead {
 	
 
 	static File name;
-	static int count =0;
-	static int count2=0;
-	static int totalLines;
+	static int lines=0;
+	static int emptyLines=0;
+	static int totalLines=0;
 	
 public 	FileRead(){
 	try{
@@ -24,8 +24,6 @@ public 	FileRead(){
    	 }catch(Exception e){
    	 	System.err.println(e.getMessage());
    	 	}
-   	setSize(400,400);
-   	setVisible(true);
    	 }
    	 
 	
@@ -37,18 +35,9 @@ public 	FileRead(){
    	public static void setTotalLines(int totalLines) {
    		FileRead.totalLines = totalLines;
    	}
-
-
-	/*public void paint(Graphics g){
-   	 	super.paint(g);
-   	 	g.drawString("Testing open file", 30,100);
-   	 	g.drawString("Number of characters' lines: " + count,30,200);
-   	 	g.drawString("Number of empty lines :" + count2, 30, 250);
-   	 }*/
-		
+	
    public void Contar(){
-   //	FileRead fr = new FileRead();
-   //	fr.setDefaultCloseOperation(2);
+  
 
       try{
     FileInputStream fstream = new FileInputStream(name); 
@@ -59,23 +48,23 @@ public 	FileRead(){
    
     while((strLine = br.readLine())!= null ){
     	if (strLine.trim().length() != 0){
-    		System.out.println(strLine);
-    		count++;
+    		lines++;
     	}else{
-    		count2++;
+    		emptyLines++;
     	}
     }
 
-    totalLines= count + count2;
+    totalLines= lines + emptyLines;
     
-    System.out.println("number of lines:" + count);
-    System.out.println("number of lines:" + count2);
-   
+    System.out.println("number of lines:" + lines);
+    System.out.println("number of lines:" + emptyLines);
+    System.out.println("number of lines:" + totalLines);
+    
     in.close();
     }catch (Exception e){
       System.err.println("Error: " + e.getMessage());
     }
-  //  fr.repaint();
+
 }
    
  
