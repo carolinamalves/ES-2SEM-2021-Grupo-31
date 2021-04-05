@@ -29,6 +29,7 @@ package Grupo31.g31;
 				List<Statement> a=unidadeC.findAll(Statement.class);
 					for(Statement i:a)
 				{
+						//counter de statement if e for
 						if (i.isExpressionStmt() || i.isIfStmt() || i.isForStmt())
 					contador++;
 					}
