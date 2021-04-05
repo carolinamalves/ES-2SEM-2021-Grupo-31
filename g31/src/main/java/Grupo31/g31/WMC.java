@@ -30,7 +30,7 @@ package Grupo31.g31;
 					for(Statement i:a)
 				{
 						//counter de statement if e for
-						if (i.isExpressionStmt() || i.isIfStmt() || i.isForStmt())
+						if (i.isExpressionStmt() || i.isIfStmt() || i.isForStmt()||i.isWhileStmt()||i.isForEachStmt())
 					contador++;
 					}
 				}	
