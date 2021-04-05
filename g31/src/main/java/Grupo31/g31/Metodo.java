@@ -77,14 +77,6 @@ public class Metodo {
 	 public void setWmc_Class(int wmc_Class) {
 		Wmc_Class = wmc_Class;
 	}
-	
-	 public boolean isIs_God_Class() {
-		return is_God_Class;
-	}
-	
-	 public void setIs_God_Class(boolean is_God_Class) {
-		this.is_God_Class = is_God_Class;
-	}
 
 	 public int getLoc_Method() {
 		return Loc_Method;
@@ -102,13 +94,7 @@ public class Metodo {
 		CYCLO_method = cYCLO_method;
 	}
 	
-	 public boolean isIs_Long_Method() {
-		return is_Long_Method;
-	}
-	
-	 public void setIs_Long_Method(boolean is_Long_Method) {
-		this.is_Long_Method = is_Long_Method;
-	}
+
 
 	 public Metodo(int MethodId,String name_package,String name_class,String name_method,int Nom_Class,int Loc_Class,
 	 int Wmc_Class,int Loc_Method,int CYCLO_method) {
