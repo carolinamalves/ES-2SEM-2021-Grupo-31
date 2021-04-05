@@ -4,7 +4,7 @@ package Grupo31.g31;
 	import java.lang.reflect.Modifier;
 		
 	public class Nom_class {
-//commit;
+//commit
 		public String getClassName() {
 		        String className = this.getClass().getSimpleName(); 
 		        return className;
