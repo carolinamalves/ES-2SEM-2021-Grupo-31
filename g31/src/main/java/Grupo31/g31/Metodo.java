@@ -19,10 +19,8 @@ public class Metodo {
 	 int Nom_Class;
 	 int Loc_Class;
 	 int Wmc_Class;
-	 boolean is_God_Class;
 	 int Loc_Method;
 	 int CYCLO_method;
-	 boolean is_Long_Method;
 	
 	 public int getMethodId() {
 		return MethodId;
