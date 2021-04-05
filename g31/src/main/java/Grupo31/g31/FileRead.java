@@ -9,6 +9,7 @@ class FileRead {
 	static int lines=0;
 	static int emptyLines=0;
 	static int totalLines=0;
+	
 
 	public 	FileRead(){
 		try{

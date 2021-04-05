@@ -122,4 +122,8 @@ public class Metodo {
 		 this.Loc_Method=Loc_Method;
 		 this.CYCLO_method=CYCLO_method;
 	 }
+
 }
+
+
+
