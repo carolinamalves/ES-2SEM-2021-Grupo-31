@@ -113,7 +113,7 @@ public class Metodo {
 	}
 
 	 public Metodo(int MethodId,String name_package,String name_class,String name_method,int Nom_Class,int Loc_Class,
-	 int Wmc_Class, boolean is_God_Class,int Loc_Method,int CYCLO_method,boolean is_Long_Method) {
+	 int Wmc_Class,int Loc_Method,int CYCLO_method) {
 		 this.MethodId=MethodId;
 		 this.name_package=name_package;
 		 this.name_class=name_class;
@@ -124,3 +124,4 @@ public class Metodo {
 		 this.Loc_Method=Loc_Method;
 		 this.CYCLO_method=CYCLO_method;
 	 }
+}
