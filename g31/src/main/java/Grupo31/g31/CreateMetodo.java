@@ -107,6 +107,7 @@ public class CreateMetodo {
 	private static ArrayList<Metodo> createData(FileRead fl){
 		ArrayList<Metodo> a = new ArrayList();
 		
+		//meter valores
 		a.add(new Metodo(1, "oi", "oii", "oiii", 2, fl.getTotalLines(), 4, 5,6 ));
 		
 		
