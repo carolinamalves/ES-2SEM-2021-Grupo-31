@@ -32,6 +32,4 @@ public class LOC_Method {
 	    		System.out.println(total);
 	    }
 	}
-
-		
 }
