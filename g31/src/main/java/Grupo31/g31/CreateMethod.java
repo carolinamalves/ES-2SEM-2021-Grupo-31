@@ -48,12 +48,12 @@ public class CreateMethod {
 			fl.Contar();
 
 			//fill data
-			ArrayList<Metodo> a = createData(fl);
+			ArrayList<Method> a = createData(fl);
 			CreationHelper creationHelper= workbook.getCreationHelper();
 			CellStyle dataStyle = workbook.createCellStyle();
 
 			int rownum = 1;
-			for (Metodo i : a) {
+			for (Method i : a) {
 				Row row = sh.createRow(rownum++);
 				row.createCell(0).setCellValue(i.getMethodId());
 				System.out.println(i.getMethodId());
@@ -82,12 +82,11 @@ public class CreateMethod {
 		}
 	}
 
-	private static ArrayList<Metodo> createData(LOC_class fl){
-		ArrayList<Metodo> a = new ArrayList();
+	private static ArrayList<Method> createData(LOC_class fl){
+		ArrayList<Method> a = new ArrayList();
 
 		//meter valoress
-		a.add(new Metodo(1, "oi", "oii", "oiii", 2, fl.getTotalLines(), 4, 5,6 ));
-
+		a.add(new Method(1, "oi", "oii", "oiii", 2, fl.getTotalLines(), 4, 5,6 ));
 
 		return a;
 	}

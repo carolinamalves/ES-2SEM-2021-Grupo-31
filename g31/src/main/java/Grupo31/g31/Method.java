@@ -1,6 +1,6 @@
 package Grupo31.g31;
 
-public class Metodo {
+public class Method {
 	int MethodId;
 	String name_package;
 	String name_class;
@@ -83,7 +83,7 @@ public class Metodo {
 		CYCLO_method = cYCLO_method;
 	}
 
-	public Metodo(int MethodId,String name_package,String name_class,String name_method,int Nom_Class,int Loc_Class,
+	public Method(int MethodId,String name_package,String name_class,String name_method,int Nom_Class,int Loc_Class,
 			int Wmc_Class,int Loc_Method,int CYCLO_method) {
 		this.MethodId=MethodId;
 		this.name_package=name_package;
