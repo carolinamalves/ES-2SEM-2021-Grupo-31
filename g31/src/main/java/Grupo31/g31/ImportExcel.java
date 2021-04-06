@@ -97,8 +97,7 @@ public class ImportExcel extends JFrame{
 		setVisible(true);
 	}
 
-	void fillData(File file)
-	{
+	void fillData(File file){
 		int index=-1;
 		HSSFWorkbook workbook = null;
 		try {
@@ -112,7 +111,7 @@ public class ImportExcel extends JFrame{
 			}
 
 			String[] strs=new String[workbook.getNumberOfSheets()];
-			//get all sheet names from selected workbook
+
 			for (int i = 0; i < strs.length; i++) {
 				strs[i]= workbook.getSheetName(i); }
 			JFrame frame = new JFrame("Input Dialog");
@@ -130,20 +129,17 @@ public class ImportExcel extends JFrame{
 				HSSFRow row=sheet.getRow(0);
 
 				headers.clear();
-				for (int i = 0; i < row.getLastCellNum(); i++)
-				{
+				for (int i = 0; i < row.getLastCellNum(); i++){
 					HSSFCell cell1 = row.getCell(i);
 					headers.add(cell1.toString());
 				}
 
 				data.clear();
-				for (int j = 1; j < sheet.getLastRowNum() + 1; j++)
-				{
+				for (int j = 1; j < sheet.getLastRowNum() + 1; j++){
 					Vector d = new Vector();
 					row=sheet.getRow(j);
 					int noofrows=row.getLastCellNum();
-					for (int i = 0; i < noofrows; i++)
-					{    //To handle empty excel cells 
+					for (int i = 0; i < noofrows; i++){
 						HSSFCell cell=row.getCell(i,
 								org.apache.poi.ss.usermodel.Row.MissingCellPolicy.CREATE_NULL_AS_BLANK);
 						d.add(cell.toString());
@@ -152,12 +148,15 @@ public class ImportExcel extends JFrame{
 					data.add(d);
 				}
 			}
-			else { return; }
+			else {
+				return; }
 		}
-		catch (Exception e) { e.printStackTrace(); } }
+		catch (Exception e) {
+			e.printStackTrace(); 
+		} 
+	}
 
 	public static void main(String[] args) {
 		new ImportExcel();
 	}
-	
 }
