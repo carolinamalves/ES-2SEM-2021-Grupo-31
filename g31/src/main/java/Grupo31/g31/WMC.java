@@ -9,21 +9,16 @@ package Grupo31.g31;
 	import com.github.javaparser.StaticJavaParser;
 	import com.github.javaparser.ast.CompilationUnit;
 	import com.github.javaparser.ast.stmt.Statement;
-		
-
-		public class  WMC {
-		
-
+	
+	public class  WMC {		
 			private static int contador;
 			private static String ficheiro;
-		
-
+		//construtor
 			public WMC(String ficheiro) throws FileNotFoundException {
 				contador = 0;
 				this.ficheiro=ficheiro;
 			}
 		
-
 			private void contagem() throws FileNotFoundException { 
 				CompilationUnit unidadeC = StaticJavaParser.parse(new File(ficheiro));
 				List<Statement> a=unidadeC.findAll(Statement.class);
