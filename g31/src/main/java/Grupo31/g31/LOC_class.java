@@ -3,7 +3,7 @@ package Grupo31.g31;
 import java.io.*;
 import java.awt.*;
 
-class FileRead {
+class LOC_class {
 
 	static File name;
 	static int lines=0;
@@ -11,7 +11,7 @@ class FileRead {
 	static int totalLines=0;
 	
 
-	public 	FileRead(){
+	public 	LOC_class(){
 		try{
 			FileDialog fd = new FileDialog(new Frame(), "Open a document", FileDialog.LOAD); 
 			fd.setDirectory(System.getProperty("user.dir")); 
@@ -28,7 +28,7 @@ class FileRead {
 
 
 	public static void setTotalLines(int totalLines) {
-		FileRead.totalLines = totalLines;
+		LOC_class.totalLines = totalLines;
 	}
 
 	public void Contar(){

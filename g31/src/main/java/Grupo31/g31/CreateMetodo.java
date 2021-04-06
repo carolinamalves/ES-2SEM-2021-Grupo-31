@@ -51,7 +51,7 @@ public class CreateMetodo {
 			
 			//numero de linhas
 			
-			FileRead fl = new FileRead();
+			LOC_class fl = new LOC_class();
 			fl.Contar();
 			
 			
@@ -105,7 +105,7 @@ public class CreateMetodo {
 
 	}
 
-	private static ArrayList<Metodo> createData(FileRead fl){
+	private static ArrayList<Metodo> createData(LOC_class fl){
 		ArrayList<Metodo> a = new ArrayList();
 		
 		//meter valoress
