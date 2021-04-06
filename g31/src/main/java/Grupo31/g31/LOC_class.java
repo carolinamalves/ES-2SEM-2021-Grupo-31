@@ -9,7 +9,7 @@ class LOC_class {
 	static int lines=0;
 	static int emptyLines=0;
 	static int totalLines=0;
-	
+
 
 	public 	LOC_class(){
 		try{
