@@ -1,5 +1,6 @@
 package Grupo31.g31;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 
@@ -13,9 +14,11 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-public class CreateMethod {
+public class CreateMethod extends GUI{
 
-	public static void main(String[] args) {
+
+		
+		static void fillmethod(LOC_class loc) {
 		try {
 			XSSFWorkbook workbook= new XSSFWorkbook();
 
@@ -71,7 +74,7 @@ public class CreateMethod {
 				sh.autoSizeColumn(i);
 			}
 
-			FileOutputStream fileOut = new FileOutputStream("C:\\Users\\alexm\\Desktop\\teste123.xlsx");
+			FileOutputStream fileOut = new FileOutputStream("C:\\Users\\inesv\\OneDrive\\Ambiente de Trabalho\\testeMethod.xlsx");
 			workbook.write(fileOut);
 
 			fileOut.close();
@@ -85,9 +88,12 @@ public class CreateMethod {
 	private static ArrayList<Method> createData(LOC_class fl){
 		ArrayList<Method> a = new ArrayList();
 
-		//meter valoress
+		//meter valores
 		a.add(new Method(1, "oi", "oii", "oiii", 2, fl.getTotalLines(), 4, 5,6 ));
 
 		return a;
 	}
+	
+	public static void main(String[] args) {
+		CreateMethod m = new CreateMethod();
 }
