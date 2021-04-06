@@ -85,7 +85,7 @@ public class CreateMethod {
 	private static ArrayList<Method> createData(LOC_class fl){
 		ArrayList<Method> a = new ArrayList();
 
-		//meter valoress
+		//meter valores
 		a.add(new Method(1, "oi", "oii", "oiii", 2, fl.getTotalLines(), 4, 5,6 ));
 
 		return a;

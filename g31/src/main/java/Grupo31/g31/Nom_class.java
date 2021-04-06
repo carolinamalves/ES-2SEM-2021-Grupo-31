@@ -19,7 +19,6 @@ public class Nom_class {
 			numberM++;
 
 		}
-		System.out.print("A função tem"+" "+ numberM + " " +"metodos");
+		System.out.print("A função tem" + " " + numberM + " " + "metodos");
 	}
-
 }

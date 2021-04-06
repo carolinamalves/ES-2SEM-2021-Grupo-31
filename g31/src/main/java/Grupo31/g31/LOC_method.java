@@ -9,7 +9,6 @@ import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 
-
 public class LOC_method {
 	private static String ficheiro;
 	//Construtor 
