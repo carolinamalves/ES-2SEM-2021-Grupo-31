@@ -14,7 +14,7 @@ import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 
 public class LOC_Method {
 		private static String ficheiro;
-		
+		//Construtor
 		public LOC_Method (String ficheiro) {
 			this.ficheiro=ficheiro;
 		}
