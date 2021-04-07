@@ -1,5 +1,7 @@
+
 package Grupo31.g31;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 
@@ -13,9 +15,12 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-public class Create_Method {
+public class Create_Method extends GUI{
 
-	public static void main(String[] args) {
+
+		
+		
+		static void fillmethod() {
 		try {
 			XSSFWorkbook workbook= new XSSFWorkbook();
 
@@ -42,36 +47,52 @@ public class Create_Method {
 				cell.setCellValue(columnHeadings[i]);
 				cell.setCellStyle(headerStyle);
 			}
-			//numero de linhas
+//			//numero de linhas
+//
+//			LOC_class fl = new LOC_class();
+//			fl.Contar();
 
-			LOC_class fl = new LOC_class();
-			fl.Contar();
-
-			//fill data
-			ArrayList<Method> a = createData(fl);
+			
+			ArrayList <Method> a;
+			a = new ArrayList <Method>();
 			CreationHelper creationHelper= workbook.getCreationHelper();
 			CellStyle dataStyle = workbook.createCellStyle();
-
+			
 			int rownum = 1;
 			for (Method i : a) {
+				int id = i.getMethodId();
+				String namePack = i.getName_package();
+				String nameClass = i.getName_class();
+				String nameMethod = i.getName_method();
+				int nomClass = i.getNom_Class();
+				int locClass = i.getLoc_Class();
+				int wmcClass = i.getWmc_Class();
+				int locMethod = i.getLoc_Method();
+				int cycloMethod = i.getCYCLO_method();
+				
+				
+				
 				Row row = sh.createRow(rownum++);
-				row.createCell(0).setCellValue(i.getMethodId());
+				row.createCell(0).setCellValue(id);
 				System.out.println(i.getMethodId());
-				row.createCell(1).setCellValue(i.getName_package());
-				row.createCell(2).setCellValue(i.getName_class());
-				row.createCell(3).setCellValue(i.getName_method());
-				row.createCell(4).setCellValue(i.getNom_Class());
-				row.createCell(5).setCellValue(i.getLoc_Class());
-				row.createCell(6).setCellValue(i.getWmc_Class());
-				row.createCell(8).setCellValue(i.getLoc_Method());
-				row.createCell(9).setCellValue(i.getCYCLO_method());
+				row.createCell(1).setCellValue(namePack);
+				row.createCell(2).setCellValue(nameClass);
+				row.createCell(3).setCellValue(nameMethod);
+				row.createCell(4).setCellValue(nomClass);
+				row.createCell(5).setCellValue(locClass);
+				row.createCell(6).setCellValue(wmcClass);
+				row.createCell(8).setCellValue(locMethod);
+				row.createCell(9).setCellValue(cycloMethod);
+				
+				//a = createData(id, namePack, nameClass, nameMethod, nomClass, locClass, wmcClass, locMethod, 1 );
+				
 			}
 
 			for(int i=0; i<columnHeadings.length; i++) {
 				sh.autoSizeColumn(i);
 			}
 
-			FileOutputStream fileOut = new FileOutputStream("C:\\Users\\alexm\\Desktop\\teste123.xlsx");
+			FileOutputStream fileOut = new FileOutputStream("C:\\Users\\inesv\\OneDrive\\Ambiente de Trabalho\\java1.xlsx" );
 			workbook.write(fileOut);
 
 			fileOut.close();
@@ -82,12 +103,16 @@ public class Create_Method {
 		}
 	}
 
-	private static ArrayList<Method> createData(LOC_class fl){
+	private static ArrayList <Method> createData(int id, String namePack, String nameClass, String nameMethod, int nomClass, LOC_class locClass, int wmcClass, int locMethod, int cycloMethod)  {
 		ArrayList<Method> a = new ArrayList();
 
-		//meter valoress
-		a.add(new Method(1, "oi", "oii", "oiii", 2, fl.getTotalLines(), 4, 5,6 ));
+		//meter valores
+		a.add(new Method(id, namePack, nameClass, nameMethod, nomClass, LOC_class.getTotalLines(), wmcClass, locMethod, cycloMethod ));
 
 		return a;
 	}
+	
+	public static void main(String[] args) {
+		Create_Method m = new Create_Method();
+}
 }
