@@ -84,7 +84,6 @@ public class GUI extends JFrame{
 					table.setPreferredSize(new Dimension(tableWidth, tableHeight));
 
 					table.setModel(model);
-					System.out.println("teste");
 				}
 			}
 		});
