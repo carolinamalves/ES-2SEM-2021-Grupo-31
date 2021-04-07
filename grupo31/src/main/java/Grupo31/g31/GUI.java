@@ -19,13 +19,11 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class GUI extends JFrame{  
-	private ImportExcel IE;
-
 	static JTable table;
 	static JScrollPane scroll;
-	static Vector headers = new Vector();
+	static Vector<String> headers = new Vector<String>();
 	static DefaultTableModel model = null;
-	static Vector data = new Vector();
+	static Vector<Vector<String>> data = new Vector<Vector<String>>();
 	static JButton Import;
 	static JButton CodeSmellsDetector;
 	static JFileChooser jChooser;
@@ -55,7 +53,7 @@ public class GUI extends JFrame{
 				if (!fileJava.getName().endsWith("java")) {
 					JOptionPane.showMessageDialog(null, "Please select only Java file.", "Error", JOptionPane.ERROR_MESSAGE);
 				} else {
-					Create_Method.fillmethod(fileJava);
+					//Create_Method.fillmethod(fileJava);
 					model = new DefaultTableModel(data, headers);
 					tableWidth = model.getColumnCount() * 150;
 					tableHeight = model.getRowCount() * 25;
@@ -79,12 +77,11 @@ public class GUI extends JFrame{
 				if (!file.getName().endsWith("xls")) {
 					JOptionPane.showMessageDialog(null, "Please select only Excel file.", "Error", JOptionPane.ERROR_MESSAGE);
 				} else {
-					ImportExcel.fillData(file);
+					//ImportExcel.fillData(file);
 					model = new DefaultTableModel(data, headers);
 					tableWidth = model.getColumnCount() * 150;
 					tableHeight = model.getRowCount() * 25;
 					table.setPreferredSize(new Dimension(tableWidth, tableHeight));
-
 					table.setModel(model);
 				}
 			}
@@ -115,11 +112,13 @@ public class GUI extends JFrame{
 		setSize(600, 600);
 		setResizable(true);
 		setVisible(true);
+	
 	}
 
 	public static void main (String args[]) {
-	GUI gui =  new GUI();
+	new GUI();
 	}
 
 }
+
 
