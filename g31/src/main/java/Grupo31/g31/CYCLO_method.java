@@ -25,4 +25,17 @@ public class CYCLO_method {
 
 	    new MethodVisitor().visit(unidadeC, null);
 	}	
+	private static class MethodVisitor extends VoidVisitorAdapter {
+    	public void visit(MethodDeclaration m, Object arg) {
+			int contador=0;
+    		List<Statement> a=m.findAll(Statement.class);
+				for(Statement i:a)
+			{
+					if (i.isExpressionStmt() || i.isIfStmt() || i.isForStmt()||i.isWhileStmt()||i.isForEachStmt())
+						contador++;
+						}
+			System.out.println(contador);
+    	}
+	}
+
 }
