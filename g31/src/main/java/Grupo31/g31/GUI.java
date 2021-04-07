@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Vector;
 
 import javax.swing.JButton;
@@ -28,7 +29,7 @@ public class GUI extends JFrame{
 	static JButton Import;
 	static JButton CodeSmellsDetector;
 	static JFileChooser jChooser;
-	//static J
+	static ArrayList <Method> a;
 
 	static int tableWidth = 0;
 	static int tableHeight = 0;
@@ -48,11 +49,11 @@ public class GUI extends JFrame{
 			public void actionPerformed(ActionEvent arg0) {
 				jChooser.showOpenDialog(null);
 
-				File file = jChooser.getSelectedFile();
-				if (!file.getName().endsWith("java")) {
+				File fileJava = jChooser.getSelectedFile();
+				if (!fileJava.getName().endsWith("java")) {
 					JOptionPane.showMessageDialog(null, "Please select only Java file.", "Error", JOptionPane.ERROR_MESSAGE);
 				} else {
-					Create_Method.fillmethod();
+					Create_Method.fillmethod(fileJava);
 					model = new DefaultTableModel(data, headers);
 					tableWidth = model.getColumnCount() * 150;
 					tableHeight = model.getRowCount() * 25;
@@ -94,7 +95,7 @@ public class GUI extends JFrame{
 		table.setBackground(Color.white);
 
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		table.setEnabled(false);
+		table.setEnabled(true);
 		table.setRowHeight(25);
 		table.setRowMargin(4);
 
@@ -115,7 +116,7 @@ public class GUI extends JFrame{
 	}
 
 	public static void main (String args[]) {
-		GUI gui = new GUI();
+	GUI gui =  new GUI();
 	}
 
 }

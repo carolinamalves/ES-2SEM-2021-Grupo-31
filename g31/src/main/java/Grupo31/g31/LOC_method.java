@@ -12,6 +12,7 @@ import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 
 public class LOC_method {
 	private static String ficheiro;
+	public static int total;
 	//Construtor 
 	public LOC_method (String ficheiro) {
 		this.ficheiro=ficheiro;
@@ -29,5 +30,10 @@ public class LOC_method {
 
 			System.out.println(total);
 		}
+	}
+
+	public int getLocMethod() {
+		return total;
+		
 	}
 }

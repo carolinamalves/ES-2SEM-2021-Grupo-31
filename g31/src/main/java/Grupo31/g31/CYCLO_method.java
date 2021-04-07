@@ -37,5 +37,9 @@ public class CYCLO_method {
 			System.out.println(contador);
     	}
 	}
+	
+	public int getWmcClass () {
+		return contador;
+	}
 
 }
