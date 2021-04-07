@@ -35,7 +35,7 @@ public class GUI extends JFrame{
 	public GUI() {
 		super("Code Smells");
 		
-		System.out.println("ines");
+		System.out.println("ola");
 	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JPanel buttonPanel = new JPanel();
