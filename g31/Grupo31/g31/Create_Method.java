@@ -18,6 +18,8 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import src.main.java.Grupo31.g31.GUI;
+
 public class Create_Method extends GUI{
 
 	public static int id;
@@ -99,7 +101,7 @@ public class Create_Method extends GUI{
 			System.out.println(cycloMethod1);
 
 		//	createData (id, namePack, nameClass, nameMethod, nomClass1, locClass1, wmcClass1, locMethod1, cycloMethod1 );
-						ArrayList <Method> a = createData (id, namePack, nameClass, nameMethod, nomClass1, locClass1, wmcClass1, locMethod1, cycloMethod1 );
+						ArrayList <Method> a = createData (id, namePack, nameClass, nameMethod, nomClass, locClass1, wmcClass1, locMethod1, cycloMethod1 );
 						
 						CreationHelper creationHelper= workbook.getCreationHelper();
 						CellStyle dataStyle = workbook.createCellStyle();
