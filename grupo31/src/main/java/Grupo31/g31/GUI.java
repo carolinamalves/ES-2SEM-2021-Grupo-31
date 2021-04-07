@@ -74,10 +74,10 @@ public class GUI extends JFrame{
 				jChooser.showOpenDialog(null);
 
 				File file = jChooser.getSelectedFile();
-				if (!file.getName().endsWith("xls")) {
+				if (!file.getName().endsWith("xlsx")) {
 					JOptionPane.showMessageDialog(null, "Please select only Excel file.", "Error", JOptionPane.ERROR_MESSAGE);
 				} else {
-					//ImportExcel.fillData(file);
+					ImportExcel.fillData(file);
 					model = new DefaultTableModel(data, headers);
 					tableWidth = model.getColumnCount() * 150;
 					tableHeight = model.getRowCount() * 25;
