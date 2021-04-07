@@ -1,7 +1,5 @@
-
 package Grupo31.g31;
 
-import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 
@@ -17,10 +15,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class Create_Method extends GUI{
 
-
-		
-		
-		static void fillmethod() {
+	static void fillmethod() {
 		try {
 			XSSFWorkbook workbook= new XSSFWorkbook();
 
@@ -47,17 +42,17 @@ public class Create_Method extends GUI{
 				cell.setCellValue(columnHeadings[i]);
 				cell.setCellStyle(headerStyle);
 			}
-//			//numero de linhas
-//
-//			LOC_class fl = new LOC_class();
-//			fl.Contar();
+			//			//numero de linhas
+			//
+			//			LOC_class fl = new LOC_class();
+			//			fl.Contar();
 
-			
+
 			ArrayList <Method> a;
 			a = new ArrayList <Method>();
 			CreationHelper creationHelper= workbook.getCreationHelper();
 			CellStyle dataStyle = workbook.createCellStyle();
-			
+
 			int rownum = 1;
 			for (Method i : a) {
 				int id = i.getMethodId();
@@ -69,9 +64,7 @@ public class Create_Method extends GUI{
 				int wmcClass = i.getWmc_Class();
 				int locMethod = i.getLoc_Method();
 				int cycloMethod = i.getCYCLO_method();
-				
-				
-				
+
 				Row row = sh.createRow(rownum++);
 				row.createCell(0).setCellValue(id);
 				System.out.println(i.getMethodId());
@@ -83,9 +76,8 @@ public class Create_Method extends GUI{
 				row.createCell(6).setCellValue(wmcClass);
 				row.createCell(8).setCellValue(locMethod);
 				row.createCell(9).setCellValue(cycloMethod);
-				
+
 				//a = createData(id, namePack, nameClass, nameMethod, nomClass, locClass, wmcClass, locMethod, 1 );
-				
 			}
 
 			for(int i=0; i<columnHeadings.length; i++) {
@@ -105,14 +97,13 @@ public class Create_Method extends GUI{
 
 	private static ArrayList <Method> createData(int id, String namePack, String nameClass, String nameMethod, int nomClass, LOC_class locClass, int wmcClass, int locMethod, int cycloMethod)  {
 		ArrayList<Method> a = new ArrayList();
-
 		//meter valores
 		a.add(new Method(id, namePack, nameClass, nameMethod, nomClass, LOC_class.getTotalLines(), wmcClass, locMethod, cycloMethod ));
 
 		return a;
 	}
-	
+
 	public static void main(String[] args) {
-		Create_Method m = new Create_Method();
-}
+		//Create_Method m = new Create_Method();
+	}
 }

@@ -62,7 +62,7 @@ public class GUI extends JFrame{
 				}
 			}
 		});
-		
+
 		jChooser = new JFileChooser();
 		Import = new JButton("Select Excel File");
 		buttonPanel.add(Import, BorderLayout.EAST);
@@ -73,9 +73,9 @@ public class GUI extends JFrame{
 				jChooser.showOpenDialog(null);
 
 				File file = jChooser.getSelectedFile();
-				if (!file.getName().endsWith("xls")) {
-					JOptionPane.showMessageDialog(null, "Please select only Excel file.", "Error", JOptionPane.ERROR_MESSAGE);
-				} else {
+//				if (!file.getName().endsWith("xls") || !file.getName().endsWith("xlsx")) {
+//					JOptionPane.showMessageDialog(null, "Please select only Excel file.", "Error", JOptionPane.ERROR_MESSAGE);
+//				} else {
 					ImportExcel.fillData(file);
 					model = new DefaultTableModel(data, headers);
 					tableWidth = model.getColumnCount() * 150;
@@ -84,8 +84,8 @@ public class GUI extends JFrame{
 
 					table.setModel(model);
 				}
-			}
-		});
+//			}
+	});
 		table = new JTable();
 		table.setAutoCreateRowSorter(true);
 		model = new DefaultTableModel(data, headers);
@@ -117,6 +117,4 @@ public class GUI extends JFrame{
 	public static void main (String args[]) {
 		GUI gui = new GUI();
 	}
-
 }
-
