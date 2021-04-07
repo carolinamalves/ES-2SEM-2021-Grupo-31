@@ -28,7 +28,6 @@ public class GUI extends JFrame{
 	static JButton Import;
 	static JButton CodeSmellsDetector;
 	static JFileChooser jChooser;
-	//static J
 
 	static int tableWidth = 0;
 	static int tableHeight = 0;
@@ -47,8 +46,9 @@ public class GUI extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				jChooser.showOpenDialog(null);
-
 				File file = jChooser.getSelectedFile();
+				jChooser.setMultiSelectionEnabled(true);
+				File[] files = jChooser.getSelectedFiles();
 				if (!file.getName().endsWith("java")) {
 					JOptionPane.showMessageDialog(null, "Please select only Java file.", "Error", JOptionPane.ERROR_MESSAGE);
 				} else {
@@ -73,19 +73,17 @@ public class GUI extends JFrame{
 				jChooser.showOpenDialog(null);
 
 				File file = jChooser.getSelectedFile();
-//				if (!file.getName().endsWith("xls") || !file.getName().endsWith("xlsx")) {
-//					JOptionPane.showMessageDialog(null, "Please select only Excel file.", "Error", JOptionPane.ERROR_MESSAGE);
-//				} else {
-					ImportExcel.fillData(file);
-					model = new DefaultTableModel(data, headers);
-					tableWidth = model.getColumnCount() * 150;
-					tableHeight = model.getRowCount() * 25;
-					table.setPreferredSize(new Dimension(tableWidth, tableHeight));
 
-					table.setModel(model);
-				}
-//			}
-	});
+				ImportExcel.fillData(file);
+				model = new DefaultTableModel(data, headers);
+				tableWidth = model.getColumnCount() * 150;
+				tableHeight = model.getRowCount() * 25;
+				table.setPreferredSize(new Dimension(tableWidth, tableHeight));
+
+				table.setModel(model);
+			}
+		});
+
 		table = new JTable();
 		table.setAutoCreateRowSorter(true);
 		model = new DefaultTableModel(data, headers);
@@ -115,6 +113,6 @@ public class GUI extends JFrame{
 	}
 
 	public static void main (String args[]) {
-		GUI gui = new GUI();
+		new GUI();
 	}
 }

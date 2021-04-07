@@ -84,7 +84,7 @@ public class Create_Method extends GUI{
 				sh.autoSizeColumn(i);
 			}
 
-			FileOutputStream fileOut = new FileOutputStream("C:\\Users\\inesv\\OneDrive\\Ambiente de Trabalho\\java1.xlsx" );
+			FileOutputStream fileOut = new FileOutputStream("C:\\Users\\carol\\Desktop\\teste.xls");
 			workbook.write(fileOut);
 
 			fileOut.close();
