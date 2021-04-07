@@ -36,7 +36,9 @@ public class GUI extends JFrame{
 
 	public GUI() {
 		super("Code Smells");
-		System.out.println("TESTE");
+		
+		System.out.println("ines");
+	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setBackground(Color.white);
@@ -44,7 +46,7 @@ public class GUI extends JFrame{
 		CodeSmellsDetector = new JButton("Detect CodeSmells");
 		buttonPanel.add(CodeSmellsDetector, BorderLayout.WEST);
 		CodeSmellsDetector.addActionListener(new ActionListener() {
-
+		
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				jChooser.showOpenDialog(null);
