@@ -18,7 +18,9 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class Create_Method extends GUI{
 
 
-		
+	public int testeParaPull()	{
+		return 2;
+}
 		
 		static void fillmethod() {
 		try {
