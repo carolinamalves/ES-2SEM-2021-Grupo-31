@@ -27,9 +27,8 @@ public class Create_Method extends GUI{
 	public static int locMethod1;
 	public static int cycloMethod1;
 
-
-
-	static void fillmethod(File file) {
+		
+		static void fillmethod() {
 		try {
 			XSSFWorkbook workbook= new XSSFWorkbook();
 

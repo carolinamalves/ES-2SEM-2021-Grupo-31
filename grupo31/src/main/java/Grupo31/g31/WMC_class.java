@@ -12,7 +12,7 @@ import com.github.javaparser.ast.stmt.Statement;
 public class  WMC_class {		
 	private static int contador;
 	private static String ficheiro;
-	//construtor
+	//construtor teste
 	public WMC_class(String ficheiro) throws FileNotFoundException {
 		contador = 0;
 		this.ficheiro=ficheiro;
