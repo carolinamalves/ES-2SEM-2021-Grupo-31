@@ -14,13 +14,13 @@ public class LOC_method {
 	private static String ficheiro;
 	public static int total;
 	//Construtor 
-	public LOC_method (String ficheiro) {
-		this.ficheiro=ficheiro;
+	public LOC_method (String fileS) {
+		this.ficheiro=fileS;
 		total=0;
 	}
 
-	void getMethodLineNumbers() throws ParseException, IOException {
-		CompilationUnit unidadeC = StaticJavaParser.parse((new File(ficheiro)));
+	public void getMethodLineNumbers() throws ParseException, IOException {
+		CompilationUnit unidadeC = StaticJavaParser.parse((new File (ficheiro)));
 
 		new MethodVisitor().visit(unidadeC, null);
 	}

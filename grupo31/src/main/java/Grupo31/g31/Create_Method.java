@@ -27,8 +27,9 @@ public class Create_Method extends GUI{
 	public static int locMethod1;
 	public static int cycloMethod1;
 
-		
-		static void fillmethod() {
+
+
+	static void fillmethod(File file) {
 		try {
 			XSSFWorkbook workbook= new XSSFWorkbook();
 
@@ -83,7 +84,7 @@ public class Create_Method extends GUI{
 			//locMethod
 
 			LOC_method locMethod = new LOC_method(fileS);
-			locMethod. getMethodLineNumbers();
+			locMethod.getTotal();
 
 			//cyclo method 
 
