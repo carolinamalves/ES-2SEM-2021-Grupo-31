@@ -35,7 +35,7 @@ public class GUI extends JFrame{
 	public GUI() {
 		super("Code Smells");
 		//teste david pull over
-		//teste adil commit 
+		//teste adil  
 		System.out.println("ola");
 	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
