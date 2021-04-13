@@ -32,7 +32,7 @@ public class CYCLO_method {
 			CYCLO_method.lista = lista;
 		}
 
-		private static void getMethodLineNumbers() throws ParseException, IOException {
+		void getMethodLineNumbers() throws ParseException, IOException {
 		    CompilationUnit unidadeC = StaticJavaParser.parse((new File(ficheiro)));
 	
 		    new MethodVisitor().visit(unidadeC, null);
@@ -51,13 +51,17 @@ public class CYCLO_method {
 				System.out.println(getLista());
 	    	}
 	    	
+	    	
+	    	
 		}
 
+	
+
 	    	
-		public static void main (String [] args) throws Exception {
-			String s = "C:\\Users\\adilh\\eclipse-workspace\\Contar\\src\\Contar.java";
-			CYCLO_method a = new CYCLO_method(s);
-	//		a.getCYCLO_method(0);
-			a.getMethodLineNumbers();
-		}		
+//		public static void main (String [] args) throws Exception {
+//			String s = "C:\\Users\\adilh\\eclipse-workspace\\Contar\\src\\Contar.java";
+//			CYCLO_method a = new CYCLO_method(s);
+//	//		a.getCYCLO_method(0);
+//			a.getMethodLineNumbers();
+//		}		
 }

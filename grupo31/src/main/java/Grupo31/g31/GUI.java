@@ -35,7 +35,7 @@ public class GUI extends JFrame{
 	public GUI() {
 		super("Code Smells");
 		
-		System.out.println("ines");
+		System.out.println("open");
 	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JPanel buttonPanel = new JPanel();
@@ -53,7 +53,7 @@ public class GUI extends JFrame{
 				if (!fileJava.getName().endsWith("java")) {
 					JOptionPane.showMessageDialog(null, "Please select only Java file.", "Error", JOptionPane.ERROR_MESSAGE);
 				} else {
-					//Create_Method.fillmethod(fileJava);
+					Create_Method.fillmethod(fileJava);
 					model = new DefaultTableModel(data, headers);
 					tableWidth = model.getColumnCount() * 150;
 					tableHeight = model.getRowCount() * 25;
