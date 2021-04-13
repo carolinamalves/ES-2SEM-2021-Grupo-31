@@ -22,7 +22,7 @@ class LOC_class {
 		}
 	}
 
-	public static int getTotalLines() {
+	public int getTotalLines() {
 		return totalLines;
 	}
 

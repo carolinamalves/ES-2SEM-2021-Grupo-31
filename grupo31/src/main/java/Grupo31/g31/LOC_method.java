@@ -12,12 +12,14 @@ import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 
 public class LOC_method {
 	private static String ficheiro;
+	public static int total;
 	//Construtor 
 	public LOC_method (String ficheiro) {
 		this.ficheiro=ficheiro;
+		total=0;
 	}
 
-	private static void getMethodLineNumbers() throws ParseException, IOException {
+	void getMethodLineNumbers() throws ParseException, IOException {
 		CompilationUnit unidadeC = StaticJavaParser.parse((new File(ficheiro)));
 
 		new MethodVisitor().visit(unidadeC, null);
@@ -29,5 +31,9 @@ public class LOC_method {
 
 			System.out.println(total);
 		}
+	}
+	
+	public int getTotal() {
+		return total;
 	}
 }

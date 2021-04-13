@@ -18,7 +18,7 @@ public class  WMC_class {
 		this.ficheiro=ficheiro;
 	}
 
-	private void contagem() throws FileNotFoundException { 
+	public void contagem() throws FileNotFoundException { 
 		CompilationUnit unidadeC = StaticJavaParser.parse(new File(ficheiro));
 		List<Statement> a=unidadeC.findAll(Statement.class);
 		for(Statement i:a)
