@@ -4,7 +4,7 @@ import java.io.*;
 import java.awt.*;
 
 class LOC_class {
-
+//teste
 	static File name;
 	static int lines=0;
 	static int emptyLines=0;
