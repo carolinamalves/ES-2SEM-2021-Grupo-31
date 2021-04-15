@@ -4,7 +4,6 @@ import java.io.*;
 import java.awt.*;
 
 class LOC_class {
-//teste
 	static File name;
 	static int lines=0;
 	static int emptyLines=0;
@@ -21,7 +20,7 @@ class LOC_class {
 			System.err.println(e.getMessage());
 		}
 	}
-
+//teste2
 	public int getTotalLines() {
 		return totalLines;
 	}
