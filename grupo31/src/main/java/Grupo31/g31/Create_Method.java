@@ -76,7 +76,8 @@ public class Create_Method extends GUI{
 			LOC_class locClass = new LOC_class();
 			locClass.Contar();
 
-			//wmc -- done
+			//wmc -- done 
+			
 
 			WMC_class wmcClass = new WMC_class(fileS);
 			wmcClass.contagem();

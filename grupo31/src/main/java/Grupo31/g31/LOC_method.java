@@ -29,6 +29,7 @@ public class LOC_method {
 		public void visit(MethodDeclaration m, Object arg) {
 			int total=(m.getEnd().get().line-m.getBegin().get().line+1);
 
+			
 			System.out.println(total);
 		}
 	}

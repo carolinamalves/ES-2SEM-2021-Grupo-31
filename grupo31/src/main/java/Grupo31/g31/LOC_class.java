@@ -45,6 +45,7 @@ class LOC_class {
 				}
 			}
 
+			
 			totalLines= lines + emptyLines;
 
 			System.out.println("number of lines:" + lines);

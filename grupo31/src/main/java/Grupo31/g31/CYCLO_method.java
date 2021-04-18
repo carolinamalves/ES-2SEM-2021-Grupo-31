@@ -27,6 +27,7 @@ public class CYCLO_method {
 		public static List<Integer> getLista() {
 			return lista;
 		}
+		
 
 		public static void setLista(List<Integer> lista) {
 			CYCLO_method.lista = lista;
