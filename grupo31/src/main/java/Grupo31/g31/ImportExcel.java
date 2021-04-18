@@ -40,6 +40,7 @@ public class ImportExcel extends GUI{
 				FileInputStream inputStream = new FileInputStream (file);
 				workbook = new XSSFWorkbook(inputStream);
 			}
+			
 			catch (IOException ex)
 			{
 				Logger.getLogger(ImportExcel.class. getName()).log(Level.SEVERE, null, ex);

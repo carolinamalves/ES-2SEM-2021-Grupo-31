@@ -96,6 +96,7 @@ public class GUI extends JFrame{
 		table.setRowHeight(25);
 		table.setRowMargin(4);
 
+		
 		tableWidth = model.getColumnCount() * 150;
 		tableHeight = model.getRowCount() * 25;
 		table.setPreferredSize(new Dimension(tableWidth, tableHeight));

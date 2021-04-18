@@ -16,6 +16,7 @@ public class Nom_class {
 		//int numberM=0;
 		Nom_class co = new Nom_class();
 
+		
 		Class<? extends Nom_class> className=co.getClass();
 		className= co.getClass();
 		Method[] methods= className.getDeclaredMethods();

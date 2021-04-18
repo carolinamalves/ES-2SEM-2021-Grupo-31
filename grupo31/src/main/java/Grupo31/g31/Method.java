@@ -85,6 +85,7 @@ public class Method {
 
 	public Method(int MethodId,String name_package,String name_class,String name_method,int Nom_Class,int Loc_Class,
 			int Wmc_Class,int Loc_Method,int CYCLO_method) {
+		
 		this.MethodId=MethodId;
 		this.name_package=name_package;
 		this.name_class=name_class;
