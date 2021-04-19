@@ -8,7 +8,7 @@ public class Method {
 	int Nom_Class;
 	int Loc_Class;
 	int Wmc_Class;
-	int Loc_Method;
+	static int Loc_Method;
 	int CYCLO_method;
 
 	public int getMethodId() {
@@ -71,7 +71,7 @@ public class Method {
 		return Loc_Method;
 	}
 
-	public void setLoc_Method(int loc_Method) {
+	public static void setLoc_Method(int loc_Method) {
 		Loc_Method = loc_Method;
 	}
 

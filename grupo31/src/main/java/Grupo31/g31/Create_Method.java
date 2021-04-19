@@ -3,8 +3,10 @@ package Grupo31.g31;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import org.apache.batik.transcoder.keys.IntegerKey;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.CreationHelper;
@@ -14,6 +16,8 @@ import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import com.github.javaparser.ParseException;
 
 public class Create_Method extends GUI{
 
@@ -26,6 +30,8 @@ public class Create_Method extends GUI{
 	public static int wmcClass1;
 	public static int locMethod1;
 	public static int cycloMethod1;
+	public static ArrayList <Method> a;
+	
 
 
 
@@ -58,7 +64,6 @@ public class Create_Method extends GUI{
 			}
 
 			String fileS = file.getAbsolutePath();
-			//id
 
 			//name class
 
@@ -66,53 +71,53 @@ public class Create_Method extends GUI{
 
 			//name method
 
-			//nom class -- done
-
 			Nom_class nomClass = new Nom_class();
 			nomClass.nomClass();
 
-			//loc class -- done
+		
 
-			LOC_class locClass = new LOC_class();
-			locClass.Contar();
+				//loc class -- done
 
-			//wmc -- done 
+				LOC_class locClass = new LOC_class(fileS);
+				locClass.Contar();
+
+				//wmc -- done 
+
+				WMC_class wmcClass = new WMC_class(fileS);
+				wmcClass.contagem();
+
+				//locMethod
+				
+				for (int f = 0; f < nomClass.getNomClass(); f++) {
 			
+				LOC_method locMethod = new LOC_method(fileS);
+				locMethod.getMethodLineNumbers();
 
-			WMC_class wmcClass = new WMC_class(fileS);
-			wmcClass.contagem();
+				//cyclo method 
+
+				CYCLO_method cycloMethod = new CYCLO_method(fileS);
+				cycloMethod.getList().get(f);
+
+				createData(1,"nomeTeste","nomeTeste","nomeTeste",nomClass, locClass,wmcClass, locMethod, cycloMethod);
 			
-			//locMethod
+				}
 
-			LOC_method locMethod = new LOC_method(fileS);
-			locMethod.getTotal();
-
-			//cyclo method 
-
-			CYCLO_method cycloMethod = new CYCLO_method(fileS);
-			cycloMethod.getMethodLineNumbers();
-
-
-
-			ArrayList <Method> a = createData(1,"nomeTeste","nomeTeste","nomeTeste",nomClass, locClass,wmcClass, locMethod, cycloMethod );
-			//a = new ArrayList <Method>();
 			CreationHelper creationHelper= workbook.getCreationHelper();
 			CellStyle dataStyle = workbook.createCellStyle();
-
 			int rownum = 1;
-			for (Method i : a) {
+			for (Method f : a) {
 
 				Row row = sh.createRow(rownum++);
-				row.createCell(0).setCellValue(i.getMethodId());
-				System.out.println(i.getMethodId());
-				row.createCell(1).setCellValue(i.getName_package());
-				row.createCell(2).setCellValue(i.getName_class());
-				row.createCell(3).setCellValue(i.getName_method());
-				row.createCell(4).setCellValue(i.getNom_Class());
-				row.createCell(5).setCellValue(i.getLoc_Class());
-				row.createCell(6).setCellValue(i.getWmc_Class());
-				row.createCell(8).setCellValue(i.getLoc_Method());
-				row.createCell(9).setCellValue(i.getCYCLO_method());
+				row.createCell(0).setCellValue(f.getMethodId());
+				System.out.println(f.getMethodId());
+				row.createCell(1).setCellValue(f.getName_package());
+				row.createCell(2).setCellValue(f.getName_class());
+				row.createCell(3).setCellValue(f.getName_method());
+				row.createCell(4).setCellValue(f.getNom_Class());
+				row.createCell(5).setCellValue(f.getLoc_Class());
+				row.createCell(6).setCellValue(f.getWmc_Class());
+				row.createCell(8).setCellValue(f.getLoc_Method());
+				row.createCell(9).setCellValue(f.getCYCLO_method());
 
 
 
@@ -123,28 +128,27 @@ public class Create_Method extends GUI{
 			}
 
 
-			FileOutputStream fileOut = new FileOutputStream("C:\\Users\\inesv\\OneDrive\\Ambiente de Trabalho\\" + file.getName() +"_metrics.xlsx");
+			FileOutputStream fileOut = new FileOutputStream("C:\\Users\\inesv\\OneDrive\\Ambiente de Trabalho\\" + file.getName() + "_metrics.xlsx");
 			System.out.println(fileOut);
 			workbook.write(fileOut);
 
 			fileOut.close();
 			workbook.close();
 			System.out.println("done");
+
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	private static ArrayList <Method> createData(int id, String namePack, String nameClass, String nameMethod, Nom_class nomClass, LOC_class locClass, WMC_class wmcClass, LOC_method locMethod, CYCLO_method cycloMethod)  {
+		private static void createData(int id, String namePack, String nameClass, String nameMethod, Nom_class nomClass, LOC_class locClass, WMC_class wmcClass, LOC_method locMethod, CYCLO_method cycloMethod) throws ParseException, IOException  {
+			Nom_class nomClass1 = new Nom_class();
+			nomClass.nomClass();
 
-
-		ArrayList<Method> a = new ArrayList<Method>();
-
-		//meter valores
-		a.add(new Method(id, namePack, nameClass, nameMethod, nomClass.getNomClass(), locClass.getTotalLines(), wmcClass.getWMC_class(), locMethod.getTotal(), 1 ));
-
-		return a;
-	}
+			for (int i = 0; i < nomClass1.getNomClass(); i++) {
+			//meter valores
+			a.add(new Method(id, namePack, nameClass, nameMethod, nomClass.getNomClass(), locClass.getTotalLines(), wmcClass.getWMC_class(), locMethod.getTotal(),cycloMethod.getList().get(i)));
+		}}
 
 	public static void main(String[] args) {
 		new Create_Method();

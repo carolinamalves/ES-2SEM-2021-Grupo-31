@@ -5,23 +5,16 @@ import java.awt.*;
 
 class LOC_class {
 
-	static File name;
+	static String file;
 	static int lines=0;
 	static int emptyLines=0;
 	static int totalLines=0;
 
 
-	public 	LOC_class(){
-		try{
-			FileDialog fd = new FileDialog(new Frame(), "Open a document", FileDialog.LOAD); 
-			fd.setDirectory(System.getProperty("user.dir")); 
-			fd.setVisible(true);	
-			name= new File(fd.getDirectory(), fd.getFile());
-		}catch(Exception e){
-			System.err.println(e.getMessage());
-		}
+	public 	LOC_class(String file){
+	this.file = file;
 	}
-
+	
 	public int getTotalLines() {
 		return totalLines;
 	}
@@ -33,7 +26,7 @@ class LOC_class {
 
 	public void Contar(){
 		try{
-			FileInputStream fstream = new FileInputStream(name); 
+			FileInputStream fstream = new FileInputStream(file); 
 			DataInputStream in = new DataInputStream(fstream);
 			BufferedReader br = new BufferedReader(new InputStreamReader(in));
 			String strLine;
