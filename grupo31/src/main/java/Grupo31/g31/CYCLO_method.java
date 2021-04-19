@@ -14,55 +14,42 @@ import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 
 
 public class CYCLO_method {
-		private static String ficheiro;
-		public static int contador;
-		public static List<Integer> lista;
-		//Construtor 
-		public CYCLO_method (String ficheiro) {
-			this.ficheiro=ficheiro;
-			contador=0;
-			lista= new ArrayList<>();
-		}
-		
-		public static List<Integer> getLista() {
-			return lista;
-		}
-		
+	private static String ficheiro;
+	public static int contador;
+	public static int i;
+	public static ArrayList<Integer> list;
 
-		public static void setLista(List<Integer> lista) {
-			CYCLO_method.lista = lista;
-		}
+	//Construtor 
+	public CYCLO_method (String ficheiro) {
+		this.ficheiro=ficheiro;
+		contador=0;
+	}
 
-		void getMethodLineNumbers() throws ParseException, IOException {
-		    CompilationUnit unidadeC = StaticJavaParser.parse((new File(ficheiro)));
-	
-		    new MethodVisitor().visit(unidadeC, null);
-		}
 
-		private static class MethodVisitor extends VoidVisitorAdapter {
-	    	public void visit(MethodDeclaration m, Object arg) {
-				int contador=0;
-	    		List<Statement> a=m.findAll(Statement.class);
-					for(Statement i:a)
-				{
-						if (i.isExpressionStmt() || i.isIfStmt() || i.isForStmt()||i.isWhileStmt()||i.isForEachStmt())
-							contador++;
-				}
-					lista.add(contador);			
-				System.out.println(getLista());
-	    	}
-	    	
-	    	
-	    	
+	void getMethodLineNumbers() throws ParseException, IOException {
+		CompilationUnit unidadeC = StaticJavaParser.parse((new File(ficheiro)));
+
+		new MethodVisitor().visit(unidadeC, null);
+
+	}
+
+	private static class MethodVisitor extends VoidVisitorAdapter {
+		public void visit(MethodDeclaration m, Object arg) {
+			int contador=0;
+			List<Statement> a=m.findAll(Statement.class);
+			for(Statement i:a)
+			{
+				if (i.isExpressionStmt() || i.isIfStmt() || i.isForStmt()||i.isWhileStmt()||i.isForEachStmt())
+					contador++;
+			}
+			list.add(contador);
 		}
 
-	
+	}
 
-	    	
-//		public static void main (String [] args) throws Exception {
-//			String s = "C:\\Users\\adilh\\eclipse-workspace\\Contar\\src\\Contar.java";
-//			CYCLO_method a = new CYCLO_method(s);
-//	//		a.getCYCLO_method(0);
-//			a.getMethodLineNumbers();
-//		}		
+	public ArrayList<Integer> getList(){
+		return list;
+	}
 }
+
+
