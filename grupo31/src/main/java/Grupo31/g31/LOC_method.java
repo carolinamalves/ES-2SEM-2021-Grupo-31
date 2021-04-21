@@ -14,11 +14,11 @@ import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 public class LOC_method{
 	private static String ficheiro;
 	public static int total;
-	public static ArrayList<Integer> list;
+	public static ArrayList<Integer> list=new ArrayList<Integer>();
 	
 	//Construtor 
 	public LOC_method (String fileS) {
-		LOC_method.ficheiro = fileS;
+		this.ficheiro = fileS;
 		total=0;
 	}
 
@@ -33,8 +33,8 @@ public class LOC_method{
 			total=(m.getEnd().get().line-m.getBegin().get().line+1);
 
 			
-			System.out.println("locMethod" + total);
-		list.add(total);
+		//	System.out.println("locMethod" + total);
+			list.add(total);
 		}
 	}
 	

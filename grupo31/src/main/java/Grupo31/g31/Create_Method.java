@@ -19,7 +19,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.github.javaparser.ParseException;
 
-public class Create_Method extends GUI{
+public class Create_Method extends GUI {
 
 	public static int id;
 	public static String namePack;
@@ -30,24 +30,21 @@ public class Create_Method extends GUI{
 	public static int wmcClass1;
 	public static int locMethod1;
 	public static int cycloMethod1;
-	public static ArrayList <Method> a;
-	
-
-
+	public static ArrayList<Method> a = new ArrayList<Method>();
 
 	static void fillmethod(File file) {
 		try {
-			XSSFWorkbook workbook= new XSSFWorkbook();
+			XSSFWorkbook workbook = new XSSFWorkbook();
 
 			// sheet
 			XSSFSheet sh = workbook.createSheet("Metodo");
 
-			//top row
-			String[] columnHeadings = {"MethodId", "name_package", "name_class", "name_method", "Nom_Class", "Loc_Class", "Wmc_Class"
-					,"is_God_Class","Loc_Method", "CYCLO_method","is_Long_Method"};
+			// top row
+			String[] columnHeadings = { "MethodId", "name_package", "name_class", "name_method", "Nom_Class",
+					"Loc_Class", "Wmc_Class", "is_God_Class", "Loc_Method", "CYCLO_method", "is_Long_Method" };
 			Font headerFont = workbook.createFont();
 			headerFont.setBold(true);
-			headerFont.setFontHeightInPoints((short)12);
+			headerFont.setFontHeightInPoints((short) 12);
 			headerFont.setColor(IndexedColors.BLACK.index);
 
 			CellStyle headerStyle = workbook.createCellStyle();
@@ -55,9 +52,9 @@ public class Create_Method extends GUI{
 			headerStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
 			headerStyle.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.index);
 
-			//header row
-			Row headerRow =  sh.createRow(0);
-			for(int i= 0; i<columnHeadings.length;i++) {
+			// header row
+			Row headerRow = sh.createRow(0);
+			for (int i = 0; i < columnHeadings.length; i++) {
 				Cell cell = headerRow.createCell(i);
 				cell.setCellValue(columnHeadings[i]);
 				cell.setCellStyle(headerStyle);
@@ -65,44 +62,42 @@ public class Create_Method extends GUI{
 
 			String fileS = file.getAbsolutePath();
 
-			//name class
+			// name class
 
-			//name package
+			// name package
 
-			//name method
+			// name method
 
 			Nom_class nomClass = new Nom_class();
 			nomClass.nomClass();
 
-		
+			// loc class -- done
 
-				//loc class -- done
+			LOC_class locClass = new LOC_class(fileS);
+			locClass.Contar();
 
-				LOC_class locClass = new LOC_class(fileS);
-				locClass.Contar();
+			// wmc -- done
 
-				//wmc -- done 
+			WMC_class wmcClass = new WMC_class(fileS);
+			wmcClass.contagem();
 
-				WMC_class wmcClass = new WMC_class(fileS);
-				wmcClass.contagem();
+			// locMethod
 
-				//locMethod
-				
-				for (int f = 0; f < nomClass.getNomClass(); f++) {
-			
-				LOC_method locMethod = new LOC_method(fileS);
-				locMethod.getMethodLineNumbers();
+			// for (int f = 0; f < nomClass.getNomClass(); f++) {
 
-				//cyclo method 
+			LOC_method locMethod = new LOC_method(fileS);
+			// locMethod.getMethodLineNumbers();
 
-				CYCLO_method cycloMethod = new CYCLO_method(fileS);
-				cycloMethod.getList().get(f);
+			// cyclo method
 
-				createData(1,"nomeTeste","nomeTeste","nomeTeste",nomClass, locClass,wmcClass, locMethod, cycloMethod);
-			
-				}
+			CYCLO_method cycloMethod = new CYCLO_method(fileS);
+			// cycloMethod.getList().get(f);
 
-			CreationHelper creationHelper= workbook.getCreationHelper();
+			createData(1, "nomeTeste", "nomeTeste", "nomeTeste", nomClass, locClass, wmcClass, locMethod, cycloMethod);
+
+			// }
+
+			CreationHelper creationHelper = workbook.getCreationHelper();
 			CellStyle dataStyle = workbook.createCellStyle();
 			int rownum = 1;
 			for (Method f : a) {
@@ -119,16 +114,14 @@ public class Create_Method extends GUI{
 				row.createCell(8).setCellValue(f.getLoc_Method());
 				row.createCell(9).setCellValue(f.getCYCLO_method());
 
-
-
 			}
 
-			for(int i=0; i<columnHeadings.length; i++) {
+			for (int i = 0; i < columnHeadings.length; i++) {
 				sh.autoSizeColumn(i);
 			}
 
-
-			FileOutputStream fileOut = new FileOutputStream("C:\\Users\\inesv\\OneDrive\\Ambiente de Trabalho\\" + file.getName() + "_metrics.xlsx");
+			FileOutputStream fileOut = new FileOutputStream(
+					"C:\\Users\\admin\\Desktop\\" + file.getName() + "_metrics.xlsx");
 			System.out.println(fileOut);
 			workbook.write(fileOut);
 
@@ -136,19 +129,31 @@ public class Create_Method extends GUI{
 			workbook.close();
 			System.out.println("done");
 
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-		private static void createData(int id, String namePack, String nameClass, String nameMethod, Nom_class nomClass, LOC_class locClass, WMC_class wmcClass, LOC_method locMethod, CYCLO_method cycloMethod) throws ParseException, IOException  {
-			Nom_class nomClass1 = new Nom_class();
-			nomClass.nomClass();
+	private static void createData(int id, String namePack, String nameClass, String nameMethod, Nom_class nomClass,
+			LOC_class locClass, WMC_class wmcClass, LOC_method locMethod, CYCLO_method cycloMethod)
+			throws ParseException, IOException {
+		// Nom_class nomClass1 = new Nom_class();
+		// nomClass.nomClass();
 
-			for (int i = 0; i < nomClass1.getNomClass(); i++) {
-			//meter valores
-			a.add(new Method(id, namePack, nameClass, nameMethod, nomClass.getNomClass(), locClass.getTotalLines(), wmcClass.getWMC_class(), locMethod.getTotal(),cycloMethod.getList().get(i)));
-		}}
+		for (int i = 0; i < nomClass.getNomClass(); i++) {
+			// meter valores
+
+			Method m = new Method(id, namePack, nameClass, nameMethod, nomClass.getNomClass(), locClass.getTotalLines(),
+					wmcClass.getWMC_class(), locMethod.getList().get(i), cycloMethod.getList().get(i));
+			System.out.println("teste------" + i);
+			System.out.println(nomClass.getNomClass());
+			System.out.println(locClass.getTotalLines());
+			System.out.println(wmcClass.getWMC_class());
+			System.out.println(locMethod.getList().get(i));
+			System.out.println(cycloMethod.getList().get(i));
+			a.add(m);
+		}
+	}
 
 	public static void main(String[] args) {
 		new Create_Method();

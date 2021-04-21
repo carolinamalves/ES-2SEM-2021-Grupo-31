@@ -17,7 +17,7 @@ public class CYCLO_method {
 	private static String ficheiro;
 	public static int contador;
 	public static int i;
-	public static ArrayList<Integer> list;
+	public static ArrayList<Integer> list=new ArrayList<Integer>();
 
 	//Construtor 
 	public CYCLO_method (String ficheiro) {
@@ -43,13 +43,18 @@ public class CYCLO_method {
 					contador++;
 			}
 			list.add(contador);
+		//	System.out.println(contador);
 		}
 
 	}
 
-	public ArrayList<Integer> getList(){
+	public ArrayList<Integer> getList() throws ParseException, IOException{
+		getMethodLineNumbers();
 		return list;
 	}
+	
+
+
 }
 
 
