@@ -82,8 +82,10 @@ public class Create_Method extends GUI {
 			wmcClass.contagem();
 
 			// locMethod
-
-			 for (int f = 0; f < nomClass.getNomClass(); f++) {
+			
+			System.out.print("antes do for : " + nomClass.getNomClass());
+			
+			
 
 			LOC_method locMethod = new LOC_method(fileS);
 			 locMethod.getMethodLineNumbers();
@@ -91,11 +93,12 @@ public class Create_Method extends GUI {
 			// cyclo method
 
 			CYCLO_method cycloMethod = new CYCLO_method(fileS);
-			cycloMethod.getList().get(f);
-
+	
 			createData(1, "nomeTeste", "nomeTeste", "nomeTeste", nomClass, locClass, wmcClass, locMethod, cycloMethod);
 
-			 }
+	
+			
+			
 
 			CreationHelper creationHelper = workbook.getCreationHelper();
 			CellStyle dataStyle = workbook.createCellStyle();
