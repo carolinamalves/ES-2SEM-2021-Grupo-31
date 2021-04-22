@@ -121,7 +121,7 @@ public class Create_Method extends GUI {
 			}
 
 			FileOutputStream fileOut = new FileOutputStream(
-					"C:\\Users\\admin\\Desktop\\" + file.getName() + "_metrics.xlsx");
+					"C:\\Users\\alexm\\Desktop\\ES\\" + file.getName() + "_metrics.xlsx");
 			System.out.println(fileOut);
 			workbook.write(fileOut);
 
@@ -142,16 +142,17 @@ public class Create_Method extends GUI {
 
 		for (int i = 0; i < nomClass.getNomClass(); i++) {
 			// meter valores
-
+			
+			System.out.println("antes do Array " + locMethod.getList().get(i));
+			
 			Method m = new Method(id, namePack, nameClass, nameMethod, nomClass.getNomClass(), locClass.getTotalLines(),
 					wmcClass.getWMC_class(), locMethod.getList().get(i), cycloMethod.getList().get(i));
-			System.out.println("teste------" + i);
-			System.out.println(nomClass.getNomClass());
-			System.out.println(locClass.getTotalLines());
-			System.out.println(wmcClass.getWMC_class());
-			System.out.println(locMethod.getList().get(i));
-			System.out.println(cycloMethod.getList().get(i));
+		
 			a.add(m);
+		}
+		
+		for(Method m: a) {
+			System.out.println("linha no array: " + m.getLoc_Method());
 		}
 	}
 

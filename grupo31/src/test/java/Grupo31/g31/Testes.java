@@ -12,7 +12,7 @@ class Testes {
 		String s=new String("as");
 		LOC_class LOC1=new LOC_class(s);
 		LOC1.Contar();
-		AssertEquals();
+		//AssertEquals();
 		LOC1.getTotalLines();
 	}
 }

@@ -9,9 +9,9 @@ public class TestLoc extends TestCase {
 	@Test
 	private static void correrLOC() {
 		// TODO Auto-generated method stub
-		LOC_class LOC1=new LOC_class();
-		LOC1.Contar();
-		LOC1.getTotalLines();
+		//LOC_class LOC1=new LOC_class();
+		//LOC1.Contar();
+		//LOC1.getTotalLines();
 	}
 
 	public static void main(String[] args) {
