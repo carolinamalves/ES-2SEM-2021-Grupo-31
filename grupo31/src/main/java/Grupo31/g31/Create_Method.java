@@ -31,6 +31,8 @@ public class Create_Method extends GUI {
 	public static int locMethod1;
 	public static int cycloMethod1;
 	public static ArrayList<Method> a = new ArrayList<Method>();
+	public static ArrayList<Method> regra1_array = new ArrayList<Method>();
+	public static ArrayList<Method> regra2_array = new ArrayList<Method>();
 
 	static void fillmethod(File file) {
 		try {
@@ -136,6 +138,45 @@ public class Create_Method extends GUI {
 			e.printStackTrace();
 		}
 	}
+	
+	static boolean Regra1 (int LOC_min, int CYCLO_min) {
+	
+		for(Method m: a) {
+			
+			for (int i = 0; i < m.getNom_Class(); i++) {
+			
+				if(m.getLoc_Method() > LOC_min && m.getCYCLO_method() > CYCLO_min) {
+				return true;
+				}
+			
+			}
+		}
+		
+		return false;
+		
+	}
+	
+	static boolean Regra2 (int WMC_min, int NOM_min) {
+		
+		for(Method m: a) {
+			
+			for (int i = 0; i < m.getNom_Class(); i++) {
+			
+				if(m.getWmc_Class() > WMC_min || m.getNom_Class() > NOM_min) {
+				return true;
+				}
+			
+			}
+		}
+		
+		return false;
+		
+	}
+
+	public static ArrayList<Method> getRegra1_array() {
+		return regra1_array;
+	}
+
 
 	private static void createData(int id, String namePack, String nameClass, String nameMethod, Nom_class nomClass,
 			LOC_class locClass, WMC_class wmcClass, LOC_method locMethod, CYCLO_method cycloMethod)
