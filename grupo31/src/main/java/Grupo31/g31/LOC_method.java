@@ -39,7 +39,8 @@ public class LOC_method{
 	}
 	
 	
-	public ArrayList<Integer> getList() {
+	public ArrayList<Integer> getList() throws ParseException, IOException {
+		getMethodLineNumbers();
 		return list;
 	}
 }
