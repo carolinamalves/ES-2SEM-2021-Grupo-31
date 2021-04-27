@@ -50,10 +50,7 @@ public class GUI extends JFrame{
 	static int tableWidth = 0;
 	static int tableHeight = 0;
 
-	private Choice choice;
-	private TextField textField;
-	private JTextArea textArea;
-	private JTextPane textPane;
+
 	private JTextField input;
 	private Button button;
 	private Create_Method cm;
