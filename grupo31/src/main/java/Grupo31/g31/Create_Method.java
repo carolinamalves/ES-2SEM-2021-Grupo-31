@@ -138,6 +138,7 @@ public class Create_Method extends GUI {
 		}
 	}
 	
+	//regra 1 
 	static boolean Regra1 (int LOC_min, int CYCLO_min) {
 	
 		for(Method m: a) {

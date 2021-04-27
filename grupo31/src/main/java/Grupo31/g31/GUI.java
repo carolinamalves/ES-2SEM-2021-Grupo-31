@@ -61,7 +61,7 @@ public class GUI extends JFrame{
 
 	public GUI() {
 		super("Code Smells");
-	//teste
+	//teste2
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jChooser = new JFileChooser();
 		
