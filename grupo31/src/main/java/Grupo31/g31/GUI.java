@@ -38,7 +38,9 @@ import javax.swing.JLabel;
 import java.awt.Font;
 
 public class GUI extends JFrame{
+	
 	private static String ENTER = "Enter";
+	
 	static Vector<String> headers = new Vector<String>();
 	static DefaultTableModel model = null;
 	static Vector<Vector<String>> data = new Vector<Vector<String>>();
@@ -60,24 +62,25 @@ public class GUI extends JFrame{
 	private JLabel labelWMC;
 	private JLabel labelTrue;
 	private JLabel labelFalse;
-	
 	private JLabel lblNewLabel;
 	private JPanel panel;
 	
 	//excel
 	private JScrollPane scrollPane;
 	private JTable table;
+	private JTextField textField;
 	
 
 	public GUI() {
+		
 		super("Code Smells");
-	//teste2
+	
+		//teste2
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jChooser = new JFileChooser();
 		
 		jChooser = new JFileChooser();
 		model = new DefaultTableModel(data, headers);
-
 		
 		tableWidth = model.getColumnCount() * 150;
 		tableHeight = model.getRowCount() * 25;
@@ -154,9 +157,6 @@ public class GUI extends JFrame{
 		gbc_buttonPanel.gridy = 2;
 		getContentPane().add(buttonPanel, gbc_buttonPanel);
 		
-		
-		
-		
 		btnNewButton = new JButton("Rules");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -183,11 +183,11 @@ public class GUI extends JFrame{
 				button = new Button("submit");
 				panel.add(button);
 				
+				panel.revalidate();
+				panel.repaint();
 				
 				button.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						
-					
+					public void actionPerformed(ActionEvent e) {		
 						
 						String minLOC= input.getText();
 						String minWMC = input2.getText();
@@ -251,16 +251,11 @@ public class GUI extends JFrame{
 		gbc_panel.fill = GridBagConstraints.BOTH;
 		gbc_panel.gridx = 0;
 		gbc_panel.gridy = 4;
-		getContentPane().add(panel, gbc_panel);
+		getContentPane().add(panel, gbc_panel);	
 		
-		
-	
-		
-		
-		
-		
-		
-		
+		textField = new JTextField();
+		panel.add(textField);
+		textField.setColumns(10);
 		setSize(800, 700);
 		setResizable(true);
 		setVisible(true);
@@ -271,7 +266,6 @@ public class GUI extends JFrame{
 	new GUI();
 	}
 
-	
 	public static boolean isNumeric(String strNum) {
 	    if (strNum == null) {
 	        return false;
@@ -284,5 +278,3 @@ public class GUI extends JFrame{
 	    return true;
 	}
 }
-
-
