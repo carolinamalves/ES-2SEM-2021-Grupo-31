@@ -50,14 +50,25 @@ public class GUI extends JFrame{
 	static int tableWidth = 0;
 	static int tableHeight = 0;
 
-
+	//regras
 	private JTextField input;
+	private JTextField input2;
 	private Button button;
 	private Create_Method cm;
 	private JButton btnNewButton;
+	private JLabel labelLOC;
+	private JLabel labelWMC;
+	private JLabel labelTrue;
+	private JLabel labelFalse;
+	
 	private JLabel lblNewLabel;
-	private JScrollPane scroll;
+	
+	private JPanel panel;
+	
+	//excel
+	private JScrollPane scrollPane;
 	private JTable table;
+	
 
 	public GUI() {
 		super("Code Smells");
@@ -73,10 +84,45 @@ public class GUI extends JFrame{
 		tableHeight = model.getRowCount() * 25;
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{584, 0};
-		gridBagLayout.rowHeights = new int[]{33, 0, 0, 0, 0, 0, 0, 0};
+		gridBagLayout.rowHeights = new int[]{33, 0, 0, 356, 27, 19, -21, 0};
 		gridBagLayout.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, Double.MIN_VALUE};
 		getContentPane().setLayout(gridBagLayout);
+		
+		lblNewLabel = new JLabel("CODE SMELLS");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 33));
+		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 0);
+		gbc_lblNewLabel.gridx = 0;
+		gbc_lblNewLabel.gridy = 0;
+		getContentPane().add(lblNewLabel, gbc_lblNewLabel);
+		CodeSmellsDetector = new JButton("Detect CodeSmells");
+		GridBagConstraints gbc_CodeSmellsDetector = new GridBagConstraints();
+		gbc_CodeSmellsDetector.insets = new Insets(0, 0, 5, 0);
+		gbc_CodeSmellsDetector.gridx = 0;
+		gbc_CodeSmellsDetector.gridy = 1;
+		getContentPane().add(CodeSmellsDetector, gbc_CodeSmellsDetector);
+		CodeSmellsDetector.setBackground(Color.LIGHT_GRAY);
+		CodeSmellsDetector.addActionListener(new ActionListener() {
+		
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				jChooser.showOpenDialog(null);
+
+				File fileJava = jChooser.getSelectedFile();
+				if (!fileJava.getName().endsWith("java")) {
+					JOptionPane.showMessageDialog(null, "Please select only Java file.", "Error", JOptionPane.ERROR_MESSAGE);
+				} else {
+					cm.fillmethod(fileJava);
+					model = new DefaultTableModel(data, headers);
+					tableWidth = model.getColumnCount() * 150;
+					tableHeight = model.getRowCount() * 25;
+					table.setPreferredSize(new Dimension(tableWidth, tableHeight));
+
+					table.setModel(model);
+				}
+			}
+		});
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setBackground(Color.WHITE);
 		Import = new JButton("Select Excel File");
@@ -101,47 +147,12 @@ public class GUI extends JFrame{
 				}
 			}
 		});
-		
-		lblNewLabel = new JLabel("CODE SMELLS");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 33));
-		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 0);
-		gbc_lblNewLabel.gridx = 0;
-		gbc_lblNewLabel.gridy = 0;
-		getContentPane().add(lblNewLabel, gbc_lblNewLabel);
-		CodeSmellsDetector = new JButton("Detect CodeSmells");
-		GridBagConstraints gbc_CodeSmellsDetector = new GridBagConstraints();
-		gbc_CodeSmellsDetector.insets = new Insets(0, 0, 5, 0);
-		gbc_CodeSmellsDetector.gridx = 0;
-		gbc_CodeSmellsDetector.gridy = 2;
-		getContentPane().add(CodeSmellsDetector, gbc_CodeSmellsDetector);
-		CodeSmellsDetector.setBackground(Color.LIGHT_GRAY);
-		CodeSmellsDetector.addActionListener(new ActionListener() {
-		
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				jChooser.showOpenDialog(null);
-
-				File fileJava = jChooser.getSelectedFile();
-				if (!fileJava.getName().endsWith("java")) {
-					JOptionPane.showMessageDialog(null, "Please select only Java file.", "Error", JOptionPane.ERROR_MESSAGE);
-				} else {
-					cm.fillmethod(fileJava);
-					model = new DefaultTableModel(data, headers);
-					tableWidth = model.getColumnCount() * 150;
-					tableHeight = model.getRowCount() * 25;
-					table.setPreferredSize(new Dimension(tableWidth, tableHeight));
-
-					table.setModel(model);
-				}
-			}
-		});
 		GridBagConstraints gbc_buttonPanel = new GridBagConstraints();
 		gbc_buttonPanel.insets = new Insets(0, 0, 5, 0);
 		gbc_buttonPanel.anchor = GridBagConstraints.NORTH;
 		gbc_buttonPanel.fill = GridBagConstraints.HORIZONTAL;
 		gbc_buttonPanel.gridx = 0;
-		gbc_buttonPanel.gridy = 4;
+		gbc_buttonPanel.gridy = 2;
 		getContentPane().add(buttonPanel, gbc_buttonPanel);
 		
 		
@@ -151,34 +162,60 @@ public class GUI extends JFrame{
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+			//	DefaultTableModel model = (DefaultTableModel) table.getModel();
+			//	model.setRowCount(0);
+				
+				labelLOC = new JLabel("LOC min");
+				labelLOC.setFont(new Font("Tahoma", Font.PLAIN, 10));
+				panel.add(labelLOC);
+				
 				input = new JTextField();
-				scroll.setColumnHeaderView(input);
+				panel.add(input);
 				input.setColumns(10);
 				
-				button = new Button("submit");
-				scroll.setRowHeaderView(button);
+				labelWMC = new JLabel("WMC min");
+				labelWMC.setFont(new Font("Tahoma", Font.PLAIN, 10));
+				panel.add(labelWMC);
 				
-			
+				input2 = new JTextField();
+				panel.add(input2);
+				input2.setColumns(20);
+								
+				button = new Button("submit");
+				panel.add(button);
+				
+				
 				button.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
 					
 						
-						String max = input.getText();
-						System.out.println(max);
+						String minLOC= input.getText();
+						String minWMC = input2.getText();
 						
-						if(isNumeric(max)) {
+						
+						if(isNumeric(minLOC) && isNumeric(minWMC)) {
 							
-							int maxNum = Integer.parseInt(max, 10);
+							int locNum = Integer.parseInt(minLOC, 10);
+							int wmcNum = Integer.parseInt(minWMC, 10);
 							
-							if(cm.Regra1(maxNum, 1)) {
+							if(cm.Regra1(locNum, wmcNum)) {
+								labelTrue = new JLabel("TRUE");
+								labelTrue.setFont(new Font("Tahoma", Font.PLAIN, 15));
+								labelTrue.setForeground(Color.GREEN);
+								panel.add(labelTrue);
+								
 								System.out.println("REGRA 1 : TRUE");
 							}
-							else 
+							else {
 								System.out.println("REGRA 1 : FALSE");
+								labelFalse = new JLabel("FALSE");
+								labelFalse.setFont(new Font("Tahoma", Font.PLAIN, 15));
+								labelFalse.setForeground(Color.RED);
+								panel.add(labelFalse);
+							}
 							
-							
-							if(cm.Regra2(maxNum, 1)) {
+							if(cm.Regra2(locNum, wmcNum)) {
 								System.out.println("REGRA 2 : TRUE");
 							}
 							else 
@@ -197,15 +234,25 @@ public class GUI extends JFrame{
 		btnNewButton.setBackground(Color.LIGHT_GRAY);
 		buttonPanel.add(btnNewButton);
 		
-		scroll = new JScrollPane();
+		scrollPane = new JScrollPane();
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+		gbc_scrollPane.insets = new Insets(0, 0, 5, 0);
 		gbc_scrollPane.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane.gridx = 0;
-		gbc_scrollPane.gridy = 6;
-		getContentPane().add(scroll, gbc_scrollPane);
+		gbc_scrollPane.gridy = 3;
+		getContentPane().add(scrollPane, gbc_scrollPane);
 		
 		table = new JTable();
-		scroll.setViewportView(table);
+		scrollPane.setViewportView(table);
+		
+		
+		panel = new JPanel();
+		GridBagConstraints gbc_panel = new GridBagConstraints();
+		gbc_panel.insets = new Insets(0, 0, 5, 0);
+		gbc_panel.fill = GridBagConstraints.BOTH;
+		gbc_panel.gridx = 0;
+		gbc_panel.gridy = 4;
+		getContentPane().add(panel, gbc_panel);
 		
 		
 	
@@ -215,7 +262,7 @@ public class GUI extends JFrame{
 		
 		
 		
-		setSize(600, 600);
+		setSize(800, 700);
 		setResizable(true);
 		setVisible(true);
 	
