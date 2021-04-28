@@ -42,17 +42,20 @@ public class CYCLO_method {
 				if (i.isExpressionStmt() || i.isIfStmt() || i.isForStmt()||i.isWhileStmt()||i.isForEachStmt())
 					contador++;
 			}
-			list.add(contador);
-		//	System.out.println(contador);
+		//	list.add(contador);
+			System.out.println(contador);
 		}
 
 	}
 
-	public ArrayList<Integer> getList() throws ParseException, IOException{
+//	public ArrayList<Integer> getList() throws ParseException, IOException{
+//		getMethodLineNumbers();
+//		return list;
+//	}
+	public int getContador() throws ParseException, IOException {
 		getMethodLineNumbers();
-		return list;
+		return contador;
 	}
-	
 
 
 }

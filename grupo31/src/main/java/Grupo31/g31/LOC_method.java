@@ -34,12 +34,27 @@ public class LOC_method{
 
 			
 		//	System.out.println("locMethod" + total);
-			list.add(total);
+		//	list.add(total);
+			System.out.println(total);
 		}
 	}
 	
 	
-	public ArrayList<Integer> getList() {
-		return list;
+//	public ArrayList<Integer> getList() throws ParseException, IOException {
+//		getMethodLineNumbers();
+//		return list;
+//	}
+	public int getTotal() throws ParseException, IOException {
+		getMethodLineNumbers();
+		return total;
 	}
+	
+	public static void main (String [] args) throws Exception {
+		String s = "C:\\Users\\adilh\\Desktop\\jasml_0.10\\src\\com\\jasml\\classes\\Attribute.java";
+		LOC_method a = new LOC_method(s);
+		System.out.println(a.getTotal());
+		
+}
+	
+	
 }
