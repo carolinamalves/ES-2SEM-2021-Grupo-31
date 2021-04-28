@@ -62,7 +62,6 @@ public class GUI extends JFrame{
 	private JLabel labelFalse;
 	
 	private JLabel lblNewLabel;
-	
 	private JPanel panel;
 	
 	//excel
