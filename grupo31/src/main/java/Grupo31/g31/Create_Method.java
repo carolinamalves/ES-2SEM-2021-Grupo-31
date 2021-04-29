@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -30,8 +31,11 @@ public class Create_Method extends GUI {
 	public static int cycloMethod1;
 	public static ArrayList<Method> a = new ArrayList<Method>();
 
-	static void fillmethod(File file) {
+	static void fillmethod(List <File> file, String fileName) {
+
 		try {
+
+
 			XSSFWorkbook workbook = new XSSFWorkbook();
 
 			// sheet
@@ -50,137 +54,146 @@ public class Create_Method extends GUI {
 			headerStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
 			headerStyle.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.index);
 
-			// header row
-			Row headerRow = sh.createRow(0);
-			for (int i = 0; i < columnHeadings.length; i++) {
-				Cell cell = headerRow.createCell(i);
-				cell.setCellValue(columnHeadings[i]);
-				cell.setCellStyle(headerStyle);
-			}
 
-			String fileS = file.getAbsolutePath();
+			for (File s : Leitura_Projetos.ficheiro) {
 
-			// name class
 
-			// name package
+				// header row
+				Row headerRow = sh.createRow(0);
+				for (int i = 0; i < columnHeadings.length; i++) {
+					Cell cell = headerRow.createCell(i);
+					cell.setCellValue(columnHeadings[i]);
+					cell.setCellStyle(headerStyle);
+				}
 
-			// name method
+				String fileS = s.getAbsolutePath();
 
-			Nom_class nomClass = new Nom_class();
-			nomClass.nomClass();
+				// name class
 
-			// loc class -- done
+				// name package
 
-			LOC_class locClass = new LOC_class(fileS);
-			locClass.Contar();
+				// name method
 
-			// wmc -- done
+				Nom_class nomClass = new Nom_class();
+				nomClass.nomClass();
 
-			WMC_class wmcClass = new WMC_class(fileS);
-			wmcClass.contagem();
+				// loc class -- done
 
-			// locMethod
+				LOC_class locClass = new LOC_class(fileS);
+				locClass.Contar();
+
+				// wmc -- done
+
+				WMC_class wmcClass = new WMC_class(fileS);
+				wmcClass.contagem();
+
+				// locMethod
+
+				System.out.print("antes do for : " + nomClass.getNomClass());
+
+				LOC_method locMethod = new LOC_method(fileS);
+				locMethod.getMethodLineNumbers();
+
+				// cyclo method
+
+				CYCLO_method cycloMethod = new CYCLO_method(fileS);
+
+				createData(1, "nomeTeste", "nomeTeste", "nomeTeste", nomClass, locClass, wmcClass, locMethod, cycloMethod);
+
+				CreationHelper creationHelper = workbook.getCreationHelper();
+				CellStyle dataStyle = workbook.createCellStyle();
+				int rownum = 1;
+				for (Method f : a) {
+
+					Row row = sh.createRow(rownum++);
+					row.createCell(0).setCellValue(f.getMethodId());
+					System.out.println(f.getMethodId());
+					row.createCell(1).setCellValue(f.getName_package());
+					row.createCell(2).setCellValue(f.getName_class());
+					row.createCell(3).setCellValue(f.getName_method());
+					row.createCell(4).setCellValue(f.getNom_Class());
+					row.createCell(5).setCellValue(f.getLoc_Class());
+					row.createCell(6).setCellValue(f.getWmc_Class());
+					row.createCell(8).setCellValue(f.getLoc_Method());
+					row.createCell(9).setCellValue(f.getCYCLO_method());
+
+				}
+
+				for (int i = 0; i < columnHeadings.length; i++) {
+					sh.autoSizeColumn(i);
+				}
+				
+//				String fileName = "C:\\Users\\inesv\\Desktop\\" + 
+//				Leitura_Projetos.getDirName().substring(Leitura_Projetos.getDirName().lastIndexOf("/") + 1)  + "_metrics.xlsx";
+
+				System.out.println(fileName);
 			
-			System.out.print("antes do for : " + nomClass.getNomClass());
-			
-			LOC_method locMethod = new LOC_method(fileS);
-			 locMethod.getMethodLineNumbers();
+				
+				FileOutputStream fileOut = new FileOutputStream(fileName);
+				System.out.println(fileOut);
+				workbook.write(fileOut);
 
-			// cyclo method
-
-			CYCLO_method cycloMethod = new CYCLO_method(fileS);
-	
-			createData(1, "nomeTeste", "nomeTeste", "nomeTeste", nomClass, locClass, wmcClass, locMethod, cycloMethod);
-
-			CreationHelper creationHelper = workbook.getCreationHelper();
-			CellStyle dataStyle = workbook.createCellStyle();
-			int rownum = 1;
-			for (Method f : a) {
-
-				Row row = sh.createRow(rownum++);
-				row.createCell(0).setCellValue(f.getMethodId());
-				System.out.println(f.getMethodId());
-				row.createCell(1).setCellValue(f.getName_package());
-				row.createCell(2).setCellValue(f.getName_class());
-				row.createCell(3).setCellValue(f.getName_method());
-				row.createCell(4).setCellValue(f.getNom_Class());
-				row.createCell(5).setCellValue(f.getLoc_Class());
-				row.createCell(6).setCellValue(f.getWmc_Class());
-				row.createCell(8).setCellValue(f.getLoc_Method());
-				row.createCell(9).setCellValue(f.getCYCLO_method());
-
+				fileOut.close();
+				workbook.close();
+				System.out.println("done");
 			}
-
-			for (int i = 0; i < columnHeadings.length; i++) {
-				sh.autoSizeColumn(i);
-			}
-
-			FileOutputStream fileOut = new FileOutputStream(
-					"C:\\Users\\carol\\Desktop\\" + file.getName() + "_metrics.xlsx");
-			System.out.println(fileOut);
-			workbook.write(fileOut);
-
-			fileOut.close();
-			workbook.close();
-			System.out.println("done");
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	//regra 1 
-	static boolean Regra1 (int LOC_min, int CYCLO_min) {
-	
-		for(Method m: a) {
-			
-			for (int i = 0; i < m.getNom_Class(); i++) {
-			
-				if(m.getLoc_Method() > LOC_min && m.getCYCLO_method() > CYCLO_min) {
-				return true;
-				}
-			}
-		}
-		return false;
-	}
-	
-	static boolean Regra2 (int WMC_min, int NOM_min) {
-		
-		for(Method m: a) {
-			
-			for (int i = 0; i < m.getNom_Class(); i++) {
-			
-				if(m.getWmc_Class() > WMC_min || m.getNom_Class() > NOM_min) {
-				return true;
-				}
-			}
-		}	
-		return false;
-	}
+
+	//	//regra 1 
+	//	static boolean Regra1 (int LOC_min, int CYCLO_min) {
+	//	
+	//		for(Method m: a) {
+	//			
+	//			for (int i = 0; i < m.getNom_Class(); i++) {
+	//			
+	//				if(m.getLoc_Method() > LOC_min && m.getCYCLO_method() > CYCLO_min) {
+	//				return true;
+	//				}
+	//			}
+	//		}
+	//		return false;
+	//	}
+	//	
+	//	static boolean Regra2 (int WMC_min, int NOM_min) {
+	//		
+	//		for(Method m: a) {
+	//			
+	//			for (int i = 0; i < m.getNom_Class(); i++) {
+	//			
+	//				if(m.getWmc_Class() > WMC_min || m.getNom_Class() > NOM_min) {
+	//				return true;
+	//				}
+	//			}
+	//		}	
+	//		return false;
+	//	}
 
 	private static void createData(int id, String namePack, String nameClass, String nameMethod, Nom_class nomClass,
 			LOC_class locClass, WMC_class wmcClass, LOC_method locMethod, CYCLO_method cycloMethod)
-			throws ParseException, IOException {
+					throws ParseException, IOException {
 		// Nom_class nomClass1 = new Nom_class();
 		// nomClass.nomClass();
 
 		for (int i = 0; i < nomClass.getNomClass(); i++) {
 			// meter valores
-			
+
 			System.out.println("antes do Array " + locMethod.getTotal());
-			
+
 			Method m = new Method(id, namePack, nameClass, nameMethod, nomClass.getNomClass(), locClass.getTotalLines(),
 					wmcClass.getWMC_class(), locMethod.getTotal(), cycloMethod.getContador());
-		
+
 			a.add(m);
 		}
-		
+
 		for(Method m: a) {
 			System.out.println("linha no array: " + m.getLoc_Method());
 		}
 	}
-
-	public static void main(String[] args) {
-		new Create_Method();
-	}
+	//
+	//	public static void main(String[] args) {
+	//		new Create_Method();
+	//	}
 }

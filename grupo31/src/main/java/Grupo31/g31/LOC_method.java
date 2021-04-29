@@ -49,12 +49,12 @@ public class LOC_method{
 		return total;
 	}
 	
-	public static void main (String [] args) throws Exception {
-		String s = "C:\\Users\\adilh\\Desktop\\jasml_0.10\\src\\com\\jasml\\classes\\Attribute.java";
-		LOC_method a = new LOC_method(s);
-		System.out.println(a.getTotal());
-		
-}
-	
+//	public static void main (String [] args) throws Exception {
+//		String s = "C:\\Users\\adilh\\Desktop\\jasml_0.10\\src\\com\\jasml\\classes\\Attribute.java";
+//		LOC_method a = new LOC_method(s);
+//		System.out.println(a.getTotal());
+//		
+//}
+//	
 	
 }
