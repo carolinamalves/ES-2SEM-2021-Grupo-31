@@ -49,7 +49,7 @@ public class GUI extends JFrame{
 	static JFileChooser jChooser;
 	static ArrayList <Method> a;
 	String choosertitle;
-
+	static String fname;
 	static int tableWidth = 0;
 	static int tableHeight = 0;
 
@@ -125,11 +125,11 @@ public class GUI extends JFrame{
 				         +  jChooser.getSelectedFile());
 				     
 				      
-				      File f = new File("C:\\Hello\\AnotherFolder\\The File Name.PDF");  
-				      System.out.println(f.getAbsolutePath().substring(f.getAbsolutePath().lastIndexOf("\\")+1));
+				      
+				     
 				      
 				      
-				      String fname = jChooser.getSelectedFile().toString().substring(jChooser.getSelectedFile().toString().lastIndexOf("\\")+2);
+				      fname = jChooser.getSelectedFile().toString().substring(jChooser.getSelectedFile().toString().lastIndexOf("\\") + 1);
 				      Create_Method.fillmethod(j.lista(jChooser.getSelectedFile().toString()), fname );
 				      
 				    } else {
