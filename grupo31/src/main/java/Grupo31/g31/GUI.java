@@ -48,6 +48,7 @@ public class GUI extends JFrame{
 	static JButton CodeSmellsDetector;
 	static JFileChooser jChooser;
 	static ArrayList <Method> a;
+	String choosertitle;
 
 	static int tableWidth = 0;
 	static int tableHeight = 0;
@@ -57,6 +58,7 @@ public class GUI extends JFrame{
 	private JTextField input2;
 	private Button button;
 	private Create_Method cm;
+	private Leitura_Projetos j= new Leitura_Projetos();
 	private JButton btnNewButton;
 	private JLabel labelLOC;
 	private JLabel labelWMC;
@@ -68,6 +70,7 @@ public class GUI extends JFrame{
 	//excel
 	private JScrollPane scrollPane;
 	private JTable table;
+	private JButton btnNewButton_1;
 
 
 	public GUI() {
@@ -85,9 +88,9 @@ public class GUI extends JFrame{
 		tableHeight = model.getRowCount() * 25;
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{584, 0};
-		gridBagLayout.rowHeights = new int[]{33, 0, 0, 356, 27, 19, -21, 0};
+		gridBagLayout.rowHeights = new int[]{33, 0, 0, 0, 356, 27, 19, -21, 0};
 		gridBagLayout.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, Double.MIN_VALUE};
 		getContentPane().setLayout(gridBagLayout);
 
 		lblNewLabel = new JLabel("CODE SMELLS");
@@ -97,11 +100,50 @@ public class GUI extends JFrame{
 		gbc_lblNewLabel.gridx = 0;
 		gbc_lblNewLabel.gridy = 0;
 		getContentPane().add(lblNewLabel, gbc_lblNewLabel);
+		
+		btnNewButton_1 = new JButton("Importar Projetos");
+		btnNewButton_1.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+				    int result;
+			        
+				    jChooser = new JFileChooser(); 
+				    jChooser.setCurrentDirectory(new java.io.File("."));
+				    jChooser.setDialogTitle(choosertitle);
+				    jChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+				    //
+				    // disable the "All files" option.
+				    //
+				    jChooser.setAcceptAllFileFilterUsed(false);
+				    //    
+				     result = jChooser.showOpenDialog(null);
+				    
+				    if (result == JFileChooser.APPROVE_OPTION) { 
+				      System.out.println("getCurrentDirectory(): " 
+				         +  jChooser.getCurrentDirectory());
+				      System.out.println("getSelectedFile() : " 
+				         +  jChooser.getSelectedFile());
+				      j.lista(jChooser.getSelectedFile().toString());
+				    } else {
+				      System.out.println("No Selection ");
+				      }			
+				}
+			});
+
+				
+				
+				
+				
+		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
+		gbc_btnNewButton_1.insets = new Insets(0, 0, 5, 0);
+		gbc_btnNewButton_1.gridx = 0;
+		gbc_btnNewButton_1.gridy = 1;
+		getContentPane().add(btnNewButton_1, gbc_btnNewButton_1);
 		CodeSmellsDetector = new JButton("Detect CodeSmells");
 		GridBagConstraints gbc_CodeSmellsDetector = new GridBagConstraints();
 		gbc_CodeSmellsDetector.insets = new Insets(0, 0, 5, 0);
 		gbc_CodeSmellsDetector.gridx = 0;
-		gbc_CodeSmellsDetector.gridy = 1;
+		gbc_CodeSmellsDetector.gridy = 2;
 		getContentPane().add(CodeSmellsDetector, gbc_CodeSmellsDetector);
 		CodeSmellsDetector.setBackground(Color.LIGHT_GRAY);
 		CodeSmellsDetector.addActionListener(new ActionListener() {
@@ -153,7 +195,7 @@ public class GUI extends JFrame{
 		gbc_buttonPanel.anchor = GridBagConstraints.NORTH;
 		gbc_buttonPanel.fill = GridBagConstraints.HORIZONTAL;
 		gbc_buttonPanel.gridx = 0;
-		gbc_buttonPanel.gridy = 2;
+		gbc_buttonPanel.gridy = 3;
 		getContentPane().add(buttonPanel, gbc_buttonPanel);
 
 		btnNewButton = new JButton("Rules");
@@ -242,7 +284,7 @@ public class GUI extends JFrame{
 		gbc_scrollPane.insets = new Insets(0, 0, 5, 0);
 		gbc_scrollPane.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane.gridx = 0;
-		gbc_scrollPane.gridy = 3;
+		gbc_scrollPane.gridy = 4;
 		getContentPane().add(scrollPane, gbc_scrollPane);
 
 		table = new JTable();
@@ -254,7 +296,7 @@ public class GUI extends JFrame{
 		gbc_panel.insets = new Insets(0, 0, 5, 0);
 		gbc_panel.fill = GridBagConstraints.BOTH;
 		gbc_panel.gridx = 0;
-		gbc_panel.gridy = 4;
+		gbc_panel.gridy = 5;
 		getContentPane().add(panel, gbc_panel);
 		setSize(800, 700);
 		setResizable(true);
