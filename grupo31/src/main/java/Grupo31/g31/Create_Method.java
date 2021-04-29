@@ -123,8 +123,9 @@ public class Create_Method extends GUI {
 					sh.autoSizeColumn(i);
 				}
 				
-//				String fileName = "C:\\Users\\inesv\\Desktop\\" + 
-//				Leitura_Projetos.getDirName().substring(Leitura_Projetos.getDirName().lastIndexOf("/") + 1)  + "_metrics.xlsx";
+			}
+				fileName = "C:\\Users\\inesv\\Desktop\\" + 
+				GUI.fname  + "_metrics.xlsx";
 
 				System.out.println(fileName);
 			
@@ -136,7 +137,7 @@ public class Create_Method extends GUI {
 				fileOut.close();
 				workbook.close();
 				System.out.println("done");
-			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
