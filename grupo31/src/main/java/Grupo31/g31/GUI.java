@@ -100,9 +100,10 @@ public class GUI extends JFrame{
 		gbc_lblNewLabel.gridx = 0;
 		gbc_lblNewLabel.gridy = 0;
 		getContentPane().add(lblNewLabel, gbc_lblNewLabel);
-		
+
 		btnNewButton_1 = new JButton("Importar Projetos");
 		btnNewButton_1.addActionListener(new ActionListener() {
+<<<<<<< HEAD
 				public void actionPerformed(ActionEvent e) {
 					
 				    int result;
@@ -136,45 +137,73 @@ public class GUI extends JFrame{
 				      }			
 				}
 			});
+=======
+			public void actionPerformed(ActionEvent e) {
+>>>>>>> branch 'main' of https://github.com/csmma1-iscteiul/ES-2SEM-2021-Grupo-31.git
 
-				
-				
-				
-				
+				int result;
+
+				jChooser = new JFileChooser(); 
+				jChooser.setCurrentDirectory(new java.io.File("."));
+				jChooser.setDialogTitle(choosertitle);
+				jChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+				//
+				// disable the "All files" option.
+				//
+				jChooser.setAcceptAllFileFilterUsed(false);
+				//    
+				result = jChooser.showOpenDialog(null);
+
+				if (result == JFileChooser.APPROVE_OPTION) { 
+					System.out.println("getCurrentDirectory(): " 
+							+  jChooser.getCurrentDirectory());
+					System.out.println("getSelectedFile() : " 
+							+  jChooser.getSelectedFile());
+
+					fname = jChooser.getSelectedFile().toString().substring(jChooser.getSelectedFile().toString().lastIndexOf("\\") + 1);
+					Create_Method.fillmethod(j.lista(jChooser.getSelectedFile().toString()), fname );
+
+				} else {
+					System.out.println("No Selection");
+				}			
+			}
+		});
+
 		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
 		gbc_btnNewButton_1.insets = new Insets(0, 0, 5, 0);
 		gbc_btnNewButton_1.gridx = 0;
 		gbc_btnNewButton_1.gridy = 1;
 		getContentPane().add(btnNewButton_1, gbc_btnNewButton_1);
+
+
+		//		CodeSmellsDetector = new JButton("Detect CodeSmells");
+		//		GridBagConstraints gbc_CodeSmellsDetector = new GridBagConstraints();
+		//		gbc_CodeSmellsDetector.insets = new Insets(0, 0, 5, 0);
+		//		gbc_CodeSmellsDetector.gridx = 0;
+		//		gbc_CodeSmellsDetector.gridy = 2;
+		//		getContentPane().add(CodeSmellsDetector, gbc_CodeSmellsDetector);
+		//		CodeSmellsDetector.setBackground(Color.LIGHT_GRAY);
+		//		CodeSmellsDetector.addActionListener(new ActionListener() {
+		//
+		//			@Override
+		//			public void actionPerformed(ActionEvent arg0) {
+		//				jChooser.showOpenDialog(null);
+		//
+		//				File fileJava = jChooser.getSelectedFile();
+		//				if (!fileJava.getName().endsWith("java")) {
+		//					JOptionPane.showMessageDialog(null, "Please select only Java file.", "Error", JOptionPane.ERROR_MESSAGE);
+		//				} else {
+		//					Create_Method.fillmethod(fileJava);
+		//					model = new DefaultTableModel(data, headers);
+		//					tableWidth = model.getColumnCount() * 150;
+		//					tableHeight = model.getRowCount() * 25;
+		//					table.setPreferredSize(new Dimension(tableWidth, tableHeight));
+		//
+		//					table.setModel(model);
+		//				}
+		//			}
+		//		});
 		
-		
-//		CodeSmellsDetector = new JButton("Detect CodeSmells");
-//		GridBagConstraints gbc_CodeSmellsDetector = new GridBagConstraints();
-//		gbc_CodeSmellsDetector.insets = new Insets(0, 0, 5, 0);
-//		gbc_CodeSmellsDetector.gridx = 0;
-//		gbc_CodeSmellsDetector.gridy = 2;
-//		getContentPane().add(CodeSmellsDetector, gbc_CodeSmellsDetector);
-//		CodeSmellsDetector.setBackground(Color.LIGHT_GRAY);
-//		CodeSmellsDetector.addActionListener(new ActionListener() {
-//
-//			@Override
-//			public void actionPerformed(ActionEvent arg0) {
-//				jChooser.showOpenDialog(null);
-//
-//				File fileJava = jChooser.getSelectedFile();
-//				if (!fileJava.getName().endsWith("java")) {
-//					JOptionPane.showMessageDialog(null, "Please select only Java file.", "Error", JOptionPane.ERROR_MESSAGE);
-//				} else {
-//					Create_Method.fillmethod(fileJava);
-//					model = new DefaultTableModel(data, headers);
-//					tableWidth = model.getColumnCount() * 150;
-//					tableHeight = model.getRowCount() * 25;
-//					table.setPreferredSize(new Dimension(tableWidth, tableHeight));
-//
-//					table.setModel(model);
-//				}
-//			}
-//		});
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setBackground(Color.WHITE);
 		Import = new JButton("Select Excel File");
@@ -266,17 +295,17 @@ public class GUI extends JFrame{
 								panel.add(labelFalse);
 								panel.revalidate();
 								panel.repaint();
-								
+
 							}
-//
-//							if(cm.Regra2(locNum, wmcNum)) {
-//								System.out.println("REGRA 2 : TRUE");
-//							}
-//							else 
-//								System.out.println("REGRA 2 : FALSE");
-//
-//
-//
+							//
+							//							if(cm.Regra2(locNum, wmcNum)) {
+							//								System.out.println("REGRA 2 : TRUE");
+							//							}
+							//							else 
+							//								System.out.println("REGRA 2 : FALSE");
+							//
+							//
+							//
 						}
 
 					}

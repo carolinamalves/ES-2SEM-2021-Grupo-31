@@ -20,7 +20,7 @@ import com.github.javaparser.ParseException;
 
 public class Create_Method extends GUI {
 
-	public static int id;
+	public static int id = 0;
 	public static String namePack;
 	public static String nameClass;
 	public static String nameMethod;
@@ -32,7 +32,7 @@ public class Create_Method extends GUI {
 	public static ArrayList<Method> a = new ArrayList<Method>();
 
 	static void fillmethod(List <File> file, String fileName) {
-
+			
 		try {
 
 
@@ -68,11 +68,7 @@ public class Create_Method extends GUI {
 
 				String fileS = s.getAbsolutePath();
 
-				// name class
-
-				// name package
-
-				// name method
+			
 
 				Nom_class nomClass = new Nom_class();
 				nomClass.nomClass();
@@ -97,8 +93,10 @@ public class Create_Method extends GUI {
 				// cyclo method
 
 				CYCLO_method cycloMethod = new CYCLO_method(fileS);
+				
+				String className = s.getAbsolutePath().toString().substring(s.getAbsolutePath().toString().lastIndexOf("\\") + 1);
 
-				createData(1, "nomeTeste", "nomeTeste", "nomeTeste", nomClass, locClass, wmcClass, locMethod, cycloMethod);
+				createData(id, GUI.fname, className, "nomeTeste", nomClass, locClass, wmcClass, locMethod, cycloMethod);
 
 				CreationHelper creationHelper = workbook.getCreationHelper();
 				CellStyle dataStyle = workbook.createCellStyle();
@@ -172,7 +170,7 @@ public class Create_Method extends GUI {
 	//		return false;
 	//	}
 
-	private static void createData(int id, String namePack, String nameClass, String nameMethod, Nom_class nomClass,
+	private static void createData(int id1, String namePack, String nameClass, String nameMethod1, Nom_class nomClass,
 			LOC_class locClass, WMC_class wmcClass, LOC_method locMethod, CYCLO_method cycloMethod)
 					throws ParseException, IOException {
 		// Nom_class nomClass1 = new Nom_class();
@@ -180,13 +178,14 @@ public class Create_Method extends GUI {
 
 		for (int i = 0; i < nomClass.getNomClass(); i++) {
 			// meter valores
-
+			id++;
 			System.out.println("antes do Array " + locMethod.getTotal());
 
 			Method m = new Method(id, namePack, nameClass, nameMethod, nomClass.getNomClass(), locClass.getTotalLines(),
 					wmcClass.getWMC_class(), locMethod.getTotal(), cycloMethod.getContador());
 
 			a.add(m);
+			
 		}
 
 		for(Method m: a) {
