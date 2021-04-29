@@ -38,9 +38,9 @@ import javax.swing.JLabel;
 import java.awt.Font;
 
 public class GUI extends JFrame{
-	
+
 	private static String ENTER = "Enter";
-	
+
 	static Vector<String> headers = new Vector<String>();
 	static DefaultTableModel model = null;
 	static Vector<Vector<String>> data = new Vector<Vector<String>>();
@@ -64,24 +64,23 @@ public class GUI extends JFrame{
 	private JLabel labelFalse;
 	private JLabel lblNewLabel;
 	private JPanel panel;
-	
+
 	//excel
 	private JScrollPane scrollPane;
 	private JTable table;
-	private JTextField textField;
-	
+
 
 	public GUI() {
-		
+
 		super("Code Smells");
-	
+
 		//teste2
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jChooser = new JFileChooser();
-		
+
 		jChooser = new JFileChooser();
 		model = new DefaultTableModel(data, headers);
-		
+
 		tableWidth = model.getColumnCount() * 150;
 		tableHeight = model.getRowCount() * 25;
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -90,7 +89,7 @@ public class GUI extends JFrame{
 		gridBagLayout.columnWeights = new double[]{1.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, Double.MIN_VALUE};
 		getContentPane().setLayout(gridBagLayout);
-		
+
 		lblNewLabel = new JLabel("CODE SMELLS");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 33));
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
@@ -106,7 +105,7 @@ public class GUI extends JFrame{
 		getContentPane().add(CodeSmellsDetector, gbc_CodeSmellsDetector);
 		CodeSmellsDetector.setBackground(Color.LIGHT_GRAY);
 		CodeSmellsDetector.addActionListener(new ActionListener() {
-		
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				jChooser.showOpenDialog(null);
@@ -156,55 +155,57 @@ public class GUI extends JFrame{
 		gbc_buttonPanel.gridx = 0;
 		gbc_buttonPanel.gridy = 2;
 		getContentPane().add(buttonPanel, gbc_buttonPanel);
-		
+
 		btnNewButton = new JButton("Rules");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-			//	DefaultTableModel model = (DefaultTableModel) table.getModel();
-			//	model.setRowCount(0);
-				
+
+				//	DefaultTableModel model = (DefaultTableModel) table.getModel();
+				//	model.setRowCount(0);
+
 				labelLOC = new JLabel("LOC min");
 				labelLOC.setFont(new Font("Tahoma", Font.PLAIN, 10));
 				panel.add(labelLOC);
-				
+
 				input = new JTextField();
 				panel.add(input);
 				input.setColumns(10);
-				
+
 				labelWMC = new JLabel("WMC min");
 				labelWMC.setFont(new Font("Tahoma", Font.PLAIN, 10));
 				panel.add(labelWMC);
-				
+
 				input2 = new JTextField();
 				panel.add(input2);
 				input2.setColumns(20);
-								
+
 				button = new Button("submit");
 				panel.add(button);
-				
+
 				panel.revalidate();
 				panel.repaint();
-				
+
 				button.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {		
-						
+
 						String minLOC= input.getText();
 						String minWMC = input2.getText();
-						
-						
+
+
 						if(isNumeric(minLOC) && isNumeric(minWMC)) {
-							
+
 							int locNum = Integer.parseInt(minLOC, 10);
 							int wmcNum = Integer.parseInt(minWMC, 10);
-							
+
 							if(cm.Regra1(locNum, wmcNum)) {
 								labelTrue = new JLabel("TRUE");
 								labelTrue.setFont(new Font("Tahoma", Font.PLAIN, 15));
 								labelTrue.setForeground(Color.GREEN);
 								panel.add(labelTrue);
-								
+
 								System.out.println("REGRA 1 : TRUE");
+								panel.revalidate();
+								panel.repaint();
 							}
 							else {
 								System.out.println("REGRA 1 : FALSE");
@@ -212,27 +213,30 @@ public class GUI extends JFrame{
 								labelFalse.setFont(new Font("Tahoma", Font.PLAIN, 15));
 								labelFalse.setForeground(Color.RED);
 								panel.add(labelFalse);
+								panel.revalidate();
+								panel.repaint();
+								
 							}
-							
+
 							if(cm.Regra2(locNum, wmcNum)) {
 								System.out.println("REGRA 2 : TRUE");
 							}
 							else 
 								System.out.println("REGRA 2 : FALSE");
-							
-							
-							
+
+
+
 						}
-		        
+
 					}
-				
+
 				});
-			
+
 			}
 		});
 		btnNewButton.setBackground(Color.LIGHT_GRAY);
 		buttonPanel.add(btnNewButton);
-		
+
 		scrollPane = new JScrollPane();
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
 		gbc_scrollPane.insets = new Insets(0, 0, 5, 0);
@@ -240,41 +244,37 @@ public class GUI extends JFrame{
 		gbc_scrollPane.gridx = 0;
 		gbc_scrollPane.gridy = 3;
 		getContentPane().add(scrollPane, gbc_scrollPane);
-		
+
 		table = new JTable();
 		scrollPane.setViewportView(table);
-		
-		
+
+
 		panel = new JPanel();
 		GridBagConstraints gbc_panel = new GridBagConstraints();
 		gbc_panel.insets = new Insets(0, 0, 5, 0);
 		gbc_panel.fill = GridBagConstraints.BOTH;
 		gbc_panel.gridx = 0;
 		gbc_panel.gridy = 4;
-		getContentPane().add(panel, gbc_panel);	
-		
-		textField = new JTextField();
-		panel.add(textField);
-		textField.setColumns(10);
+		getContentPane().add(panel, gbc_panel);
 		setSize(800, 700);
 		setResizable(true);
 		setVisible(true);
-	
+
 	}
 
 	public static void main (String args[]) {
-	new GUI();
+		new GUI();
 	}
 
 	public static boolean isNumeric(String strNum) {
-	    if (strNum == null) {
-	        return false;
-	    }
-	    try {
-	        double d = Double.parseDouble(strNum);
-	    } catch (NumberFormatException nfe) {
-	        return false;
-	    }
-	    return true;
+		if (strNum == null) {
+			return false;
+		}
+		try {
+			double d = Double.parseDouble(strNum);
+		} catch (NumberFormatException nfe) {
+			return false;
+		}
+		return true;
 	}
 }

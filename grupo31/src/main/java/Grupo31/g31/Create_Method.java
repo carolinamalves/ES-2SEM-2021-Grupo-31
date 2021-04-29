@@ -1,4 +1,3 @@
-
 package Grupo31.g31;
 
 import java.io.File;
@@ -6,7 +5,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import org.apache.batik.transcoder.keys.IntegerKey;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.CreationHelper;
@@ -31,7 +29,6 @@ public class Create_Method extends GUI {
 	public static int locMethod1;
 	public static int cycloMethod1;
 	public static ArrayList<Method> a = new ArrayList<Method>();
-
 
 	static void fillmethod(File file) {
 		try {
@@ -86,8 +83,6 @@ public class Create_Method extends GUI {
 			
 			System.out.print("antes do for : " + nomClass.getNomClass());
 			
-			
-
 			LOC_method locMethod = new LOC_method(fileS);
 			 locMethod.getMethodLineNumbers();
 
@@ -96,10 +91,6 @@ public class Create_Method extends GUI {
 			CYCLO_method cycloMethod = new CYCLO_method(fileS);
 	
 			createData(1, "nomeTeste", "nomeTeste", "nomeTeste", nomClass, locClass, wmcClass, locMethod, cycloMethod);
-
-	
-			
-			
 
 			CreationHelper creationHelper = workbook.getCreationHelper();
 			CellStyle dataStyle = workbook.createCellStyle();
@@ -125,7 +116,7 @@ public class Create_Method extends GUI {
 			}
 
 			FileOutputStream fileOut = new FileOutputStream(
-					"C:\\Users\\adilh\\Desktop\\" + file.getName() + "_metrics.xlsx");
+					"C:\\Users\\carol\\Desktop\\" + file.getName() + "_metrics.xlsx");
 			System.out.println(fileOut);
 			workbook.write(fileOut);
 
@@ -148,12 +139,9 @@ public class Create_Method extends GUI {
 				if(m.getLoc_Method() > LOC_min && m.getCYCLO_method() > CYCLO_min) {
 				return true;
 				}
-			
 			}
 		}
-		
 		return false;
-		
 	}
 	
 	static boolean Regra2 (int WMC_min, int NOM_min) {
@@ -165,15 +153,10 @@ public class Create_Method extends GUI {
 				if(m.getWmc_Class() > WMC_min || m.getNom_Class() > NOM_min) {
 				return true;
 				}
-			
 			}
-		}
-		
+		}	
 		return false;
-		
 	}
-
-	
 
 	private static void createData(int id, String namePack, String nameClass, String nameMethod, Nom_class nomClass,
 			LOC_class locClass, WMC_class wmcClass, LOC_method locMethod, CYCLO_method cycloMethod)
