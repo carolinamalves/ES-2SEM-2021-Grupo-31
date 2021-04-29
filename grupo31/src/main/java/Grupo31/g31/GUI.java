@@ -125,7 +125,6 @@ public class GUI extends JFrame{
 				         +  jChooser.getSelectedFile());
 				     
 				      
-				      
 				     
 				      
 				      

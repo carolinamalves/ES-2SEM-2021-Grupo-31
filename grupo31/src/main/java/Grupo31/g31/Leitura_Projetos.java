@@ -19,7 +19,6 @@ public class Leitura_Projetos {
 		 return dirName;
 		  
 	  }
-	  
 	  public List <File> lista(String local_diretorio) {
 	      dirName = local_diretorio;
 		  File diretorio = new File(local_diretorio);

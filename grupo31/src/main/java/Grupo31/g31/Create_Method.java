@@ -142,7 +142,6 @@ public class Create_Method extends GUI {
 			e.printStackTrace();
 		}
 	}
-	
 
 	//	//regra 1 
 	//	static boolean Regra1 (int LOC_min, int CYCLO_min) {
