@@ -31,13 +31,13 @@ public class Métricas2 {
 		return contador;
 	}
 	
-	public void getNumberClasses(){
-		ClassOrInterfaceDeclaration classe = StaticJavaParser.parse((new File (ficheiro)));;
-
-		ClassVisitor CV= new ClassVisitor();
-		CV.contarClasses(classe);
-		CV.numeroClasses();
-	}
+//	public void getNumberClasses(){
+//		ClassOrInterfaceDeclaration classe = StaticJavaParser.parse((new File (ficheiro)));;
+//
+//		ClassVisitor CV= new ClassVisitor();
+//		CV.contarClasses(classe);
+//		CV.numeroClasses();
+//	}
 	
 	public static class ClassVisitor extends VoidVisitorAdapter {
 		int contador=0;
