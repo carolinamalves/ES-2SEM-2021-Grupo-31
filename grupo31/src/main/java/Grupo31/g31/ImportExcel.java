@@ -92,7 +92,7 @@ public class ImportExcel extends GUI{
 		} 
 	}
 
-	public static void main(String[] args) {
-		new ImportExcel();
-	}
+//	public static void main(String[] args) {
+//		new ImportExcel();
+//	}
 }

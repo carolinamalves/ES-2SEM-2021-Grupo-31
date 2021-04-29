@@ -49,7 +49,7 @@ public class GUI extends JFrame{
 	static JFileChooser jChooser;
 	static ArrayList <Method> a;
 	String choosertitle;
-
+	static String fname;
 	static int tableWidth = 0;
 	static int tableHeight = 0;
 
@@ -123,9 +123,17 @@ public class GUI extends JFrame{
 				         +  jChooser.getCurrentDirectory());
 				      System.out.println("getSelectedFile() : " 
 				         +  jChooser.getSelectedFile());
-				      j.lista(jChooser.getSelectedFile().toString());
+				     
+				      
+				      
+				     
+				      
+				      
+				      fname = jChooser.getSelectedFile().toString().substring(jChooser.getSelectedFile().toString().lastIndexOf("\\") + 1);
+				      Create_Method.fillmethod(j.lista(jChooser.getSelectedFile().toString()), fname );
+				      
 				    } else {
-				      System.out.println("No Selection ");
+				      System.out.println("No Selection");
 				      }			
 				}
 			});
@@ -139,33 +147,35 @@ public class GUI extends JFrame{
 		gbc_btnNewButton_1.gridx = 0;
 		gbc_btnNewButton_1.gridy = 1;
 		getContentPane().add(btnNewButton_1, gbc_btnNewButton_1);
-		CodeSmellsDetector = new JButton("Detect CodeSmells");
-		GridBagConstraints gbc_CodeSmellsDetector = new GridBagConstraints();
-		gbc_CodeSmellsDetector.insets = new Insets(0, 0, 5, 0);
-		gbc_CodeSmellsDetector.gridx = 0;
-		gbc_CodeSmellsDetector.gridy = 2;
-		getContentPane().add(CodeSmellsDetector, gbc_CodeSmellsDetector);
-		CodeSmellsDetector.setBackground(Color.LIGHT_GRAY);
-		CodeSmellsDetector.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				jChooser.showOpenDialog(null);
-
-				File fileJava = jChooser.getSelectedFile();
-				if (!fileJava.getName().endsWith("java")) {
-					JOptionPane.showMessageDialog(null, "Please select only Java file.", "Error", JOptionPane.ERROR_MESSAGE);
-				} else {
-					cm.fillmethod(fileJava);
-					model = new DefaultTableModel(data, headers);
-					tableWidth = model.getColumnCount() * 150;
-					tableHeight = model.getRowCount() * 25;
-					table.setPreferredSize(new Dimension(tableWidth, tableHeight));
-
-					table.setModel(model);
-				}
-			}
-		});
+		
+		
+//		CodeSmellsDetector = new JButton("Detect CodeSmells");
+//		GridBagConstraints gbc_CodeSmellsDetector = new GridBagConstraints();
+//		gbc_CodeSmellsDetector.insets = new Insets(0, 0, 5, 0);
+//		gbc_CodeSmellsDetector.gridx = 0;
+//		gbc_CodeSmellsDetector.gridy = 2;
+//		getContentPane().add(CodeSmellsDetector, gbc_CodeSmellsDetector);
+//		CodeSmellsDetector.setBackground(Color.LIGHT_GRAY);
+//		CodeSmellsDetector.addActionListener(new ActionListener() {
+//
+//			@Override
+//			public void actionPerformed(ActionEvent arg0) {
+//				jChooser.showOpenDialog(null);
+//
+//				File fileJava = jChooser.getSelectedFile();
+//				if (!fileJava.getName().endsWith("java")) {
+//					JOptionPane.showMessageDialog(null, "Please select only Java file.", "Error", JOptionPane.ERROR_MESSAGE);
+//				} else {
+//					Create_Method.fillmethod(fileJava);
+//					model = new DefaultTableModel(data, headers);
+//					tableWidth = model.getColumnCount() * 150;
+//					tableHeight = model.getRowCount() * 25;
+//					table.setPreferredSize(new Dimension(tableWidth, tableHeight));
+//
+//					table.setModel(model);
+//				}
+//			}
+//		});
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setBackground(Color.WHITE);
 		Import = new JButton("Select Excel File");
@@ -239,7 +249,7 @@ public class GUI extends JFrame{
 							int locNum = Integer.parseInt(minLOC, 10);
 							int wmcNum = Integer.parseInt(minWMC, 10);
 
-							if(cm.Regra1(locNum, wmcNum)) {
+							if(Rules.Regra1(locNum, wmcNum)) {
 								labelTrue = new JLabel("TRUE");
 								labelTrue.setFont(new Font("Tahoma", Font.PLAIN, 15));
 								labelTrue.setForeground(Color.GREEN);
@@ -259,15 +269,15 @@ public class GUI extends JFrame{
 								panel.repaint();
 								
 							}
-
-							if(cm.Regra2(locNum, wmcNum)) {
-								System.out.println("REGRA 2 : TRUE");
-							}
-							else 
-								System.out.println("REGRA 2 : FALSE");
-
-
-
+//
+//							if(cm.Regra2(locNum, wmcNum)) {
+//								System.out.println("REGRA 2 : TRUE");
+//							}
+//							else 
+//								System.out.println("REGRA 2 : FALSE");
+//
+//
+//
 						}
 
 					}

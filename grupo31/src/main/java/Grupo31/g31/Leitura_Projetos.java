@@ -6,13 +6,23 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Leitura_Projetos {
-	  static ArrayList<File>ficheiro= new ArrayList<>();
-
+	  static ArrayList <File> ficheiro = new ArrayList<>();
+	 static String dirName;
+	  
 	  public static ArrayList<File> getFicheiro() {
 		  return ficheiro;
-	  }     
-	  public static List<File> lista(String local_diretorio) {
-	        File diretorio = new File(local_diretorio);
+	  }
+	  
+	  public static String getDirName() { 
+		  
+		
+		 return dirName;
+		  
+	  }
+	  
+	  public List <File> lista(String local_diretorio) {
+	      dirName = local_diretorio;
+		  File diretorio = new File(local_diretorio);
 
 	        File[] listaFicheiros = diretorio.listFiles();
 	        ficheiro.addAll(Arrays.asList(listaFicheiros));
