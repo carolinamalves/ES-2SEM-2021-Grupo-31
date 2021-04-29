@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.Vector;
 
 import javax.swing.JButton;
@@ -18,6 +19,16 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import org.apache.commons.codec.binary.StringUtils;
+
+import javax.swing.JScrollBar;
+import java.awt.Panel;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
+import java.awt.Choice;
+import java.awt.TextField;
+import javax.swing.JTextArea;
+import javax.swing.JTextPane;
 import javax.swing.JTextField;
 import java.awt.Button;
 import java.awt.GridBagLayout;
@@ -28,7 +39,7 @@ import java.awt.Font;
 
 public class GUI extends JFrame{
 
-	//private static String ENTER = "Enter";
+	private static String ENTER = "Enter";
 
 	static Vector<String> headers = new Vector<String>();
 	static DefaultTableModel model = null;
@@ -254,12 +265,17 @@ public class GUI extends JFrame{
 							}
 							else 
 								System.out.println("REGRA 2 : FALSE");
+
+
+
 						}
+
 					}
+
 				});
+
 			}
 		});
-		
 		btnNewButton.setBackground(Color.LIGHT_GRAY);
 		buttonPanel.add(btnNewButton);
 
