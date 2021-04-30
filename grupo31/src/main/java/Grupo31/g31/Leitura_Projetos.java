@@ -8,7 +8,6 @@ import java.util.List;
 public class Leitura_Projetos {
 	  static ArrayList <File> ficheiro = new ArrayList<>();
 	 static String dirName;
-	  
 	  public static ArrayList<File> getFicheiro() {
 		  return ficheiro;
 	  }

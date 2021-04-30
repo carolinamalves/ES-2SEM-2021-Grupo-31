@@ -3,12 +3,14 @@ package Grupo31.g31;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.github.javaparser.ParseException;
 import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
+
 
 
 public class LOC_method{
@@ -34,27 +36,30 @@ public class LOC_method{
 
 			
 		//	System.out.println("locMethod" + total);
-		//	list.add(total);
-			System.out.println(total);
+			list.add(total);
+		//	System.out.println(total);
 		}
 	}
 	
-	
-//	public ArrayList<Integer> getList() throws ParseException, IOException {
-//		getMethodLineNumbers();
-//		return list;
-//	}
-	public int getTotal() throws ParseException, IOException {
+	public ArrayList<Integer> getList() throws ParseException, IOException {
 		getMethodLineNumbers();
-		return total;
+		return list;
+	}	
+	
+
+	
+	
+ 	 public static void main(String[] args) throws ParseException, IOException {
+	     		 
+ 		 Leitura_Projetos s = new Leitura_Projetos();
+ 		List<File>lista = s.lista("C:\\Users\\adilh\\git\\ES-2SEM-2021-Grupo-31\\grupo31\\src\\main\\java\\Grupo31\\g31\\");
+	//	LOC_method a = new LOC_method("");
+	 for(File i:lista) {
+		 LOC_method  a = new LOC_method(i.toString());
+			System.out.println(a.getList()+ ""+ i);
+	 }
+	
 	}
 	
-//	public static void main (String [] args) throws Exception {
-//		String s = "C:\\Users\\adilh\\Desktop\\jasml_0.10\\src\\com\\jasml\\classes\\Attribute.java";
-//		LOC_method a = new LOC_method(s);
-//		System.out.println(a.getTotal());
-//		
-//}
-//	
 	
 }
