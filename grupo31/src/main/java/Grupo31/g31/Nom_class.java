@@ -3,6 +3,10 @@ package Grupo31.g31;
 import java.io.FileNotFoundException;
 import java.lang.reflect.Method;
 
+/**
+ * @author admin
+ *
+ */
 public class Nom_class {
 	
 	private static int numberM;

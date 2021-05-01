@@ -40,21 +40,13 @@ public class LOC_method{
 	}
 	
 	
-//	public ArrayList<Integer> getList() throws ParseException, IOException {
-//		getMethodLineNumbers();
-//		return list;
-//	}
+
 	public int getTotal() throws ParseException, IOException {
 		getMethodLineNumbers();
 		return total;
 	}
 	
-	public static void main (String [] args) throws Exception {
-		String s = "C:\\Users\\adilh\\Desktop\\jasml_0.10\\src\\com\\jasml\\classes\\Attribute.java";
-		LOC_method a = new LOC_method(s);
-		System.out.println(a.getTotal());
-		
-}
+
 	
 	
 }
