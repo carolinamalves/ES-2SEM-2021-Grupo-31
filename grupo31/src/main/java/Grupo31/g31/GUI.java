@@ -213,8 +213,6 @@ public class GUI extends JFrame{
 				panel.revalidate();
 				panel.repaint();
 
-				//	DefaultTableModel model = (DefaultTableModel) table.getModel();
-				//	model.setRowCount(0);
 
 				labelLOC = new JLabel("LOC min");
 				labelLOC.setFont(new Font("Tahoma", Font.PLAIN, 10));
