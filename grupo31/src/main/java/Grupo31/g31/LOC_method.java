@@ -42,24 +42,12 @@ public class LOC_method{
 	}
 	
 	public ArrayList<Integer> getList() throws ParseException, IOException {
+
 		getMethodLineNumbers();
 		return list;
 	}	
 	
 
-	
-	
- 	 public static void main(String[] args) throws ParseException, IOException {
-	     		 
- 		 Leitura_Projetos s = new Leitura_Projetos();
- 		List<File>lista = s.lista("C:\\Users\\adilh\\git\\ES-2SEM-2021-Grupo-31\\grupo31\\src\\main\\java\\Grupo31\\g31\\");
-	//	LOC_method a = new LOC_method("");
-	 for(File i:lista) {
-		 LOC_method  a = new LOC_method(i.toString());
-			System.out.println(a.getList()+ ""+ i);
-	 }
-	
-	}
 	
 	
 }

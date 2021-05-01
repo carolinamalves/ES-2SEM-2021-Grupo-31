@@ -9,6 +9,10 @@ import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.stmt.Statement;
 
+/**
+ * @author admin
+ * @version 
+ */
 public class  WMC_class {	
 	private static int contador;
 	private static String ficheiro;
@@ -19,7 +23,10 @@ public class  WMC_class {
 		this.ficheiro=ficheiro;
 	}
 
-	public void contagem() throws FileNotFoundException { 
+	/**
+	 * @throws FileNotFoundException
+	 */
+	public int contagem() throws FileNotFoundException { 
 		
 	CompilationUnit unidadeC = StaticJavaParser.parse(new File(ficheiro));
 	List<Statement> a=unidadeC.findAll(Statement.class);
@@ -30,7 +37,7 @@ public class  WMC_class {
 			if (i.isExpressionStmt() || i.isIfStmt() || i.isForStmt()||i.isWhileStmt()||i.isForEachStmt())
 				contador++;
 		}
-	
+		return contador;
 	}	
 
 	public int getWMC_class() {
