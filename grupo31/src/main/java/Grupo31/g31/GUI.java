@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Vector;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -59,9 +60,13 @@ public class GUI extends JFrame{
 	private Button button;
 	private Create_Method cm;
 	private Leitura_Projetos j= new Leitura_Projetos();
-	private JButton btnNewButton;
+	private JButton regra1;
+	private JButton regra2;
 	private JLabel labelLOC;
+	private JLabel labelCYCLO;
 	private JLabel labelWMC;
+	private JLabel labelNOM;
+	
 	private JLabel labelTrue;
 	private JLabel labelFalse;
 	private JLabel lblNewLabel;
@@ -92,7 +97,6 @@ public class GUI extends JFrame{
 		gridBagLayout.columnWeights = new double[]{1.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, Double.MIN_VALUE};
 		getContentPane().setLayout(gridBagLayout);
-
 		lblNewLabel = new JLabel("CODE SMELLS");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 33));
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
@@ -200,9 +204,14 @@ public class GUI extends JFrame{
 		gbc_buttonPanel.gridy = 3;
 		getContentPane().add(buttonPanel, gbc_buttonPanel);
 
-		btnNewButton = new JButton("Rules");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		regra1 = new JButton("LOC and CYCLO rules");
+		regra1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				
+				panel.removeAll();
+				panel.revalidate();
+				panel.repaint();
 
 				//	DefaultTableModel model = (DefaultTableModel) table.getModel();
 				//	model.setRowCount(0);
@@ -215,9 +224,9 @@ public class GUI extends JFrame{
 				panel.add(input);
 				input.setColumns(10);
 
-				labelWMC = new JLabel("WMC min");
-				labelWMC.setFont(new Font("Tahoma", Font.PLAIN, 10));
-				panel.add(labelWMC);
+				labelCYCLO = new JLabel("CYCLO min");
+				labelCYCLO.setFont(new Font("Tahoma", Font.PLAIN, 10));
+				panel.add(labelCYCLO);
 
 				input2 = new JTextField();
 				panel.add(input2);
@@ -231,17 +240,18 @@ public class GUI extends JFrame{
 
 				button.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {		
+					
 
 						String minLOC= input.getText();
-						String minWMC = input2.getText();
+						String minCYCLO = input2.getText();
 
 
-						if(isNumeric(minLOC) && isNumeric(minWMC)) {
+						if(isNumeric(minLOC) && isNumeric(minCYCLO)) {
 
 							int locNum = Integer.parseInt(minLOC, 10);
-							int wmcNum = Integer.parseInt(minWMC, 10);
+							int cycloNum = Integer.parseInt(minCYCLO, 10);
 
-							if(Rules.Regra1(locNum, wmcNum)) {
+							if(Rules.Regra1(locNum, cycloNum)) {
 								labelTrue = new JLabel("TRUE");
 								labelTrue.setFont(new Font("Tahoma", Font.PLAIN, 15));
 								labelTrue.setForeground(Color.GREEN);
@@ -275,11 +285,112 @@ public class GUI extends JFrame{
 					}
 
 				});
+				
 
 			}
 		});
-		btnNewButton.setBackground(Color.LIGHT_GRAY);
-		buttonPanel.add(btnNewButton);
+		
+		
+		
+		regra2 = new JButton("WMC and NOM rules");
+		regra2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panel.removeAll();
+				panel.revalidate();
+				panel.repaint();
+
+				//	DefaultTableModel model = (DefaultTableModel) table.getModel();
+				//	model.setRowCount(0);
+
+				labelWMC = new JLabel("WMC min");
+				labelWMC.setFont(new Font("Tahoma", Font.PLAIN, 10));
+				panel.add(labelWMC);
+
+				input = new JTextField();
+				panel.add(input);
+				input.setColumns(10);
+
+				labelNOM = new JLabel("NOM min");
+				labelNOM.setFont(new Font("Tahoma", Font.PLAIN, 10));
+				panel.add(labelNOM);
+
+				input2 = new JTextField();
+				panel.add(input2);
+				input2.setColumns(20);
+
+				button = new Button("submit");
+				panel.add(button);
+
+				panel.revalidate();
+				panel.repaint();
+
+				button.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {		
+
+						String minWMC= input.getText();
+						String minNOM = input2.getText();
+
+
+						if(isNumeric(minWMC) && isNumeric(minNOM)) {
+
+							int wmcNum = Integer.parseInt(minWMC, 10);
+							int nomNum = Integer.parseInt(minNOM, 10);
+
+							if(Rules.Regra2(wmcNum, nomNum)) {
+								labelTrue = new JLabel("TRUE");
+								labelTrue.setFont(new Font("Tahoma", Font.PLAIN, 15));
+								labelTrue.setForeground(Color.GREEN);
+								panel.add(labelTrue);
+
+								System.out.println("REGRA 2 : TRUE");
+								panel.revalidate();
+								panel.repaint();
+							}
+							else {
+								System.out.println("REGRA 2 : FALSE");
+								labelFalse = new JLabel("FALSE");
+								labelFalse.setFont(new Font("Tahoma", Font.PLAIN, 15));
+								labelFalse.setForeground(Color.RED);
+								panel.add(labelFalse);
+								panel.revalidate();
+								panel.repaint();
+
+							}
+							//
+							//							if(cm.Regra2(locNum, wmcNum)) {
+							//								System.out.println("REGRA 2 : TRUE");
+							//							}
+							//							else 
+							//								System.out.println("REGRA 2 : FALSE");
+							//
+							//
+							//
+						}
+
+					}
+
+				});
+				
+
+			}
+		});
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		regra1.setBackground(Color.LIGHT_GRAY);
+		buttonPanel.add(regra1);
+		
+		regra2.setBackground(Color.LIGHT_GRAY);
+		buttonPanel.add(regra2);
 
 		scrollPane = new JScrollPane();
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
