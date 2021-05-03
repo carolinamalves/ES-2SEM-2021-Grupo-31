@@ -31,30 +31,12 @@ public class LOC_method{
 	private static class MethodVisitor extends VoidVisitorAdapter {
 		public void visit(MethodDeclaration m, Object arg) {
 			total=(m.getEnd().get().line-m.getBegin().get().line+1);
-
-			
-		//	System.out.println("locMethod" + total);
-		//	list.add(total);
-			System.out.println(total);
+			list.add(total);
+			System.out.println("LOOOOOOOOOOOOOOC" + total);
 		}
 	}
 	
-	
-//	public ArrayList<Integer> getList() throws ParseException, IOException {
-//		getMethodLineNumbers();
-//		return list;
-//	}
-	public int getTotal() throws ParseException, IOException {
-		getMethodLineNumbers();
-		return total;
-	}
-	
-//	public static void main (String [] args) throws Exception {
-//		String s = "C:\\Users\\adilh\\Desktop\\jasml_0.10\\src\\com\\jasml\\classes\\Attribute.java";
-//		LOC_method a = new LOC_method(s);
-//		System.out.println(a.getTotal());
-//		
-//}
-//	
-	
+	public ArrayList<Integer> getTotal() throws ParseException, IOException {
+		return list;
+	}	
 }

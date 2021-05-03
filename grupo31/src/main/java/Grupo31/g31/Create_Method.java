@@ -19,7 +19,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import com.github.javaparser.ParseException;
 
 public class Create_Method extends GUI {
-
+	public static int u = 1;
 	public static int id = 0;
 	public static String namePack;
 	public static String nameClass;
@@ -30,6 +30,7 @@ public class Create_Method extends GUI {
 	public static int locMethod1;
 	public static int cycloMethod1;
 	public static ArrayList<Method> a = new ArrayList<Method>();
+	public static java.lang.reflect.Method[] met;
 
 	static void fillmethod(List <File> file, String fileName) {
 			
@@ -57,8 +58,12 @@ public class Create_Method extends GUI {
 
 			for (File s : Leitura_Projetos.ficheiro) {
 
-
-				// header row
+				String className = s.getAbsolutePath().toString().substring(s.getAbsolutePath().toString().lastIndexOf("\\") + 1); 
+				Class c = className.getClass();
+				System.out.println(c.getPackageName());
+			
+				
+		 // header row
 				Row headerRow = sh.createRow(0);
 				for (int i = 0; i < columnHeadings.length; i++) {
 					Cell cell = headerRow.createCell(i);
@@ -89,20 +94,36 @@ public class Create_Method extends GUI {
 
 				LOC_method locMethod = new LOC_method(fileS);
 				locMethod.getMethodLineNumbers();
-
+				int locM = locMethod.getTotal().indexOf(u);
+				
 				// cyclo method
 
 				CYCLO_method cycloMethod = new CYCLO_method(fileS);
+				cycloMethod.getMethodLineNumbers();
+				int cycloM = cycloMethod.getContador();
 				
-				String className = s.getAbsolutePath().toString().substring(s.getAbsolutePath().toString().lastIndexOf("\\") + 1);
-
-				createData(id, GUI.fname, className, "nomeTeste", nomClass, locClass, wmcClass, locMethod, cycloMethod);
-
+				createData(id, GUI.fname, className, "nome do metodo", nomClass, locClass, wmcClass, locM, cycloM);
+				u++;
+				//String className = s.getAbsolutePath().toString().substring(s.getAbsolutePath().toString().lastIndexOf("\\") + 1);
+				
+			
+				
+//				String nameofCurrMethod = new Throwable()
+//                        .getStackTrace()[u]
+//                        .getMethodName();
+			
+			
+				
+//			createData(id, GUI.fname, className, "nome do metodo", nomClass, locClass, wmcClass, locMethod, cycloMethod);
+	
+				
 				CreationHelper creationHelper = workbook.getCreationHelper();
 				CellStyle dataStyle = workbook.createCellStyle();
+				
+				
 				int rownum = 1;
 				for (Method f : a) {
-
+					
 					Row row = sh.createRow(rownum++);
 					row.createCell(0).setCellValue(f.getMethodId());
 					System.out.println(f.getMethodId());
@@ -114,14 +135,15 @@ public class Create_Method extends GUI {
 					row.createCell(6).setCellValue(f.getWmc_Class());
 					row.createCell(8).setCellValue(f.getLoc_Method());
 					row.createCell(9).setCellValue(f.getCYCLO_method());
-
+	
 				}
-
+			
+			}
 				for (int i = 0; i < columnHeadings.length; i++) {
 					sh.autoSizeColumn(i);
 				}
 				
-			}
+			
 				fileName = "C:\\Users\\inesv\\Desktop\\" + 
 				GUI.fname  + "_metrics.xlsx";
 
@@ -172,7 +194,7 @@ public class Create_Method extends GUI {
 	//	}
 
 	private static void createData(int id1, String namePack, String nameClass, String nameMethod1, Nom_class nomClass,
-			LOC_class locClass, WMC_class wmcClass, LOC_method locMethod, CYCLO_method cycloMethod)
+			LOC_class locClass, WMC_class wmcClass, int locMethod, int cycloMethod)
 					throws ParseException, IOException {
 		// Nom_class nomClass1 = new Nom_class();
 		// nomClass.nomClass();
@@ -180,18 +202,18 @@ public class Create_Method extends GUI {
 		for (int i = 0; i < nomClass.getNomClass(); i++) {
 			// meter valores
 			id++;
-			System.out.println("antes do Array " + locMethod.getTotal());
-
-			Method m = new Method(id, namePack, nameClass, nameMethod, nomClass.getNomClass(), locClass.getTotalLines(),
-					wmcClass.getWMC_class(), locMethod.getTotal(), cycloMethod.getContador());
+//			System.out.println("antes do Array " + locMethod.getTotal());
+			
+			Method m = new Method(id, namePack, nameClass, nameMethod1, nomClass.getNomClass(), locClass.getTotalLines(),
+					wmcClass.getWMC_class(), locMethod, cycloMethod);
 
 			a.add(m);
 			
 		}
 
-		for(Method m: a) {
-			System.out.println("linha no array: " + m.getLoc_Method());
-		}
+//		for(Method m: a) {
+//			System.out.println("linha no array: " + m.getLoc_Method());
+//		}
 	}
 	//
 	//	public static void main(String[] args) {

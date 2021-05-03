@@ -11,6 +11,7 @@ import java.util.Scanner;
 import java.util.Vector;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -167,7 +168,7 @@ public class GUI extends JFrame{
 		//				}
 		//			}
 		//		});
-		
+
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setBackground(Color.WHITE);
 		Import = new JButton("Select Excel File");
@@ -200,28 +201,47 @@ public class GUI extends JFrame{
 		gbc_buttonPanel.gridy = 3;
 		getContentPane().add(buttonPanel, gbc_buttonPanel);
 
-		btnNewButton = new JButton("Rules");
+		btnNewButton = new JButton("Define Rules");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				//	DefaultTableModel model = (DefaultTableModel) table.getModel();
-				//	model.setRowCount(0);
+				DefaultTableModel model = (DefaultTableModel) table.getModel();
+				model.setRowCount(0);
 
-				labelLOC = new JLabel("LOC min");
-				labelLOC.setFont(new Font("Tahoma", Font.PLAIN, 10));
-				panel.add(labelLOC);
+				JComboBox comboBox1 = new JComboBox();
 
-				input = new JTextField();
-				panel.add(input);
-				input.setColumns(10);
+				comboBox1.addItem("LOC_method");
+				comboBox1.addItem("CYLO_method");
+				comboBox1.addItem("LOC_class");
+				comboBox1.addItem("Nom_class");
+				comboBox1.addItem("WMX_class");
+				panel.add(comboBox1);
 
-				labelWMC = new JLabel("WMC min");
-				labelWMC.setFont(new Font("Tahoma", Font.PLAIN, 10));
-				panel.add(labelWMC);
 
-				input2 = new JTextField();
-				panel.add(input2);
-				input2.setColumns(20);
+				JTextField v1 = new JTextField();
+				panel.add(v1);
+				v1.setColumns(10);
+
+				JComboBox op = new JComboBox();
+				op.addItem("and");
+				op.addItem("or");
+				panel.add(op);
+				
+
+				JComboBox comboBox2 = new JComboBox();
+
+				comboBox2.addItem("LOC_method");
+				comboBox2.addItem("CYLO_method");
+				comboBox2.addItem("LOC_class");
+				comboBox2.addItem("Nom_class");
+				comboBox2.addItem("WMX_class");
+				panel.add(comboBox2);
+				
+				
+				JTextField v2 = new JTextField();
+				panel.add(v2);
+				v2.setColumns(10);
+
 
 				button = new Button("submit");
 				panel.add(button);
@@ -232,47 +252,34 @@ public class GUI extends JFrame{
 				button.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {		
 
-						String minLOC= input.getText();
-						String minWMC = input2.getText();
+						//						String regra = ruleField.getText();
+						String m1 = comboBox1.getSelectedItem().toString();
+						int valor1 = Integer.parseInt(v1.getText());
+						String oper= op.getSelectedItem().toString();
+						String m2 = comboBox2.getSelectedItem().toString();
+						int valor2 = Integer.parseInt(v2.getText());
 
 
-						if(isNumeric(minLOC) && isNumeric(minWMC)) {
-
-							int locNum = Integer.parseInt(minLOC, 10);
-							int wmcNum = Integer.parseInt(minWMC, 10);
-
-							if(Rules.Regra1(locNum, wmcNum)) {
-								labelTrue = new JLabel("TRUE");
-								labelTrue.setFont(new Font("Tahoma", Font.PLAIN, 15));
-								labelTrue.setForeground(Color.GREEN);
-								panel.add(labelTrue);
-
-								System.out.println("REGRA 1 : TRUE");
-								panel.revalidate();
-								panel.repaint();
-							}
-							else {
-								System.out.println("REGRA 1 : FALSE");
-								labelFalse = new JLabel("FALSE");
-								labelFalse.setFont(new Font("Tahoma", Font.PLAIN, 15));
-								labelFalse.setForeground(Color.RED);
-								panel.add(labelFalse);
-								panel.revalidate();
-								panel.repaint();
-
-							}
-							//
-							//							if(cm.Regra2(locNum, wmcNum)) {
-							//								System.out.println("REGRA 2 : TRUE");
-							//							}
-							//							else 
-							//								System.out.println("REGRA 2 : FALSE");
-							//
-							//
-							//
-						}
-
+								if(Rules.Regras(m1, valor1, oper, m2, valor2) == true) {
+									labelTrue = new JLabel("TRUE");
+									labelTrue.setFont(new Font("Tahoma", Font.PLAIN, 15));
+									labelTrue.setForeground(Color.GREEN);
+									panel.add(labelTrue);
+									panel.revalidate();
+									panel.repaint();
+								
+								}else{
+									
+									labelFalse = new JLabel("FALSE");
+									labelFalse.setFont(new Font("Tahoma", Font.PLAIN, 15));
+									labelFalse.setForeground(Color.RED);
+									panel.add(labelFalse);
+									panel.revalidate();
+									panel.repaint();
+								}
 					}
+
+
 
 				});
 
