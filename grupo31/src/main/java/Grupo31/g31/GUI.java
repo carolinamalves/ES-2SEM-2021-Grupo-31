@@ -90,6 +90,7 @@ public class GUI extends JFrame{
 		jChooser = new JFileChooser();
 		model = new DefaultTableModel(data, headers);
 
+		
 		tableWidth = model.getColumnCount() * 150;
 		tableHeight = model.getRowCount() * 25;
 		GridBagLayout gridBagLayout = new GridBagLayout();
