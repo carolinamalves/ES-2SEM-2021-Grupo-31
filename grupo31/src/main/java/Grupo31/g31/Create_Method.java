@@ -54,7 +54,11 @@ public class Create_Method extends GUI {
 			headerStyle.setFont(headerFont);
 			headerStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
 			headerStyle.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.index);
+			
 
+			 Leitura_Projetos leitura = new Leitura_Projetos();
+			 System.out.println("nome"+" "+leitura.ficheiro.toString());		
+			 List<File>lista = leitura.lista("C:\\Users\\adilh\\git\\ES-2SEM-2021-Grupo-31\\grupo31\\src\\main\\java\\Grupo31\\g31\\");
 
 			for (File s : Leitura_Projetos.ficheiro) {
 
@@ -64,6 +68,12 @@ public class Create_Method extends GUI {
 			
 				
 		 // header row
+
+			 		for (File s : lista) {
+				
+
+				// header row
+
 				Row headerRow = sh.createRow(0);
 				for (int i = 0; i < columnHeadings.length; i++) {
 					Cell cell = headerRow.createCell(i);
@@ -72,7 +82,7 @@ public class Create_Method extends GUI {
 				}
 
 				String fileS = s.getAbsolutePath();
-
+				System.out.println("o path"+s.getAbsolutePath());
 			
 
 				Nom_class nomClass = new Nom_class();
@@ -93,9 +103,17 @@ public class Create_Method extends GUI {
 				System.out.print("antes do for : " + nomClass.getNomClass());
 
 				LOC_method locMethod = new LOC_method(fileS);
+
 				locMethod.getMethodLineNumbers();
 				int locM = locMethod.getTotal().indexOf(u);
 				
+=======
+	//			locMethod.getMethodLineNumbers();				 
+						 locMethod= new LOC_method(s.toString());
+							System.out.println(locMethod.getList());
+							System.out.println("teste"+ locMethod.getList());
+					 
+
 				// cyclo method
 
 				CYCLO_method cycloMethod = new CYCLO_method(fileS);
@@ -117,6 +135,12 @@ public class Create_Method extends GUI {
 //			createData(id, GUI.fname, className, "nome do metodo", nomClass, locClass, wmcClass, locMethod, cycloMethod);
 	
 				
+
+
+				String className = s.getAbsolutePath().toString().substring(s.getAbsolutePath().toString().lastIndexOf("\\") + 1);
+				createData(id, GUI.fname, className, "nomeTeste", nomClass, locClass, wmcClass, locMethod, cycloMethod);
+				
+
 				CreationHelper creationHelper = workbook.getCreationHelper();
 				CellStyle dataStyle = workbook.createCellStyle();
 				
@@ -143,15 +167,20 @@ public class Create_Method extends GUI {
 					sh.autoSizeColumn(i);
 				}
 				
+
 			
 				fileName = "C:\\Users\\inesv\\Desktop\\" + 
+
+			}
+				fileName = "C:\\Users\\adilh\\Desktop\\" + 
+
 				GUI.fname  + "_metrics.xlsx";
 
-				System.out.println(fileName);
+			//	System.out.println(fileName);
 			
 				
 				FileOutputStream fileOut = new FileOutputStream(fileName);
-				System.out.println(fileOut);
+			//	System.out.println(fileOut);
 				workbook.write(fileOut);
 
 				fileOut.close();
@@ -202,18 +231,31 @@ public class Create_Method extends GUI {
 		for (int i = 0; i < nomClass.getNomClass(); i++) {
 			// meter valores
 			id++;
+
 //			System.out.println("antes do Array " + locMethod.getTotal());
 			
 			Method m = new Method(id, namePack, nameClass, nameMethod1, nomClass.getNomClass(), locClass.getTotalLines(),
 					wmcClass.getWMC_class(), locMethod, cycloMethod);
 
+
+	//		System.out.println("antes do Array " + locMethod.getList().get(i));
+			
+			Method m = new Method(id, namePack, nameClass, nameMethod, nomClass.getNomClass(), locClass.getTotalLines(),
+					wmcClass.getWMC_class(), locMethod.getList().get(i),cycloMethod.getList().get(i));
+
 			a.add(m);
 			
 		}
 
+
 //		for(Method m: a) {
 //			System.out.println("linha no array: " + m.getLoc_Method());
 //		}
+
+		for(Method m: a) {
+	//		System.out.println("linha no array: " + m.getLoc_Method());
+		}
+
 	}
 	//
 	//	public static void main(String[] args) {

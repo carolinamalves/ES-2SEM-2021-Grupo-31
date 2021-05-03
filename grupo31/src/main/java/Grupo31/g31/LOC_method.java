@@ -3,12 +3,14 @@ package Grupo31.g31;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.github.javaparser.ParseException;
 import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
+
 
 
 public class LOC_method{
@@ -31,6 +33,7 @@ public class LOC_method{
 	private static class MethodVisitor extends VoidVisitorAdapter {
 		public void visit(MethodDeclaration m, Object arg) {
 			total=(m.getEnd().get().line-m.getBegin().get().line+1);
+
 			list.add(total);
 			System.out.println("LOOOOOOOOOOOOOOC" + total);
 		}
@@ -39,4 +42,23 @@ public class LOC_method{
 	public ArrayList<Integer> getTotal() throws ParseException, IOException {
 		return list;
 	}	
+
+
+			
+		//	System.out.println("locMethod" + total);
+			list.add(total);
+		//	System.out.println(total);
+		}
+	}
+	
+	public ArrayList<Integer> getList() throws ParseException, IOException {
+
+		getMethodLineNumbers();
+		return list;
+	}	
+	
+
+	
+	
+
 }

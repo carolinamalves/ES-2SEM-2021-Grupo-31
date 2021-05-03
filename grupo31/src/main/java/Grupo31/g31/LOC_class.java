@@ -28,7 +28,7 @@ class LOC_class {
 		LOC_class.totalLines = totalLines;
 	}
 
-	public void Contar(){
+	public int Contar(){
 		try{
 			FileInputStream fstream = new FileInputStream(file); 
 			DataInputStream in = new DataInputStream(fstream);
@@ -51,8 +51,10 @@ class LOC_class {
 			System.out.println("number of lines:" + totalLines);
 
 			in.close();
+			
 		}catch (Exception e){
 			System.err.println("Error: " + e.getMessage());
 		}
+		return totalLines;
 	}
 }
