@@ -108,7 +108,43 @@ public class GUI extends JFrame{
 
 		btnNewButton_1 = new JButton("Importar Projetos");
 		btnNewButton_1.addActionListener(new ActionListener() {
+<<<<<<< HEAD
+				public void actionPerformed(ActionEvent e) {
+					
+				    int result;
+			        
+				    jChooser = new JFileChooser(); 
+				    jChooser.setCurrentDirectory(new java.io.File("."));
+				    jChooser.setDialogTitle(choosertitle);
+				    jChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+				    //
+				    // disable the "All files" option.
+				    //
+				    jChooser.setAcceptAllFileFilterUsed(false);
+				    //    
+				     result = jChooser.showOpenDialog(null);
+				    
+				    if (result == JFileChooser.APPROVE_OPTION) { 
+				      System.out.println("getCurrentDirectory(): " 
+				         +  jChooser.getCurrentDirectory());
+				      System.out.println("getSelectedFile() : " 
+				         +  jChooser.getSelectedFile());
+				     
+				      
+				     
+				      
+				      
+				      fname = jChooser.getSelectedFile().toString().substring(jChooser.getSelectedFile().toString().lastIndexOf("\\") + 1);
+				      Create_Method.fillmethod(j.lista(jChooser.getSelectedFile().toString()), fname );
+				      
+				    } else {
+				      System.out.println("No Selection");
+				      }			
+				}
+			});
+=======
 			public void actionPerformed(ActionEvent e) {
+>>>>>>> branch 'main' of https://github.com/csmma1-iscteiul/ES-2SEM-2021-Grupo-31.git
 
 				int result;
 
