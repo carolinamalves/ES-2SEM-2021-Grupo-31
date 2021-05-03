@@ -19,6 +19,7 @@ public class CYCLO_method {
 	public static int i;
 	public static ArrayList<Integer> list=new ArrayList<Integer>();
 
+
 	//Construtor 
 	public CYCLO_method (String ficheiro) {
 		this.ficheiro=ficheiro;
@@ -35,6 +36,8 @@ public class CYCLO_method {
 
 	private static class MethodVisitor extends VoidVisitorAdapter {
 		public void visit(MethodDeclaration m, Object arg) {
+			
+		
 			int contador=0;
 			List<Statement> a=m.findAll(Statement.class);
 			for(Statement i:a)
@@ -56,8 +59,6 @@ public class CYCLO_method {
 		getMethodLineNumbers();
 		return contador;
 	}
-
-
 }
 
 

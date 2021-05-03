@@ -12,6 +12,7 @@ import java.util.Vector;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -171,7 +172,7 @@ public class GUI extends JFrame{
 		//				}
 		//			}
 		//		});
-		
+
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setBackground(Color.WHITE);
 		Import = new JButton("Select Excel File");
@@ -204,6 +205,24 @@ public class GUI extends JFrame{
 		gbc_buttonPanel.gridy = 3;
 		getContentPane().add(buttonPanel, gbc_buttonPanel);
 
+
+		btnNewButton = new JButton("Define Rules");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				DefaultTableModel model = (DefaultTableModel) table.getModel();
+				model.setRowCount(0);
+
+				JComboBox comboBox1 = new JComboBox();
+
+				comboBox1.addItem("LOC_method");
+				comboBox1.addItem("CYLO_method");
+				comboBox1.addItem("LOC_class");
+				comboBox1.addItem("Nom_class");
+				comboBox1.addItem("WMX_class");
+				panel.add(comboBox1);
+
+
 		regra1 = new JButton("LOC and CYCLO rules");
 		regra1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
@@ -214,21 +233,36 @@ public class GUI extends JFrame{
 				panel.repaint();
 
 
-				labelLOC = new JLabel("LOC min");
-				labelLOC.setFont(new Font("Tahoma", Font.PLAIN, 10));
-				panel.add(labelLOC);
 
-				input = new JTextField();
-				panel.add(input);
-				input.setColumns(10);
+				JTextField v1 = new JTextField();
+				panel.add(v1);
+				v1.setColumns(10);
+
+				JComboBox op = new JComboBox();
+				op.addItem("and");
+				op.addItem("or");
+				panel.add(op);
+				
+
+
+				JComboBox comboBox2 = new JComboBox();
+
+				comboBox2.addItem("LOC_method");
+				comboBox2.addItem("CYLO_method");
+				comboBox2.addItem("LOC_class");
+				comboBox2.addItem("Nom_class");
+				comboBox2.addItem("WMX_class");
+				panel.add(comboBox2);
+				
+				
+				JTextField v2 = new JTextField();
+				panel.add(v2);
+				v2.setColumns(10);
 
 				labelCYCLO = new JLabel("CYCLO min");
 				labelCYCLO.setFont(new Font("Tahoma", Font.PLAIN, 10));
 				panel.add(labelCYCLO);
 
-				input2 = new JTextField();
-				panel.add(input2);
-				input2.setColumns(20);
 
 				button = new Button("submit");
 				panel.add(button);
@@ -239,6 +273,33 @@ public class GUI extends JFrame{
 				button.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {		
 					
+
+
+						//						String regra = ruleField.getText();
+						String m1 = comboBox1.getSelectedItem().toString();
+						int valor1 = Integer.parseInt(v1.getText());
+						String oper= op.getSelectedItem().toString();
+						String m2 = comboBox2.getSelectedItem().toString();
+						int valor2 = Integer.parseInt(v2.getText());
+
+
+								if(Rules.Regras(m1, valor1, oper, m2, valor2) == true) {
+									labelTrue = new JLabel("TRUE");
+									labelTrue.setFont(new Font("Tahoma", Font.PLAIN, 15));
+									labelTrue.setForeground(Color.GREEN);
+									panel.add(labelTrue);
+									panel.revalidate();
+									panel.repaint();
+								
+								}else{
+									
+									labelFalse = new JLabel("FALSE");
+									labelFalse.setFont(new Font("Tahoma", Font.PLAIN, 15));
+									labelFalse.setForeground(Color.RED);
+									panel.add(labelFalse);
+									panel.revalidate();
+									panel.repaint();
+								}
 
 						String minLOC= input.getText();
 						String minCYCLO = input2.getText();
@@ -280,7 +341,10 @@ public class GUI extends JFrame{
 							//
 						}
 
+
 					}
+
+
 
 				});
 				

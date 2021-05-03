@@ -34,6 +34,16 @@ public class LOC_method{
 		public void visit(MethodDeclaration m, Object arg) {
 			total=(m.getEnd().get().line-m.getBegin().get().line+1);
 
+			list.add(total);
+			System.out.println("LOOOOOOOOOOOOOOC" + total);
+		}
+	}
+	
+	public ArrayList<Integer> getTotal() throws ParseException, IOException {
+		return list;
+	}	
+
+
 			
 		//	System.out.println("locMethod" + total);
 			list.add(total);
@@ -50,4 +60,5 @@ public class LOC_method{
 
 	
 	
+
 }
