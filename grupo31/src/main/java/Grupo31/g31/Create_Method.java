@@ -1,6 +1,7 @@
 package Grupo31.g31;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,30 +20,54 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import com.github.javaparser.ParseException;
 
 public class Create_Method extends GUI {
-	public static int u = 1;
-	public static int id = 0;
-	public static String namePack;
-	public static String nameClass;
-	public static String nameMethod;
-	public static int nomClass1;
-	public static int locClass1;
-	public static int wmcClass1;
-	public static int locMethod1;
-	public static int cycloMethod1;
+
 	public static ArrayList<Method> a = new ArrayList<Method>();
-	public static java.lang.reflect.Method[] met;
 
-	static void fillmethod(List <File> file, String fileName) {
-			
-		try {
+	static int iterator = 1;
+	static int id = 1;
+	static int rownum = 1;
 
+	static XSSFWorkbook workbook = new XSSFWorkbook();
+	static XSSFSheet sh = workbook.createSheet("Metodo");
 
-			XSSFWorkbook workbook = new XSSFWorkbook();
+	static Row row; 
 
-			// sheet
-			XSSFSheet sh = workbook.createSheet("Metodo");
+	public static void createMethod(List<File> list) throws ParseException, IOException {	
 
-			// top row
+		for (File s : Leitura_Projetos.ficheiro){
+
+			String className = s.getAbsolutePath().toString().substring(s.getAbsolutePath().toString().lastIndexOf("\\") + 1); 
+			Class<? extends String> c = className.getClass();
+			System.out.println(c.getPackageName());
+
+			String fileS = s.getAbsolutePath();
+
+			Nom_class nomClass = new Nom_class();
+			nomClass.nomClass();
+			int nomC=nomClass.getNomClass();
+
+			LOC_class locClass = new LOC_class(fileS);
+			int locC = locClass.Contar();
+
+			WMC_class wmcClass = new WMC_class(fileS);
+			int wmcC = wmcClass.contagem();
+
+			CYCLO_method cycloMethod = new CYCLO_method(fileS);
+			cycloMethod.getMethodLineNumbers();
+			ArrayList <Integer> cycloList = cycloMethod.getContador();
+
+			LOC_method locMethod = new LOC_method(fileS);
+			locMethod.getMethodLineNumbers();
+			ArrayList<Integer> locList = locMethod.getTotal();
+
+			createData(className, "methodName", nomC, locC, wmcC, cycloList, locList);
+		}
+	}
+
+	public static void createExcel() {
+
+		try{
+
 			String[] columnHeadings = { "MethodId", "name_package", "name_class", "name_method", "Nom_Class",
 					"Loc_Class", "Wmc_Class", "is_God_Class", "Loc_Method", "CYCLO_method", "is_Long_Method" };
 			Font headerFont = workbook.createFont();
@@ -54,211 +79,76 @@ public class Create_Method extends GUI {
 			headerStyle.setFont(headerFont);
 			headerStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
 			headerStyle.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.index);
-			
 
-			 Leitura_Projetos leitura = new Leitura_Projetos();
-			 System.out.println("nome"+" "+leitura.ficheiro.toString());		
-			 List<File>lista = leitura.lista("C:\\Users\\adilh\\git\\ES-2SEM-2021-Grupo-31\\grupo31\\src\\main\\java\\Grupo31\\g31\\");
-
-			for (File s : Leitura_Projetos.ficheiro) {
-
-				String className = s.getAbsolutePath().toString().substring(s.getAbsolutePath().toString().lastIndexOf("\\") + 1); 
-				Class c = className.getClass();
-				System.out.println(c.getPackageName());
-			
-				
-		 // header row
-
-			 		for (File s : lista) {
-				
-
-				// header row
-
-				Row headerRow = sh.createRow(0);
-				for (int i = 0; i < columnHeadings.length; i++) {
-					Cell cell = headerRow.createCell(i);
-					cell.setCellValue(columnHeadings[i]);
-					cell.setCellStyle(headerStyle);
-				}
-
-				String fileS = s.getAbsolutePath();
-				System.out.println("o path"+s.getAbsolutePath());
-			
-
-				Nom_class nomClass = new Nom_class();
-				nomClass.nomClass();
-
-				// loc class -- done
-
-				LOC_class locClass = new LOC_class(fileS);
-				locClass.Contar();
-
-				// wmc -- done
-
-				WMC_class wmcClass = new WMC_class(fileS);
-				wmcClass.contagem();
-
-				// locMethod
-
-				System.out.print("antes do for : " + nomClass.getNomClass());
-
-				LOC_method locMethod = new LOC_method(fileS);
-
-				locMethod.getMethodLineNumbers();
-				int locM = locMethod.getTotal().indexOf(u);
-				
-=======
-	//			locMethod.getMethodLineNumbers();				 
-						 locMethod= new LOC_method(s.toString());
-							System.out.println(locMethod.getList());
-							System.out.println("teste"+ locMethod.getList());
-					 
-
-				// cyclo method
-
-				CYCLO_method cycloMethod = new CYCLO_method(fileS);
-				cycloMethod.getMethodLineNumbers();
-				int cycloM = cycloMethod.getContador();
-				
-				createData(id, GUI.fname, className, "nome do metodo", nomClass, locClass, wmcClass, locM, cycloM);
-				u++;
-				//String className = s.getAbsolutePath().toString().substring(s.getAbsolutePath().toString().lastIndexOf("\\") + 1);
-				
-			
-				
-//				String nameofCurrMethod = new Throwable()
-//                        .getStackTrace()[u]
-//                        .getMethodName();
-			
-			
-				
-//			createData(id, GUI.fname, className, "nome do metodo", nomClass, locClass, wmcClass, locMethod, cycloMethod);
-	
-				
-
-
-				String className = s.getAbsolutePath().toString().substring(s.getAbsolutePath().toString().lastIndexOf("\\") + 1);
-				createData(id, GUI.fname, className, "nomeTeste", nomClass, locClass, wmcClass, locMethod, cycloMethod);
-				
-
-				CreationHelper creationHelper = workbook.getCreationHelper();
-				CellStyle dataStyle = workbook.createCellStyle();
-				
-				
-				int rownum = 1;
-				for (Method f : a) {
-					
-					Row row = sh.createRow(rownum++);
-					row.createCell(0).setCellValue(f.getMethodId());
-					System.out.println(f.getMethodId());
-					row.createCell(1).setCellValue(f.getName_package());
-					row.createCell(2).setCellValue(f.getName_class());
-					row.createCell(3).setCellValue(f.getName_method());
-					row.createCell(4).setCellValue(f.getNom_Class());
-					row.createCell(5).setCellValue(f.getLoc_Class());
-					row.createCell(6).setCellValue(f.getWmc_Class());
-					row.createCell(8).setCellValue(f.getLoc_Method());
-					row.createCell(9).setCellValue(f.getCYCLO_method());
-	
-				}
-			
+			Row headerRow = sh.createRow(0);
+			for (int i = 0; i < columnHeadings.length; i++) {
+				Cell cell = headerRow.createCell(i);
+				cell.setCellValue(columnHeadings[i]);
+				cell.setCellStyle(headerStyle);
 			}
-				for (int i = 0; i < columnHeadings.length; i++) {
-					sh.autoSizeColumn(i);
-				}
-				
 
-			
-				fileName = "C:\\Users\\inesv\\Desktop\\" + 
+			CreationHelper creationHelper = workbook.getCreationHelper();
+			CellStyle dataStyle = workbook.createCellStyle();
 
+			for (Method met : a) {
+
+				row = sh.createRow(rownum++);
+				row.createCell(0).setCellValue(met.getMethodId());
+				row.createCell(1).setCellValue(met.getName_package());
+				row.createCell(2).setCellValue(met.getName_class());
+				row.createCell(3).setCellValue(met.getName_method());
+				row.createCell(4).setCellValue(met.getNom_Class());
+				row.createCell(5).setCellValue(met.getLoc_Class());
+				row.createCell(6).setCellValue(met.getWmc_Class());
+				row.createCell(8).setCellValue(met.getLoc_Method());
+				row.createCell(9).setCellValue(met.getCYCLO_method());
+
+				Rules.longMethod(GUI.v1, GUI.v2,met);
+				Rules.godClass(GUI.v3, GUI.v4, met);
 			}
-				fileName = "C:\\Users\\adilh\\Desktop\\" + 
 
-				GUI.fname  + "_metrics.xlsx";
+			for (int i = 0; i < columnHeadings.length; i++) {
+				sh.autoSizeColumn(i);
+			}
 
-			//	System.out.println(fileName);
-			
-				
-				FileOutputStream fileOut = new FileOutputStream(fileName);
-			//	System.out.println(fileOut);
-				workbook.write(fileOut);
+			FileOutputStream fileOut = new FileOutputStream("C:\\Users\\inesv\\Desktop\\" + 
+					GUI.fname  + "_metrics.xlsx");
 
-				fileOut.close();
-				workbook.close();
-				System.out.println("done");
-			
-		} catch (Exception e) {
+			workbook.write(fileOut);
+			fileOut.close();
+
+			workbook.close();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		System.out.println("done");
 	}
-	
 
-	//	//regra 1 
-	//	static boolean Regra1 (int LOC_min, int CYCLO_min) {
-	//	
-	//		for(Method m: a) {
-	//			
-	//			for (int i = 0; i < m.getNom_Class(); i++) {
-	//			
-	//				if(m.getLoc_Method() > LOC_min && m.getCYCLO_method() > CYCLO_min) {
-	//				return true;
-	//				}
-	//			}
-	//		}
-	//		return false;
-	//	}
-	//	
-	//	static boolean Regra2 (int WMC_min, int NOM_min) {
-	//		
-	//		for(Method m: a) {
-	//			
-	//			for (int i = 0; i < m.getNom_Class(); i++) {
-	//			
-	//				if(m.getWmc_Class() > WMC_min || m.getNom_Class() > NOM_min) {
-	//				return true;
-	//				}
-	//			}
-	//		}	
-	//		return false;
-	//	}
+	public static void createData (String className, String methodName, int nomC, int locC, int wmcC, ArrayList<Integer> 
+		cycloList, ArrayList<Integer> locList ) {
 
-	private static void createData(int id1, String namePack, String nameClass, String nameMethod1, Nom_class nomClass,
-			LOC_class locClass, WMC_class wmcClass, int locMethod, int cycloMethod)
-					throws ParseException, IOException {
-		// Nom_class nomClass1 = new Nom_class();
-		// nomClass.nomClass();
+		for (int t = 0; t < cycloList.size() ; t++) {
+			Method m;
 
-		for (int i = 0; i < nomClass.getNomClass(); i++) {
-			// meter valores
-			id++;
-
-//			System.out.println("antes do Array " + locMethod.getTotal());
-			
-			Method m = new Method(id, namePack, nameClass, nameMethod1, nomClass.getNomClass(), locClass.getTotalLines(),
-					wmcClass.getWMC_class(), locMethod, cycloMethod);
-
-
-	//		System.out.println("antes do Array " + locMethod.getList().get(i));
-			
-			Method m = new Method(id, namePack, nameClass, nameMethod, nomClass.getNomClass(), locClass.getTotalLines(),
-					wmcClass.getWMC_class(), locMethod.getList().get(i),cycloMethod.getList().get(i));
-
+			m = new Method(id, GUI.fname, className,"nome do metodo",nomC, locC, wmcC, cycloList.get(t),locList.get(t));
 			a.add(m);
-			
+
+			id++;
+			cycloList.remove(t);
+			locList.remove(t);
 		}
-
-
-//		for(Method m: a) {
-//			System.out.println("linha no array: " + m.getLoc_Method());
-//		}
-
-		for(Method m: a) {
-	//		System.out.println("linha no array: " + m.getLoc_Method());
-		}
-
 	}
-	//
-	//	public static void main(String[] args) {
-	//		new Create_Method();
-	//	}
+
+	public static void addLongMethod(boolean t) { 
+		if(t == true) {
+
+			row.createCell(10).setCellValue("TRUE");
+			System.out.println("LONG METHOD TRUE");
+			
+		} else if (t == false){
+
+			row.createCell(10).setCellValue("FALSE");
+			System.out.println("LONG METHOD FALSE");
+		}
+	}
 }

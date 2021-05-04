@@ -1,10 +1,5 @@
 package Grupo31.g31;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -12,19 +7,9 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -33,14 +18,16 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class ImportExcel extends GUI{  
 
 	static void fillData(File file){
-		int index=-1;
+
+		int index =- 1;
 		XSSFWorkbook workbook = null;
+
 		try {
 			try {
 				FileInputStream inputStream = new FileInputStream (file);
 				workbook = new XSSFWorkbook(inputStream);
 			}
-			
+
 			catch (IOException ex)
 			{
 				Logger.getLogger(ImportExcel.class. getName()).log(Level.SEVERE, null, ex);
@@ -49,22 +36,27 @@ public class ImportExcel extends GUI{
 			String[] strs=new String[workbook.getNumberOfSheets()];
 
 			for (int i = 0; i < strs.length; i++) {
-				strs[i]= workbook.getSheetName(i); }
+				strs[i]= workbook.getSheetName(i); 
+			}
+
 			JFrame frame = new JFrame("Input Dialog");
 
 			String selectedsheet = (String) JOptionPane.showInputDialog(
 					frame, "Which worksheet you want to import ?", "Select Worksheet",
 					JOptionPane.QUESTION_MESSAGE, null, strs, strs[0]);
 
-			if (selectedsheet!=null) {
-				for (int i = 0; i < strs.length; i++)
-				{
+			if (selectedsheet != null) {
+				for (int i = 0; i < strs.length; i++) {
+
 					if (workbook.getSheetName(i).equalsIgnoreCase(selectedsheet))
-						index=i; }
+						index = i; 
+				}
+
 				XSSFSheet sheet = workbook.getSheetAt(index);
-				XSSFRow row=sheet.getRow(0);
+				XSSFRow row = sheet.getRow(0);
 
 				headers.clear();
+
 				for (int i = 0; i < row.getLastCellNum(); i++){
 					XSSFCell cell1 = row.getCell(i);
 					headers.add(cell1.toString());
@@ -73,10 +65,10 @@ public class ImportExcel extends GUI{
 				data.clear();
 				for (int j = 1; j < sheet.getLastRowNum() + 1; j++){
 					Vector d = new Vector();
-					row=sheet.getRow(j);
-					int noofrows=row.getLastCellNum();
+					row = sheet.getRow(j);
+					int noofrows = row.getLastCellNum();
 					for (int i = 0; i < noofrows; i++){
-						XSSFCell cell=row.getCell(i,
+						XSSFCell cell = row.getCell(i,
 								org.apache.poi.ss.usermodel.Row.MissingCellPolicy.CREATE_NULL_AS_BLANK);
 						d.add(cell.toString());
 					}
@@ -85,14 +77,11 @@ public class ImportExcel extends GUI{
 				}
 			}
 			else {
-				return; }
+				return; 
+			}
 		}
 		catch (Exception e) {
 			e.printStackTrace(); 
 		} 
 	}
-
-//	public static void main(String[] args) {
-//		new ImportExcel();
-//	}
 }
