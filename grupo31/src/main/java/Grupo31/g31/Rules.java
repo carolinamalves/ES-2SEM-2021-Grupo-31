@@ -20,13 +20,13 @@ public class Rules {
 
 		if (m.getWmc_Class() > valor1 || m.getNom_Class() > valor2) {
 
-			Create_Method.row.createCell(10).setCellValue("TRUE");
-			System.out.println("LONG METHOD TRUE");
+			Create_Method.row.createCell(7).setCellValue("TRUE");
+			System.out.println("GOD CLASS TRUE");
 
-		} else {
+		} else{
 
-			Create_Method.row.createCell(10).setCellValue("FALSE");
-			System.out.println("LONG METHOD FALSE");
+			Create_Method.row.createCell(7).setCellValue("FALSE");
+			System.out.println("GOD CLASS FALSE");
 		}
 	}	
 }

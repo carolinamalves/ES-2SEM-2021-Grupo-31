@@ -38,12 +38,14 @@ public class Create_Method extends GUI {
 
 			String className = s.getAbsolutePath().toString().substring(s.getAbsolutePath().toString().lastIndexOf("\\") + 1); 
 			Class<? extends String> c = className.getClass();
-			System.out.println(c.getPackageName());
+			
+			String packName = c.getClass().getPackageName();
+			System.out.println(c.getClass().getPackage());
 
 			String fileS = s.getAbsolutePath();
 
 			Nom_class nomClass = new Nom_class();
-			nomClass.nomClass();
+			nomClass.nomClass(fileS);
 			int nomC=nomClass.getNomClass();
 
 			LOC_class locClass = new LOC_class(fileS);
@@ -60,7 +62,7 @@ public class Create_Method extends GUI {
 			locMethod.getMethodLineNumbers();
 			ArrayList<Integer> locList = locMethod.getTotal();
 
-			createData(className, "methodName", nomC, locC, wmcC, cycloList, locList);
+			createData(packName, className, "methodName", nomC, locC, wmcC, cycloList, locList);
 		}
 	}
 
@@ -111,7 +113,7 @@ public class Create_Method extends GUI {
 				sh.autoSizeColumn(i);
 			}
 
-			FileOutputStream fileOut = new FileOutputStream("C:\\Users\\inesv\\Desktop\\" + 
+			FileOutputStream fileOut = new FileOutputStream("C:\\Users\\carol\\Desktop\\" + 
 					GUI.fname  + "_metrics.xlsx");
 
 			workbook.write(fileOut);
@@ -124,31 +126,18 @@ public class Create_Method extends GUI {
 		System.out.println("done");
 	}
 
-	public static void createData (String className, String methodName, int nomC, int locC, int wmcC, ArrayList<Integer> 
+	public static void createData (String packName, String className, String methodName, int nomC, int locC, int wmcC, ArrayList<Integer> 
 		cycloList, ArrayList<Integer> locList ) {
 
 		for (int t = 0; t < cycloList.size() ; t++) {
 			Method m;
 
-			m = new Method(id, GUI.fname, className,"nome do metodo",nomC, locC, wmcC, cycloList.get(t),locList.get(t));
+			m = new Method(id, packName, className,"nome do metodo",nomC, locC, wmcC, cycloList.get(t),locList.get(t));
 			a.add(m);
 
 			id++;
 			cycloList.remove(t);
 			locList.remove(t);
-		}
-	}
-
-	public static void addLongMethod(boolean t) { 
-		if(t == true) {
-
-			row.createCell(10).setCellValue("TRUE");
-			System.out.println("LONG METHOD TRUE");
-			
-		} else if (t == false){
-
-			row.createCell(10).setCellValue("FALSE");
-			System.out.println("LONG METHOD FALSE");
 		}
 	}
 }

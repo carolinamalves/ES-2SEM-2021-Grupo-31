@@ -1,5 +1,6 @@
 package Grupo31.g31;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.lang.reflect.Method;
 
@@ -14,14 +15,16 @@ public class Nom_class {
 		return className;
 	}
 
-	public void nomClass() throws FileNotFoundException{
-		Nom_class co = new Nom_class();
+	public void nomClass(String file) throws FileNotFoundException{
+//		Nom_class co = new Nom_class();
 
-		Class className = co.getClass();
+		Class className = file.getClass();
 
 		Method[] methods= className.getDeclaredMethods();
 		for(int i = 0; i < methods.length; i++) {
 			numberM++;
+			
+		
 		}
 	}
 
