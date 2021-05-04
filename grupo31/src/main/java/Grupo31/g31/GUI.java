@@ -5,14 +5,18 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import java.awt.Font;
+
 import java.io.File;
+import java.io.IOException;
+
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.Vector;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -20,28 +24,12 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-
-import org.apache.commons.codec.binary.StringUtils;
-
-import javax.swing.JScrollBar;
-import java.awt.Panel;
-import javax.swing.event.ChangeListener;
-import javax.swing.event.ChangeEvent;
-import java.awt.Choice;
-import java.awt.TextField;
-import javax.swing.JTextArea;
-import javax.swing.JTextPane;
 import javax.swing.JTextField;
-import java.awt.Button;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
 import javax.swing.JLabel;
-import java.awt.Font;
+
+import com.github.javaparser.ParseException;
 
 public class GUI extends JFrame{
-
-	private static String ENTER = "Enter";
 
 	static Vector<String> headers = new Vector<String>();
 	static DefaultTableModel model = null;
@@ -49,48 +37,45 @@ public class GUI extends JFrame{
 	static JButton Import;
 	static JButton CodeSmellsDetector;
 	static JFileChooser jChooser;
+
 	static ArrayList <Method> a;
+
 	String choosertitle;
 	static String fname;
+
 	static int tableWidth = 0;
 	static int tableHeight = 0;
 
-	//regras
-	private JTextField input;
-	private JTextField input2;
-	private Button button;
-	private Create_Method cm;
 	private Leitura_Projetos j= new Leitura_Projetos();
-	private JButton regra1;
-	private JButton regra2;
-	private JLabel labelLOC;
-	private JLabel labelCYCLO;
-	private JLabel labelWMC;
-	private JLabel labelNOM;
-	
-	private JLabel labelTrue;
-	private JLabel labelFalse;
+	private JButton btnNewButton;
+
 	private JLabel lblNewLabel;
 	private JPanel panel;
 
-	//excel
 	private JScrollPane scrollPane;
 	private JTable table;
 	private JButton btnNewButton_1;
 
+	static int v1;
+	static int v2;
+	static int v3;
+	static int v4;
+
+	JTextField valor1;
+	JTextField valor2;
+	JTextField valor3;
+	JTextField valor4;
 
 	public GUI() {
 
 		super("Code Smells");
 
-		//teste2
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jChooser = new JFileChooser();
 
 		jChooser = new JFileChooser();
 		model = new DefaultTableModel(data, headers);
 
-		
 		tableWidth = model.getColumnCount() * 150;
 		tableHeight = model.getRowCount() * 25;
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -99,6 +84,7 @@ public class GUI extends JFrame{
 		gridBagLayout.columnWeights = new double[]{1.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, Double.MIN_VALUE};
 		getContentPane().setLayout(gridBagLayout);
+
 		lblNewLabel = new JLabel("CODE SMELLS");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 33));
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
@@ -109,43 +95,7 @@ public class GUI extends JFrame{
 
 		btnNewButton_1 = new JButton("Importar Projetos");
 		btnNewButton_1.addActionListener(new ActionListener() {
-<<<<<<< HEAD
-				public void actionPerformed(ActionEvent e) {
-					
-				    int result;
-			        
-				    jChooser = new JFileChooser(); 
-				    jChooser.setCurrentDirectory(new java.io.File("."));
-				    jChooser.setDialogTitle(choosertitle);
-				    jChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-				    //
-				    // disable the "All files" option.
-				    //
-				    jChooser.setAcceptAllFileFilterUsed(false);
-				    //    
-				     result = jChooser.showOpenDialog(null);
-				    
-				    if (result == JFileChooser.APPROVE_OPTION) { 
-				      System.out.println("getCurrentDirectory(): " 
-				         +  jChooser.getCurrentDirectory());
-				      System.out.println("getSelectedFile() : " 
-				         +  jChooser.getSelectedFile());
-				     
-				      
-				     
-				      
-				      
-				      fname = jChooser.getSelectedFile().toString().substring(jChooser.getSelectedFile().toString().lastIndexOf("\\") + 1);
-				      Create_Method.fillmethod(j.lista(jChooser.getSelectedFile().toString()), fname );
-				      
-				    } else {
-				      System.out.println("No Selection");
-				      }			
-				}
-			});
-=======
 			public void actionPerformed(ActionEvent e) {
->>>>>>> branch 'main' of https://github.com/csmma1-iscteiul/ES-2SEM-2021-Grupo-31.git
 
 				int result;
 
@@ -153,22 +103,22 @@ public class GUI extends JFrame{
 				jChooser.setCurrentDirectory(new java.io.File("."));
 				jChooser.setDialogTitle(choosertitle);
 				jChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-				//
-				// disable the "All files" option.
-				//
 				jChooser.setAcceptAllFileFilterUsed(false);
-				//    
+
 				result = jChooser.showOpenDialog(null);
 
 				if (result == JFileChooser.APPROVE_OPTION) { 
-					System.out.println("getCurrentDirectory(): " 
-							+  jChooser.getCurrentDirectory());
-					System.out.println("getSelectedFile() : " 
-							+  jChooser.getSelectedFile());
 
-					fname = jChooser.getSelectedFile().toString().substring(jChooser.getSelectedFile().toString().lastIndexOf("\\") + 1);
-					Create_Method.fillmethod(j.lista(jChooser.getSelectedFile().toString()), fname );
+					fname = jChooser.getSelectedFile().toString().substring(jChooser.getSelectedFile().toString()
+							.lastIndexOf("\\") + 1);
 
+					try {
+						Create_Method.createMethod(j.lista(jChooser.getSelectedFile().toString()));
+					} catch (ParseException e1) {
+						e1.printStackTrace();
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
 				} else {
 					System.out.println("No Selection");
 				}			
@@ -181,35 +131,6 @@ public class GUI extends JFrame{
 		gbc_btnNewButton_1.gridy = 1;
 		getContentPane().add(btnNewButton_1, gbc_btnNewButton_1);
 
-
-		//		CodeSmellsDetector = new JButton("Detect CodeSmells");
-		//		GridBagConstraints gbc_CodeSmellsDetector = new GridBagConstraints();
-		//		gbc_CodeSmellsDetector.insets = new Insets(0, 0, 5, 0);
-		//		gbc_CodeSmellsDetector.gridx = 0;
-		//		gbc_CodeSmellsDetector.gridy = 2;
-		//		getContentPane().add(CodeSmellsDetector, gbc_CodeSmellsDetector);
-		//		CodeSmellsDetector.setBackground(Color.LIGHT_GRAY);
-		//		CodeSmellsDetector.addActionListener(new ActionListener() {
-		//
-		//			@Override
-		//			public void actionPerformed(ActionEvent arg0) {
-		//				jChooser.showOpenDialog(null);
-		//
-		//				File fileJava = jChooser.getSelectedFile();
-		//				if (!fileJava.getName().endsWith("java")) {
-		//					JOptionPane.showMessageDialog(null, "Please select only Java file.", "Error", JOptionPane.ERROR_MESSAGE);
-		//				} else {
-		//					Create_Method.fillmethod(fileJava);
-		//					model = new DefaultTableModel(data, headers);
-		//					tableWidth = model.getColumnCount() * 150;
-		//					tableHeight = model.getRowCount() * 25;
-		//					table.setPreferredSize(new Dimension(tableWidth, tableHeight));
-		//
-		//					table.setModel(model);
-		//				}
-		//			}
-		//		});
-
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setBackground(Color.WHITE);
 		Import = new JButton("Select Excel File");
@@ -219,12 +140,15 @@ public class GUI extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				
 				jChooser.showOpenDialog(null);
-
 				File file = jChooser.getSelectedFile();
+				
 				if (!file.getName().endsWith("xlsx")) {
+					
 					JOptionPane.showMessageDialog(null, "Please select only Excel file.", "Error", JOptionPane.ERROR_MESSAGE);
 				} else {
+					
 					ImportExcel.fillData(file);
 					model = new DefaultTableModel(data, headers);
 					tableWidth = model.getColumnCount() * 150;
@@ -234,6 +158,7 @@ public class GUI extends JFrame{
 				}
 			}
 		});
+		
 		GridBagConstraints gbc_buttonPanel = new GridBagConstraints();
 		gbc_buttonPanel.insets = new Insets(0, 0, 5, 0);
 		gbc_buttonPanel.anchor = GridBagConstraints.NORTH;
@@ -242,254 +167,93 @@ public class GUI extends JFrame{
 		gbc_buttonPanel.gridy = 3;
 		getContentPane().add(buttonPanel, gbc_buttonPanel);
 
-
 		btnNewButton = new JButton("Define Rules");
 		btnNewButton.addActionListener(new ActionListener() {
+			
 			public void actionPerformed(ActionEvent e) {
 
 				DefaultTableModel model = (DefaultTableModel) table.getModel();
-				model.setRowCount(0);
-
-				JComboBox comboBox1 = new JComboBox();
-
-				comboBox1.addItem("LOC_method");
-				comboBox1.addItem("CYLO_method");
-				comboBox1.addItem("LOC_class");
-				comboBox1.addItem("Nom_class");
-				comboBox1.addItem("WMX_class");
-				panel.add(comboBox1);
-
-
-		regra1 = new JButton("LOC and CYCLO rules");
-		regra1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) 
-			{
-				
-				panel.removeAll();
-				panel.revalidate();
-				panel.repaint();
-
-
-
-				JTextField v1 = new JTextField();
-				panel.add(v1);
-				v1.setColumns(10);
-
-				JComboBox op = new JComboBox();
-				op.addItem("and");
-				op.addItem("or");
-				panel.add(op);
-				
-
-
-				JComboBox comboBox2 = new JComboBox();
-
-				comboBox2.addItem("LOC_method");
-				comboBox2.addItem("CYLO_method");
-				comboBox2.addItem("LOC_class");
-				comboBox2.addItem("Nom_class");
-				comboBox2.addItem("WMX_class");
-				panel.add(comboBox2);
-				
-				
-				JTextField v2 = new JTextField();
-				panel.add(v2);
-				v2.setColumns(10);
-
-				labelCYCLO = new JLabel("CYCLO min");
-				labelCYCLO.setFont(new Font("Tahoma", Font.PLAIN, 10));
-				panel.add(labelCYCLO);
-
-
-				button = new Button("submit");
-				panel.add(button);
+				model.setColumnCount(0);
 
 				panel.revalidate();
 				panel.repaint();
 
-				button.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {		
-					
+				JButton longM = new JButton("Apply Long Method Rule");
+				longM.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
 
+						JLabel first = new JLabel();
+						first.setText("Loc Metric > ");
+						panel.add(first);
 
-						//						String regra = ruleField.getText();
-						String m1 = comboBox1.getSelectedItem().toString();
-						int valor1 = Integer.parseInt(v1.getText());
-						String oper= op.getSelectedItem().toString();
-						String m2 = comboBox2.getSelectedItem().toString();
-						int valor2 = Integer.parseInt(v2.getText());
+						valor1 = new JTextField();
+						panel.add(valor1);
+						valor1.setColumns(10);
 
+						JLabel second = new JLabel();
+						second.setText(" && Cyclo Metric > ");
+						panel.add(second);
 
-								if(Rules.Regras(m1, valor1, oper, m2, valor2) == true) {
-									labelTrue = new JLabel("TRUE");
-									labelTrue.setFont(new Font("Tahoma", Font.PLAIN, 15));
-									labelTrue.setForeground(Color.GREEN);
-									panel.add(labelTrue);
-									panel.revalidate();
-									panel.repaint();
-								
-								}else{
-									
-									labelFalse = new JLabel("FALSE");
-									labelFalse.setFont(new Font("Tahoma", Font.PLAIN, 15));
-									labelFalse.setForeground(Color.RED);
-									panel.add(labelFalse);
-									panel.revalidate();
-									panel.repaint();
-								}
+						valor2 = new JTextField();
+						panel.add(valor2);
+						valor2.setColumns(10);
 
-						String minLOC= input.getText();
-						String minCYCLO = input2.getText();
-
-
-						if(isNumeric(minLOC) && isNumeric(minCYCLO)) {
-
-							int locNum = Integer.parseInt(minLOC, 10);
-							int cycloNum = Integer.parseInt(minCYCLO, 10);
-
-							if(Rules.Regra1(locNum, cycloNum)) {
-								labelTrue = new JLabel("TRUE");
-								labelTrue.setFont(new Font("Tahoma", Font.PLAIN, 15));
-								labelTrue.setForeground(Color.GREEN);
-								panel.add(labelTrue);
-
-								System.out.println("REGRA 1 : TRUE");
-								panel.revalidate();
-								panel.repaint();
-							}
-							else {
-								System.out.println("REGRA 1 : FALSE");
-								labelFalse = new JLabel("FALSE");
-								labelFalse.setFont(new Font("Tahoma", Font.PLAIN, 15));
-								labelFalse.setForeground(Color.RED);
-								panel.add(labelFalse);
-								panel.revalidate();
-								panel.repaint();
-
-							}
-							//
-							//							if(cm.Regra2(locNum, wmcNum)) {
-							//								System.out.println("REGRA 2 : TRUE");
-							//							}
-							//							else 
-							//								System.out.println("REGRA 2 : FALSE");
-							//
-							//
-							//
-						}
-
-
+						panel.revalidate();
+						panel.repaint();
 					}
-
-
-
 				});
 				
+				longM.setBackground(Color.LIGHT_GRAY);
+				panel.add(longM);
 
+				JButton GodC = new JButton("Apply Long Method Rule");
+				GodC.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+
+						JLabel first = new JLabel();
+						first.setText("WMC Metric > ");
+						panel.add(first);
+
+						valor3 = new JTextField();
+						panel.add(valor3);
+						valor3.setColumns(10);
+
+						JLabel second = new JLabel();
+						second.setText(" || NomCLass Metric > ");
+						panel.add(second);
+
+						valor4 = new JTextField();
+						panel.add(valor4);
+						valor4.setColumns(10);
+
+						panel.revalidate();
+						panel.repaint();
+					}
+				});
+				
+				GodC.setBackground(Color.LIGHT_GRAY);
+				panel.add(GodC);
+
+				JButton submit1 = new JButton("Submit");
+				submit1.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						
+						v1 = Integer.parseInt(valor1.getText());
+						v2 = Integer.parseInt(valor2.getText());
+						v3 = Integer.parseInt(valor3.getText());
+						v4 = Integer.parseInt(valor4.getText());
+						
+						Create_Method.createExcel();
+					}
+				});
+				
+				submit1.setBackground(Color.LIGHT_GRAY);
+				panel.add(submit1);
 			}
 		});
 		
-		
-		
-		regra2 = new JButton("WMC and NOM rules");
-		regra2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				panel.removeAll();
-				panel.revalidate();
-				panel.repaint();
-
-				//	DefaultTableModel model = (DefaultTableModel) table.getModel();
-				//	model.setRowCount(0);
-
-				labelWMC = new JLabel("WMC min");
-				labelWMC.setFont(new Font("Tahoma", Font.PLAIN, 10));
-				panel.add(labelWMC);
-
-				input = new JTextField();
-				panel.add(input);
-				input.setColumns(10);
-
-				labelNOM = new JLabel("NOM min");
-				labelNOM.setFont(new Font("Tahoma", Font.PLAIN, 10));
-				panel.add(labelNOM);
-
-				input2 = new JTextField();
-				panel.add(input2);
-				input2.setColumns(20);
-
-				button = new Button("submit");
-				panel.add(button);
-
-				panel.revalidate();
-				panel.repaint();
-
-				button.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {		
-
-						String minWMC= input.getText();
-						String minNOM = input2.getText();
-
-
-						if(isNumeric(minWMC) && isNumeric(minNOM)) {
-
-							int wmcNum = Integer.parseInt(minWMC, 10);
-							int nomNum = Integer.parseInt(minNOM, 10);
-
-							if(Rules.Regra2(wmcNum, nomNum)) {
-								labelTrue = new JLabel("TRUE");
-								labelTrue.setFont(new Font("Tahoma", Font.PLAIN, 15));
-								labelTrue.setForeground(Color.GREEN);
-								panel.add(labelTrue);
-
-								System.out.println("REGRA 2 : TRUE");
-								panel.revalidate();
-								panel.repaint();
-							}
-							else {
-								System.out.println("REGRA 2 : FALSE");
-								labelFalse = new JLabel("FALSE");
-								labelFalse.setFont(new Font("Tahoma", Font.PLAIN, 15));
-								labelFalse.setForeground(Color.RED);
-								panel.add(labelFalse);
-								panel.revalidate();
-								panel.repaint();
-
-							}
-							//
-							//							if(cm.Regra2(locNum, wmcNum)) {
-							//								System.out.println("REGRA 2 : TRUE");
-							//							}
-							//							else 
-							//								System.out.println("REGRA 2 : FALSE");
-							//
-							//
-							//
-						}
-
-					}
-
-				});
-				
-
-			}
-		});
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		regra1.setBackground(Color.LIGHT_GRAY);
-		buttonPanel.add(regra1);
-		
-		regra2.setBackground(Color.LIGHT_GRAY);
-		buttonPanel.add(regra2);
+		btnNewButton.setBackground(Color.LIGHT_GRAY);
+		buttonPanel.add(btnNewButton);
 
 		scrollPane = new JScrollPane();
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
@@ -502,7 +266,6 @@ public class GUI extends JFrame{
 		table = new JTable();
 		scrollPane.setViewportView(table);
 
-
 		panel = new JPanel();
 		GridBagConstraints gbc_panel = new GridBagConstraints();
 		gbc_panel.insets = new Insets(0, 0, 5, 0);
@@ -513,7 +276,6 @@ public class GUI extends JFrame{
 		setSize(800, 700);
 		setResizable(true);
 		setVisible(true);
-
 	}
 
 	public static void main (String args[]) {
@@ -525,7 +287,7 @@ public class GUI extends JFrame{
 			return false;
 		}
 		try {
-			double d = Double.parseDouble(strNum);
+			Double.parseDouble(strNum);
 		} catch (NumberFormatException nfe) {
 			return false;
 		}
