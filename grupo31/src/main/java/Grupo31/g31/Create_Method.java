@@ -22,10 +22,13 @@ public class Create_Method extends GUI {
 
 	public static ArrayList<Method> a = new ArrayList<Method>();
 
+	static int testeN;
+	static int testeLoc;
+
 	static int iterator = 1;
 	static int id = 1;
 	static int rownum = 1;
-
+	static int nomC;
 	static XSSFWorkbook workbook = new XSSFWorkbook();
 	static XSSFSheet sh = workbook.createSheet("Metodo");
 
@@ -37,16 +40,16 @@ public class Create_Method extends GUI {
 
 			String className = s.getAbsolutePath().toString().substring(s.getAbsolutePath().toString().lastIndexOf("\\") + 1); 
 			Class<? extends String> c = className.getClass();
-			
-			
+
+
 			String packName = c.getClass().getPackageName();
 			System.out.println(c.getClass().getPackage());
 
 			String fileS = s.getAbsolutePath();
 			String cNameWJ = className.substring(0, className.indexOf(".java"));
 			Nom_class nomClass = new Nom_class();
-			int nomC = nomClass.nomClass("Grupo31.g31." + cNameWJ, s);
-//			int locC = nomClass.getLoc();
+			nomC = nomClass.nomClass("com.jasml.classes." + cNameWJ, s);
+			//			int locC = nomClass.getLoc();
 
 
 			LOC_class locClass = new LOC_class(fileS);
@@ -54,15 +57,15 @@ public class Create_Method extends GUI {
 
 			WMC_class wmcClass = new WMC_class(fileS);
 			int wmcC = wmcClass.contagem();
-			
+
 			CYCLO_method cycloMethod = new CYCLO_method(fileS);
 			cycloMethod.getMethodLineNumbers();
 			ArrayList <Integer> cycloList = cycloMethod.getContador();
-			
-			LOC_method locMethod = new LOC_method(fileS);
-			ArrayList<Integer> locList = locMethod.getTotal();
 
-			createData(packName, className, "methodName", nomC, locC, wmcC, cycloList, locList);
+			LOC_method locMethod = new LOC_method(fileS);
+			ArrayList<Integer> locList = locMethod.getList();
+
+			createData(packName, className, "methodName", nomC, locC, wmcC, locList ,cycloList);
 		}
 	}
 
@@ -113,7 +116,7 @@ public class Create_Method extends GUI {
 				sh.autoSizeColumn(i);
 			}
 
-			FileOutputStream fileOut = new FileOutputStream("C:\\Users\\carol\\Desktop\\" + 
+			FileOutputStream fileOut = new FileOutputStream("C:\\Users\\inesv\\Desktop\\" + 
 					GUI.fname  + "_metrics.xlsx");
 
 			workbook.write(fileOut);
@@ -126,18 +129,23 @@ public class Create_Method extends GUI {
 		System.out.println("done");
 	}
 
-	public static void createData (String packName, String className, String methodName, int nomC, int locC, int wmcC, ArrayList<Integer> 
-		locList, ArrayList<Integer> cycloList ) {
-
-		for (int t = 0; t < locList.size() ; t++) {
+	public static void createData (String packName, String className, String methodName, int nomC, int locC, int wmcC, ArrayList<Integer>
+	locList, ArrayList<Integer> cycloList ) {
+		testeN=0;
+		testeLoc=0;
+		
+		for (int t = 0; t < nomC ; t++) {
 			Method m;
 
 			m = new Method(id, packName, className,"nome do metodo",nomC, locC, wmcC, locList.get(t), 1);
 			a.add(m);
-
+//			System.out.println(locList.get(0));
 			id++;
-//			cycloList.remove(id);
-//			locList.remove(id);
+//			System.out.println("LOC VALOR" + t);
+//			//			cycloList.remove(id);
+//			locList.remove(t);
+			
 		}
+
 	}
 }

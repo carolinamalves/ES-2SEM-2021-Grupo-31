@@ -8,9 +8,9 @@ class LOC_class {
 
 	static File name;
 
-	static int lines=0;
-	static int emptyLines=0;
-	static int totalLines=0;
+	static int lines;
+	static int emptyLines;
+	static int totalLines;
 
 	public 	LOC_class(String file){
 		this.file = file;
@@ -25,6 +25,9 @@ class LOC_class {
 	}
 
 	public int Contar(){
+		lines = 0;
+		emptyLines = 0;
+		totalLines = 0;
 		try{
 			FileInputStream fstream = new FileInputStream(file); 
 			DataInputStream in = new DataInputStream(fstream);
