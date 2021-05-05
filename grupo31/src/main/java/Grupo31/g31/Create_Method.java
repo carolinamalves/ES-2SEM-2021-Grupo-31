@@ -1,7 +1,6 @@
 package Grupo31.g31;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,34 +31,35 @@ public class Create_Method extends GUI {
 
 	static Row row; 
 
-	public static void createMethod(List<File> list) throws ParseException, IOException {	
+	public static void createMethod(List<File> list) throws ParseException, IOException, ClassNotFoundException {	
 
 		for (File s : Leitura_Projetos.ficheiro){
 
 			String className = s.getAbsolutePath().toString().substring(s.getAbsolutePath().toString().lastIndexOf("\\") + 1); 
 			Class<? extends String> c = className.getClass();
 			
+			
 			String packName = c.getClass().getPackageName();
 			System.out.println(c.getClass().getPackage());
 
 			String fileS = s.getAbsolutePath();
-
+			String cNameWJ = className.substring(0, className.indexOf(".java"));
 			Nom_class nomClass = new Nom_class();
-			nomClass.nomClass(fileS);
-			int nomC=nomClass.getNomClass();
+			int nomC = nomClass.nomClass("Grupo31.g31." + cNameWJ, s);
+//			int locC = nomClass.getLoc();
+
 
 			LOC_class locClass = new LOC_class(fileS);
 			int locC = locClass.Contar();
 
 			WMC_class wmcClass = new WMC_class(fileS);
 			int wmcC = wmcClass.contagem();
-
+			
 			CYCLO_method cycloMethod = new CYCLO_method(fileS);
 			cycloMethod.getMethodLineNumbers();
 			ArrayList <Integer> cycloList = cycloMethod.getContador();
-
+			
 			LOC_method locMethod = new LOC_method(fileS);
-			locMethod.getMethodLineNumbers();
 			ArrayList<Integer> locList = locMethod.getTotal();
 
 			createData(packName, className, "methodName", nomC, locC, wmcC, cycloList, locList);
@@ -127,17 +127,17 @@ public class Create_Method extends GUI {
 	}
 
 	public static void createData (String packName, String className, String methodName, int nomC, int locC, int wmcC, ArrayList<Integer> 
-		cycloList, ArrayList<Integer> locList ) {
+		locList, ArrayList<Integer> cycloList ) {
 
-		for (int t = 0; t < cycloList.size() ; t++) {
+		for (int t = 0; t < locList.size() ; t++) {
 			Method m;
 
-			m = new Method(id, packName, className,"nome do metodo",nomC, locC, wmcC, cycloList.get(t),locList.get(t));
+			m = new Method(id, packName, className,"nome do metodo",nomC, locC, wmcC, locList.get(t), 1);
 			a.add(m);
 
 			id++;
-			cycloList.remove(t);
-			locList.remove(t);
+//			cycloList.remove(id);
+//			locList.remove(id);
 		}
 	}
 }

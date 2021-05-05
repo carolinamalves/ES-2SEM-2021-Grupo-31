@@ -118,6 +118,9 @@ public class GUI extends JFrame{
 						e1.printStackTrace();
 					} catch (IOException e1) {
 						e1.printStackTrace();
+					} catch (ClassNotFoundException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
 					}
 				} else {
 					System.out.println("No Selection");
