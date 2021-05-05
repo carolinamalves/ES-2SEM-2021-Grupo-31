@@ -32,7 +32,7 @@ public class ImportExcel extends GUI{
 			{
 				Logger.getLogger(ImportExcel.class. getName()).log(Level.SEVERE, null, ex);
 			}
-
+			
 			String[] strs=new String[workbook.getNumberOfSheets()];
 
 			for (int i = 0; i < strs.length; i++) {

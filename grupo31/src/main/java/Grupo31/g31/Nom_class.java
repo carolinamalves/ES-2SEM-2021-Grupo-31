@@ -13,7 +13,7 @@ public class Nom_class {
 		return x;
 	}
 
-	public int nomClass(String f, File file) throws FileNotFoundException{
+	public int nomClass(String f) throws FileNotFoundException{
 		int Mcount=0;
 		locClass = 0;
 		packName=null;
@@ -22,7 +22,7 @@ public class Nom_class {
 			Class cls = Class.forName(f);
 			java.lang.reflect.Method[] methlist= cls.getDeclaredMethods();
 			System.out.println("NAMEEEEEEEE" + cls.getPackageName());
-			packName= cls.getPackageName();
+//			packName= cls.getPackageName();
 
 			for (int i = 0; i < methlist.length; i++){
 				Mcount++;

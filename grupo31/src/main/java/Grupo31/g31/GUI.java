@@ -22,6 +22,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -109,40 +110,37 @@ public class GUI extends JFrame{
 		gbc_lblNewLabel.gridx = 0;
 		gbc_lblNewLabel.gridy = 0;
 		getContentPane().add(lblNewLabel, gbc_lblNewLabel);
-
+		JScrollBar scrollBar = new JScrollBar();
+		
+		
 		btnNewButton_1 = new JButton("Importar Projetos");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				int result;
+				    int result;
+			        
+				    jChooser = new JFileChooser(); 
+				    jChooser.setCurrentDirectory(new java.io.File("."));
+				    jChooser.setDialogTitle(choosertitle);
+				    jChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+				    //
+				    // disable the "All files" option.
+				    //
+				    jChooser.setAcceptAllFileFilterUsed(false);
+				    //    
+				     result = jChooser.showOpenDialog(null);
+				    
+				    if (result == JFileChooser.APPROVE_OPTION) { 
+				      System.out.println("getCurrentDirectory(): " 
+				         +  jChooser.getCurrentDirectory());
+				      System.out.println("getSelectedFile() : " 
+				         +  jChooser.getSelectedFile());
+				      j.lista(jChooser.getSelectedFile().toString());
+				    } else {
+				      System.out.println("No Selection ");
+				      }	
+				}
 
-				jChooser = new JFileChooser(); 
-				jChooser.setCurrentDirectory(new java.io.File("."));
-				jChooser.setDialogTitle(choosertitle);
-				jChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-				jChooser.setAcceptAllFileFilterUsed(false);
-
-				result = jChooser.showOpenDialog(null);
-
-				if (result == JFileChooser.APPROVE_OPTION) { 
-
-					fname = jChooser.getSelectedFile().toString().substring(jChooser.getSelectedFile().toString()
-							.lastIndexOf("\\") + 1);
-
-					try {
-						Create_Method.createMethod(j.lista(jChooser.getSelectedFile().toString()));
-					} catch (ParseException e1) {
-						e1.printStackTrace();
-					} catch (IOException e1) {
-						e1.printStackTrace();
-					} catch (ClassNotFoundException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-				} else {
-					System.out.println("No Selection");
-				}			
-			}
 		});
 
 		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
@@ -335,8 +333,10 @@ public class GUI extends JFrame{
 						v5 = Integer.parseInt(valor5.getText());
 						v6 = Integer.parseInt(valor6.getText());
 						
-						Create_Method.createExcel();
-					
+//						Create_Method.createExcel();
+//						
+//						history.saveHistory(regra, sinal1, v5, operador, regra2, sinal2, v6);
+//					
 					}
 				});
 
