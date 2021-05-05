@@ -29,7 +29,8 @@ public class CYCLO_method {
 
 	void getMethodLineNumbers() throws ParseException, IOException {
 		CompilationUnit unidadeC = StaticJavaParser.parse((new File(ficheiro)));
-		new MethodVisitor().visit(unidadeC, null);
+		new MethodVisitor().visit(unidadeC,null);
+		
 	}
 
 	private static class MethodVisitor extends VoidVisitorAdapter {
@@ -40,10 +41,12 @@ public class CYCLO_method {
 			{
 				if (i.isExpressionStmt() || i.isIfStmt() || i.isForStmt()||i.isWhileStmt()||i.isForEachStmt()) {
 					contador++;
-
-				}
+				}else {
+					contador = 0;
+				}	
 			}
 			list.add(contador);
+			
 		}
 	}
 

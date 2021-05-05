@@ -1,30 +1,29 @@
 package Grupo31.g31;
-
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.List;
 
 import com.github.javaparser.ParseException;
 import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
+import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
-
 
 public class LOC_method{
 	private static String ficheiro;
 	public static int total;
 	public static ArrayList<Integer> list=new ArrayList<Integer>();
 
-	public LOC_method (String fileS) {
+	public LOC_method (String fileS) throws ParseException, IOException{
 		this.ficheiro = fileS;
 		total=0;
-	}
-
-	public void getMethodLineNumbers() throws ParseException, IOException {
 		CompilationUnit unidadeC = StaticJavaParser.parse((new File (ficheiro)));
 
 		new MethodVisitor().visit(unidadeC, null);
+
 	}
 
 	private static class MethodVisitor extends VoidVisitorAdapter {
