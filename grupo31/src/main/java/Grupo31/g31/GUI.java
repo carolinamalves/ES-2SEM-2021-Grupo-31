@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -60,12 +61,28 @@ public class GUI extends JFrame{
 	static int v2;
 	static int v3;
 	static int v4;
-
+	static int v5;
+	static int v6;
+	
 	JTextField valor1;
 	JTextField valor2;
 	JTextField valor3;
 	JTextField valor4;
-
+	JTextField valor5;
+	JTextField valor6;
+	
+	static String regra;
+	static String sinal1;
+	static String operador;
+	static String sinal2;
+	static String regra2;
+	
+	JComboBox<String> rule;
+	JComboBox<String> signal1;
+	JComboBox<String> op;
+	JComboBox<String> signal2;
+	JComboBox<String> rule2;
+	
 	public GUI() {
 
 		super("Code Smells");
@@ -143,15 +160,15 @@ public class GUI extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				
+
 				jChooser.showOpenDialog(null);
 				File file = jChooser.getSelectedFile();
-				
+
 				if (!file.getName().endsWith("xlsx")) {
-					
+
 					JOptionPane.showMessageDialog(null, "Please select only Excel file.", "Error", JOptionPane.ERROR_MESSAGE);
 				} else {
-					
+
 					ImportExcel.fillData(file);
 					model = new DefaultTableModel(data, headers);
 					tableWidth = model.getColumnCount() * 150;
@@ -161,7 +178,7 @@ public class GUI extends JFrame{
 				}
 			}
 		});
-		
+
 		GridBagConstraints gbc_buttonPanel = new GridBagConstraints();
 		gbc_buttonPanel.insets = new Insets(0, 0, 5, 0);
 		gbc_buttonPanel.anchor = GridBagConstraints.NORTH;
@@ -172,7 +189,7 @@ public class GUI extends JFrame{
 
 		btnNewButton = new JButton("Define Rules");
 		btnNewButton.addActionListener(new ActionListener() {
-			
+
 			public void actionPerformed(ActionEvent e) {
 
 				DefaultTableModel model = (DefaultTableModel) table.getModel();
@@ -205,11 +222,11 @@ public class GUI extends JFrame{
 						panel.repaint();
 					}
 				});
-				
+
 				longM.setBackground(Color.LIGHT_GRAY);
 				panel.add(longM);
 
-				JButton GodC = new JButton("Apply Long Method Rule");
+				JButton GodC = new JButton("Apply God Class Rule");
 				GodC.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 
@@ -233,28 +250,101 @@ public class GUI extends JFrame{
 						panel.repaint();
 					}
 				});
-				
+
 				GodC.setBackground(Color.LIGHT_GRAY);
 				panel.add(GodC);
+
+				JButton apply = new JButton ("Apply new Rule");
+				apply.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+
+
+						DefaultTableModel model = (DefaultTableModel) table.getModel();
+						model.setColumnCount(0);
+
+						rule = new JComboBox<String>();
+
+						rule.addItem("LOC_method");
+						rule.addItem("CYLO_method");
+						rule.addItem("LOC_class");
+						rule.addItem("Nom_class");
+						rule.addItem("WMX_class");
+						panel.add(rule);
+
+						signal1 = new JComboBox<String>();
+						signal1.addItem(">");
+						signal1.addItem("<");
+						panel.add(signal1);
+
+						valor5 = new JTextField();
+						panel.add(valor5);
+						valor5.setColumns(10);
+
+						op = new JComboBox<String>();
+						op.addItem("and");
+						op.addItem("or");
+						panel.add(op);
+
+
+						rule2 = new JComboBox<String>();
+
+						rule2.addItem("LOC_method");
+						rule2.addItem("CYLO_method");
+						rule2.addItem("LOC_class");
+						rule2.addItem("Nom_class");
+						rule2.addItem("WMX_class");
+						panel.add(rule2);
+
+						signal2 = new JComboBox<String>();
+						signal2.addItem(">");
+						signal2.addItem("<");
+						panel.add(signal2);
+
+						valor6 = new JTextField();
+						panel.add(valor6);
+						valor6.setColumns(10);
+
+						panel.revalidate();
+						panel.repaint();
+
+					}
+				});
+				apply.setBackground(Color.LIGHT_GRAY);
+				
+				panel.add(apply);
+
 
 				JButton submit1 = new JButton("Submit");
 				submit1.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						
+
+						//long method and godclass
 						v1 = Integer.parseInt(valor1.getText());
 						v2 = Integer.parseInt(valor2.getText());
 						v3 = Integer.parseInt(valor3.getText());
 						v4 = Integer.parseInt(valor4.getText());
 						
+						
+						//user rules
+						regra = rule.getSelectedItem().toString();
+						sinal1 = signal1.getSelectedItem().toString();
+						operador = op.getSelectedItem().toString();
+						sinal2 = signal2.getSelectedItem().toString();
+						regra2 = rule2.getSelectedItem().toString();
+						
+						v5 = Integer.parseInt(valor5.getText());
+						v6 = Integer.parseInt(valor6.getText());
+						
 						Create_Method.createExcel();
+					
 					}
 				});
-				
+
 				submit1.setBackground(Color.LIGHT_GRAY);
 				panel.add(submit1);
 			}
 		});
-		
+
 		btnNewButton.setBackground(Color.LIGHT_GRAY);
 		buttonPanel.add(btnNewButton);
 

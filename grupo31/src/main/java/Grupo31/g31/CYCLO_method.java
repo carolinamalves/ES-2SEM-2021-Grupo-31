@@ -1,6 +1,7 @@
 package Grupo31.g31;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import java.util.ArrayList;
@@ -19,19 +20,17 @@ public class CYCLO_method {
 	public static int contador;
 	public static int i;
 	public static int cic = 0;
-
+	public static int num;
 	public static ArrayList<Integer> list=new ArrayList<Integer>();
 
-	public CYCLO_method (String ficheiro) {
+	public CYCLO_method (String ficheiro) throws FileNotFoundException {
 		this.ficheiro = ficheiro;
 		contador=0;
-	}
-
-	void getMethodLineNumbers() throws ParseException, IOException {
+		num = 0 ;
 		CompilationUnit unidadeC = StaticJavaParser.parse((new File(ficheiro)));
 		new MethodVisitor().visit(unidadeC,null);
-		
 	}
+
 
 	private static class MethodVisitor extends VoidVisitorAdapter {
 		public void visit(MethodDeclaration m, Object arg) {
@@ -40,17 +39,21 @@ public class CYCLO_method {
 			for(Statement i:a)
 			{
 				if (i.isExpressionStmt() || i.isIfStmt() || i.isForStmt()||i.isWhileStmt()||i.isForEachStmt()) {
-					contador++;
-				}else {
-					contador = 0;
-				}	
+					contador++;	
+
+				}
+
+
 			}
+			System.out.println("contadooooor" + contador);
 			list.add(contador);
-			
+			list.set(num, contador);
+			num++;
 		}
 	}
-
 	public ArrayList<Integer> getContador() throws ParseException, IOException {
+		System.out.println("LISTA" + list);
 		return list;
+
 	}
 }

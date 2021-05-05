@@ -32,12 +32,12 @@ public class LOC_method{
 			list.add(total);
 			list.set(num, total);
 			num++;
-			System.out.println("NUUUUUM" + num);
+		
 		}
 		
 	}	
 	public ArrayList <Integer> getList(){
-		System.out.println("lista" + list);
+		
 		return list;
 	}
 }

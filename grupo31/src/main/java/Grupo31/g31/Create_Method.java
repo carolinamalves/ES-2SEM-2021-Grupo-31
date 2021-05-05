@@ -34,24 +34,21 @@ public class Create_Method extends GUI {
 
 	static Row row; 
 
-	public static void createMethod(List<File> list) throws ParseException, IOException, ClassNotFoundException {	
+	public static void createMethod(List <File> list) throws ParseException, IOException, ClassNotFoundException {	
 
 		for (File s : Leitura_Projetos.ficheiro){
 
 			String className = s.getAbsolutePath().toString().substring(s.getAbsolutePath().toString().lastIndexOf("\\") + 1); 
-			Class<? extends String> c = className.getClass();
-
-
-			String packName = c.getClass().getPackageName();
-			System.out.println(c.getClass().getPackage());
+			className.getClass();
 
 			String fileS = s.getAbsolutePath();
 			String cNameWJ = className.substring(0, className.indexOf(".java"));
 			Nom_class nomClass = new Nom_class();
-			nomC = nomClass.nomClass("com.jasml.classes." + cNameWJ, s);
+			nomC = nomClass.nomClass("Grupo31.g31." + cNameWJ, s);
 			//			int locC = nomClass.getLoc();
 
-
+			String packageName = nomClass.packName;
+			ArrayList <String> methodNames = nomClass.getMethodNames();
 			LOC_class locClass = new LOC_class(fileS);
 			int locC = locClass.Contar();
 
@@ -59,13 +56,12 @@ public class Create_Method extends GUI {
 			int wmcC = wmcClass.contagem();
 
 			CYCLO_method cycloMethod = new CYCLO_method(fileS);
-			cycloMethod.getMethodLineNumbers();
 			ArrayList <Integer> cycloList = cycloMethod.getContador();
 
 			LOC_method locMethod = new LOC_method(fileS);
 			ArrayList<Integer> locList = locMethod.getList();
 
-			createData(packName, className, "methodName", nomC, locC, wmcC, locList ,cycloList);
+			createData(packageName, className, methodNames, nomC, locC, wmcC, locList ,cycloList);
 		}
 	}
 
@@ -110,6 +106,7 @@ public class Create_Method extends GUI {
 
 				Rules.longMethod(GUI.v1, GUI.v2,met);
 				Rules.godClass(GUI.v3, GUI.v4, met);
+				Rules.userRules(regra, sinal1, v5, operador,regra2, sinal2, v6,met);
 			}
 
 			for (int i = 0; i < columnHeadings.length; i++) {
@@ -129,7 +126,7 @@ public class Create_Method extends GUI {
 		System.out.println("done");
 	}
 
-	public static void createData (String packName, String className, String methodName, int nomC, int locC, int wmcC, ArrayList<Integer>
+	public static void createData (String packName, String className, ArrayList <String> methodName, int nomC, int locC, int wmcC, ArrayList<Integer>
 	locList, ArrayList<Integer> cycloList ) {
 		testeN=0;
 		testeLoc=0;
@@ -137,15 +134,9 @@ public class Create_Method extends GUI {
 		for (int t = 0; t < nomC ; t++) {
 			Method m;
 
-			m = new Method(id, packName, className,"nome do metodo",nomC, locC, wmcC, locList.get(t), 1);
+			m = new Method(id, packName, className,methodName.get(t),nomC, locC, wmcC, locList.get(t), cycloList.get(t));
 			a.add(m);
-//			System.out.println(locList.get(0));
 			id++;
-//			System.out.println("LOC VALOR" + t);
-//			//			cycloList.remove(id);
-//			locList.remove(t);
-			
 		}
-
 	}
 }
