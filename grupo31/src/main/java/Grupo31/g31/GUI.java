@@ -60,19 +60,7 @@ public class GUI extends JFrame{
 	private JTable table;
 	private JButton btnNewButton_1;
 
-	static int v1;
-	static int v2;
-	static int v3;
-	static int v4;
-	static int v5;
-
 	JPanel panel3;
-
-	JTextField valor3;
-	JTextField valor4;
-	JTextField valor5;
-
-
 
 	//God Class
 	static String metricaL1;
@@ -87,6 +75,18 @@ public class GUI extends JFrame{
 	static String valorL3;
 	static String operadorL2;
 
+	static JComboBox metL1;
+	static JComboBox sinL1;
+	static JTextField valL1;
+	static JComboBox operL1;
+	static JComboBox metL2;
+	static JComboBox sinL2;
+	static JTextField valL2;
+	static JComboBox operL2;
+	static JComboBox metL3;
+	static JComboBox sinL3;
+	static JTextField valL3;
+
 
 	//Loc Method
 	static String metrica1;
@@ -96,6 +96,15 @@ public class GUI extends JFrame{
 	static String operador1;
 	static String valor1;
 	static String valor2;
+	
+	static JComboBox metG;
+	static JComboBox signal3;
+	static JTextField valor4;
+	static JComboBox op2;
+	static JComboBox metricaG2;
+	static JComboBox signal4;
+	static JTextField valor5;
+	
 
 	ArrayList<String> historico = new ArrayList<String>();
 
@@ -206,83 +215,94 @@ public class GUI extends JFrame{
 
 				panel.revalidate();
 				panel.repaint();
+				
+				JButton submitLongMethod = new JButton("Submeter");
 
 				JButton godC = new JButton("Regras GodClass");
 				godC.addActionListener(new ActionListener() {
+
 					public void actionPerformed(ActionEvent e) {
 
 						panel2.removeAll();
 
-						JComboBox metL1 = new JComboBox();
+						metL1 = new JComboBox();
 						metL1.addItem("LOC_class");
 						metL1.addItem("NOM_class");
 						metL1.addItem("WMC_class");
 						panel2.add(metL1);
 
 
-						JComboBox sinL1 = new JComboBox();
+						sinL1 = new JComboBox();
 						sinL1.addItem(">");
 						sinL1.addItem("<");
 						panel2.add(sinL1);
 
-						JTextField valL1 = new JTextField();
+						valL1 = new JTextField();
 						panel2.add(valL1);
 						valL1.setColumns(10);
 
-						JComboBox operL1 = new JComboBox();
+						operL1 = new JComboBox();
 						operL1.addItem("NULL");
 						operL1.addItem("AND");
 						operL1.addItem("OR");
 						panel2.add(operL1);
 
-						JComboBox metL2 = new JComboBox();
+						metL2 = new JComboBox();
 						metL2.addItem("NULL");
 						metL2.addItem("LOC_class");
 						metL2.addItem("NOM_class");
 						metL2.addItem("WMC_class");
 						panel2.add(metL2);
 
-						JComboBox sinL2 = new JComboBox();
+						sinL2 = new JComboBox();
 						sinL2.addItem("NULL");
 						sinL2.addItem(">");
 						sinL2.addItem("<");
 						panel2.add(sinL2);
 
-						JTextField valL2 = new JTextField();
+						valL2 = new JTextField();
 						panel2.add(valL2);
 						valL2.setColumns(10);
 
-						JComboBox operL2 = new JComboBox();
+						operL2 = new JComboBox();
 						operL2.addItem("NULL");
 						operL2.addItem("AND");
 						operL2.addItem("OR");
 						panel2.add(operL2);
 
-						JComboBox metL3 = new JComboBox();
+						metL3 = new JComboBox();
 						metL3.addItem("NULL");
 						metL3.addItem("LOC_class");
 						metL3.addItem("NOM_class");
 						metL3.addItem("WMC_class");
 						panel2.add(metL3);
 
-						JComboBox sinL3 = new JComboBox();
+						sinL3 = new JComboBox();
 						sinL3.addItem("NULL");
 						sinL3.addItem(">");
 						sinL3.addItem("<");
 						panel2.add(sinL3);
 
-						JTextField valL3 = new JTextField();
+						valL3 = new JTextField();
 						panel2.add(valL3);
 						valL3.setColumns(10);
 
 						panel2.revalidate();
 						panel2.repaint();
-
-
-						JButton submitGodClass = new JButton("Submeter God Class");
-						submitGodClass.addActionListener(new ActionListener() {
+						
+						submitLongMethod.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
+								
+//								metrica1 = metG.getSelectedItem().toString();
+//								sinal1 = signal3.getSelectedItem().toString();
+//								valor1 = valor4.getText();
+//								operador1 = op2.getSelectedItem().toString();
+//								metrica2 = metricaG2.getSelectedItem().toString();
+//								sinal2 = signal4.getSelectedItem().toString();
+//								valor2 = valor5.getText();
+								
 
+								
 								metricaL1 = metL1.getSelectedItem().toString();
 								sinalL1 = sinL1.getSelectedItem().toString();
 								valorL1 = valL1.getText();
@@ -295,6 +315,25 @@ public class GUI extends JFrame{
 								sinalL3 = sinL3.getSelectedItem().toString();
 								valorL3 = valL3.getText();
 
+//								if (operador1 == "NULL") {
+//									String rule = (metrica1 + " " + sinal1 + " " + valor1);
+//									historico.add(rule);							
+//
+//									checkRule = new JCheckBox(rule); 
+//
+//									panel3.add(checkRule);
+//								}
+//
+//								if (operador1 != "NULL") {
+//									String rule = (metrica1 + " " + sinal1 + " " + valor1 + " " + operador1 + " " + metrica2 + " " + sinal2 + " " + valor2);
+//									historico.add(rule);
+//
+//									checkRule = new JCheckBox(rule);
+//
+//									panel3.add(checkRule);
+//
+//								}
+								
 								if (operadorL1 == "NULL") {
 									String rule = (metricaL1 + " " + sinalL1 + " " + valorL1);
 									historico.add(rule);							
@@ -323,33 +362,10 @@ public class GUI extends JFrame{
 
 									panel3.add(checkRule);
 
-								}
-
-								JButton detectGodc = new JButton ("Detectar GodClass");
-								detectGodc.addActionListener(new ActionListener() {
-									public void actionPerformed(ActionEvent e) {
-
-										String regra = checkRule.getActionCommand();
-
-										if (checkRule.isSelected() && regra.indexOf("class") != -1) {
-											RulesGodClass.rules(checkRule.getActionCommand());
-											System.out.println(checkRule.getActionCommand());
-
-										}
-
-									}
-								});
-								detectGodc.setBackground(Color.LIGHT_GRAY);
-								panel3.add(detectGodc);
-
-
-
-								System.out.println("historico: " + historico);
+								}								
 							}
 						});
 
-						submitGodClass.setBackground(Color.LIGHT_GRAY);
-						panel.add(submitGodClass);
 
 					}
 				});
@@ -357,6 +373,22 @@ public class GUI extends JFrame{
 				godC.setBackground(Color.LIGHT_GRAY);
 				panel.add(godC);
 
+				JButton detectGodc = new JButton ("Detectar GodClass");
+				detectGodc.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+
+						String regra = checkRule.getActionCommand();
+
+						if (checkRule.isSelected() && regra.indexOf("class") != -1) {
+							RulesGodClass.rules(checkRule.getActionCommand());
+							System.out.println(checkRule.getActionCommand());
+
+						}
+
+					}
+				});
+				detectGodc.setBackground(Color.LIGHT_GRAY);
+				panel3.add(detectGodc);
 
 				JButton longM = new JButton("Regra LongMethod");
 				longM.addActionListener(new ActionListener() {
@@ -364,12 +396,12 @@ public class GUI extends JFrame{
 
 						panel2.removeAll();
 
-						JComboBox metG = new JComboBox();
+						metG = new JComboBox();
 						metG.addItem("LOC_method");
 						metG.addItem("CYCLO_method");
 						panel2.add(metG);
 
-						JComboBox signal3 = new JComboBox();
+						signal3 = new JComboBox();
 						signal3.addItem(">");
 						signal3.addItem("<");
 						panel2.add(signal3);
@@ -379,19 +411,19 @@ public class GUI extends JFrame{
 						panel2.add(valor4);
 						valor4.setColumns(10);
 
-						JComboBox op2 = new JComboBox();
+						op2 = new JComboBox();
 						op2.addItem("NULL");
 						op2.addItem("AND");
 						op2.addItem("OR");
 						panel2.add(op2);
 
-						JComboBox metricaG2 = new JComboBox();
+						metricaG2 = new JComboBox();
 						metricaG2.addItem("NULL");
 						metricaG2.addItem("LOC_method");
 						metricaG2.addItem("CYCLO_method");
 						panel2.add(metricaG2);
 
-						JComboBox signal4 = new JComboBox();
+						signal4 = new JComboBox();
 						signal4.addItem("NULL");
 						signal4.addItem(">");
 						signal4.addItem("<");
@@ -403,11 +435,10 @@ public class GUI extends JFrame{
 
 						panel2.revalidate();
 						panel2.repaint();
-
-						JButton submitLongMethod = new JButton("Submeter Long Method");
+						
 						submitLongMethod.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
-
+								
 								metrica1 = metG.getSelectedItem().toString();
 								sinal1 = signal3.getSelectedItem().toString();
 								valor1 = valor4.getText();
@@ -415,6 +446,20 @@ public class GUI extends JFrame{
 								metrica2 = metricaG2.getSelectedItem().toString();
 								sinal2 = signal4.getSelectedItem().toString();
 								valor2 = valor5.getText();
+								
+
+								
+//								metricaL1 = metL1.getSelectedItem().toString();
+//								sinalL1 = sinL1.getSelectedItem().toString();
+//								valorL1 = valL1.getText();
+//								operadorL1 = operL1.getSelectedItem().toString();
+//								metricaL2 = metL2.getSelectedItem().toString();
+//								sinalL2 = sinL2.getSelectedItem().toString();
+//								valorL2 = valL2.getText();
+//								operadorL2 = operL2.getSelectedItem().toString();
+//								metricaL3 = metL3.getSelectedItem().toString();
+//								sinalL3 = sinL3.getSelectedItem().toString();
+//								valorL3 = valL3.getText();
 
 								if (operador1 == "NULL") {
 									String rule = (metrica1 + " " + sinal1 + " " + valor1);
@@ -434,40 +479,66 @@ public class GUI extends JFrame{
 									panel3.add(checkRule);
 
 								}
-
-
-								System.out.println("historico: " + historico);
-
-
-								JButton detectLongM = new JButton ("Detectar LongMethod");
-								detectLongM.addActionListener(new ActionListener() {
-									public void actionPerformed(ActionEvent e) {
-
-										String regra = checkRule.getActionCommand();
-
-										if (checkRule.isSelected() && regra.indexOf("method") != -1) {
-											RulesLongMethod.rules(checkRule.getActionCommand());
-											System.out.println(checkRule.getActionCommand());
-
-										}
-
-									}
-								});
-								detectLongM.setBackground(Color.LIGHT_GRAY);
-								panel3.add(detectLongM);
-
+								
+//								if (operadorL1 == "NULL") {
+//									String rule = (metricaL1 + " " + sinalL1 + " " + valorL1);
+//									historico.add(rule);							
+//
+//									checkRule = new JCheckBox(rule); 
+//
+//									panel3.add(checkRule);
+//								}
+//
+//								if (operadorL1 != "NULL" && operadorL2 == "NULL") {
+//									String rule = (metricaL1 + " " + sinalL1 + " " + valorL1 + " " + operadorL1 + " " + metricaL2 + " " + sinalL2 + " " + valorL2);
+//									historico.add(rule);
+//
+//									checkRule = new JCheckBox(rule);
+//
+//									panel3.add(checkRule);
+//
+//								}
+//
+//								if (operadorL1 != "NULL" && operadorL2 != "NULL") {
+//									String rule = (metricaL1 + " " + sinalL1 + " " + valorL1 + " " + operadorL1 + " " + metricaL2 + " " + sinalL2 + " " + valorL2 + 
+//											" " + operadorL2 + " " + metricaL3 + " " + sinalL3 + " " + valorL3 );
+//									historico.add(rule);
+//
+//									checkRule = new JCheckBox(rule);
+//
+//									panel3.add(checkRule);
+//
+//								}								
 							}
 						});
-
-						submitLongMethod.setBackground(Color.LIGHT_GRAY);
-						panel.add(submitLongMethod);
 
 					}
 				});
 
-
 				longM.setBackground(Color.LIGHT_GRAY);
 				panel.add(longM);
+
+
+				submitLongMethod.setBackground(Color.LIGHT_GRAY);
+				panel.add(submitLongMethod);
+
+
+				JButton detectLongM = new JButton ("Detectar LongMethod");
+				detectLongM.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+
+						String regra = checkRule.getActionCommand();
+
+						if (checkRule.isSelected() && regra.indexOf("method") != -1) {
+							RulesLongMethod.rules(checkRule.getActionCommand());
+							System.out.println(checkRule.getActionCommand());
+
+						}
+					}
+				});
+				detectLongM.setBackground(Color.LIGHT_GRAY);
+				panel.add(detectLongM);
+
 
 				JButton updateHistorico = new JButton("Guardar Regras");
 				updateHistorico.addActionListener(new ActionListener() {
@@ -495,7 +566,7 @@ public class GUI extends JFrame{
 					}
 
 				});
- 
+
 				verHistorico.setBackground(Color.LIGHT_GRAY);
 				panel.add(verHistorico);
 
