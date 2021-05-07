@@ -40,6 +40,8 @@ public class GUI extends JFrame{
 	static JButton CodeSmellsDetector;
 	static JFileChooser jChooser;
 
+	static JCheckBox checkRule;
+	
 	static ArrayList <Method> a;
 
 	String choosertitle;
@@ -204,7 +206,7 @@ public class GUI extends JFrame{
 						JComboBox metL1 = new JComboBox();
 						metL1.addItem("LOC_class");
 						metL1.addItem("NOM_class");
-						metL1.addItem("WMX_class");
+						metL1.addItem("WMC_class");
 						panel2.add(metL1);
 
 
@@ -227,7 +229,7 @@ public class GUI extends JFrame{
 						metL2.addItem("NULL");
 						metL2.addItem("LOC_class");
 						metL2.addItem("NOM_class");
-						metL2.addItem("WMX_class");
+						metL2.addItem("WMC_class");
 						panel2.add(metL2);
 
 						JComboBox sinL2 = new JComboBox();
@@ -250,7 +252,7 @@ public class GUI extends JFrame{
 						metL3.addItem("NULL");
 						metL3.addItem("LOC_class");
 						metL3.addItem("NOM_class");
-						metL3.addItem("WMX_class");
+						metL3.addItem("WMC_class");
 						panel2.add(metL3);
 
 						JComboBox sinL3 = new JComboBox();
@@ -287,7 +289,8 @@ public class GUI extends JFrame{
 								if (operadorL1 == "NULL") {
 									String rule = (metricaL1 + " " + sinalL1 + " " + valorL1);
 									historico.add(rule);							
-									JCheckBox checkRule = new JCheckBox(rule);
+							
+									checkRule = new JCheckBox(rule); 
 									
 									panel3.add(checkRule);
 								}
@@ -296,7 +299,8 @@ public class GUI extends JFrame{
 									String rule = (metricaL1 + " " + sinalL1 + " " + valorL1 + " " + operadorL1 + " " + metricaL2 + " " + sinalL2 + " " + valorL2);
 									historico.add(rule);
 									
-									JCheckBox checkRule = new JCheckBox(rule);
+									checkRule = new JCheckBox(rule);
+									
 									panel3.add(checkRule);
 								
 								}
@@ -306,7 +310,8 @@ public class GUI extends JFrame{
 											" " + operadorL2 + " " + metricaL3 + " " + sinalL3 + " " + valorL3 );
 									historico.add(rule);
 									
-									JCheckBox checkRule = new JCheckBox(rule);
+									checkRule = new JCheckBox(rule);
+																	
 									panel3.add(checkRule);
 									
 								}
@@ -317,6 +322,21 @@ public class GUI extends JFrame{
 
 						submitLongMethod.setBackground(Color.LIGHT_GRAY);
 						panel.add(submitLongMethod);
+						
+						JButton detectCodeSmells = new JButton ("Detectar Code Smells");
+						detectCodeSmells.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+								
+						
+								if (checkRule.isSelected()) {
+									Rules.rules(checkRule.getActionCommand());
+									System.out.println(checkRule.getActionCommand());
+				
+								}
+							}
+						});
+						detectCodeSmells.setBackground(Color.LIGHT_GRAY);
+						panel3.add(detectCodeSmells);
 
 					}
 				});
