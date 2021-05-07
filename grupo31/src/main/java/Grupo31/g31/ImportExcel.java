@@ -15,7 +15,7 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-public class ImportExcel {  
+public class ImportExcel extends GUI{  
 
 	static void fillData(File file){
 
@@ -76,7 +76,7 @@ public class ImportExcel {
 					data.add(d);
 				}
 			}
-			else {
+			else { 
 				return; 
 			}
 		}

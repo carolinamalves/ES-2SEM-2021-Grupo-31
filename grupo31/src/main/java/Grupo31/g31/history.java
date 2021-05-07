@@ -25,7 +25,7 @@ public class history {
 		catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
+	} 
 
 	public static void clear(String fileName) {
 
@@ -58,8 +58,4 @@ public class history {
 		return historic;
 	}
 
-	public static void main(String[] args) {
-
-		viewHistoric("MyFile.txt");
-	}
 }
