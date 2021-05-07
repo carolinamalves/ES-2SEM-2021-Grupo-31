@@ -96,7 +96,7 @@ public class GUI extends JFrame{
 	static String operador1;
 	static String valor1;
 	static String valor2;
-	
+
 	static JComboBox metG;
 	static JComboBox signal3;
 	static JTextField valor4;
@@ -104,7 +104,7 @@ public class GUI extends JFrame{
 	static JComboBox metricaG2;
 	static JComboBox signal4;
 	static JTextField valor5;
-	
+
 
 	ArrayList<String> historico = new ArrayList<String>();
 
@@ -215,8 +215,6 @@ public class GUI extends JFrame{
 
 				panel.revalidate();
 				panel.repaint();
-				
-				JButton submitLongMethod = new JButton("Submeter");
 
 				JButton godC = new JButton("Regras GodClass");
 				godC.addActionListener(new ActionListener() {
@@ -289,106 +287,85 @@ public class GUI extends JFrame{
 
 						panel2.revalidate();
 						panel2.repaint();
-						
-						submitLongMethod.addActionListener(new ActionListener() {
-							public void actionPerformed(ActionEvent e) {
-								
-//								metrica1 = metG.getSelectedItem().toString();
-//								sinal1 = signal3.getSelectedItem().toString();
-//								valor1 = valor4.getText();
-//								operador1 = op2.getSelectedItem().toString();
-//								metrica2 = metricaG2.getSelectedItem().toString();
-//								sinal2 = signal4.getSelectedItem().toString();
-//								valor2 = valor5.getText();
-								
-
-								
-								metricaL1 = metL1.getSelectedItem().toString();
-								sinalL1 = sinL1.getSelectedItem().toString();
-								valorL1 = valL1.getText();
-								operadorL1 = operL1.getSelectedItem().toString();
-								metricaL2 = metL2.getSelectedItem().toString();
-								sinalL2 = sinL2.getSelectedItem().toString();
-								valorL2 = valL2.getText();
-								operadorL2 = operL2.getSelectedItem().toString();
-								metricaL3 = metL3.getSelectedItem().toString();
-								sinalL3 = sinL3.getSelectedItem().toString();
-								valorL3 = valL3.getText();
-
-//								if (operador1 == "NULL") {
-//									String rule = (metrica1 + " " + sinal1 + " " + valor1);
-//									historico.add(rule);							
-//
-//									checkRule = new JCheckBox(rule); 
-//
-//									panel3.add(checkRule);
-//								}
-//
-//								if (operador1 != "NULL") {
-//									String rule = (metrica1 + " " + sinal1 + " " + valor1 + " " + operador1 + " " + metrica2 + " " + sinal2 + " " + valor2);
-//									historico.add(rule);
-//
-//									checkRule = new JCheckBox(rule);
-//
-//									panel3.add(checkRule);
-//
-//								}
-								
-								if (operadorL1 == "NULL") {
-									String rule = (metricaL1 + " " + sinalL1 + " " + valorL1);
-									historico.add(rule);							
-
-									checkRule = new JCheckBox(rule); 
-
-									panel3.add(checkRule);
-								}
-
-								if (operadorL1 != "NULL" && operadorL2 == "NULL") {
-									String rule = (metricaL1 + " " + sinalL1 + " " + valorL1 + " " + operadorL1 + " " + metricaL2 + " " + sinalL2 + " " + valorL2);
-									historico.add(rule);
-
-									checkRule = new JCheckBox(rule);
-
-									panel3.add(checkRule);
-
-								}
-
-								if (operadorL1 != "NULL" && operadorL2 != "NULL") {
-									String rule = (metricaL1 + " " + sinalL1 + " " + valorL1 + " " + operadorL1 + " " + metricaL2 + " " + sinalL2 + " " + valorL2 + 
-											" " + operadorL2 + " " + metricaL3 + " " + sinalL3 + " " + valorL3 );
-									historico.add(rule);
-
-									checkRule = new JCheckBox(rule);
-
-									panel3.add(checkRule);
-
-								}								
-							}
-						});
 
 
 					}
 				});
-
+				
 				godC.setBackground(Color.LIGHT_GRAY);
 				panel.add(godC);
 
-				JButton detectGodc = new JButton ("Detectar GodClass");
-				detectGodc.addActionListener(new ActionListener() {
+
+
+
+				JButton submitGodC = new  JButton ("Submeter God Class");
+				submitGodC.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 
-						String regra = checkRule.getActionCommand();
+						metricaL1 = metL1.getSelectedItem().toString();
+						sinalL1 = sinL1.getSelectedItem().toString();
+						valorL1 = valL1.getText();
+						operadorL1 = operL1.getSelectedItem().toString();
+						metricaL2 = metL2.getSelectedItem().toString();
+						sinalL2 = sinL2.getSelectedItem().toString();
+						valorL2 = valL2.getText();
+						operadorL2 = operL2.getSelectedItem().toString();
+						metricaL3 = metL3.getSelectedItem().toString();
+						sinalL3 = sinL3.getSelectedItem().toString();
+						valorL3 = valL3.getText();
+						
+						
+						if (operadorL1 == "NULL") {
+							String rule = (metricaL1 + " " + sinalL1 + " " + valorL1);
+							historico.add(rule);							
 
-						if (checkRule.isSelected() && regra.indexOf("class") != -1) {
-							RulesGodClass.rules(checkRule.getActionCommand());
-							System.out.println(checkRule.getActionCommand());
+							checkRule = new JCheckBox(rule); 
+
+							panel3.add(checkRule);
+						}
+
+						if (operadorL1 != "NULL" && operadorL2 == "NULL") {
+							String rule = (metricaL1 + " " + sinalL1 + " " + valorL1 + " " + operadorL1 + " " + metricaL2 + " " + sinalL2 + " " + valorL2);
+							historico.add(rule);
+
+							checkRule = new JCheckBox(rule);
+
+							panel3.add(checkRule);
 
 						}
 
+						if (operadorL1 != "NULL" && operadorL2 != "NULL") {
+							String rule = (metricaL1 + " " + sinalL1 + " " + valorL1 + " " + operadorL1 + " " + metricaL2 + " " + sinalL2 + " " + valorL2 + 
+									" " + operadorL2 + " " + metricaL3 + " " + sinalL3 + " " + valorL3 );
+							historico.add(rule);
+
+							checkRule = new JCheckBox(rule);
+
+							panel3.add(checkRule);
+
+						}								
+
+
 					}
 				});
-				detectGodc.setBackground(Color.LIGHT_GRAY);
-				panel3.add(detectGodc);
+				submitGodC.setBackground(Color.LIGHT_GRAY);
+				panel.add(submitGodC);
+//				JButton detectGodc = new JButton ("Detectar GodClass");
+//				detectGodc.addActionListener(new ActionListener() {
+//					public void actionPerformed(ActionEvent e) {
+//
+//						String regra = checkRule.getActionCommand();
+//
+//						if (checkRule.isSelected() && regra.indexOf("class") != -1) {
+//							RulesGodClass.rules(checkRule.getActionCommand());
+//							System.out.println(checkRule.getActionCommand());
+//
+//						}
+//
+//					}
+//				});
+//				detectGodc.setBackground(Color.LIGHT_GRAY);
+//				panel3.add(detectGodc);
 
 				JButton longM = new JButton("Regra LongMethod");
 				longM.addActionListener(new ActionListener() {
@@ -435,83 +412,6 @@ public class GUI extends JFrame{
 
 						panel2.revalidate();
 						panel2.repaint();
-						
-						submitLongMethod.addActionListener(new ActionListener() {
-							public void actionPerformed(ActionEvent e) {
-								
-								metrica1 = metG.getSelectedItem().toString();
-								sinal1 = signal3.getSelectedItem().toString();
-								valor1 = valor4.getText();
-								operador1 = op2.getSelectedItem().toString();
-								metrica2 = metricaG2.getSelectedItem().toString();
-								sinal2 = signal4.getSelectedItem().toString();
-								valor2 = valor5.getText();
-								
-
-								
-//								metricaL1 = metL1.getSelectedItem().toString();
-//								sinalL1 = sinL1.getSelectedItem().toString();
-//								valorL1 = valL1.getText();
-//								operadorL1 = operL1.getSelectedItem().toString();
-//								metricaL2 = metL2.getSelectedItem().toString();
-//								sinalL2 = sinL2.getSelectedItem().toString();
-//								valorL2 = valL2.getText();
-//								operadorL2 = operL2.getSelectedItem().toString();
-//								metricaL3 = metL3.getSelectedItem().toString();
-//								sinalL3 = sinL3.getSelectedItem().toString();
-//								valorL3 = valL3.getText();
-
-								if (operador1 == "NULL") {
-									String rule = (metrica1 + " " + sinal1 + " " + valor1);
-									historico.add(rule);							
-
-									checkRule = new JCheckBox(rule); 
-
-									panel3.add(checkRule);
-								}
-
-								if (operador1 != "NULL") {
-									String rule = (metrica1 + " " + sinal1 + " " + valor1 + " " + operador1 + " " + metrica2 + " " + sinal2 + " " + valor2);
-									historico.add(rule);
-
-									checkRule = new JCheckBox(rule);
-
-									panel3.add(checkRule);
-
-								}
-								
-//								if (operadorL1 == "NULL") {
-//									String rule = (metricaL1 + " " + sinalL1 + " " + valorL1);
-//									historico.add(rule);							
-//
-//									checkRule = new JCheckBox(rule); 
-//
-//									panel3.add(checkRule);
-//								}
-//
-//								if (operadorL1 != "NULL" && operadorL2 == "NULL") {
-//									String rule = (metricaL1 + " " + sinalL1 + " " + valorL1 + " " + operadorL1 + " " + metricaL2 + " " + sinalL2 + " " + valorL2);
-//									historico.add(rule);
-//
-//									checkRule = new JCheckBox(rule);
-//
-//									panel3.add(checkRule);
-//
-//								}
-//
-//								if (operadorL1 != "NULL" && operadorL2 != "NULL") {
-//									String rule = (metricaL1 + " " + sinalL1 + " " + valorL1 + " " + operadorL1 + " " + metricaL2 + " " + sinalL2 + " " + valorL2 + 
-//											" " + operadorL2 + " " + metricaL3 + " " + sinalL3 + " " + valorL3 );
-//									historico.add(rule);
-//
-//									checkRule = new JCheckBox(rule);
-//
-//									panel3.add(checkRule);
-//
-//								}								
-							}
-						});
-
 					}
 				});
 
@@ -519,25 +419,65 @@ public class GUI extends JFrame{
 				panel.add(longM);
 
 
+				JButton submitLongMethod = new JButton("Submeter Long Method");
+				submitLongMethod.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						
+						metrica1 = metG.getSelectedItem().toString();
+						sinal1 = signal3.getSelectedItem().toString();
+						valor1 = valor4.getText();
+						operador1 = op2.getSelectedItem().toString();
+						metrica2 = metricaG2.getSelectedItem().toString();
+						sinal2 = signal4.getSelectedItem().toString();
+						valor2 = valor5.getText();
+
+
+						if (operador1 == "NULL") {
+							String rule = (metrica1 + " " + sinal1 + " " + valor1);
+							historico.add(rule);							
+
+							checkRule = new JCheckBox(rule); 
+
+							panel3.add(checkRule);
+						}
+
+						if (operador1 != "NULL") {
+							String rule = (metrica1 + " " + sinal1 + " " + valor1 + " " + operador1 + " " + metrica2 + " " + sinal2 + " " + valor2);
+							historico.add(rule);
+
+							checkRule = new JCheckBox(rule);
+
+							panel3.add(checkRule);
+
+						}
+
+					}
+				});
 				submitLongMethod.setBackground(Color.LIGHT_GRAY);
 				panel.add(submitLongMethod);
 
 
-				JButton detectLongM = new JButton ("Detectar LongMethod");
-				detectLongM.addActionListener(new ActionListener() {
+				JButton detectCodeSmell = new JButton ("Detectar Code Smell");
+				detectCodeSmell.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 
 						String regra = checkRule.getActionCommand();
 
-						if (checkRule.isSelected() && regra.indexOf("method") != -1) {
+						if (regra.indexOf("method") != -1) {
 							RulesLongMethod.rules(checkRule.getActionCommand());
+							System.out.println(checkRule.getActionCommand());
+
+						}
+						
+						if (regra.indexOf("class") != -1) {
+							RulesGodClass.rules(checkRule.getActionCommand());
 							System.out.println(checkRule.getActionCommand());
 
 						}
 					}
 				});
-				detectLongM.setBackground(Color.LIGHT_GRAY);
-				panel.add(detectLongM);
+				detectCodeSmell.setBackground(Color.LIGHT_GRAY);
+				panel3.add(detectCodeSmell);
 
 
 				JButton updateHistorico = new JButton("Guardar Regras");
