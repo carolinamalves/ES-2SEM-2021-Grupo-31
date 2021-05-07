@@ -22,30 +22,40 @@ public class CYCLO_method {
 	public static int cic = 0;
 	public static int num;
 	public static ArrayList<Integer> list=new ArrayList<Integer>();
-
+	public static int nomClass;
+	
+	public static ArrayList<String> nameOfMethods = new ArrayList<String>();
+	
 	public CYCLO_method (String ficheiro) throws FileNotFoundException {
 		this.ficheiro = ficheiro;
 		contador=0;
 		num = 0 ;
-		CompilationUnit unidadeC = StaticJavaParser.parse((new File(ficheiro)));
+		nomClass=0;
+		CompilationUnit unidadeC = StaticJavaParser.parse(new File(ficheiro));
 		new MethodVisitor().visit(unidadeC,null);
+		
 	}
 
 
 	private static class MethodVisitor extends VoidVisitorAdapter {
 		public void visit(MethodDeclaration m, Object arg) {
-
+			nomClass++;
+			
 			List <Statement> a=m.findAll(Statement.class);
 			for(Statement i:a)
 			{
-				if (i.isExpressionStmt() || i.isIfStmt() || i.isForStmt()||i.isWhileStmt()||i.isForEachStmt()) {
-					contador++;	
-
+				if (i.isExpressionStmt() || i.isIfStmt() || i.isForStmt()||i.isWhileStmt()||i.isForEachStmt() || i.isSwitchStmt()) {
+					contador++;		
 				}
-
-
 			}
-			System.out.println("contadooooor" + contador);
+			
+			String metName = (m.getNameAsString() + m.getParameters()).replace("[", "(");
+			metName = metName.replace("]", ")");
+			
+			nameOfMethods.add(metName); //getParameters
+			nameOfMethods.set(num,metName);			
+			System.out.println("nome do metodo:" + metName);
+			contador = contador +1;
 			list.add(contador);
 			list.set(num, contador);
 			num++;
@@ -54,6 +64,13 @@ public class CYCLO_method {
 	public ArrayList<Integer> getContador() throws ParseException, IOException {
 		System.out.println("LISTA" + list);
 		return list;
-
+	}
+	
+	public int getNomClass() {
+		return nomClass;
+	}
+	
+	public ArrayList<String> getNameOfMethods(){
+		return nameOfMethods;
 	}
 }
