@@ -32,7 +32,7 @@ public class  WMC_class {
 	}	
 
 	public int getWMC_class() {
-System.out.println("WMC" + contador);
+		System.out.println("WMC" + contador);
 		return contador;
 	}
 }
