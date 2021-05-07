@@ -49,7 +49,6 @@ public class Rules {
 					}else {
 						System.out.println(m.getName_class() + ":" + "FALSEEEE");
 					}
-
 				}	
 			}
 
@@ -60,11 +59,9 @@ public class Rules {
 
 					if( m.getNom_Class() > Integer.parseInt(splitRule[2])) {
 						System.out.println(m.getName_class() + ":" + "TRUEEEE");
-
 					}else {
 						System.out.println(m.getName_class() + ":" + "FALSEEEE");
 					}
-
 				}	
 			}
 
@@ -75,11 +72,9 @@ public class Rules {
 
 					if( m.getNom_Class() < Integer.parseInt(splitRule[2])) {
 						System.out.println(m.getName_class() + ":" + "TRUEEEE");
-
 					}else {
 						System.out.println(m.getName_class() + ":" + "FALSEEEE");
 					}
-
 				}	
 			}
 
@@ -90,11 +85,9 @@ public class Rules {
 
 					if( m.getWmc_Class() > Integer.parseInt(splitRule[2])) {
 						System.out.println(m.getName_class() + ":" + "TRUEEEE");
-
 					}else {
 						System.out.println(m.getName_class() + ":" + "FALSEEEE");
 					}
-
 				}	
 			}
 
@@ -105,11 +98,9 @@ public class Rules {
 
 					if( m.getWmc_Class() < Integer.parseInt(splitRule[2])) {
 						System.out.println(m.getName_class() + ":" + "TRUEEEE");
-
 					}else {
 						System.out.println(m.getName_class() + ":" + "FALSEEEE");
 					}
-
 				}	
 			}
 		}
@@ -126,13 +117,10 @@ public class Rules {
 
 					if( m.getLoc_Class() > Integer.parseInt(splitRule[2]) && m.getNom_Class() > Integer.parseInt(splitRule[6])) {
 						System.out.println(m.getName_class() + ":" + "TRUEEEE");
-
-					}else {
+					} else {
 						System.out.println(m.getName_class() + ":" + "FALSEEEE");
 					}
-
 				}
-
 			}
 
 			//locCLass > .. && nomClass < ...
@@ -145,12 +133,10 @@ public class Rules {
 					if( m.getLoc_Class() > Integer.parseInt(splitRule[2]) && m.getNom_Class() < Integer.parseInt(splitRule[6])) {
 						System.out.println(m.getName_class() + ":" + "TRUEEEE");
 
-					}else {
+					} else {
 						System.out.println(m.getName_class() + ":" + "FALSEEEE");
 					}
-
 				}
-
 			}
 
 			//locClass < ... && nomClass > ...
@@ -162,13 +148,10 @@ public class Rules {
 
 					if( m.getLoc_Class() < Integer.parseInt(splitRule[2]) && m.getNom_Class() > Integer.parseInt(splitRule[6])) {
 						System.out.println(m.getName_class() + ":" + "TRUEEEE");
-
 					}else {
 						System.out.println(m.getName_class() + ":" + "FALSEEEE");
 					}
-
 				}
-
 			}
 
 			// locClass < ... && nomClass < ... 
@@ -180,13 +163,10 @@ public class Rules {
 
 					if( m.getLoc_Class() < Integer.parseInt(splitRule[2]) && m.getNom_Class() < Integer.parseInt(splitRule[6])) {
 						System.out.println(m.getName_class() + ":" + "TRUEEEE");
-
 					}else {
 						System.out.println(m.getName_class() + ":" + "FALSEEEE");
 					}
-
 				}
-
 			}
 
 			//locClass > ... || nomC > ...
@@ -198,13 +178,10 @@ public class Rules {
 
 					if( m.getLoc_Class() > Integer.parseInt(splitRule[2]) || m.getNom_Class() > Integer.parseInt(splitRule[6])) {
 						System.out.println(m.getName_class() + ":" + "TRUEEEE");
-
 					}else {
 						System.out.println(m.getName_class() + ":" + "FALSEEEE");
 					}
-
 				}
-
 			}
 
 			//locCLass > .. || nomClass < ...
@@ -216,13 +193,10 @@ public class Rules {
 
 					if( m.getLoc_Class() > Integer.parseInt(splitRule[2]) || m.getNom_Class() < Integer.parseInt(splitRule[6])) {
 						System.out.println(m.getName_class() + ":" + "TRUEEEE");
-
 					}else {
 						System.out.println(m.getName_class() + ":" + "FALSEEEE");
 					}
-
 				}
-
 			}
 
 			//locClass < ... || nomClass > ...
@@ -234,13 +208,10 @@ public class Rules {
 
 					if( m.getLoc_Class() < Integer.parseInt(splitRule[2]) || m.getNom_Class() > Integer.parseInt(splitRule[6])) {
 						System.out.println(m.getName_class() + ":" + "TRUEEEE");
-
 					}else {
 						System.out.println(m.getName_class() + ":" + "FALSEEEE");
 					}
-
 				}
-
 			}
 
 			// locClass < ... || nomClass < ... 
@@ -252,19 +223,12 @@ public class Rules {
 
 					if( m.getLoc_Class() < Integer.parseInt(splitRule[2]) || m.getNom_Class() < Integer.parseInt(splitRule[6])) {
 						System.out.println(m.getName_class() + ":" + "TRUEEEE");
-
 					}else {
 						System.out.println(m.getName_class() + ":" + "FALSEEEE");
 					}
-
 				}
-
 			}
-			
-			
-			
-			
-			
+
 			//locClass > ... && wmcClass > ...
 			if(splitRule[0].equals(locC) && splitRule[1].equals(maior) && splitRule[3].equals(and) 
 					&& splitRule[4].equals(wmcC) && splitRule[5].equals(maior) || splitRule[0].equals(wmcC) && splitRule[1].equals(maior) 
@@ -274,13 +238,10 @@ public class Rules {
 
 					if( m.getLoc_Class() > Integer.parseInt(splitRule[2]) && m.getWmc_Class() > Integer.parseInt(splitRule[6])) {
 						System.out.println(m.getName_class() + ":" + "TRUEEEE");
-
 					}else {
 						System.out.println(m.getName_class() + ":" + "FALSEEEE");
 					}
-
 				}
-
 			}
 
 			//locCLass > .. && wmcClass < ...
@@ -289,16 +250,12 @@ public class Rules {
 					splitRule[3].equals(and) && splitRule[4].equals(locC) && splitRule[5].equals(maior)) {
 
 				for (Method m : a) {
-
 					if( m.getLoc_Class() > Integer.parseInt(splitRule[2]) && m.getWmc_Class() < Integer.parseInt(splitRule[6])) {
 						System.out.println(m.getName_class() + ":" + "TRUEEEE");
-
 					}else {
 						System.out.println(m.getName_class() + ":" + "FALSEEEE");
 					}
-
 				}
-
 			}
 
 			//locClass < ... && wmcClass > ...
@@ -310,13 +267,10 @@ public class Rules {
 
 					if( m.getLoc_Class() < Integer.parseInt(splitRule[2]) && m.getWmc_Class() > Integer.parseInt(splitRule[6])) {
 						System.out.println(m.getName_class() + ":" + "TRUEEEE");
-
 					}else {
 						System.out.println(m.getName_class() + ":" + "FALSEEEE");
 					}
-
 				}
-
 			}
 
 			// locClass < ... && wmcClass < ... 
@@ -328,13 +282,10 @@ public class Rules {
 
 					if( m.getLoc_Class() < Integer.parseInt(splitRule[2]) && m.getWmc_Class() < Integer.parseInt(splitRule[6])) {
 						System.out.println(m.getName_class() + ":" + "TRUEEEE");
-
 					}else {
 						System.out.println(m.getName_class() + ":" + "FALSEEEE");
 					}
-
 				}
-
 			}
 
 			//locClass > ... || wmcClass > ...
@@ -343,16 +294,12 @@ public class Rules {
 					&& splitRule[3].equals(or) && splitRule[4].equals(locC) && splitRule[5].equals(maior)) {
 
 				for (Method m : a) {
-
 					if( m.getLoc_Class() > Integer.parseInt(splitRule[2]) || m.getWmc_Class() > Integer.parseInt(splitRule[6])) {
 						System.out.println(m.getName_class() + ":" + "TRUEEEE");
-
 					}else {
 						System.out.println(m.getName_class() + ":" + "FALSEEEE");
 					}
-
 				}
-
 			}
 
 			//locCLass > .. || wmcClass < ...
@@ -364,13 +311,10 @@ public class Rules {
 
 					if( m.getLoc_Class() > Integer.parseInt(splitRule[2]) || m.getWmc_Class() < Integer.parseInt(splitRule[6])) {
 						System.out.println(m.getName_class() + ":" + "TRUEEEE");
-
 					}else {
 						System.out.println(m.getName_class() + ":" + "FALSEEEE");
 					}
-
 				}
-
 			}
 
 			//locClass < ... || wmcClass > ...
@@ -382,13 +326,10 @@ public class Rules {
 
 					if( m.getLoc_Class() < Integer.parseInt(splitRule[2]) || m.getWmc_Class() > Integer.parseInt(splitRule[6])) {
 						System.out.println(m.getName_class() + ":" + "TRUEEEE");
-
 					}else {
 						System.out.println(m.getName_class() + ":" + "FALSEEEE");
 					}
-
 				}
-
 			}
 
 			// locClass < ... || wmcClass < ... 
@@ -404,14 +345,9 @@ public class Rules {
 					}else {
 						System.out.println(m.getName_class() + ":" + "FALSEEEE");
 					}
-
 				}
-
 			}
-			
-			
-			
-			
+
 			//nomC > ... && wmcClass > ...
 			if(splitRule[0].equals(nomC) && splitRule[1].equals(maior) && splitRule[3].equals(and) 
 					&& splitRule[4].equals(wmcC) && splitRule[5].equals(maior) || splitRule[0].equals(wmcC) && splitRule[1].equals(maior) 
@@ -421,13 +357,10 @@ public class Rules {
 
 					if( m.getNom_Class() > Integer.parseInt(splitRule[2]) && m.getWmc_Class() > Integer.parseInt(splitRule[6])) {
 						System.out.println(m.getName_class() + ":" + "TRUEEEE");
-
 					}else {
 						System.out.println(m.getName_class() + ":" + "FALSEEEE");
 					}
-
 				}
-
 			}
 
 			//nomC > .. && wmcClass < ...
@@ -439,13 +372,10 @@ public class Rules {
 
 					if( m.getNom_Class() > Integer.parseInt(splitRule[2]) && m.getWmc_Class() < Integer.parseInt(splitRule[6])) {
 						System.out.println(m.getName_class() + ":" + "TRUEEEE");
-
 					}else {
 						System.out.println(m.getName_class() + ":" + "FALSEEEE");
 					}
-
 				}
-
 			}
 
 			//nomClass < ... && wmcClass > ...
@@ -457,13 +387,10 @@ public class Rules {
 
 					if( m.getNom_Class() < Integer.parseInt(splitRule[2]) && m.getWmc_Class() > Integer.parseInt(splitRule[6])) {
 						System.out.println(m.getName_class() + ":" + "TRUEEEE");
-
 					}else {
 						System.out.println(m.getName_class() + ":" + "FALSEEEE");
 					}
-
 				}
-
 			}
 
 			// nomClass < ... && wmcClass < ... 
@@ -475,11 +402,9 @@ public class Rules {
 
 					if( m.getNom_Class() < Integer.parseInt(splitRule[2]) && m.getWmc_Class() < Integer.parseInt(splitRule[6])) {
 						System.out.println(m.getName_class() + ":" + "TRUEEEE");
-
 					}else {
 						System.out.println(m.getName_class() + ":" + "FALSEEEE");
 					}
-
 				}
 
 			}
@@ -493,13 +418,10 @@ public class Rules {
 
 					if( m.getLoc_Class() > Integer.parseInt(splitRule[2]) || m.getWmc_Class() > Integer.parseInt(splitRule[6])) {
 						System.out.println(m.getName_class() + ":" + "TRUEEEE");
-
 					}else {
 						System.out.println(m.getName_class() + ":" + "FALSEEEE");
 					}
-
 				}
-
 			}
 
 			//nomC > .. || wmcClass < ...
@@ -508,16 +430,13 @@ public class Rules {
 					splitRule[3].equals(or) && splitRule[4].equals(nomC) && splitRule[5].equals(maior)) {
 
 				for (Method m : a) {
-					
+
 					if(m.getNom_Class() > Integer.parseInt(splitRule[2]) || m.getWmc_Class() < Integer.parseInt(splitRule[6])) {
 						System.out.println(m.getName_class() + ":" + "TRUEEEE");
-
 					}else {
 						System.out.println(m.getName_class() + ":" + "FALSEEEE");
 					}
-
 				}
-
 			}
 
 			//nomClass < ... || wmcClass > ...
@@ -529,13 +448,10 @@ public class Rules {
 
 					if( m.getNom_Class() < Integer.parseInt(splitRule[2]) || m.getWmc_Class() > Integer.parseInt(splitRule[6])) {
 						System.out.println(m.getName_class() + ":" + "TRUEEEE");
-
 					}else {
 						System.out.println(m.getName_class() + ":" + "FALSEEEE");
 					}
-
 				}
-
 			}
 
 			// nomClass < ... || wmcClass < ... 
@@ -547,30 +463,11 @@ public class Rules {
 
 					if( m.getNom_Class() < Integer.parseInt(splitRule[2]) || m.getWmc_Class() < Integer.parseInt(splitRule[6])) {
 						System.out.println(m.getName_class() + ":" + "TRUEEEE");
-
 					}else {
 						System.out.println(m.getName_class() + ":" + "FALSEEEE");
 					}
-
 				}
-
 			}
 		}
-			
-			//3 metricas
-			
-//		if (splitRule.length == 11) {
-//			
-//			
-//			
-//		
-//			
-//			
-//
-//
-//
-//		}
-
-
 	}
 }

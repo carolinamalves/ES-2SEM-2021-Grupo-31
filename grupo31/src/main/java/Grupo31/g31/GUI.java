@@ -41,7 +41,7 @@ public class GUI extends JFrame{
 	static JFileChooser jChooser;
 
 	static JCheckBox checkRule;
-	
+
 	static ArrayList <Method> a;
 
 	String choosertitle;
@@ -90,8 +90,6 @@ public class GUI extends JFrame{
 	private JPanel panel2;
 
 	public GUI() {
-
-		super("Code Smells");
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jChooser = new JFileChooser();
@@ -209,7 +207,6 @@ public class GUI extends JFrame{
 						metL1.addItem("WMC_class");
 						panel2.add(metL1);
 
-
 						JComboBox sinL1 = new JComboBox();
 						sinL1.addItem(">");
 						sinL1.addItem("<");
@@ -267,13 +264,10 @@ public class GUI extends JFrame{
 						panel2.revalidate();
 						panel2.repaint();
 
-			
 						JButton submitLongMethod = new JButton("Submeter");
 						submitLongMethod.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
 
-								
-								
 								metricaL1 = metL1.getSelectedItem().toString();
 								sinalL1 = sinL1.getSelectedItem().toString();
 								valorL1 = valL1.getText();
@@ -285,68 +279,59 @@ public class GUI extends JFrame{
 								metricaL3 = metL3.getSelectedItem().toString();
 								sinalL3 = sinL3.getSelectedItem().toString();
 								valorL3 = valL3.getText();
-								
+
 								if (operadorL1 == "NULL") {
 									String rule = (metricaL1 + " " + sinalL1 + " " + valorL1);
 									historico.add(rule);							
-							
+
 									checkRule = new JCheckBox(rule); 
-									
+
 									panel3.add(checkRule);
 								}
-								
+
 								if (operadorL1 != "NULL" && operadorL2 == "NULL") {
 									String rule = (metricaL1 + " " + sinalL1 + " " + valorL1 + " " + operadorL1 + " " + metricaL2 + " " + sinalL2 + " " + valorL2);
 									historico.add(rule);
-									
+
 									checkRule = new JCheckBox(rule);
-									
+
 									panel3.add(checkRule);
-								
 								}
-								
+
 								if (operadorL1 != "NULL" && operadorL2 != "NULL") {
 									String rule = (metricaL1 + " " + sinalL1 + " " + valorL1 + " " + operadorL1 + " " + metricaL2 + " " + sinalL2 + " " + valorL2 + 
 											" " + operadorL2 + " " + metricaL3 + " " + sinalL3 + " " + valorL3 );
 									historico.add(rule);
-									
+
 									checkRule = new JCheckBox(rule);
-																	
-									panel3.add(checkRule);
-									
+
+									panel3.add(checkRule);			
 								}
-								
-								System.out.println("historico: " + historico);
 							}
 						});
 
 						submitLongMethod.setBackground(Color.LIGHT_GRAY);
 						panel.add(submitLongMethod);
-						
+
 						JButton detectCodeSmells = new JButton ("Detectar Code Smells");
 						detectCodeSmells.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
-								
-						
+
 								if (checkRule.isSelected()) {
 									Rules.rules(checkRule.getActionCommand());
-									System.out.println(checkRule.getActionCommand());
-				
 								}
 							}
 						});
 						detectCodeSmells.setBackground(Color.LIGHT_GRAY);
 						panel3.add(detectCodeSmells);
-						
+
 						panel3.revalidate();
 						panel3.repaint();
-
 					}
 				});
 
 				longM.setBackground(Color.LIGHT_GRAY);
 				panel.add(longM);
-
 
 				JButton GodC = new JButton("Regra God Class");
 				GodC.addActionListener(new ActionListener() {
@@ -354,16 +339,10 @@ public class GUI extends JFrame{
 
 						panel2.removeAll();
 
-						//						metrica1 = new JComboBox();
-						//						metrica1.addItem("LOC_method");
-						//						metrica1.addItem("CYLO_method");
-						//						panel2.add(metrica1);
-
 						JComboBox signal3 = new JComboBox();
 						signal3.addItem(">");
 						signal3.addItem("<");
 						panel2.add(signal3);
-
 
 						valor4 = new JTextField();
 						panel2.add(valor4);
@@ -392,21 +371,9 @@ public class GUI extends JFrame{
 						panel2.revalidate();
 						panel2.repaint();
 
-
 						JButton submitG = new JButton("Submit");
-						//						submit1.addActionListener(new ActionListener() {
-						//							public void actionPerformed(ActionEvent e) {
-
-						//								String m1 = metrica1.
-
-
-
 					}
 				});
-
-				//						submit1.setBackground(Color.LIGHT_GRAY);
-				//						panel.add(submit1);
-
 
 				GodC.setBackground(Color.LIGHT_GRAY);
 				panel.add(GodC);
@@ -414,90 +381,61 @@ public class GUI extends JFrame{
 				JButton updateHistorico = new JButton("Guardar Regras");
 				updateHistorico.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						
-						history.updateHistoric("MyFile.txt" , historico);
-						
+
+						history.updateHistoric("MyFile.txt" , historico);	
 					}
-				
+
 				});
 				updateHistorico.setBackground(Color.LIGHT_GRAY);
 				panel.add(updateHistorico);
-				
 
 				JButton verHistorico = new JButton("Carregar histórico");
 				verHistorico.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						
+
 						ArrayList<String> carregar = history.viewHistoric("Myfile.txt");
-						
+
 						for (String s : carregar) {
-		
-							
-							
-											
-						
-								checkRule = new JCheckBox(s); 
-								
-								panel3.add(checkRule);
-						
-							
-							
-							
-				
-							
+
+							checkRule = new JCheckBox(s); 
+
+							panel3.add(checkRule);
 						}
 
 						JButton detectCodeSmells = new JButton ("Detectar Code Smells");
 						detectCodeSmells.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
-								
-						
+
+
 								if (checkRule.isSelected()) {
 									Rules.rules(checkRule.getActionCommand());
-									System.out.println(checkRule.getActionCommand());
-				
 								}
 							}
 						});
 						detectCodeSmells.setBackground(Color.LIGHT_GRAY);
 						panel3.add(detectCodeSmells);
-					
+
 						panel3.revalidate();
 						panel3.repaint();
 					}
-				
 				});
 				verHistorico.setBackground(Color.LIGHT_GRAY);
 				panel.add(verHistorico);
-				
-				
-				
-				
+
 				JButton apagarHistorico = new JButton("Apagar Histórico");
 				apagarHistorico.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						
+
 						history.clear("Myfile.txt");
-						
-						
+
 						panel3.removeAll();
-						
-					
-					
 						panel3.revalidate();
 						panel3.repaint();
 					}
-				
 				});
 				apagarHistorico.setBackground(Color.LIGHT_GRAY);
 				panel.add(apagarHistorico);
-				
-				
-				
-				
-				
-			}
-					
+			}		
 		});
 
 		btnNewButton.setBackground(Color.LIGHT_GRAY);
@@ -532,7 +470,7 @@ public class GUI extends JFrame{
 		setSize(800, 700);
 		setResizable(true);
 		setVisible(true);
-		
+
 
 		panel3 = new JPanel();
 		GridBagConstraints gbc_panel3 = new GridBagConstraints();

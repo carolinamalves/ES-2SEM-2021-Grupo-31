@@ -15,7 +15,7 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-public class ImportExcel extends GUI{  
+public class ImportExcel {  
 
 	static void fillData(File file){
 
@@ -32,7 +32,7 @@ public class ImportExcel extends GUI{
 			{
 				Logger.getLogger(ImportExcel.class. getName()).log(Level.SEVERE, null, ex);
 			}
-			
+
 			String[] strs=new String[workbook.getNumberOfSheets()];
 
 			for (int i = 0; i < strs.length; i++) {

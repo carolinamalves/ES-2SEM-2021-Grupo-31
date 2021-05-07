@@ -13,16 +13,18 @@ import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 
 public class LOC_method{
+
 	private static String ficheiro;
 	public static int total;	
 	public static ArrayList<Integer> list = new ArrayList <Integer>();
 	public static int num;
-	public LOC_method (String fileS) throws ParseException, IOException{
+
+	public LOC_method (String fileS) throws ParseException, IOException {
 		this.ficheiro = fileS;
 		total=0;
 		num = 0;
 		CompilationUnit unidadeC = StaticJavaParser.parse((new File (ficheiro)));
-		
+
 		new MethodVisitor().visit(unidadeC, null);
 	}
 
@@ -33,8 +35,9 @@ public class LOC_method{
 			list.set(num, total);
 			num++;
 		}
-	}	
-	public ArrayList <Integer> getList(){
+	}
+
+	public ArrayList <Integer> getList() {
 		System.out.println("LISTA LOC" + list);
 		return list;
 	}
