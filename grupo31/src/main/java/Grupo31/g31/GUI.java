@@ -72,7 +72,9 @@ public class GUI extends JFrame{
 	JTextField valor4;
 	JTextField valor5;
 
-	//Long Method
+
+
+	//God Class
 	static String metricaL1;
 	static String metricaL2;
 	static String sinalL1;
@@ -84,6 +86,16 @@ public class GUI extends JFrame{
 	static String sinalL3;
 	static String valorL3;
 	static String operadorL2;
+
+
+	//Loc Method
+	static String metrica1;
+	static String metrica2;
+	static String sinal1;
+	static String sinal2;
+	static String operador1;
+	static String valor1;
+	static String valor2;
 
 	ArrayList<String> historico = new ArrayList<String>();
 
@@ -195,8 +207,8 @@ public class GUI extends JFrame{
 				panel.revalidate();
 				panel.repaint();
 
-				JButton longM = new JButton("Regras Long Method");
-				longM.addActionListener(new ActionListener() {
+				JButton godC = new JButton("Regras GodClass");
+				godC.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 
 						panel2.removeAll();
@@ -206,6 +218,7 @@ public class GUI extends JFrame{
 						metL1.addItem("NOM_class");
 						metL1.addItem("WMC_class");
 						panel2.add(metL1);
+
 
 						JComboBox sinL1 = new JComboBox();
 						sinL1.addItem(">");
@@ -253,6 +266,7 @@ public class GUI extends JFrame{
 						panel2.add(metL3);
 
 						JComboBox sinL3 = new JComboBox();
+						sinL3.addItem("NULL");
 						sinL3.addItem(">");
 						sinL3.addItem("<");
 						panel2.add(sinL3);
@@ -264,8 +278,9 @@ public class GUI extends JFrame{
 						panel2.revalidate();
 						panel2.repaint();
 
-						JButton submitLongMethod = new JButton("Submeter");
-						submitLongMethod.addActionListener(new ActionListener() {
+
+						JButton submitGodClass = new JButton("Submeter God Class");
+						submitGodClass.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
 
 								metricaL1 = metL1.getSelectedItem().toString();
@@ -296,6 +311,7 @@ public class GUI extends JFrame{
 									checkRule = new JCheckBox(rule);
 
 									panel3.add(checkRule);
+
 								}
 
 								if (operadorL1 != "NULL" && operadorL2 != "NULL") {
@@ -305,61 +321,78 @@ public class GUI extends JFrame{
 
 									checkRule = new JCheckBox(rule);
 
-									panel3.add(checkRule);			
+									panel3.add(checkRule);
+
 								}
+
+								JButton detectGodc = new JButton ("Detectar GodClass");
+								detectGodc.addActionListener(new ActionListener() {
+									public void actionPerformed(ActionEvent e) {
+
+										String regra = checkRule.getActionCommand();
+
+										if (checkRule.isSelected() && regra.indexOf("class") != -1) {
+											RulesGodClass.rules(checkRule.getActionCommand());
+											System.out.println(checkRule.getActionCommand());
+
+										}
+
+									}
+								});
+								detectGodc.setBackground(Color.LIGHT_GRAY);
+								panel3.add(detectGodc);
+
+
+
+								System.out.println("historico: " + historico);
 							}
 						});
 
-						submitLongMethod.setBackground(Color.LIGHT_GRAY);
-						panel.add(submitLongMethod);
+						submitGodClass.setBackground(Color.LIGHT_GRAY);
+						panel.add(submitGodClass);
 
-						JButton detectCodeSmells = new JButton ("Detectar Code Smells");
-						detectCodeSmells.addActionListener(new ActionListener() {
-							public void actionPerformed(ActionEvent e) {
-
-								if (checkRule.isSelected()) {
-									Rules.rules(checkRule.getActionCommand());
-								}
-							}
-						});
-						detectCodeSmells.setBackground(Color.LIGHT_GRAY);
-						panel3.add(detectCodeSmells);
-
-						panel3.revalidate();
-						panel3.repaint();
 					}
 				});
 
-				longM.setBackground(Color.LIGHT_GRAY);
-				panel.add(longM);
+				godC.setBackground(Color.LIGHT_GRAY);
+				panel.add(godC);
 
-				JButton GodC = new JButton("Regra God Class");
-				GodC.addActionListener(new ActionListener() {
+
+				JButton longM = new JButton("Regra LongMethod");
+				longM.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 
 						panel2.removeAll();
+
+						JComboBox metG = new JComboBox();
+						metG.addItem("LOC_method");
+						metG.addItem("CYCLO_method");
+						panel2.add(metG);
 
 						JComboBox signal3 = new JComboBox();
 						signal3.addItem(">");
 						signal3.addItem("<");
 						panel2.add(signal3);
 
+
 						valor4 = new JTextField();
 						panel2.add(valor4);
 						valor4.setColumns(10);
 
 						JComboBox op2 = new JComboBox();
+						op2.addItem("NULL");
 						op2.addItem("AND");
 						op2.addItem("OR");
 						panel2.add(op2);
 
-						JComboBox metrica2 = new JComboBox();
-						metrica2.addItem("NULL");
-						metrica2.addItem("LOC_method");
-						metrica2.addItem("CYLO_method");
-						panel2.add(metrica2);
+						JComboBox metricaG2 = new JComboBox();
+						metricaG2.addItem("NULL");
+						metricaG2.addItem("LOC_method");
+						metricaG2.addItem("CYCLO_method");
+						panel2.add(metricaG2);
 
 						JComboBox signal4 = new JComboBox();
+						signal4.addItem("NULL");
 						signal4.addItem(">");
 						signal4.addItem("<");
 						panel2.add(signal4);
@@ -371,12 +404,70 @@ public class GUI extends JFrame{
 						panel2.revalidate();
 						panel2.repaint();
 
-						JButton submitG = new JButton("Submit");
+						JButton submitLongMethod = new JButton("Submeter Long Method");
+						submitLongMethod.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+
+								metrica1 = metG.getSelectedItem().toString();
+								sinal1 = signal3.getSelectedItem().toString();
+								valor1 = valor4.getText();
+								operador1 = op2.getSelectedItem().toString();
+								metrica2 = metricaG2.getSelectedItem().toString();
+								sinal2 = signal4.getSelectedItem().toString();
+								valor2 = valor5.getText();
+
+								if (operador1 == "NULL") {
+									String rule = (metrica1 + " " + sinal1 + " " + valor1);
+									historico.add(rule);							
+
+									checkRule = new JCheckBox(rule); 
+
+									panel3.add(checkRule);
+								}
+
+								if (operador1 != "NULL") {
+									String rule = (metrica1 + " " + sinal1 + " " + valor1 + " " + operador1 + " " + metrica2 + " " + sinal2 + " " + valor2);
+									historico.add(rule);
+
+									checkRule = new JCheckBox(rule);
+
+									panel3.add(checkRule);
+
+								}
+
+
+								System.out.println("historico: " + historico);
+
+
+								JButton detectLongM = new JButton ("Detectar LongMethod");
+								detectLongM.addActionListener(new ActionListener() {
+									public void actionPerformed(ActionEvent e) {
+
+										String regra = checkRule.getActionCommand();
+
+										if (checkRule.isSelected() && regra.indexOf("method") != -1) {
+											RulesLongMethod.rules(checkRule.getActionCommand());
+											System.out.println(checkRule.getActionCommand());
+
+										}
+
+									}
+								});
+								detectLongM.setBackground(Color.LIGHT_GRAY);
+								panel3.add(detectLongM);
+
+							}
+						});
+
+						submitLongMethod.setBackground(Color.LIGHT_GRAY);
+						panel.add(submitLongMethod);
+
 					}
 				});
 
-				GodC.setBackground(Color.LIGHT_GRAY);
-				panel.add(GodC);
+
+				longM.setBackground(Color.LIGHT_GRAY);
+				panel.add(longM);
 
 				JButton updateHistorico = new JButton("Guardar Regras");
 				updateHistorico.addActionListener(new ActionListener() {
@@ -393,7 +484,7 @@ public class GUI extends JFrame{
 				verHistorico.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 
-						ArrayList<String> carregar = history.viewHistoric("Myfile.txt");
+						ArrayList<String> carregar = history.viewHistoric("C:\\Users\\inesv\\OneDrive\\Ambiente de Trabalho\\historico.txt");
 
 						for (String s : carregar) {
 
@@ -401,24 +492,10 @@ public class GUI extends JFrame{
 
 							panel3.add(checkRule);
 						}
-
-						JButton detectCodeSmells = new JButton ("Detectar Code Smells");
-						detectCodeSmells.addActionListener(new ActionListener() {
-							public void actionPerformed(ActionEvent e) {
-
-
-								if (checkRule.isSelected()) {
-									Rules.rules(checkRule.getActionCommand());
-								}
-							}
-						});
-						detectCodeSmells.setBackground(Color.LIGHT_GRAY);
-						panel3.add(detectCodeSmells);
-
-						panel3.revalidate();
-						panel3.repaint();
 					}
+
 				});
+
 				verHistorico.setBackground(Color.LIGHT_GRAY);
 				panel.add(verHistorico);
 

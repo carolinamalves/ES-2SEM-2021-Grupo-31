@@ -58,8 +58,4 @@ public class history {
 		return historic;
 	}
 
-	public static void main(String[] args) {
-
-		viewHistoric("MyFile.txt");
-	}
 }
