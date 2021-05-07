@@ -15,7 +15,7 @@ public class RulesGodClass {
 	static String and = "AND";
 	static String or = "OR";
 
-
+ 
 	public static void rules (String rule) {
 
 		String [] splitRule = rule.split(" ");

@@ -157,7 +157,7 @@ public class RulesLongMethod {
 
 					}
 
-				}
+				} 
 
 				//locMethod > ... || cycM > ...
 				if(splitRule[0].equals(locM) && splitRule[1].equals(maior) && splitRule[3].equals(or) 

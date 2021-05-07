@@ -76,7 +76,7 @@ public class ImportExcel extends GUI{
 					data.add(d);
 				}
 			}
-			else {
+			else { 
 				return; 
 			}
 		}

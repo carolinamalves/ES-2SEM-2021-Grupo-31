@@ -495,7 +495,7 @@ public class GUI extends JFrame{
 					}
 
 				});
-
+ 
 				verHistorico.setBackground(Color.LIGHT_GRAY);
 				panel.add(verHistorico);
 

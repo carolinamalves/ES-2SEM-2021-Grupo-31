@@ -25,7 +25,7 @@ public class history {
 		catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
+	} 
 
 	public static void clear(String fileName) {
 
