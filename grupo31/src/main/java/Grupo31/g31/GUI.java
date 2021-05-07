@@ -337,6 +337,9 @@ public class GUI extends JFrame{
 						});
 						detectCodeSmells.setBackground(Color.LIGHT_GRAY);
 						panel3.add(detectCodeSmells);
+						
+						panel3.revalidate();
+						panel3.repaint();
 
 					}
 				});
@@ -412,13 +415,87 @@ public class GUI extends JFrame{
 				updateHistorico.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
-						history.updateHistoric("C:\\Users\\inesv\\OneDrive\\Ambiente de Trabalho\\historico.txt" , historico);
+						history.updateHistoric("MyFile.txt" , historico);
 						
 					}
 				
 				});
 				updateHistorico.setBackground(Color.LIGHT_GRAY);
 				panel.add(updateHistorico);
+				
+
+				JButton verHistorico = new JButton("Carregar histórico");
+				verHistorico.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						
+						ArrayList<String> carregar = history.viewHistoric("Myfile.txt");
+						
+						for (String s : carregar) {
+		
+							
+							
+											
+						
+								checkRule = new JCheckBox(s); 
+								
+								panel3.add(checkRule);
+						
+							
+							
+							
+				
+							
+						}
+
+						JButton detectCodeSmells = new JButton ("Detectar Code Smells");
+						detectCodeSmells.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+								
+						
+								if (checkRule.isSelected()) {
+									Rules.rules(checkRule.getActionCommand());
+									System.out.println(checkRule.getActionCommand());
+				
+								}
+							}
+						});
+						detectCodeSmells.setBackground(Color.LIGHT_GRAY);
+						panel3.add(detectCodeSmells);
+					
+						panel3.revalidate();
+						panel3.repaint();
+					}
+				
+				});
+				verHistorico.setBackground(Color.LIGHT_GRAY);
+				panel.add(verHistorico);
+				
+				
+				
+				
+				JButton apagarHistorico = new JButton("Apagar Histórico");
+				apagarHistorico.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						
+						history.clear("Myfile.txt");
+						
+						
+						panel3.removeAll();
+						
+					
+					
+						panel3.revalidate();
+						panel3.repaint();
+					}
+				
+				});
+				apagarHistorico.setBackground(Color.LIGHT_GRAY);
+				panel.add(apagarHistorico);
+				
+				
+				
+				
+				
 			}
 					
 		});
