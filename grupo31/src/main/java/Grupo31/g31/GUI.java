@@ -17,12 +17,12 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -63,27 +63,30 @@ public class GUI extends JFrame{
 	static int v3;
 	static int v4;
 	static int v5;
-	static int v6;
-	
-	JTextField valor1;
-	JTextField valor2;
+
+	JPanel panel3;
+
 	JTextField valor3;
 	JTextField valor4;
 	JTextField valor5;
-	JTextField valor6;
-	
-	static String regra;
-	static String sinal1;
-	static String operador;
-	static String sinal2;
-	static String regra2;
-	
-	JComboBox<String> rule;
-	JComboBox<String> signal1;
-	JComboBox<String> op;
-	JComboBox<String> signal2;
-	JComboBox<String> rule2;
-	
+
+	//Long Method
+	static String metricaL1;
+	static String metricaL2;
+	static String sinalL1;
+	static String sinalL2;
+	static String operadorL1;
+	static String valorL1;
+	static String valorL2;
+	static String metricaL3;
+	static String sinalL3;
+	static String valorL3;
+	static String operadorL2;
+
+	ArrayList<String> historico = new ArrayList<String>();
+
+	private JPanel panel2;
+
 	public GUI() {
 
 		super("Code Smells");
@@ -110,37 +113,33 @@ public class GUI extends JFrame{
 		gbc_lblNewLabel.gridx = 0;
 		gbc_lblNewLabel.gridy = 0;
 		getContentPane().add(lblNewLabel, gbc_lblNewLabel);
-		JScrollBar scrollBar = new JScrollBar();
-		
-		
-		btnNewButton_1 = new JButton("Importar Projetos");
+
+		btnNewButton_1 = new JButton("Extrair Métricas");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				    int result;
-			        
-				    jChooser = new JFileChooser(); 
-				    jChooser.setCurrentDirectory(new java.io.File("."));
-				    jChooser.setDialogTitle(choosertitle);
-				    jChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-				    //
-				    // disable the "All files" option.
-				    //
-				    jChooser.setAcceptAllFileFilterUsed(false);
-				    //    
-				     result = jChooser.showOpenDialog(null);
-				    
-				    if (result == JFileChooser.APPROVE_OPTION) { 
-				      System.out.println("getCurrentDirectory(): " 
-				         +  jChooser.getCurrentDirectory());
-				      System.out.println("getSelectedFile() : " 
-				         +  jChooser.getSelectedFile());
-				      j.lista(jChooser.getSelectedFile().toString());
-				    } else {
-				      System.out.println("No Selection ");
-				      }	
-				}
+				int result;
 
+				jChooser = new JFileChooser(); 
+				jChooser.setCurrentDirectory(new java.io.File("."));
+				jChooser.setDialogTitle(choosertitle);
+				jChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+				jChooser.setAcceptAllFileFilterUsed(false);
+
+				result = jChooser.showOpenDialog(null);
+
+				if (result == JFileChooser.APPROVE_OPTION) { 
+
+					fname = jChooser.getSelectedFile().toString().substring(jChooser.getSelectedFile().toString()
+							.lastIndexOf("\\") + 1);
+
+
+					j.lista(jChooser.getSelectedFile().toString());
+
+				} else {
+					System.out.println("No Selection");
+				}			
+			}
 		});
 
 		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
@@ -151,7 +150,7 @@ public class GUI extends JFrame{
 
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setBackground(Color.WHITE);
-		Import = new JButton("Select Excel File");
+		Import = new JButton("Selecionar Ficheiro Excel");
 		Import.setBackground(Color.LIGHT_GRAY);
 		buttonPanel.add(Import, BorderLayout.EAST);
 		Import.addActionListener(new ActionListener() {
@@ -185,7 +184,7 @@ public class GUI extends JFrame{
 		gbc_buttonPanel.gridy = 3;
 		getContentPane().add(buttonPanel, gbc_buttonPanel);
 
-		btnNewButton = new JButton("Define Rules");
+		btnNewButton = new JButton("Definir Regras");
 		btnNewButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -196,153 +195,212 @@ public class GUI extends JFrame{
 				panel.revalidate();
 				panel.repaint();
 
-				JButton longM = new JButton("Apply Long Method Rule");
+				JButton longM = new JButton("Regras Long Method");
 				longM.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 
-						JLabel first = new JLabel();
-						first.setText("Loc Metric > ");
-						panel.add(first);
+						panel2.removeAll();
 
-						valor1 = new JTextField();
-						panel.add(valor1);
-						valor1.setColumns(10);
+						JComboBox metL1 = new JComboBox();
+						metL1.addItem("LOC_class");
+						metL1.addItem("NOM_class");
+						metL1.addItem("WMX_class");
+						panel2.add(metL1);
 
-						JLabel second = new JLabel();
-						second.setText(" && Cyclo Metric > ");
-						panel.add(second);
 
-						valor2 = new JTextField();
-						panel.add(valor2);
-						valor2.setColumns(10);
+						JComboBox sinL1 = new JComboBox();
+						sinL1.addItem(">");
+						sinL1.addItem("<");
+						panel2.add(sinL1);
 
-						panel.revalidate();
-						panel.repaint();
+						JTextField valL1 = new JTextField();
+						panel2.add(valL1);
+						valL1.setColumns(10);
+
+						JComboBox operL1 = new JComboBox();
+						operL1.addItem("NULL");
+						operL1.addItem("AND");
+						operL1.addItem("OR");
+						panel2.add(operL1);
+
+						JComboBox metL2 = new JComboBox();
+						metL2.addItem("NULL");
+						metL2.addItem("LOC_class");
+						metL2.addItem("NOM_class");
+						metL2.addItem("WMX_class");
+						panel2.add(metL2);
+
+						JComboBox sinL2 = new JComboBox();
+						sinL2.addItem("NULL");
+						sinL2.addItem(">");
+						sinL2.addItem("<");
+						panel2.add(sinL2);
+
+						JTextField valL2 = new JTextField();
+						panel2.add(valL2);
+						valL2.setColumns(10);
+
+						JComboBox operL2 = new JComboBox();
+						operL2.addItem("NULL");
+						operL2.addItem("AND");
+						operL2.addItem("OR");
+						panel2.add(operL2);
+
+						JComboBox metL3 = new JComboBox();
+						metL3.addItem("NULL");
+						metL3.addItem("LOC_class");
+						metL3.addItem("NOM_class");
+						metL3.addItem("WMX_class");
+						panel2.add(metL3);
+
+						JComboBox sinL3 = new JComboBox();
+						sinL3.addItem(">");
+						sinL3.addItem("<");
+						panel2.add(sinL3);
+
+						JTextField valL3 = new JTextField();
+						panel2.add(valL3);
+						valL3.setColumns(10);
+
+						panel2.revalidate();
+						panel2.repaint();
+
+			
+						JButton submitLongMethod = new JButton("Submeter");
+						submitLongMethod.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+
+								
+								
+								metricaL1 = metL1.getSelectedItem().toString();
+								sinalL1 = sinL1.getSelectedItem().toString();
+								valorL1 = valL1.getText();
+								operadorL1 = operL1.getSelectedItem().toString();
+								metricaL2 = metL2.getSelectedItem().toString();
+								sinalL2 = sinL2.getSelectedItem().toString();
+								valorL2 = valL2.getText();
+								operadorL2 = operL2.getSelectedItem().toString();
+								metricaL3 = metL3.getSelectedItem().toString();
+								sinalL3 = sinL3.getSelectedItem().toString();
+								valorL3 = valL3.getText();
+								
+								if (operadorL1 == "NULL") {
+									String rule = (metricaL1 + " " + sinalL1 + " " + valorL1);
+									historico.add(rule);							
+									JCheckBox checkRule = new JCheckBox(rule);
+									
+									panel3.add(checkRule);
+								}
+								
+								if (operadorL1 != "NULL" && operadorL2 == "NULL") {
+									String rule = (metricaL1 + " " + sinalL1 + " " + valorL1 + " " + operadorL1 + " " + metricaL2 + " " + sinalL2 + " " + valorL2);
+									historico.add(rule);
+									
+									JCheckBox checkRule = new JCheckBox(rule);
+									panel3.add(checkRule);
+								
+								}
+								
+								if (operadorL1 != "NULL" && operadorL2 != "NULL") {
+									String rule = (metricaL1 + " " + sinalL1 + " " + valorL1 + " " + operadorL1 + " " + metricaL2 + " " + sinalL2 + " " + valorL2 + 
+											" " + operadorL2 + " " + metricaL3 + " " + sinalL3 + " " + valorL3 );
+									historico.add(rule);
+									
+									JCheckBox checkRule = new JCheckBox(rule);
+									panel3.add(checkRule);
+									
+								}
+								
+								System.out.println("historico: " + historico);
+							}
+						});
+
+						submitLongMethod.setBackground(Color.LIGHT_GRAY);
+						panel.add(submitLongMethod);
+
 					}
 				});
 
 				longM.setBackground(Color.LIGHT_GRAY);
 				panel.add(longM);
 
-				JButton GodC = new JButton("Apply God Class Rule");
+
+				JButton GodC = new JButton("Regra God Class");
 				GodC.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 
-						JLabel first = new JLabel();
-						first.setText("WMC Metric > ");
-						panel.add(first);
+						panel2.removeAll();
 
-						valor3 = new JTextField();
-						panel.add(valor3);
-						valor3.setColumns(10);
+						//						metrica1 = new JComboBox();
+						//						metrica1.addItem("LOC_method");
+						//						metrica1.addItem("CYLO_method");
+						//						panel2.add(metrica1);
 
-						JLabel second = new JLabel();
-						second.setText(" || NomCLass Metric > ");
-						panel.add(second);
+						JComboBox signal3 = new JComboBox();
+						signal3.addItem(">");
+						signal3.addItem("<");
+						panel2.add(signal3);
+
 
 						valor4 = new JTextField();
-						panel.add(valor4);
+						panel2.add(valor4);
 						valor4.setColumns(10);
 
-						panel.revalidate();
-						panel.repaint();
+						JComboBox op2 = new JComboBox();
+						op2.addItem("AND");
+						op2.addItem("OR");
+						panel2.add(op2);
+
+						JComboBox metrica2 = new JComboBox();
+						metrica2.addItem("NULL");
+						metrica2.addItem("LOC_method");
+						metrica2.addItem("CYLO_method");
+						panel2.add(metrica2);
+
+						JComboBox signal4 = new JComboBox();
+						signal4.addItem(">");
+						signal4.addItem("<");
+						panel2.add(signal4);
+
+						valor5 = new JTextField();
+						panel2.add(valor5);
+						valor5.setColumns(10);
+
+						panel2.revalidate();
+						panel2.repaint();
+
+
+						JButton submitG = new JButton("Submit");
+						//						submit1.addActionListener(new ActionListener() {
+						//							public void actionPerformed(ActionEvent e) {
+
+						//								String m1 = metrica1.
+
+
+
 					}
 				});
+
+				//						submit1.setBackground(Color.LIGHT_GRAY);
+				//						panel.add(submit1);
+
 
 				GodC.setBackground(Color.LIGHT_GRAY);
 				panel.add(GodC);
 
-				JButton apply = new JButton ("Apply new Rule");
-				apply.addActionListener(new ActionListener() {
+				JButton updateHistorico = new JButton("Guardar Regras");
+				updateHistorico.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-
-
-						DefaultTableModel model = (DefaultTableModel) table.getModel();
-						model.setColumnCount(0);
-
-						rule = new JComboBox<String>();
-
-						rule.addItem("LOC_method");
-						rule.addItem("CYLO_method");
-						rule.addItem("LOC_class");
-						rule.addItem("Nom_class");
-						rule.addItem("WMX_class");
-						panel.add(rule);
-
-						signal1 = new JComboBox<String>();
-						signal1.addItem(">");
-						signal1.addItem("<");
-						panel.add(signal1);
-
-						valor5 = new JTextField();
-						panel.add(valor5);
-						valor5.setColumns(10);
-
-						op = new JComboBox<String>();
-						op.addItem("and");
-						op.addItem("or");
-						panel.add(op);
-
-
-						rule2 = new JComboBox<String>();
-
-						rule2.addItem("LOC_method");
-						rule2.addItem("CYLO_method");
-						rule2.addItem("LOC_class");
-						rule2.addItem("Nom_class");
-						rule2.addItem("WMX_class");
-						panel.add(rule2);
-
-						signal2 = new JComboBox<String>();
-						signal2.addItem(">");
-						signal2.addItem("<");
-						panel.add(signal2);
-
-						valor6 = new JTextField();
-						panel.add(valor6);
-						valor6.setColumns(10);
-
-						panel.revalidate();
-						panel.repaint();
-
+						
+						history.updateHistoric("C:\\Users\\inesv\\OneDrive\\Ambiente de Trabalho\\historico.txt" , historico);
+						
 					}
-				});
-				apply.setBackground(Color.LIGHT_GRAY);
 				
-				panel.add(apply);
-
-
-				JButton submit1 = new JButton("Submit");
-				submit1.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-
-						//long method and godclass
-						v1 = Integer.parseInt(valor1.getText());
-						v2 = Integer.parseInt(valor2.getText());
-						v3 = Integer.parseInt(valor3.getText());
-						v4 = Integer.parseInt(valor4.getText());
-						
-						
-						//user rules
-						regra = rule.getSelectedItem().toString();
-						sinal1 = signal1.getSelectedItem().toString();
-						operador = op.getSelectedItem().toString();
-						sinal2 = signal2.getSelectedItem().toString();
-						regra2 = rule2.getSelectedItem().toString();
-						
-						v5 = Integer.parseInt(valor5.getText());
-						v6 = Integer.parseInt(valor6.getText());
-						
-//						Create_Method.createExcel();
-//						
-//						history.saveHistory(regra, sinal1, v5, operador, regra2, sinal2, v6);
-//					
-					}
 				});
-
-				submit1.setBackground(Color.LIGHT_GRAY);
-				panel.add(submit1);
+				updateHistorico.setBackground(Color.LIGHT_GRAY);
+				panel.add(updateHistorico);
 			}
+					
 		});
 
 		btnNewButton.setBackground(Color.LIGHT_GRAY);
@@ -366,6 +424,26 @@ public class GUI extends JFrame{
 		gbc_panel.gridx = 0;
 		gbc_panel.gridy = 5;
 		getContentPane().add(panel, gbc_panel);
+
+		panel2 = new JPanel();
+		GridBagConstraints gbc_panel2 = new GridBagConstraints();
+		gbc_panel2.insets = new Insets(0, 0, 5, 0);
+		gbc_panel2.fill = GridBagConstraints.BOTH;
+		gbc_panel2.gridx = 0;
+		gbc_panel2.gridy = 6;
+		getContentPane().add(panel2, gbc_panel2);
+		setSize(800, 700);
+		setResizable(true);
+		setVisible(true);
+		
+
+		panel3 = new JPanel();
+		GridBagConstraints gbc_panel3 = new GridBagConstraints();
+		gbc_panel2.insets = new Insets(0, 0, 5, 0);
+		gbc_panel2.fill = GridBagConstraints.BOTH;
+		gbc_panel2.gridx = 0;
+		gbc_panel2.gridy = 7;
+		getContentPane().add(panel3, gbc_panel3);
 		setSize(800, 700);
 		setResizable(true);
 		setVisible(true);

@@ -13,6 +13,7 @@ import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.util.SystemOutLogger;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -65,7 +66,44 @@ public class Create_Method extends GUI {
 //		}
 //	}
 	void fillmethod(File file) {
-		try {
+		
+	try {
+			String fileS = file.getAbsolutePath();
+			
+			String className = file.getAbsolutePath().toString().substring(file.getAbsolutePath().toString().lastIndexOf("\\") + 1); 
+			className.getClass();
+	
+			
+//			String cNameWJ = className.substring(0, className.indexOf(".java"));
+//			Nom_class nomClass = new Nom_class();
+//			nomC = nomClass.nomClass(fileS);
+			//			int locC = nomClass.getLoc();
+
+//			ArrayList <String> methodNames = nomClass.getMethodNames();
+			LOC_class locClass = new LOC_class(fileS);
+			int locC = locClass.Contar();
+
+			WMC_class wmcClass = new WMC_class(fileS);
+			int wmcC = wmcClass.contagem();
+
+			CYCLO_method cycloMethod = new CYCLO_method(fileS);
+			ArrayList <Integer> cycloList = cycloMethod.getContador();
+			int nomC = cycloMethod.getNomClass();
+			ArrayList<String> nameMethods = cycloMethod.getNameOfMethods();
+			
+			
+			LOC_method locMethod = new LOC_method(fileS);
+			ArrayList<Integer> locList = locMethod.getList();
+	
+			String packName = locClass.s1;
+//			ArrayList<String> packName = locClass.packageNames;
+//			String packageName = packName.get(0); 
+			createData(packName, className, nameMethods, nomC, locC, wmcC, locList ,cycloList);
+		
+			
+			
+			CreationHelper creationHelper = workbook.getCreationHelper();
+			CellStyle dataStyle = workbook.createCellStyle();
 			
 			
 			XSSFWorkbook workbook = new XSSFWorkbook();
@@ -93,36 +131,6 @@ public class Create_Method extends GUI {
 				cell.setCellValue(columnHeadings[i]);
 				cell.setCellStyle(headerStyle);
 			}
-
-			String fileS = file.getAbsolutePath();
-		
-			String className = file.getAbsolutePath().toString().substring(file.getAbsolutePath().toString().lastIndexOf("\\") + 1); 
-			className.getClass();
-			
-			String cNameWJ = className.substring(0, className.indexOf(".java"));
-			Nom_class nomClass = new Nom_class();
-			nomC = nomClass.nomClass(className);
-			//			int locC = nomClass.getLoc();
-
-			ArrayList <String> methodNames = nomClass.getMethodNames();
-			LOC_class locClass = new LOC_class(fileS);
-			int locC = locClass.Contar();
-
-			WMC_class wmcClass = new WMC_class(fileS);
-			int wmcC = wmcClass.contagem();
-
-			CYCLO_method cycloMethod = new CYCLO_method(fileS);
-			ArrayList <Integer> cycloList = cycloMethod.getContador();
-
-			LOC_method locMethod = new LOC_method(fileS);
-			ArrayList<Integer> locList = locMethod.getList();
-			
-			ArrayList<String> packName = Leitura_Projetos.packName;
-			
-			createData(packName, className, methodNames, nomC, locC, wmcC, locList ,cycloList);
-			
-			CreationHelper creationHelper = workbook.getCreationHelper();
-			CellStyle dataStyle = workbook.createCellStyle();
 			
 			int rownum = 1;
 			for (Method f : a) {
@@ -219,13 +227,16 @@ public class Create_Method extends GUI {
 //		System.out.println("done");
 //	}
 
-	public static void createData (ArrayList <String> packName, String className, ArrayList <String> methodName, int nomC, int locC, int wmcC, ArrayList<Integer>
+	public static void createData (String packName, String className,  ArrayList <String> methodName, int nomC, int locC, int wmcC, ArrayList<Integer>
 	locList, ArrayList<Integer> cycloList ) {
 		
 		for (int t = 0; t < nomC ; t++) {
+			
+			System.out.println("T:" + t + "  nom " + nomC);
+			
 			Method m;
 
-			m = new Method(id, packName.get(t), className,methodName.get(t),nomC, locC, wmcC, locList.get(t), cycloList.get(t));
+			m = new Method(id, packName, className,methodName.get(t),nomC, locC, wmcC, locList.get(t), cycloList.get(t));
 			a.add(m);
 			id++;
 		}
