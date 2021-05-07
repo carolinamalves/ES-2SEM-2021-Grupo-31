@@ -31,7 +31,6 @@ public class RulesLongMethod {
 
 						if( m.getLoc_Method() > Integer.parseInt(splitRule[2])) {
 							System.out.println(m.getName_class() + ":" + "TRUEEEE");
-
 						}else {
 							System.out.println(m.getName_class() + ":" + "FALSEEEE");
 						}
