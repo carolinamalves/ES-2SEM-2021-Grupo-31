@@ -39,6 +39,8 @@ public class GUI extends JFrame{
 	static JButton Import;
 	static JButton CodeSmellsDetector;
 	static JFileChooser jChooser;
+	static JFileChooser jChooserExcel;
+
 
 	static JCheckBox checkRule;
 
@@ -61,6 +63,7 @@ public class GUI extends JFrame{
 	private JButton btnNewButton_1;
 
 	JPanel panel3;
+	JPanel panel4;
 
 	//God Class
 	static String metricaL1;
@@ -179,8 +182,15 @@ public class GUI extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 
-				jChooser.showOpenDialog(null);
-				File file = jChooser.getSelectedFile();
+				jChooserExcel = new JFileChooser(); 
+				//	jChooserExcel.setCurrentDirectory(new java.io.File("."));
+					jChooserExcel.setDialogTitle(choosertitle);
+					jChooserExcel.setFileSelectionMode(JFileChooser.FILES_ONLY);
+					jChooserExcel.setAcceptAllFileFilterUsed(false);
+					jChooserExcel.showOpenDialog(null);
+
+					File file = jChooserExcel.getSelectedFile();
+
 
 				if (!file.getName().endsWith("xlsx")) {
 
@@ -291,7 +301,7 @@ public class GUI extends JFrame{
 
 					}
 				});
-				
+
 				godC.setBackground(Color.LIGHT_GRAY);
 				panel.add(godC);
 
@@ -313,8 +323,8 @@ public class GUI extends JFrame{
 						metricaL3 = metL3.getSelectedItem().toString();
 						sinalL3 = sinL3.getSelectedItem().toString();
 						valorL3 = valL3.getText();
-						
-						
+
+
 						if (operadorL1 == "NULL") {
 							String rule = (metricaL1 + " " + sinalL1 + " " + valorL1);
 							historico.add(rule);							
@@ -322,6 +332,8 @@ public class GUI extends JFrame{
 							checkRule = new JCheckBox(rule); 
 
 							panel3.add(checkRule);
+							panel3.revalidate();
+							panel3.repaint();
 						}
 
 						if (operadorL1 != "NULL" && operadorL2 == "NULL") {
@@ -331,6 +343,8 @@ public class GUI extends JFrame{
 							checkRule = new JCheckBox(rule);
 
 							panel3.add(checkRule);
+							panel3.revalidate();
+							panel3.repaint();
 
 						}
 
@@ -342,6 +356,8 @@ public class GUI extends JFrame{
 							checkRule = new JCheckBox(rule);
 
 							panel3.add(checkRule);
+							panel3.revalidate();
+							panel3.repaint();
 
 						}								
 
@@ -350,22 +366,7 @@ public class GUI extends JFrame{
 				});
 				submitGodC.setBackground(Color.LIGHT_GRAY);
 				panel.add(submitGodC);
-//				JButton detectGodc = new JButton ("Detectar GodClass");
-//				detectGodc.addActionListener(new ActionListener() {
-//					public void actionPerformed(ActionEvent e) {
-//
-//						String regra = checkRule.getActionCommand();
-//
-//						if (checkRule.isSelected() && regra.indexOf("class") != -1) {
-//							RulesGodClass.rules(checkRule.getActionCommand());
-//							System.out.println(checkRule.getActionCommand());
-//
-//						}
-//
-//					}
-//				});
-//				detectGodc.setBackground(Color.LIGHT_GRAY);
-//				panel3.add(detectGodc);
+				
 
 				JButton longM = new JButton("Regra LongMethod");
 				longM.addActionListener(new ActionListener() {
@@ -422,7 +423,7 @@ public class GUI extends JFrame{
 				JButton submitLongMethod = new JButton("Submeter Long Method");
 				submitLongMethod.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						
+
 						metrica1 = metG.getSelectedItem().toString();
 						sinal1 = signal3.getSelectedItem().toString();
 						valor1 = valor4.getText();
@@ -439,6 +440,8 @@ public class GUI extends JFrame{
 							checkRule = new JCheckBox(rule); 
 
 							panel3.add(checkRule);
+							panel3.revalidate();
+							panel3.repaint();
 						}
 
 						if (operador1 != "NULL") {
@@ -448,6 +451,8 @@ public class GUI extends JFrame{
 							checkRule = new JCheckBox(rule);
 
 							panel3.add(checkRule);
+							panel3.revalidate();
+							panel3.repaint();
 
 						}
 
@@ -468,7 +473,7 @@ public class GUI extends JFrame{
 							System.out.println(checkRule.getActionCommand());
 
 						}
-						
+
 						if (regra.indexOf("class") != -1) {
 							RulesGodClass.rules(checkRule.getActionCommand());
 							System.out.println(checkRule.getActionCommand());
@@ -484,7 +489,7 @@ public class GUI extends JFrame{
 				updateHistorico.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 
-						history.updateHistoric("MyFile.txt" , historico);	
+						history.updateHistoric("C:\\Users\\inesv\\OneDrive\\Ambiente de Trabalho\\historico.txt" , historico);	
 					}
 
 				});
@@ -506,6 +511,83 @@ public class GUI extends JFrame{
 					}
 
 				});
+				JButton analyseValue = new JButton("Analisar Qualidade de CodeSmells"); 
+				analyseValue.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						
+						
+						
+						String regra = checkRule.getActionCommand();
+
+						if (regra.indexOf("method") != -1) {
+							RulesLongMethod.rules(checkRule.getActionCommand());
+							System.out.println(checkRule.getActionCommand());
+
+						}
+
+						if (regra.indexOf("class") != -1) {
+							RulesGodClass.rules(checkRule.getActionCommand());
+							System.out.println(checkRule.getActionCommand());
+
+						}
+						try {
+							
+							if (regra.indexOf("class") != -1){
+							CodeSmellQualityClass.compareValues();
+							
+							String vn = String.valueOf(CodeSmellQualityClass.VN);
+							String fn = String.valueOf(CodeSmellQualityClass.FN);
+							String vp = String.valueOf(CodeSmellQualityClass.VP);
+							String fp = String.valueOf(CodeSmellQualityClass.FP);
+							
+							JLabel VN = new JLabel("Verdadeiros Negativos: " + vn);
+							JLabel VP = new JLabel("Verdadeiros Positivos: " + vp);
+							JLabel FP = new JLabel("Falsos Positivos: " + fp);
+							JLabel FN = new JLabel("Falsos Negativos: " + fn);
+							
+							panel4.add(VN);
+							panel4.add(VP);
+							panel4.add(FP);
+							panel4.add(FN);
+							
+							panel4.revalidate();
+							panel4.repaint();
+							
+							}
+							if (regra.indexOf("method") != -1) {		
+							CodeSmellQualityMethod.compareValues();
+							
+							String vn = String.valueOf(CodeSmellQualityMethod.VN);
+							String fn = String.valueOf(CodeSmellQualityMethod.FN);
+							String vp = String.valueOf(CodeSmellQualityMethod.VP);
+							String fp = String.valueOf(CodeSmellQualityMethod.FP);
+							
+							JLabel VN = new JLabel("Verdadeiros Negativos: " + vn);
+							JLabel VP = new JLabel("Verdadeiros Positivos: " + vp);
+							JLabel FP = new JLabel("Falsos Positivos: " + fp);
+							JLabel FN = new JLabel("Falsos Negativos: " + fn);
+							
+							panel4.add(VN);
+							panel4.add(VP);
+							panel4.add(FP);
+							panel4.add(FN);
+							
+							panel4.revalidate();
+							panel4.repaint();
+							}
+							
+							
+							
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+
+					}	
+				});
+				analyseValue.setBackground(Color.LIGHT_GRAY);
+				panel3.add(analyseValue);
+
 
 				verHistorico.setBackground(Color.LIGHT_GRAY);
 				panel.add(verHistorico);
@@ -514,7 +596,7 @@ public class GUI extends JFrame{
 				apagarHistorico.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 
-						history.clear("Myfile.txt");
+						history.clear("C:\\Users\\inesv\\OneDrive\\Ambiente de Trabalho\\historico.txt");
 
 						panel3.removeAll();
 						panel3.revalidate();
@@ -525,6 +607,7 @@ public class GUI extends JFrame{
 				panel.add(apagarHistorico);
 			}		
 		});
+
 
 		btnNewButton.setBackground(Color.LIGHT_GRAY);
 		buttonPanel.add(btnNewButton);
@@ -562,11 +645,23 @@ public class GUI extends JFrame{
 
 		panel3 = new JPanel();
 		GridBagConstraints gbc_panel3 = new GridBagConstraints();
-		gbc_panel2.insets = new Insets(0, 0, 5, 0);
-		gbc_panel2.fill = GridBagConstraints.BOTH;
-		gbc_panel2.gridx = 0;
-		gbc_panel2.gridy = 7;
+		gbc_panel3.insets = new Insets(0, 0, 5, 0);
+		gbc_panel3.fill = GridBagConstraints.BOTH;
+		gbc_panel3.gridx = 0;
+		gbc_panel3.gridy = 7;
 		getContentPane().add(panel3, gbc_panel3);
+		setSize(800, 700);
+		setResizable(true);
+		setVisible(true);
+		
+		
+		panel4 = new JPanel();
+		GridBagConstraints gbc_panel4 = new GridBagConstraints();
+		gbc_panel4.insets = new Insets(0, 0, 5, 0);
+		gbc_panel4.fill = GridBagConstraints.BOTH;
+		gbc_panel4.gridx = 0;
+		gbc_panel4.gridy = 8;
+		getContentPane().add(panel4, gbc_panel4);
 		setSize(800, 700);
 		setResizable(true);
 		setVisible(true);

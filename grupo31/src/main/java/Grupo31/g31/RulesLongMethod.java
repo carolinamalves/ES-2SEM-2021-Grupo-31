@@ -13,6 +13,7 @@ public class RulesLongMethod {
 		static String and = "AND";
 		static String or = "OR";
 
+		static ArrayList<String> longValues = new ArrayList<>();
 
 		public static void rules(String rule) {
 
@@ -31,8 +32,11 @@ public class RulesLongMethod {
 
 						if( m.getLoc_Method() > Integer.parseInt(splitRule[2])) {
 							System.out.println(m.getName_class() + ":" + "TRUEEEE");
+							longValues.add("TRUE");
 						}else {
 							System.out.println(m.getName_class() + ":" + "FALSEEEE");
+					
+							longValues.add("FALSE");
 						}
 					}
 				}
@@ -44,9 +48,13 @@ public class RulesLongMethod {
 
 						if( m.getLoc_Method() < Integer.parseInt(splitRule[2])) {
 							System.out.println(m.getName_class() + ":" + "TRUEEEE");
+							longValues.add("TRUE");
+						 
 
 						}else {
 							System.out.println(m.getName_class() + ":" + "FALSEEEE");
+					
+							longValues.add("FALSE");
 						}
 
 					}	
@@ -59,9 +67,13 @@ public class RulesLongMethod {
 
 						if( m.getCYCLO_method() > Integer.parseInt(splitRule[2])) {
 							System.out.println(m.getName_class() + ":" + "TRUEEEE");
+							longValues.add("TRUE");
+						 
 
 						}else {
 							System.out.println(m.getName_class() + ":" + "FALSEEEE");
+						 
+							longValues.add("FALSE");
 						}
 
 					}	
@@ -74,9 +86,13 @@ public class RulesLongMethod {
 
 						if( m.getCYCLO_method() < Integer.parseInt(splitRule[2])) {
 							System.out.println(m.getName_class() + ":" + "TRUEEEE");
+							longValues.add("TRUE");
+							 
 
 						}else {
 							System.out.println(m.getName_class() + ":" + "FALSEEEE");
+					 
+							longValues.add("FALSE");
 						}
 
 					}	
@@ -95,9 +111,13 @@ public class RulesLongMethod {
 
 						if( m.getLoc_Method() > Integer.parseInt(splitRule[2]) && m.getCYCLO_method() > Integer.parseInt(splitRule[6])) {
 							System.out.println(m.getName_class() + ":" + "TRUEEEE");
+							longValues.add("TRUE");
+						 
 
 						}else {
 							System.out.println(m.getName_class() + ":" + "FALSEEEE");
+							 
+							longValues.add("FALSE");
 						}
 
 					}
@@ -113,9 +133,13 @@ public class RulesLongMethod {
 
 						if( m.getLoc_Method() > Integer.parseInt(splitRule[2]) && m.getCYCLO_method() < Integer.parseInt(splitRule[6])) {
 							System.out.println(m.getName_class() + ":" + "TRUEEEE");
+							longValues.add("TRUE");
+						
 
-						}else {
+						}else{
 							System.out.println(m.getName_class() + ":" + "FALSEEEE");
+							 
+							longValues.add("FALSE");
 						}
 
 					}
@@ -131,9 +155,13 @@ public class RulesLongMethod {
 
 						if( m.getLoc_Method() < Integer.parseInt(splitRule[2]) && m.getCYCLO_method() > Integer.parseInt(splitRule[6])) {
 							System.out.println(m.getName_class() + ":" + "TRUEEEE");
+							longValues.add("TRUE");
+					 
 
 						}else {
 							System.out.println(m.getName_class() + ":" + "FALSEEEE");
+						 
+							longValues.add("FALSE");
 						}
 
 					}
@@ -149,9 +177,13 @@ public class RulesLongMethod {
 
 						if( m.getLoc_Method() < Integer.parseInt(splitRule[2]) && m.getCYCLO_method() < Integer.parseInt(splitRule[6])) {
 							System.out.println(m.getName_class() + ":" + "TRUEEEE");
+							longValues.add("TRUE");
+					 
 
 						}else {
 							System.out.println(m.getName_class() + ":" + "FALSEEEE");
+							 
+							longValues.add("FALSE");
 						}
 
 					}
@@ -167,9 +199,13 @@ public class RulesLongMethod {
 
 						if( m.getLoc_Method() > Integer.parseInt(splitRule[2]) || m.getCYCLO_method() > Integer.parseInt(splitRule[6])) {
 							System.out.println(m.getName_class() + ":" + "TRUEEEE");
+							longValues.add("TRUE");
+						 
 
 						}else {
 							System.out.println(m.getName_class() + ":" + "FALSEEEE");
+						 
+							longValues.add("FALSE");
 						}
 
 					}
@@ -185,9 +221,13 @@ public class RulesLongMethod {
 
 						if( m.getLoc_Method() > Integer.parseInt(splitRule[2]) || m.getCYCLO_method() < Integer.parseInt(splitRule[6])) {
 							System.out.println(m.getName_class() + ":" + "TRUEEEE");
+							longValues.add("TRUE");
+						 
 
 						}else {
 							System.out.println(m.getName_class() + ":" + "FALSEEEE");
+							 
+							longValues.add("FALSE");
 						}
 
 					}
@@ -203,9 +243,13 @@ public class RulesLongMethod {
 
 						if( m.getLoc_Method() < Integer.parseInt(splitRule[2]) || m.getCYCLO_method() > Integer.parseInt(splitRule[6])) {
 							System.out.println(m.getName_class() + ":" + "TRUEEEE");
+							longValues.add("TRUE");
+						 
 
 						}else {
 							System.out.println(m.getName_class() + ":" + "FALSEEEE");
+						 
+							longValues.add("FALSE");
 						}
 
 					}
@@ -221,9 +265,13 @@ public class RulesLongMethod {
 
 						if( m.getLoc_Method() < Integer.parseInt(splitRule[2]) || m.getCYCLO_method() < Integer.parseInt(splitRule[6])) {
 							System.out.println(m.getName_class() + ":" + "TRUEEEE");
+							longValues.add("TRUE");
+						 
 
 						}else {
 							System.out.println(m.getName_class() + ":" + "FALSEEEE");
+						 
+							longValues.add("FALSE");
 						}
 
 					}
