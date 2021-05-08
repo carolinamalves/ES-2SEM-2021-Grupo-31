@@ -115,12 +115,12 @@ public class Create_Method {
 			for (int i = 0; i < columnHeadings.length; i++) {
 				sh.autoSizeColumn(i);
 			}
-
-			FileOutputStream fileOut = new FileOutputStream(
-					"C:\\Users\\inesv\\Desktop\\" + GUI.fname + "_metrics.xlsx");
-			workbook.write(fileOut);
-
-			fileOut.close();
+			  File desktopDir = new File(System.getProperty("user.home"), "Desktop");
+			  String pathToDesktop = desktopDir.getPath();
+			  FileOutputStream out =  new FileOutputStream(new File(desktopDir, GUI.fname + "_metrics.xlsx"));	
+			
+			 workbook.write(out);
+			out.close();
 			workbook.close();
 			System.out.println("done");
 
