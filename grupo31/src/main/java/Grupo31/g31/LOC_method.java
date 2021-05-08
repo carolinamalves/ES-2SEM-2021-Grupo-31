@@ -18,7 +18,7 @@ public class LOC_method{
 	public static int total;	
 	public static ArrayList<Integer> list = new ArrayList <Integer>();
 	public static int num;
-
+	public static int numMethods;
 	public LOC_method (String fileS) throws ParseException, IOException {
 		this.ficheiro = fileS;
 		total=0;
@@ -34,6 +34,7 @@ public class LOC_method{
 			list.add(total);
 			list.set(num, total);
 			num++;
+			numMethods++;
 		}
 	}
 

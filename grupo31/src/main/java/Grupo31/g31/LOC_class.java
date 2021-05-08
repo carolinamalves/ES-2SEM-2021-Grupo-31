@@ -14,6 +14,7 @@ class LOC_class {
 	static int totalLines;
 	ArrayList<String> packageNames = new ArrayList<String>();
 	String s1;
+	public static int numLines;
 
 	public 	LOC_class(String file){
 		this.file = file;
@@ -41,7 +42,7 @@ class LOC_class {
 			while((strLine = br.readLine())!= null ){
 				if (strLine.trim().length() != 0){
 					lines++;
-
+					numLines++;
 					if(strLine.indexOf("package") != -1) {
 						String s = strLine.replace("package ", "");
 						s1 = s.replace(";", "");

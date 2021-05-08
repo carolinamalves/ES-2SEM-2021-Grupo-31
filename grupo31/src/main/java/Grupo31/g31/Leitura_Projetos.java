@@ -20,7 +20,8 @@ public class Leitura_Projetos {
 	static Create_Method cm = new Create_Method();
 	static ArrayList <String> packName = new ArrayList <String>();
 	static int it;
-
+	public static ArrayList <String> packages = new ArrayList<>();
+	public static int contadorClasses;
 	static ArrayList <File> file = new ArrayList<>();
 
 	public static ArrayList<File> getFicheiro() {
@@ -45,6 +46,11 @@ public class Leitura_Projetos {
 				Path fim = Paths.get(i.getAbsolutePath());
 				fimdojava.add(fim.getFileName().toString());	
 				cm.fillmethod(i.getAbsoluteFile());
+				contadorClasses++;
+				String parentName= i.getParent();
+				if(!packages.contains(parentName)) {
+					packages.add(parentName);
+				}
 
 			} else if (i.isDirectory()) {
 				ficheiro.addAll(lista(i.getAbsolutePath()));
