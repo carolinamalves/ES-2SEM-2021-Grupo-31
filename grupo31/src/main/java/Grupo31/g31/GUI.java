@@ -33,6 +33,9 @@ import com.github.javaparser.ParseException;
 
 public class GUI extends JFrame{
 
+
+	static  File desktopDir = new File(System.getProperty("user.home"), "Desktop");
+	static String pathToDesktop = desktopDir.getPath();
 	static Vector<String> headers = new Vector<String>();
 	static DefaultTableModel model = null;
 	static Vector<Vector<String>> data = new Vector<Vector<String>>();
@@ -185,8 +188,7 @@ public class GUI extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 
-				jChooserExcel = new JFileChooser(); 
-				//	jChooserExcel.setCurrentDirectory(new java.io.File("."));
+					jChooserExcel = new JFileChooser(); 
 					jChooserExcel.setDialogTitle(choosertitle);
 					jChooserExcel.setFileSelectionMode(JFileChooser.FILES_ONLY);
 					jChooserExcel.setAcceptAllFileFilterUsed(false);
@@ -492,7 +494,7 @@ public class GUI extends JFrame{
 				updateHistorico.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 
-						history.updateHistoric("C:\\Users\\inesv\\OneDrive\\Ambiente de Trabalho\\historico.txt" , historico);	
+						history.updateHistoric(desktopDir+"\\historico.txt", historico);	
 					}
 
 				});
@@ -503,7 +505,7 @@ public class GUI extends JFrame{
 				verHistorico.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 
-						ArrayList<String> carregar = history.viewHistoric("C:\\Users\\inesv\\OneDrive\\Ambiente de Trabalho\\historico.txt");
+						ArrayList<String> carregar = history.viewHistoric(desktopDir+"\\historico.txt");
 
 						for (String s : carregar) {
 
@@ -537,9 +539,17 @@ public class GUI extends JFrame{
 
 						}
 						try {
-							
+							jChooserExcel = new JFileChooser(); 
+							jChooserExcel.setDialogTitle(choosertitle);
+							jChooserExcel.setFileSelectionMode(JFileChooser.FILES_ONLY);
+							jChooserExcel.setAcceptAllFileFilterUsed(false);
+							jChooserExcel.showOpenDialog(null);
+
+							File file = jChooserExcel.getSelectedFile();
+
 							if (regra.indexOf("class") != -1){
-							CodeSmellQualityClass.compareValues();
+								
+							CodeSmellQualityClass.compareValues(file.toString());
 							
 							String vn = String.valueOf(CodeSmellQualityClass.VN);
 							String fn = String.valueOf(CodeSmellQualityClass.FN);
@@ -561,7 +571,7 @@ public class GUI extends JFrame{
 							
 							}
 							if (regra.indexOf("method") != -1) {		
-							CodeSmellQualityMethod.compareValues();
+							CodeSmellQualityMethod.compareValues(file.toString());
 							
 							String vn = String.valueOf(CodeSmellQualityMethod.VN);
 							String fn = String.valueOf(CodeSmellQualityMethod.FN);
@@ -602,7 +612,7 @@ public class GUI extends JFrame{
 				apagarHistorico.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 
-						history.clear("C:\\Users\\inesv\\OneDrive\\Ambiente de Trabalho\\historico.txt");
+						history.clear(desktopDir+"\\historico.txt");
 
 						panel3.removeAll();
 						panel3.revalidate();

@@ -24,14 +24,14 @@ public class CodeSmellQualityMethod {
 
 	static ArrayList<Method> a = Create_Method.a;
 
-	public static void getTheirs() throws IOException {
+	public static void getTheirs(String path) throws IOException {
 
 		nameMT = new ArrayList<String>();
 		longMT= new ArrayList<String>();
-		String envFilePath =("C:\\Users\\inesv\\OneDrive\\Ambiente de Trabalho\\Code_Smells.xlsx");
+		String envFilePath =(path);
 
 
-		FileInputStream fileName = new FileInputStream(new File("C:\\Users\\inesv\\OneDrive\\Ambiente de Trabalho\\Code_Smells.xlsx"));
+		FileInputStream fileName = new FileInputStream(new File(path));
 		//int masterSheetColumnIndex = 0;
 
 		XSSFWorkbook workbook = new XSSFWorkbook (fileName);
@@ -108,7 +108,7 @@ public class CodeSmellQualityMethod {
 
 
 
-	public static void getOurs() throws IOException {
+	public static void getOurs(String path) throws IOException {
 
 
 		nameMO = new ArrayList<String>();
@@ -157,11 +157,11 @@ public class CodeSmellQualityMethod {
 
 	}
 
-	public static void compareValues() throws IOException {
+	public static void compareValues(String path) throws IOException {
 
 
-		getOurs();
-		getTheirs();
+		getOurs(path);
+		getTheirs(path);
 		ArrayList<String> longMO = RulesLongMethod.longValues;
 		VP = 0;
 		VN = 0;

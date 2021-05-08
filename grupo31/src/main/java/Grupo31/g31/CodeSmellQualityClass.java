@@ -35,14 +35,14 @@ public class CodeSmellQualityClass {
 
 	static ArrayList<Method> a = Create_Method.a;
 
-	public static void getTheirs() throws IOException {
+	public static void getTheirs(String path) throws IOException {
 
 		nameCT = new ArrayList<String>();
 		godT= new ArrayList<String>();
-		String envFilePath =("C:\\Users\\inesv\\OneDrive\\Ambiente de Trabalho\\Code_Smells.xlsx");
+		String envFilePath =path;
 
 
-		FileInputStream fileName = new FileInputStream(new File("C:\\Users\\inesv\\OneDrive\\Ambiente de Trabalho\\Code_Smells.xlsx"));
+		FileInputStream fileName = new FileInputStream(new File(path));
 		//int masterSheetColumnIndex = 0;
 
 		XSSFWorkbook workbook = new XSSFWorkbook (fileName);
@@ -129,11 +129,11 @@ public class CodeSmellQualityClass {
 
 
 
-	public static void getOurs() throws IOException {
+	public static void getOurs(String path) throws IOException {
 
 
 		nameCO = new ArrayList<String>();
-		FileInputStream fileName = new FileInputStream(new File("C:\\Users\\inesv\\Desktop\\src_metrics.xlsx"));
+		FileInputStream fileName = new FileInputStream(new File(path));
 		//int masterSheetColumnIndex = 0;
 
 		XSSFWorkbook workbook = new XSSFWorkbook (fileName);
@@ -180,11 +180,11 @@ public class CodeSmellQualityClass {
 
 	}
 
-	public static void compareValues() throws IOException {
+	public static void compareValues(String path) throws IOException {
 
 
-		getOurs();
-		getTheirs();
+		getOurs(path);
+		getTheirs(path);
 		ArrayList<String> godO = RulesGodClass.godValues;
 		VP = 0;
 		VN = 0;
