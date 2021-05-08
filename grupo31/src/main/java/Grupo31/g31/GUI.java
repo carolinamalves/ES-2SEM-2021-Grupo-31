@@ -165,7 +165,9 @@ public class GUI extends JFrame{
 				}			
 			}
 		});
-
+		
+		
+		
 		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
 		gbc_btnNewButton_1.insets = new Insets(0, 0, 5, 0);
 		gbc_btnNewButton_1.gridx = 0;
@@ -306,7 +308,7 @@ public class GUI extends JFrame{
 				panel.add(godC);
 
 
-
+				
 
 				JButton submitGodC = new  JButton ("Submeter God Class");
 				submitGodC.addActionListener(new ActionListener() {
@@ -611,6 +613,29 @@ public class GUI extends JFrame{
 
 		btnNewButton.setBackground(Color.LIGHT_GRAY);
 		buttonPanel.add(btnNewButton);
+		
+		JButton caracGerais = new JButton("Características Gerais");
+		caracGerais.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+				JLabel numP = new JLabel (String.valueOf(Leitura_Projetos.packages.size()));
+				JLabel numC = new JLabel (String.valueOf(Leitura_Projetos.contadorClasses));
+				JLabel numM = new JLabel (String.valueOf(LOC_method.numMethods));
+				JLabel numL = new JLabel (String.valueOf(LOC_class.numLines));	
+				
+				panel.add(numP);
+				panel.add(numC);
+				panel.add(numM);
+				panel.add(numL);
+				
+				panel.revalidate();
+				panel.repaint();
+			}
+		
+		});
+	
+		caracGerais.setBackground(Color.LIGHT_GRAY);
+		buttonPanel.add(caracGerais);
 
 		scrollPane = new JScrollPane();
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
