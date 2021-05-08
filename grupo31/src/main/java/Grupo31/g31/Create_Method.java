@@ -34,15 +34,19 @@ public class Create_Method {
 	static XSSFSheet sh = workbook.createSheet("Metodo");
 
 	static Row row; 
+	static int numberOfClasses;
 
 
 	void fillmethod(File file) {
 		
 	try {
+		numberOfClasses++;
 			String fileS = file.getAbsolutePath();
 			
 			String className = file.getAbsolutePath().toString().substring(file.getAbsolutePath().toString().lastIndexOf("\\") + 1); 
 			className.getClass();
+			
+			String classNameWJ = className.replace(".java", " ");
 
 			LOC_class locClass = new LOC_class(fileS);
 			int locC = locClass.Contar();
@@ -60,7 +64,7 @@ public class Create_Method {
 	
 			String packName = locClass.s1;
 
-			createData(packName, className, nameMethods, nomC, locC, wmcC, locList ,cycloList);
+			createData(packName, classNameWJ, nameMethods, nomC, locC, wmcC, locList ,cycloList);
 
 			CreationHelper creationHelper = workbook.getCreationHelper();
 			CellStyle dataStyle = workbook.createCellStyle();
@@ -71,8 +75,8 @@ public class Create_Method {
 			XSSFSheet sh = workbook.createSheet("Metodo");
 
 			// top row
-			String[] columnHeadings = { "MethodId", "name_package", "name_class", "name_method", "Nom_Class",
-					"Loc_Class", "Wmc_Class", "is_God_Class", "Loc_Method", "CYCLO_method", "is_Long_Method" };
+			String[] columnHeadings = { "MethodID", "package", "class", "method", "NOM_class",
+					"LOC_class", "WMC_class", "is_God_Class", "LOC_method", "CYCLO_method", "is_Long_Method" };
 			Font headerFont = workbook.createFont();
 			headerFont.setBold(true);
 			headerFont.setFontHeightInPoints((short) 12);
