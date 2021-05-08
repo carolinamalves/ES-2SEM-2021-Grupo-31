@@ -64,6 +64,7 @@ public class GUI extends JFrame{
 
 	JPanel panel3;
 	JPanel panel4;
+	JPanel panelCarac;
 
 	//God Class
 	static String metricaL1;
@@ -509,6 +510,9 @@ public class GUI extends JFrame{
 							checkRule = new JCheckBox(s); 
 
 							panel3.add(checkRule);
+							
+							panel3.revalidate();
+							panel3.repaint();
 						}
 					}
 
@@ -618,18 +622,18 @@ public class GUI extends JFrame{
 		caracGerais.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			
-				JLabel numP = new JLabel (String.valueOf(Leitura_Projetos.packages.size()));
-				JLabel numC = new JLabel (String.valueOf(Leitura_Projetos.contadorClasses));
-				JLabel numM = new JLabel (String.valueOf(LOC_method.numMethods));
-				JLabel numL = new JLabel (String.valueOf(LOC_class.numLines));	
+				JLabel numP = new JLabel ("Número de Packages: " + String.valueOf(Leitura_Projetos.packages.size()));
+				JLabel numC = new JLabel ("Número de Classes: " + String.valueOf(Leitura_Projetos.contadorClasses));
+				JLabel numM = new JLabel ("Número de Métodos: " + String.valueOf(LOC_method.numMethods));
+				JLabel numL = new JLabel ("Número de Linhas: " + String.valueOf(LOC_class.numLines));	
 				
-				panel.add(numP);
-				panel.add(numC);
-				panel.add(numM);
-				panel.add(numL);
+				panelCarac.add(numP);
+				panelCarac.add(numC);
+				panelCarac.add(numM);
+				panelCarac.add(numL);
 				
-				panel.revalidate();
-				panel.repaint();
+				panelCarac.revalidate();
+				panelCarac.repaint();
 			}
 		
 		});
@@ -644,6 +648,14 @@ public class GUI extends JFrame{
 		gbc_scrollPane.gridx = 0;
 		gbc_scrollPane.gridy = 4;
 		getContentPane().add(scrollPane, gbc_scrollPane);
+		
+		panelCarac = new JPanel();
+		GridBagConstraints gbc_panelCarac = new GridBagConstraints();
+		gbc_panelCarac.insets = new Insets(0, 0, 5, 0);
+		gbc_panelCarac.fill = GridBagConstraints.BOTH;
+		gbc_panelCarac.gridx = 0;
+		gbc_panelCarac.gridy = 4;
+		getContentPane().add(panelCarac, gbc_panelCarac);
 
 		table = new JTable();
 		scrollPane.setViewportView(table);
