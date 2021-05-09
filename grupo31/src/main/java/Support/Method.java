@@ -7,28 +7,28 @@ public class Method {
 
 	/** The name package. */
 	String name_package;
-	
+
 	/** The name class. */
 	String name_class;
-	
+
 	/** The name method. */
 	String name_method;
 
 	/** The Method id. */
 	int MethodId;
-	
+
 	/** The Nom class. */
 	int Nom_Class;
-	
+
 	/** The Loc class. */
 	int Loc_Class;
-	
+
 	/** The Wmc class. */
 	int Wmc_Class;
-	
+
 	/** The Loc method. */
 	int Loc_Method;
-	
+
 	/** The CYCL O method. */
 	int CYCLO_method;
 

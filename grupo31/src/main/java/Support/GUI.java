@@ -44,28 +44,28 @@ public class GUI extends JFrame{
 
 	/** The desktop dir. */
 	static  File desktopDir = new File(System.getProperty("user.home"), "Desktop");
-	
+
 	/** The path to desktop. */
 	static String pathToDesktop = desktopDir.getPath();
-	
+
 	/** The headers. */
 	static Vector<String> headers = new Vector<String>();
-	
+
 	/** The model. */
 	static DefaultTableModel model = null;
-	
+
 	/** The data. */
 	static Vector<Vector<String>> data = new Vector<Vector<String>>();
-	
+
 	/** The Import. */
 	static JButton Import;
-	
+
 	/** The Code smells detector. */
 	static JButton CodeSmellsDetector;
-	
+
 	/** The j chooser. */
 	static JFileChooser jChooser;
-	
+
 	/** The j chooser excel. */
 	static JFileChooser jChooserExcel;
 
@@ -77,153 +77,153 @@ public class GUI extends JFrame{
 
 	/** The choosertitle. */
 	String choosertitle;
-	
+
 	/** The fname. */
 	static String fname;
 
 	/** The table width. */
 	static int tableWidth = 0;
-	
+
 	/** The table height. */
 	static int tableHeight = 0;
 
 	/** The j. */
 	private Leitura_Projetos j= new Leitura_Projetos();
-	
+
 	/** The btn new button. */
 	private JButton btnNewButton;
 
 	/** The lbl new label. */
 	private JLabel lblNewLabel;
-	
+
 	/** The panel. */
 	private JPanel panel;
 
 	/** The scroll pane. */
 	private JScrollPane scrollPane;
-	
+
 	/** The table. */
 	private JTable table;
-	
+
 	/** The btn new button 1. */
 	private JButton btnNewButton_1;
 
 	/** The panel 3. */
 	JPanel panel3;
-	
+
 	/** The panel 4. */
 	JPanel panel4;
-	
+
 	/** The panel carac. */
 	JPanel panelCarac;
 
 	/** The metrica L 1. */
 	//God Class
 	static String metricaL1;
-	
+
 	/** The metrica L 2. */
 	static String metricaL2;
-	
+
 	/** The sinal L 1. */
 	static String sinalL1;
-	
+
 	/** The sinal L 2. */
 	static String sinalL2;
-	
+
 	/** The operador L 1. */
 	static String operadorL1;
-	
+
 	/** The valor L 1. */
 	static String valorL1;
-	
+
 	/** The valor L 2. */
 	static String valorL2;
-	
+
 	/** The metrica L 3. */
 	static String metricaL3;
-	
+
 	/** The sinal L 3. */
 	static String sinalL3;
-	
+
 	/** The valor L 3. */
 	static String valorL3;
-	
+
 	/** The operador L 2. */
 	static String operadorL2;
 
 	/** The met L 1. */
 	static JComboBox metL1;
-	
+
 	/** The sin L 1. */
 	static JComboBox sinL1;
-	
+
 	/** The val L 1. */
 	static JTextField valL1;
-	
+
 	/** The oper L 1. */
 	static JComboBox operL1;
-	
+
 	/** The met L 2. */
 	static JComboBox metL2;
-	
+
 	/** The sin L 2. */
 	static JComboBox sinL2;
-	
+
 	/** The val L 2. */
 	static JTextField valL2;
-	
+
 	/** The oper L 2. */
 	static JComboBox operL2;
-	
+
 	/** The met L 3. */
 	static JComboBox metL3;
-	
+
 	/** The sin L 3. */
 	static JComboBox sinL3;
-	
+
 	/** The val L 3. */
 	static JTextField valL3;
 
 	/** The metrica 1. */
 	//Loc Method
 	static String metrica1;
-	
+
 	/** The metrica 2. */
 	static String metrica2;
-	
+
 	/** The sinal 1. */
 	static String sinal1;
-	
+
 	/** The sinal 2. */
 	static String sinal2;
-	
+
 	/** The operador 1. */
 	static String operador1;
-	
+
 	/** The valor 1. */
 	static String valor1;
-	
+
 	/** The valor 2. */
 	static String valor2;
 
 	/** The met G. */
 	static JComboBox metG;
-	
+
 	/** The signal 3. */
 	static JComboBox signal3;
-	
+
 	/** The valor 4. */
 	static JTextField valor4;
-	
+
 	/** The op 2. */
 	static JComboBox op2;
-	
+
 	/** The metrica G 2. */
 	static JComboBox metricaG2;
-	
+
 	/** The signal 4. */
 	static JComboBox signal4;
-	
+
 	/** The valor 5. */
 	static JTextField valor5;
 
@@ -260,7 +260,7 @@ public class GUI extends JFrame{
 
 		btnNewButton_1 = new JButton("Extrair Métricas");
 		btnNewButton_1.addActionListener(new ActionListener() {
-			
+
 			/**
 			 * Action performed.
 			 *
@@ -723,7 +723,7 @@ public class GUI extends JFrame{
 
 		JButton caracGerais = new JButton("Características Gerais");
 		caracGerais.addActionListener(new ActionListener() {
-			
+
 			/**
 			 * Action performed.
 			 *

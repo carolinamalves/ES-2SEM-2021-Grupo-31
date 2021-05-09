@@ -72,8 +72,6 @@ public class history {
 	 */
 	public static ArrayList<String> viewHistoric(String fileName) {
 		try {
-			FileReader reader = new FileReader(fileName);
-			int character;
 			String token1 = "";
 			Scanner inFile1 = new Scanner(new FileReader(fileName)).useDelimiter("\r\n");
 			while (inFile1.hasNext()) {

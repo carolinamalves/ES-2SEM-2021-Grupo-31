@@ -12,22 +12,22 @@ public class RulesLongMethod {
 
 	/** The a. */
 	static ArrayList<Method> a = Create_Method.a;
-	
+
 	/** The loc M. */
 	static String locM = "LOC_method";
-	
+
 	/** The cyc M. */
 	static String cycM = "CYCLO_method";
 
 	/** The maior. */
 	static String maior = ">";
-	
+
 	/** The menor. */
 	static String menor = "<";
-	
+
 	/** The and. */
 	static String and = "AND";
-	
+
 	/** The or. */
 	static String or = "OR";
 
@@ -42,8 +42,6 @@ public class RulesLongMethod {
 	public static void rules(String rule) {
 
 		String [] splitRule = rule.split(" ");
-		System.out.println("REGRA" + splitRule.length);
-
 
 		//so com uma metrica
 		if (splitRule.length == 3) {
