@@ -35,7 +35,7 @@ public class RulesGodClass {
 	static String or = "OR";
 	
 	/** The god values. */
-	static ArrayList <String> godValues = new ArrayList <String> (); 
+	public static ArrayList <String> godValues = new ArrayList <String> (); 
 	
 	/** The it. */
 	static int it;

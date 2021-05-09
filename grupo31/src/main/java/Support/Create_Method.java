@@ -64,7 +64,7 @@ public class Create_Method {
 	 *
 	 * @param file the file
 	 */
-	void fillmethod(File file) {
+	public void fillmethod(File file) {
 
 		try {
 			numberOfClasses++;

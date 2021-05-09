@@ -25,7 +25,7 @@ class CYCLO_methodTest {
 
 	@Test
 	void testGetContador() throws ParseException, IOException {
-		file="C:\\Users\\admin\\Desktop\\jasml\\jasml_0.10\\src\\com\\jasml\\classes\\Attribute.java";
+		file="C:\\Users\\Admin\\Desktop\\jasml_0.10\\src\\com\\jasml\\classes\\Attribute.java";
 		cM=new CYCLO_method(file);
 
 	}

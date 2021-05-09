@@ -25,7 +25,7 @@ public class ImportExcel extends GUI{
 	 *
 	 * @param file the file
 	 */
-	static void fillData(File file){
+	public static void fillData(File file){
 
 		int index =- 1;
 		XSSFWorkbook workbook = null;
