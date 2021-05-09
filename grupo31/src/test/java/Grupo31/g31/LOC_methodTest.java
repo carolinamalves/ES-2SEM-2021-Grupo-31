@@ -15,20 +15,15 @@ class LOC_methodTest {
 	protected String file;
 	protected LOC_method lM;
 	protected ArrayList<Integer> a;
-	@Test
-	void testLOC_method() {
-
-	}
-
-	@Test
-	void testGetMethodLineNumbers() {
-
-	}
 
 	@Test
 	public void testGetTotal() throws ParseException, IOException {
-		file="C:\\Users\\Admin\\Desktop\\jasml_0.10\\src\\com\\jasml\\classes\\Attribute.java";
+		file="C:\\Users\\carol\\Desktop\\ISCTE-IUL\\Engenharia de Software\\jasml_0.10.zip_expanded\\src\\com\\jasml\\compiler\\SourceCodeParser.java";
 		lM=new LOC_method(file);
 		assertEquals(a,lM.getList());
+		assertNotNull(lM.getList());
 	}
+
+
+
 }

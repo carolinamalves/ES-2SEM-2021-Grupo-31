@@ -56,7 +56,7 @@ public class Create_Method {
 	static Row row; 
 
 	/** The number of classes. */
-	static int numberOfClasses;
+	public static int numberOfClasses;
 
 
 	/**

@@ -42,15 +42,6 @@ public class Method {
 	}
 
 	/**
-	 * Sets the method id.
-	 *
-	 * @param methodId the new method id
-	 */
-	public void setMethodId(int methodId) {
-		MethodId = methodId;
-	}
-
-	/**
 	 * Gets the name package.
 	 *
 	 * @return the name package
@@ -59,14 +50,6 @@ public class Method {
 		return name_package;
 	}
 
-	/**
-	 * Sets the name package.
-	 *
-	 * @param name_package the new name package
-	 */
-	public void setName_package(String name_package) {
-		this.name_package = name_package;
-	}
 
 	/**
 	 * Gets the name class.
@@ -77,14 +60,6 @@ public class Method {
 		return name_class;
 	}
 
-	/**
-	 * Sets the name class.
-	 *
-	 * @param name_class the new name class
-	 */
-	public void setName_class(String name_class) {
-		this.name_class = name_class;
-	}
 
 	/**
 	 * Gets the name method.
@@ -93,15 +68,6 @@ public class Method {
 	 */
 	public String getName_method() {
 		return name_method;
-	}
-
-	/**
-	 * Sets the name method.
-	 *
-	 * @param name_method the new name method
-	 */
-	public void setName_method(String name_method) {
-		this.name_method = name_method;
 	}
 
 	/**
@@ -114,30 +80,12 @@ public class Method {
 	}
 
 	/**
-	 * Sets the nom class.
-	 *
-	 * @param nom_Class the new nom class
-	 */
-	public void setNom_Class(int nom_Class) {
-		Nom_Class = nom_Class;
-	}
-
-	/**
 	 * Gets the loc class.
 	 *
 	 * @return the loc class
 	 */
 	public int getLoc_Class() {
 		return Loc_Class;
-	}
-
-	/**
-	 * Sets the loc class.
-	 *
-	 * @param loc_Class the new loc class
-	 */
-	public void setLoc_Class(int loc_Class) {
-		Loc_Class = loc_Class;
 	}
 
 	/**
@@ -150,15 +98,6 @@ public class Method {
 	}
 
 	/**
-	 * Sets the wmc class.
-	 *
-	 * @param wmc_Class the new wmc class
-	 */
-	public void setWmc_Class(int wmc_Class) {
-		Wmc_Class = wmc_Class;
-	}
-
-	/**
 	 * Gets the loc method.
 	 *
 	 * @return the loc method
@@ -168,30 +107,12 @@ public class Method {
 	}
 
 	/**
-	 * Sets the loc method.
-	 *
-	 * @param loc_Method the new loc method
-	 */
-	public void setLoc_Method(int loc_Method) {
-		Loc_Method = loc_Method;
-	}
-
-	/**
 	 * Gets the CYCL O method.
 	 *
 	 * @return the CYCL O method
 	 */
 	public int getCYCLO_method() {
 		return CYCLO_method;
-	}
-
-	/**
-	 * Sets the CYCL O method.
-	 *
-	 * @param cYCLO_method the new CYCL O method
-	 */
-	public void setCYCLO_method(int cYCLO_method) {
-		CYCLO_method = cYCLO_method;
 	}
 
 	/**
