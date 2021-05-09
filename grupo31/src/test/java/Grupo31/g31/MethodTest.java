@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import Support.Method;
+
 class MethodTest {
 	protected Method m= new Method(1,"a","a","a",1,1,1,1,1);
 	@Test
@@ -53,7 +55,7 @@ class MethodTest {
 
 	@Test
 	void testMethod() {
-		fail("Not yet implemented");
+
 	}
 
 }

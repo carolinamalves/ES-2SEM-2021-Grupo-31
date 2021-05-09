@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 
 import com.github.javaparser.ParseException;
 
+import Metrics.LOC_method;
+
 class LOC_methodTest {
 	protected String file;
 	protected LOC_method lM;
@@ -20,14 +22,4 @@ class LOC_methodTest {
 	void testGetMethodLineNumbers() {
 		
 	}
-
-	@Test
-	void testGetTotal() throws ParseException, IOException {
-		file="C:\\Users\\admin\\Desktop\\jasml\\jasml_0.10\\src\\com\\jasml\\classes\\Attribute.java";
-		lM=new LOC_method(file);
-		assertEquals(0,lM.getTotal());
-	}
-
-
-
 }
