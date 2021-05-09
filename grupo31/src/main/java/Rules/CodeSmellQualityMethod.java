@@ -134,7 +134,7 @@ public class CodeSmellQualityMethod {
 	public static void getOurs(String path) throws IOException {
 
 		nameMO = new ArrayList<String>();
-		FileInputStream fileName = new FileInputStream(new File("C:\\Users\\inesv\\Desktop\\src_metrics.xlsx"));
+		FileInputStream fileName = new FileInputStream(new File(path));
 		//int masterSheetColumnIndex = 0;
 
 		XSSFWorkbook workbook = new XSSFWorkbook (fileName);
@@ -178,9 +178,9 @@ public class CodeSmellQualityMethod {
 	 * @param path the path
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
-	public static void compareValues(String path) throws IOException {
+	public static void compareValues(String path, String path1) throws IOException {
 
-		getOurs(path);
+		getOurs(path1);
 		getTheirs(path);
 		ArrayList<String> longMO = RulesLongMethod.longValues;
 		VP = 0;

@@ -188,9 +188,9 @@ public class CodeSmellQualityClass {
 	 * @param path the path
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
-	public static void compareValues(String path) throws IOException {
+	public static void compareValues(String path, String path1) throws IOException {
 
-		getOurs(path);
+		getOurs(path1);
 		getTheirs(path);
 		ArrayList<String> godO = RulesGodClass.godValues;
 		VP = 0;

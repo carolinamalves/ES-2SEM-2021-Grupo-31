@@ -648,7 +648,7 @@ public class GUI extends JFrame{
 
 							if (regra.indexOf("class") != -1){
 
-								CodeSmellQualityClass.compareValues(file.toString());
+								CodeSmellQualityClass.compareValues(file.toString(), desktopDir+"\\src_metrics.xlsx");
 
 								String vn = String.valueOf(CodeSmellQualityClass.VN);
 								String fn = String.valueOf(CodeSmellQualityClass.FN);
@@ -670,7 +670,7 @@ public class GUI extends JFrame{
 
 							}
 							if (regra.indexOf("method") != -1) {		
-								CodeSmellQualityMethod.compareValues(file.toString());
+								CodeSmellQualityMethod.compareValues(file.toString(), desktopDir+"\\src_metrics.xlsx");
 
 								String vn = String.valueOf(CodeSmellQualityMethod.VN);
 								String fn = String.valueOf(CodeSmellQualityMethod.FN);

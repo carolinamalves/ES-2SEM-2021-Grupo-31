@@ -32,7 +32,7 @@ public class RulesLongMethod {
 	static String or = "OR";
 
 	/** The long values. */
-	static ArrayList<String> longValues = new ArrayList<>();
+	public static ArrayList<String> longValues = new ArrayList<>();
 
 	/**
 	 * Rules.
