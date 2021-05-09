@@ -11,50 +11,57 @@ class MethodTest {
 	@Test
 	void testGetMethodId() {
 		assertEquals(1,m.getMethodId());
+		assertNotNull(m.getMethodId());
 	}
 
 	@Test
 	void testGetName_package() {
 		assertEquals("a",m.getName_package());
+		assertNotNull(m.getName_package());
 	}
 
 	@Test
 	void testGetName_class() {
 		assertEquals("a",m.getName_class());
+		assertNotNull(m.getName_class());
 	}
 
 	@Test
 	void testGetName_method() {
 		assertEquals("a",m.getName_method());
+		assertNotNull(m.getName_method());
 	}
 
 	@Test
 	void testGetNom_Class() {
 		assertEquals(1,m.getNom_Class());
+		assertNotNull(m.getNom_Class());
 	}
 
 	@Test
 	void testGetLoc_Class() {
 		assertEquals(1,m.getLoc_Class());
+		assertNotNull(m.getLoc_Class());
 	}
 
 	@Test
 	void testGetWmc_Class() {
 		assertEquals(1,m.getWmc_Class());
+		assertNotNull(m.getWmc_Class());
 	}
 
 	@Test
 	void testGetLoc_Method() {
 		assertEquals(1,m.getLoc_Method());
+		assertNotNull(m.getLoc_Method());
 	}
 
 	@Test
 	void testGetCYCLO_method() {
 		assertEquals(1,m.getCYCLO_method());
+		assertNotNull(m.getCYCLO_method());
 	}
 
-	@Test
-	void testMethod() {
+	
 
-	}
 }

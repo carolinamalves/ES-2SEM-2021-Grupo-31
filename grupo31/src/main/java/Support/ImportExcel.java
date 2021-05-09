@@ -18,8 +18,10 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 // TODO: Auto-generated Javadoc
 //@author grupo 31
 
-public class ImportExcel extends GUI{  
 
+	
+public class ImportExcel extends GUI{  
+	public static int index;
 	/**
 	 * Fill data.
 	 *
@@ -27,7 +29,7 @@ public class ImportExcel extends GUI{
 	 */
 	public static void fillData(File file){
 
-		int index =- 1;
+		index =- 1;
 		XSSFWorkbook workbook = null;
 
 		try {

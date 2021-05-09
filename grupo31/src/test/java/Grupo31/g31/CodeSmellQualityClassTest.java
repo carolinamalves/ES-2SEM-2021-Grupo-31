@@ -16,10 +16,12 @@ class CodeSmellQualityClassTest {
 	@Test
 	void testCompareValues() throws IOException 
 	{
-		file1=new File("C:\\Users\\Admin\\Desktop\\src_metrics.xlsx");
-		file2=new File("C:\\Users\\Admin\\Desktop\\Code_Smells.xlsx");
+		file1=new File("C:\\Users\\carol\\Desktop\\src_metrics.xlsx");
+		file2=new File("C:\\Users\\carol\\Desktop\\ISCTE-IUL\\Engenharia de Software\\Code_Smells.xlsx");
 		cS.compareValues(file1.toString(), file2.toString());
 		assertEquals(1,cS.FN);
+		assertNotNull(cS.FN);
+	
 		
 	}
 
