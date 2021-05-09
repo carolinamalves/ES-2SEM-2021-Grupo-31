@@ -4,10 +4,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-class Leitura_ProjetosTest {
+class Leitura_Projetos {
 
 	@Test
-	void testLista() {
+	void test() {
 		fail("Not yet implemented");
 	}
 

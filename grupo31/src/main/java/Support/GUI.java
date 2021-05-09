@@ -1,4 +1,4 @@
-package Grupo31.g31;
+package Support;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -26,95 +26,211 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import Metrics.LOC_class;
+import Metrics.LOC_method;
+import Rules.CodeSmellQualityClass;
+import Rules.CodeSmellQualityMethod;
+import Rules.RulesGodClass;
+import Rules.RulesLongMethod;
+
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 
-import com.github.javaparser.ParseException;
+// TODO: Auto-generated Javadoc
+//@author grupo 31
 
 public class GUI extends JFrame{
 
-
+	/** The desktop dir. */
 	static  File desktopDir = new File(System.getProperty("user.home"), "Desktop");
+	
+	/** The path to desktop. */
 	static String pathToDesktop = desktopDir.getPath();
+	
+	/** The headers. */
 	static Vector<String> headers = new Vector<String>();
+	
+	/** The model. */
 	static DefaultTableModel model = null;
+	
+	/** The data. */
 	static Vector<Vector<String>> data = new Vector<Vector<String>>();
+	
+	/** The Import. */
 	static JButton Import;
+	
+	/** The Code smells detector. */
 	static JButton CodeSmellsDetector;
+	
+	/** The j chooser. */
 	static JFileChooser jChooser;
+	
+	/** The j chooser excel. */
 	static JFileChooser jChooserExcel;
 
-
+	/** The check rule. */
 	static JCheckBox checkRule;
 
+	/** The a. */
 	static ArrayList <Method> a;
 
+	/** The choosertitle. */
 	String choosertitle;
+	
+	/** The fname. */
 	static String fname;
 
+	/** The table width. */
 	static int tableWidth = 0;
+	
+	/** The table height. */
 	static int tableHeight = 0;
 
+	/** The j. */
 	private Leitura_Projetos j= new Leitura_Projetos();
+	
+	/** The btn new button. */
 	private JButton btnNewButton;
 
+	/** The lbl new label. */
 	private JLabel lblNewLabel;
+	
+	/** The panel. */
 	private JPanel panel;
 
+	/** The scroll pane. */
 	private JScrollPane scrollPane;
+	
+	/** The table. */
 	private JTable table;
+	
+	/** The btn new button 1. */
 	private JButton btnNewButton_1;
 
+	/** The panel 3. */
 	JPanel panel3;
+	
+	/** The panel 4. */
 	JPanel panel4;
+	
+	/** The panel carac. */
 	JPanel panelCarac;
 
+	/** The metrica L 1. */
 	//God Class
 	static String metricaL1;
+	
+	/** The metrica L 2. */
 	static String metricaL2;
+	
+	/** The sinal L 1. */
 	static String sinalL1;
+	
+	/** The sinal L 2. */
 	static String sinalL2;
+	
+	/** The operador L 1. */
 	static String operadorL1;
+	
+	/** The valor L 1. */
 	static String valorL1;
+	
+	/** The valor L 2. */
 	static String valorL2;
+	
+	/** The metrica L 3. */
 	static String metricaL3;
+	
+	/** The sinal L 3. */
 	static String sinalL3;
+	
+	/** The valor L 3. */
 	static String valorL3;
+	
+	/** The operador L 2. */
 	static String operadorL2;
 
+	/** The met L 1. */
 	static JComboBox metL1;
+	
+	/** The sin L 1. */
 	static JComboBox sinL1;
+	
+	/** The val L 1. */
 	static JTextField valL1;
+	
+	/** The oper L 1. */
 	static JComboBox operL1;
+	
+	/** The met L 2. */
 	static JComboBox metL2;
+	
+	/** The sin L 2. */
 	static JComboBox sinL2;
+	
+	/** The val L 2. */
 	static JTextField valL2;
+	
+	/** The oper L 2. */
 	static JComboBox operL2;
+	
+	/** The met L 3. */
 	static JComboBox metL3;
+	
+	/** The sin L 3. */
 	static JComboBox sinL3;
+	
+	/** The val L 3. */
 	static JTextField valL3;
 
-
+	/** The metrica 1. */
 	//Loc Method
 	static String metrica1;
+	
+	/** The metrica 2. */
 	static String metrica2;
+	
+	/** The sinal 1. */
 	static String sinal1;
+	
+	/** The sinal 2. */
 	static String sinal2;
+	
+	/** The operador 1. */
 	static String operador1;
+	
+	/** The valor 1. */
 	static String valor1;
+	
+	/** The valor 2. */
 	static String valor2;
 
+	/** The met G. */
 	static JComboBox metG;
+	
+	/** The signal 3. */
 	static JComboBox signal3;
+	
+	/** The valor 4. */
 	static JTextField valor4;
+	
+	/** The op 2. */
 	static JComboBox op2;
+	
+	/** The metrica G 2. */
 	static JComboBox metricaG2;
+	
+	/** The signal 4. */
 	static JComboBox signal4;
+	
+	/** The valor 5. */
 	static JTextField valor5;
 
-
+	/** The historico. */
 	ArrayList<String> historico = new ArrayList<String>();
 
+	/** The panel 2. */
 	private JPanel panel2;
 
 	public GUI() {
@@ -144,6 +260,12 @@ public class GUI extends JFrame{
 
 		btnNewButton_1 = new JButton("Extrair Métricas");
 		btnNewButton_1.addActionListener(new ActionListener() {
+			
+			/**
+			 * Action performed.
+			 *
+			 * @param e the e
+			 */
 			public void actionPerformed(ActionEvent e) {
 
 				int result;
@@ -169,9 +291,7 @@ public class GUI extends JFrame{
 				}			
 			}
 		});
-		
-		
-		
+
 		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
 		gbc_btnNewButton_1.insets = new Insets(0, 0, 5, 0);
 		gbc_btnNewButton_1.gridx = 0;
@@ -185,17 +305,21 @@ public class GUI extends JFrame{
 		buttonPanel.add(Import, BorderLayout.EAST);
 		Import.addActionListener(new ActionListener() {
 
+			/**
+			 * Action performed.
+			 *
+			 * @param arg0 the arg 0
+			 */
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 
-					jChooserExcel = new JFileChooser(); 
-					jChooserExcel.setDialogTitle(choosertitle);
-					jChooserExcel.setFileSelectionMode(JFileChooser.FILES_ONLY);
-					jChooserExcel.setAcceptAllFileFilterUsed(false);
-					jChooserExcel.showOpenDialog(null);
+				jChooserExcel = new JFileChooser(); 
+				jChooserExcel.setDialogTitle(choosertitle);
+				jChooserExcel.setFileSelectionMode(JFileChooser.FILES_ONLY);
+				jChooserExcel.setAcceptAllFileFilterUsed(false);
+				jChooserExcel.showOpenDialog(null);
 
-					File file = jChooserExcel.getSelectedFile();
-
+				File file = jChooserExcel.getSelectedFile();
 
 				if (!file.getName().endsWith("xlsx")) {
 
@@ -223,6 +347,11 @@ public class GUI extends JFrame{
 		btnNewButton = new JButton("Definir Regras");
 		btnNewButton.addActionListener(new ActionListener() {
 
+			/**
+			 * Action performed.
+			 *
+			 * @param e the e
+			 */
 			public void actionPerformed(ActionEvent e) {
 
 				DefaultTableModel model = (DefaultTableModel) table.getModel();
@@ -243,7 +372,6 @@ public class GUI extends JFrame{
 						metL1.addItem("NOM_class");
 						metL1.addItem("WMC_class");
 						panel2.add(metL1);
-
 
 						sinL1 = new JComboBox();
 						sinL1.addItem(">");
@@ -302,16 +430,11 @@ public class GUI extends JFrame{
 
 						panel2.revalidate();
 						panel2.repaint();
-
-
 					}
 				});
 
 				godC.setBackground(Color.LIGHT_GRAY);
 				panel.add(godC);
-
-
-				
 
 				JButton submitGodC = new  JButton ("Submeter God Class");
 				submitGodC.addActionListener(new ActionListener() {
@@ -328,7 +451,6 @@ public class GUI extends JFrame{
 						metricaL3 = metL3.getSelectedItem().toString();
 						sinalL3 = sinL3.getSelectedItem().toString();
 						valorL3 = valL3.getText();
-
 
 						if (operadorL1 == "NULL") {
 							String rule = (metricaL1 + " " + sinalL1 + " " + valorL1);
@@ -350,7 +472,6 @@ public class GUI extends JFrame{
 							panel3.add(checkRule);
 							panel3.revalidate();
 							panel3.repaint();
-
 						}
 
 						if (operadorL1 != "NULL" && operadorL2 != "NULL") {
@@ -363,15 +484,12 @@ public class GUI extends JFrame{
 							panel3.add(checkRule);
 							panel3.revalidate();
 							panel3.repaint();
-
 						}								
-
-
 					}
 				});
+
 				submitGodC.setBackground(Color.LIGHT_GRAY);
 				panel.add(submitGodC);
-				
 
 				JButton longM = new JButton("Regra LongMethod");
 				longM.addActionListener(new ActionListener() {
@@ -424,7 +542,6 @@ public class GUI extends JFrame{
 				longM.setBackground(Color.LIGHT_GRAY);
 				panel.add(longM);
 
-
 				JButton submitLongMethod = new JButton("Submeter Long Method");
 				submitLongMethod.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -436,7 +553,6 @@ public class GUI extends JFrame{
 						metrica2 = metricaG2.getSelectedItem().toString();
 						sinal2 = signal4.getSelectedItem().toString();
 						valor2 = valor5.getText();
-
 
 						if (operador1 == "NULL") {
 							String rule = (metrica1 + " " + sinal1 + " " + valor1);
@@ -458,14 +574,11 @@ public class GUI extends JFrame{
 							panel3.add(checkRule);
 							panel3.revalidate();
 							panel3.repaint();
-
 						}
-
 					}
 				});
 				submitLongMethod.setBackground(Color.LIGHT_GRAY);
 				panel.add(submitLongMethod);
-
 
 				JButton detectCodeSmell = new JButton ("Detectar Code Smell");
 				detectCodeSmell.addActionListener(new ActionListener() {
@@ -475,25 +588,19 @@ public class GUI extends JFrame{
 
 						if (regra.indexOf("method") != -1) {
 							RulesLongMethod.rules(checkRule.getActionCommand());
-							System.out.println(checkRule.getActionCommand());
-
 						}
 
 						if (regra.indexOf("class") != -1) {
 							RulesGodClass.rules(checkRule.getActionCommand());
-							System.out.println(checkRule.getActionCommand());
-
 						}
 					}
 				});
 				detectCodeSmell.setBackground(Color.LIGHT_GRAY);
 				panel3.add(detectCodeSmell);
 
-
 				JButton updateHistorico = new JButton("Guardar Regras");
 				updateHistorico.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-
 						history.updateHistoric(desktopDir+"\\historico.txt", historico);	
 					}
 
@@ -512,31 +619,23 @@ public class GUI extends JFrame{
 							checkRule = new JCheckBox(s); 
 
 							panel3.add(checkRule);
-							
+
 							panel3.revalidate();
 							panel3.repaint();
 						}
 					}
-
 				});
 				JButton analyseValue = new JButton("Analisar Qualidade de CodeSmells"); 
 				analyseValue.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						
-						
-						
 						String regra = checkRule.getActionCommand();
 
 						if (regra.indexOf("method") != -1) {
 							RulesLongMethod.rules(checkRule.getActionCommand());
-							System.out.println(checkRule.getActionCommand());
-
 						}
 
 						if (regra.indexOf("class") != -1) {
 							RulesGodClass.rules(checkRule.getActionCommand());
-							System.out.println(checkRule.getActionCommand());
-
 						}
 						try {
 							jChooserExcel = new JFileChooser(); 
@@ -548,62 +647,57 @@ public class GUI extends JFrame{
 							File file = jChooserExcel.getSelectedFile();
 
 							if (regra.indexOf("class") != -1){
-								
-							CodeSmellQualityClass.compareValues(file.toString());
-							
-							String vn = String.valueOf(CodeSmellQualityClass.VN);
-							String fn = String.valueOf(CodeSmellQualityClass.FN);
-							String vp = String.valueOf(CodeSmellQualityClass.VP);
-							String fp = String.valueOf(CodeSmellQualityClass.FP);
-							
-							JLabel VN = new JLabel("Verdadeiros Negativos: " + vn);
-							JLabel VP = new JLabel("Verdadeiros Positivos: " + vp);
-							JLabel FP = new JLabel("Falsos Positivos: " + fp);
-							JLabel FN = new JLabel("Falsos Negativos: " + fn);
-							
-							panel4.add(VN);
-							panel4.add(VP);
-							panel4.add(FP);
-							panel4.add(FN);
-							
-							panel4.revalidate();
-							panel4.repaint();
-							
+
+								CodeSmellQualityClass.compareValues(file.toString());
+
+								String vn = String.valueOf(CodeSmellQualityClass.VN);
+								String fn = String.valueOf(CodeSmellQualityClass.FN);
+								String vp = String.valueOf(CodeSmellQualityClass.VP);
+								String fp = String.valueOf(CodeSmellQualityClass.FP);
+
+								JLabel VN = new JLabel("Verdadeiros Negativos: " + vn);
+								JLabel VP = new JLabel("Verdadeiros Positivos: " + vp);
+								JLabel FP = new JLabel("Falsos Positivos: " + fp);
+								JLabel FN = new JLabel("Falsos Negativos: " + fn);
+
+								panel4.add(VN);
+								panel4.add(VP);
+								panel4.add(FP);
+								panel4.add(FN);
+
+								panel4.revalidate();
+								panel4.repaint();
+
 							}
 							if (regra.indexOf("method") != -1) {		
-							CodeSmellQualityMethod.compareValues(file.toString());
-							
-							String vn = String.valueOf(CodeSmellQualityMethod.VN);
-							String fn = String.valueOf(CodeSmellQualityMethod.FN);
-							String vp = String.valueOf(CodeSmellQualityMethod.VP);
-							String fp = String.valueOf(CodeSmellQualityMethod.FP);
-							
-							JLabel VN = new JLabel("Verdadeiros Negativos: " + vn);
-							JLabel VP = new JLabel("Verdadeiros Positivos: " + vp);
-							JLabel FP = new JLabel("Falsos Positivos: " + fp);
-							JLabel FN = new JLabel("Falsos Negativos: " + fn);
-							
-							panel4.add(VN);
-							panel4.add(VP);
-							panel4.add(FP);
-							panel4.add(FN);
-							
-							panel4.revalidate();
-							panel4.repaint();
+								CodeSmellQualityMethod.compareValues(file.toString());
+
+								String vn = String.valueOf(CodeSmellQualityMethod.VN);
+								String fn = String.valueOf(CodeSmellQualityMethod.FN);
+								String vp = String.valueOf(CodeSmellQualityMethod.VP);
+								String fp = String.valueOf(CodeSmellQualityMethod.FP);
+
+								JLabel VN = new JLabel("Verdadeiros Negativos: " + vn);
+								JLabel VP = new JLabel("Verdadeiros Positivos: " + vp);
+								JLabel FP = new JLabel("Falsos Positivos: " + fp);
+								JLabel FN = new JLabel("Falsos Negativos: " + fn);
+
+								panel4.add(VN);
+								panel4.add(VP);
+								panel4.add(FP);
+								panel4.add(FN);
+
+								panel4.revalidate();
+								panel4.repaint();
 							}
-							
-							
-							
 						} catch (IOException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
-
 					}	
 				});
 				analyseValue.setBackground(Color.LIGHT_GRAY);
 				panel3.add(analyseValue);
-
 
 				verHistorico.setBackground(Color.LIGHT_GRAY);
 				panel.add(verHistorico);
@@ -624,30 +718,34 @@ public class GUI extends JFrame{
 			}		
 		});
 
-
 		btnNewButton.setBackground(Color.LIGHT_GRAY);
 		buttonPanel.add(btnNewButton);
-		
+
 		JButton caracGerais = new JButton("Características Gerais");
 		caracGerais.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
 			
+			/**
+			 * Action performed.
+			 *
+			 * @param e the e
+			 */
+			public void actionPerformed(ActionEvent e) {
+
 				JLabel numP = new JLabel ("Número de Packages: " + String.valueOf(Leitura_Projetos.packages.size()));
 				JLabel numC = new JLabel ("Número de Classes: " + String.valueOf(Leitura_Projetos.contadorClasses));
 				JLabel numM = new JLabel ("Número de Métodos: " + String.valueOf(LOC_method.numMethods));
 				JLabel numL = new JLabel ("Número de Linhas: " + String.valueOf(LOC_class.numLines));	
-				
+
 				panelCarac.add(numP);
 				panelCarac.add(numC);
 				panelCarac.add(numM);
 				panelCarac.add(numL);
-				
+
 				panelCarac.revalidate();
 				panelCarac.repaint();
 			}
-		
 		});
-	
+
 		caracGerais.setBackground(Color.LIGHT_GRAY);
 		buttonPanel.add(caracGerais);
 
@@ -658,7 +756,7 @@ public class GUI extends JFrame{
 		gbc_scrollPane.gridx = 0;
 		gbc_scrollPane.gridy = 4;
 		getContentPane().add(scrollPane, gbc_scrollPane);
-		
+
 		panelCarac = new JPanel();
 		GridBagConstraints gbc_panelCarac = new GridBagConstraints();
 		gbc_panelCarac.insets = new Insets(0, 0, 5, 0);
@@ -689,7 +787,6 @@ public class GUI extends JFrame{
 		setResizable(true);
 		setVisible(true);
 
-
 		panel3 = new JPanel();
 		GridBagConstraints gbc_panel3 = new GridBagConstraints();
 		gbc_panel3.insets = new Insets(0, 0, 5, 0);
@@ -700,8 +797,7 @@ public class GUI extends JFrame{
 		setSize(800, 700);
 		setResizable(true);
 		setVisible(true);
-		
-		
+
 		panel4 = new JPanel();
 		GridBagConstraints gbc_panel4 = new GridBagConstraints();
 		gbc_panel4.insets = new Insets(0, 0, 5, 0);
@@ -714,10 +810,21 @@ public class GUI extends JFrame{
 		setVisible(true);
 	}
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main (String args[]) {
 		new GUI();
 	}
 
+	/**
+	 * Checks if is numeric.
+	 *
+	 * @param strNum the str num
+	 * @return true, if is numeric
+	 */
 	public static boolean isNumeric(String strNum) {
 		if (strNum == null) {
 			return false;

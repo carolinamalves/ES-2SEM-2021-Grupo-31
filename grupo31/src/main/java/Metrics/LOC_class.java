@@ -1,33 +1,69 @@
-package Grupo31.g31;
+package Metrics;
 
 import java.io.*;
 import java.util.ArrayList;
 
-class LOC_class {
+// TODO: Auto-generated Javadoc
+//@author grupo 31
 
+public class LOC_class {
+
+	/** The file. */
 	static String file;
 
+	/** The name. */
 	static File name;
 
+	/** The lines. */
 	static int lines;
+	
+	/** The empty lines. */
 	static int emptyLines;
+	
+	/** The total lines. */
 	static int totalLines;
+	
+	/** The package names. */
 	ArrayList<String> packageNames = new ArrayList<String>();
-	String s1;
+	
+	/** The s 1. */
+	public String s1;
+	
+	/** The num lines. */
 	public static int numLines;
 
+	/**
+	 * Instantiates a new LO C class.
+	 *
+	 * @param file the file
+	 */
 	public 	LOC_class(String file){
 		this.file = file;
 	}
 
+	/**
+	 * Gets the total lines.
+	 *
+	 * @return the total lines
+	 */
 	public int getTotalLines() {
 		return totalLines;
 	}
 
+	/**
+	 * Sets the total lines.
+	 *
+	 * @param totalLines the new total lines
+	 */
 	public static void setTotalLines(int totalLines) {
 		LOC_class.totalLines = totalLines;
 	}
 
+	/**
+	 * Contar.
+	 *
+	 * @return the int
+	 */
 	public int Contar() {
 		lines = 0;
 		emptyLines = 0;

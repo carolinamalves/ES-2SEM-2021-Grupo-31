@@ -1,49 +1,66 @@
-package Grupo31.g31;
+package Rules;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
-import javax.swing.JTable;
+import Support.Create_Method;
+import Support.Method;
 
-import org.apache.poi.util.SystemOutLogger;
+// TODO: Auto-generated Javadoc
+//@author grupo 31
 
 public class RulesGodClass {
 
+	/** The a. */
 	static ArrayList<Method> a = Create_Method.a;
+	
+	/** The loc C. */
 	static String locC = "LOC_class";
+	
+	/** The nom C. */
 	static String nomC = "NOM_class";
+	
+	/** The wmc C. */
 	static String wmcC = "WMC_class";
+	
+	/** The maior. */
 	static String maior = ">";
+	
+	/** The menor. */
 	static String menor = "<";
+	
+	/** The and. */
 	static String and = "AND";
+	
+	/** The or. */
 	static String or = "OR";
 	
-	static ArrayList <String> godValues = new ArrayList <String> (); 
+	/** The god values. */
+	public static ArrayList <String> godValues = new ArrayList <String> (); 
+	
+	/** The it. */
 	static int it;
 	
+	/**
+	 * Rules.
+	 *
+	 * @param rule the rule
+	 */
 	public static void rules (String rule) {
 
 		String [] splitRule = rule.split(" ");
-		System.out.println("REGRA" + splitRule.length);
-		
 
 		//so com uma metrica
 		if (splitRule.length == 3) {
 
 			//locCLass > ...
 			if (splitRule[0].equals(locC) && splitRule[1].equals(maior)) {
-				it=0;
+				it = 0;
 				for (Method m : a) { 
 
-
 					if( m.getLoc_Class() > Integer.parseInt(splitRule[2])) {
-						System.out.println(m.getName_class() + ":" + "TRUEEEE");
 						godValues.add("TRUE");
 						godValues.set(it, "TRUE");
-						
-
 					}else {
-						System.out.println(m.getName_class() + ":" + "FALSEEEE");
 						godValues.add("FALSE");
 						godValues.set(it, "FALSE");
 					}
@@ -57,16 +74,10 @@ public class RulesGodClass {
 				for (Method m : a) { 
 
 					if( m.getLoc_Class() < Integer.parseInt(splitRule[2])) {
-						System.out.println(m.getName_class() + ":" + "TRUEEEE");
 						godValues.add("TRUE");
-						
-
-					}else {
-						System.out.println(m.getName_class() + ":" + "FALSEEEE");
-					
+					}else {	
 						godValues.add("FALSE");
 					}
-
 				}	
 			}
 
@@ -76,15 +87,11 @@ public class RulesGodClass {
 				for (Method m : a) { 
 
 					if( m.getNom_Class() > Integer.parseInt(splitRule[2])) {
-						System.out.println(m.getName_class() + ":" + "TRUEEEE");
 						godValues.add("TRUE");
 						 
-					}else {
-						System.out.println(m.getName_class() + ":" + "FALSEEEE");
-					  
+					}else {					  
 						godValues.add("FALSE");
 					}
-
 				}	
 			}
 
@@ -92,17 +99,12 @@ public class RulesGodClass {
 			if(splitRule[0].equals(nomC) && splitRule[1].equals(menor)){
 
 				for (Method m : a) { 
-
 					if( m.getNom_Class() < Integer.parseInt(splitRule[2])) {
-						System.out.println(m.getName_class() + ":" + "TRUEEEE");
 						godValues.add("TRUE");
 				
-					}else {
-						System.out.println(m.getName_class() + ":" + "FALSEEEE");
-						
+					}else {	
 						godValues.add("FALSE");
 					}
-
 				}	
 			}
 
@@ -112,16 +114,10 @@ public class RulesGodClass {
 				for (Method m : a) { 
 
 					if( m.getWmc_Class() > Integer.parseInt(splitRule[2])) {
-						System.out.println(m.getName_class() + ":" + "TRUEEEE");
 						godValues.add("TRUE");
- 
-
 					}else {
-						System.out.println(m.getName_class() + ":" + "FALSEEEE");
-					 
 						godValues.add("FALSE");
 					}
-
 				}	
 			}
 
@@ -131,19 +127,13 @@ public class RulesGodClass {
 				for (Method m : a) { 
 
 					if( m.getWmc_Class() < Integer.parseInt(splitRule[2])) {
-						System.out.println(m.getName_class() + ":" + "TRUEEEE");
 						godValues.add("TRUE");
-					 
-
 					}else {
-						System.out.println(m.getName_class() + ":" + "FALSEEEE");
 						godValues.add("FALSE");
 					}
-
 				}	
 			}
 		}
-
 		//duas metricas
 		if (splitRule.length == 7) {
 
@@ -155,18 +145,11 @@ public class RulesGodClass {
 				for (Method m : a) {
 
 					if( m.getLoc_Class() > Integer.parseInt(splitRule[2]) && m.getNom_Class() > Integer.parseInt(splitRule[6])) {
-						System.out.println(m.getName_class() + ":" + "TRUEEEE");
 						godValues.add("TRUE");
-				
-
 					}else {
-						System.out.println(m.getName_class() + ":" + "FALSEEEE");
-					 
 						godValues.add("FALSE");
 					}
-
 				}
-
 			}
 
 			//locCLass > .. && nomClass < ...
@@ -177,20 +160,12 @@ public class RulesGodClass {
 				for (Method m : a) {
 
 					if( m.getLoc_Class() > Integer.parseInt(splitRule[2]) && m.getNom_Class() < Integer.parseInt(splitRule[6])) {
-						System.out.println(m.getName_class() + ":" + "TRUEEEE");
 						godValues.add("TRUE");
-					
-
 					}else {
-						System.out.println(m.getName_class() + ":" + "FALSEEEE");
-					
 						godValues.add("FALSE");
 					}
-
 				}
-
 			}
-
 			//locClass < ... && nomClass > ...
 			if(splitRule[0].equals(locC) && splitRule[1].equals(menor) &&
 					splitRule[3].equals(and) && splitRule[4].equals(nomC) && splitRule[5].equals(maior) || splitRule[0].equals(nomC) && splitRule[1].equals(maior) &&  
@@ -199,18 +174,11 @@ public class RulesGodClass {
 				for (Method m : a) {
 
 					if( m.getLoc_Class() < Integer.parseInt(splitRule[2]) && m.getNom_Class() > Integer.parseInt(splitRule[6])) {
-						System.out.println(m.getName_class() + ":" + "TRUEEEE");
 						godValues.add("TRUE");
-					 
-
 					}else {
-						System.out.println(m.getName_class() + ":" + "FALSEEEE");
-				 
 						godValues.add("FALSE");
 					}
-
 				}
-
 			}
 
 			// locClass < ... && nomClass < ... 
@@ -221,18 +189,11 @@ public class RulesGodClass {
 				for (Method m : a) {
 
 					if( m.getLoc_Class() < Integer.parseInt(splitRule[2]) && m.getNom_Class() < Integer.parseInt(splitRule[6])) {
-						System.out.println(m.getName_class() + ":" + "TRUEEEE");
 						godValues.add("TRUE");
-					 
-
 					}else {
-						System.out.println(m.getName_class() + ":" + "FALSEEEE");
-					 
 						godValues.add("FALSE");
 					}
-
 				}
-
 			}
 
 			//locClass > ... || nomC > ...
@@ -243,20 +204,12 @@ public class RulesGodClass {
 				for (Method m : a) {
 
 					if( m.getLoc_Class() > Integer.parseInt(splitRule[2]) || m.getNom_Class() > Integer.parseInt(splitRule[6])) {
-						System.out.println(m.getName_class() + ":" + "TRUEEEE");
 						godValues.add("TRUE");
-				
-
 					}else {
-						System.out.println(m.getName_class() + ":" + "FALSEEEE");
-				
 						godValues.add("FALSE");
 					}
-
 				}
-
 			}
-
 			//locCLass > .. || nomClass < ...
 			if(splitRule[0].equals(locC) && splitRule[1].equals(maior) &&
 					splitRule[3].equals(or) && splitRule[4].equals(nomC) && splitRule[5].equals(menor) || splitRule[0].equals(nomC) && splitRule[1].equals(menor) &&  
@@ -265,18 +218,11 @@ public class RulesGodClass {
 				for (Method m : a) {
 
 					if( m.getLoc_Class() > Integer.parseInt(splitRule[2]) || m.getNom_Class() < Integer.parseInt(splitRule[6])) {
-						System.out.println(m.getName_class() + ":" + "TRUEEEE");
 						godValues.add("TRUE");
-				 
-
 					}else {
-						System.out.println(m.getName_class() + ":" + "FALSEEEE");
-					 
 						godValues.add("FALSE");
 					}
-
 				}
-
 			}
 
 			//locClass < ... || nomClass > ...
@@ -287,18 +233,11 @@ public class RulesGodClass {
 				for (Method m : a) {
 
 					if( m.getLoc_Class() < Integer.parseInt(splitRule[2]) || m.getNom_Class() > Integer.parseInt(splitRule[6])) {
-						System.out.println(m.getName_class() + ":" + "TRUEEEE");
 						godValues.add("TRUE");
-				 
-
 					}else {
-						System.out.println(m.getName_class() + ":" + "FALSEEEE");
-		 
 						godValues.add("FALSE");
 					}
-
 				}
-
 			}
 
 			// locClass < ... || nomClass < ... 
@@ -309,24 +248,12 @@ public class RulesGodClass {
 				for (Method m : a) {
 
 					if( m.getLoc_Class() < Integer.parseInt(splitRule[2]) || m.getNom_Class() < Integer.parseInt(splitRule[6])) {
-						System.out.println(m.getName_class() + ":" + "TRUEEEE");
 						godValues.add("TRUE");
-					 
-
 					}else {
-						System.out.println(m.getName_class() + ":" + "FALSEEEE");
-				 
 						godValues.add("FALSE");
 					}
-
 				}
-
 			}
-
-
-
-
-
 			//locClass > ... && wmcClass > ...
 			if(splitRule[0].equals(locC) && splitRule[1].equals(maior) && splitRule[3].equals(and) 
 					&& splitRule[4].equals(wmcC) && splitRule[5].equals(maior) || splitRule[0].equals(wmcC) && splitRule[1].equals(maior) 
@@ -335,18 +262,11 @@ public class RulesGodClass {
 				for (Method m : a) {
 
 					if( m.getLoc_Class() > Integer.parseInt(splitRule[2]) && m.getWmc_Class() > Integer.parseInt(splitRule[6])) {
-						System.out.println(m.getName_class() + ":" + "TRUEEEE");
 						godValues.add("TRUE");
-						 
-
 					}else {
-						System.out.println(m.getName_class() + ":" + "FALSEEEE");
-				 
 						godValues.add("FALSE");
 					}
-
 				}
-
 			}
 
 			//locCLass > .. && wmcClass < ...
@@ -357,18 +277,11 @@ public class RulesGodClass {
 				for (Method m : a) {
 
 					if( m.getLoc_Class() > Integer.parseInt(splitRule[2]) && m.getWmc_Class() < Integer.parseInt(splitRule[6])) {
-						System.out.println(m.getName_class() + ":" + "TRUEEEE");
 						godValues.add("TRUE");
-	 
-
 					}else {
-						System.out.println(m.getName_class() + ":" + "FALSEEEE");
-			 
 						godValues.add("FALSE");
 					}
-
 				}
-
 			}
 
 			//locClass < ... && wmcClass > ...
@@ -379,17 +292,11 @@ public class RulesGodClass {
 				for (Method m : a) {
 
 					if( m.getLoc_Class() < Integer.parseInt(splitRule[2]) && m.getWmc_Class() > Integer.parseInt(splitRule[6])) {
-						System.out.println(m.getName_class() + ":" + "TRUEEEE");
 						godValues.add("TRUE"); 
-
 					}else {
-						System.out.println(m.getName_class() + ":" + "FALSEEEE");
-				 
 						godValues.add("FALSE");
 					}
-
 				}
-
 			}
 
 			// locClass < ... && wmcClass < ... 
@@ -400,18 +307,11 @@ public class RulesGodClass {
 				for (Method m : a) {
 
 					if( m.getLoc_Class() < Integer.parseInt(splitRule[2]) && m.getWmc_Class() < Integer.parseInt(splitRule[6])) {
-						System.out.println(m.getName_class() + ":" + "TRUEEEE");
 						godValues.add("TRUE");
-				 
-
 					}else {
-						System.out.println(m.getName_class() + ":" + "FALSEEEE");
-					 
 						godValues.add("FALSE");
 					}
-
 				}
-
 			}
 
 			//locClass > ... || wmcClass > ...
@@ -422,18 +322,11 @@ public class RulesGodClass {
 				for (Method m : a) {
 
 					if( m.getLoc_Class() > Integer.parseInt(splitRule[2]) || m.getWmc_Class() > Integer.parseInt(splitRule[6])) {
-						System.out.println(m.getName_class() + ":" + "TRUEEEE");
-
 						godValues.add("TRUE");
-						 
 					}else {
-						System.out.println(m.getName_class() + ":" + "FALSEEEE");
-					 
 						godValues.add("FALSE");
 					}
-
 				}
-
 			}
 
 			//locCLass > .. || wmcClass < ...
@@ -444,18 +337,11 @@ public class RulesGodClass {
 				for (Method m : a) {
 
 					if( m.getLoc_Class() > Integer.parseInt(splitRule[2]) || m.getWmc_Class() < Integer.parseInt(splitRule[6])) {
-						System.out.println(m.getName_class() + ":" + "TRUEEEE");
 						godValues.add("TRUE");
-						
-
 					}else {
-						System.out.println(m.getName_class() + ":" + "FALSEEEE");
-					 
 						godValues.add("FALSE");
 					}
-
 				}
-
 			}
 
 			//locClass < ... || wmcClass > ...
@@ -466,18 +352,11 @@ public class RulesGodClass {
 				for (Method m : a) {
 
 					if( m.getLoc_Class() < Integer.parseInt(splitRule[2]) || m.getWmc_Class() > Integer.parseInt(splitRule[6])) {
-						System.out.println(m.getName_class() + ":" + "TRUEEEE");
 						godValues.add("TRUE");
-					 
-
 					}else {
-						System.out.println(m.getName_class() + ":" + "FALSEEEE");
-				 
 						godValues.add("FALSE");
 					}
-
 				}
-
 			}
 
 			// locClass < ... || wmcClass < ... 
@@ -488,22 +367,12 @@ public class RulesGodClass {
 				for (Method m : a) {
 
 					if( m.getLoc_Class() < Integer.parseInt(splitRule[2]) || m.getWmc_Class() < Integer.parseInt(splitRule[6])) {
-						System.out.println(m.getName_class() + ":" + "TRUEEEE");
 						godValues.add("TRUE");
-				 
-
 					}else {
-						System.out.println(m.getName_class() + ":" + "FALSEEEE");
-				 
 						godValues.add("FALSE");
 					}
-
 				}
-
 			}
-
-
-
 
 			//nomC > ... && wmcClass > ...
 			if(splitRule[0].equals(nomC) && splitRule[1].equals(maior) && splitRule[3].equals(and) 
@@ -513,18 +382,11 @@ public class RulesGodClass {
 				for (Method m : a) {
 
 					if( m.getNom_Class() > Integer.parseInt(splitRule[2]) && m.getWmc_Class() > Integer.parseInt(splitRule[6])) {
-						System.out.println(m.getName_class() + ":" + "TRUEEEE");
 						godValues.add("TRUE");
-					 
-
 					}else {
-						System.out.println(m.getName_class() + ":" + "FALSEEEE");
-				 
 						godValues.add("FALSE");
 					}
-
 				}
-
 			}
 
 			//nomC > .. && wmcClass < ...
@@ -535,18 +397,11 @@ public class RulesGodClass {
 				for (Method m : a) {
 
 					if( m.getNom_Class() > Integer.parseInt(splitRule[2]) && m.getWmc_Class() < Integer.parseInt(splitRule[6])) {
-						System.out.println(m.getName_class() + ":" + "TRUEEEE");
 						godValues.add("TRUE");
-				 
-
 					}else {
-						System.out.println(m.getName_class() + ":" + "FALSEEEE");
-					 
 						godValues.add("FALSE");
 					}
-
 				}
-
 			}
 
 			//nomClass < ... && wmcClass > ...
@@ -557,18 +412,11 @@ public class RulesGodClass {
 				for (Method m : a) {
 
 					if( m.getNom_Class() < Integer.parseInt(splitRule[2]) && m.getWmc_Class() > Integer.parseInt(splitRule[6])) {
-						System.out.println(m.getName_class() + ":" + "TRUEEEE");
 						godValues.add("TRUE");
-					 
-
 					}else {
-						System.out.println(m.getName_class() + ":" + "FALSEEEE");
-					 
 						godValues.add("FALSE");
 					}
-
 				}
-
 			}
 
 			// nomClass < ... && wmcClass < ... 
@@ -579,17 +427,11 @@ public class RulesGodClass {
 				for (Method m : a) {
 
 					if( m.getNom_Class() < Integer.parseInt(splitRule[2]) && m.getWmc_Class() < Integer.parseInt(splitRule[6])) {
-						System.out.println(m.getName_class() + ":" + "TRUEEEE");
 						godValues.add("TRUE");
-					 
 					}else {
-						System.out.println(m.getName_class() + ":" + "FALSEEEE");
-				 
 						godValues.add("FALSE");
 					}
-
 				}
-
 			}
 
 			//nomClass > ... || wmcClass > ...
@@ -600,18 +442,11 @@ public class RulesGodClass {
 				for (Method m : a) {
 
 					if( m.getLoc_Class() > Integer.parseInt(splitRule[2]) || m.getWmc_Class() > Integer.parseInt(splitRule[6])) {
-						System.out.println(m.getName_class() + ":" + "TRUEEEE");
 						godValues.add("TRUE");
-					 
-
 					}else {
-						System.out.println(m.getName_class() + ":" + "FALSEEEE");
-				 
 						godValues.add("FALSE");
 					}
-
 				}
-
 			}
 
 			//nomC > .. || wmcClass < ...
@@ -622,17 +457,11 @@ public class RulesGodClass {
 				for (Method m : a) {
 
 					if(m.getNom_Class() > Integer.parseInt(splitRule[2]) || m.getWmc_Class() < Integer.parseInt(splitRule[6])) {
-						System.out.println(m.getName_class() + ":" + "TRUEEEE");
 						godValues.add("TRUE");
-					 
 					}else {
-						System.out.println(m.getName_class() + ":" + "FALSEEEE");
-				 
 						godValues.add("FALSE");
 					}
-
 				}
-
 			}
 
 			//nomClass < ... || wmcClass > ...
@@ -643,17 +472,11 @@ public class RulesGodClass {
 				for (Method m : a) {
 
 					if( m.getNom_Class() < Integer.parseInt(splitRule[2]) || m.getWmc_Class() > Integer.parseInt(splitRule[6])) {
-						System.out.println(m.getName_class() + ":" + "TRUEEEE");
 						godValues.add("TRUE");
-					 
 					}else {
-						System.out.println(m.getName_class() + ":" + "FALSEEEE");
-					 
 						godValues.add("FALSE");
 					}
-
 				}
-
 			}
 
 			// nomClass < ... || wmcClass < ... 
@@ -664,18 +487,11 @@ public class RulesGodClass {
 				for (Method m : a) {
 
 					if( m.getNom_Class() < Integer.parseInt(splitRule[2]) || m.getWmc_Class() < Integer.parseInt(splitRule[6])) {
-						System.out.println(m.getName_class() + ":" + "TRUEEEE");
 						godValues.add("TRUE");
-			 
-
 					}else {
-						System.out.println(m.getName_class() + ":" + "FALSEEEE");
-				 
 						godValues.add("FALSE");
 					}
-
 				}
-
 			}
 		}
 
@@ -700,16 +516,10 @@ public class RulesGodClass {
 				for (Method m: a) {
 
 					if (m.getLoc_Class() > Integer.parseInt(splitRule[2]) && m.getNom_Class() > Integer.parseInt(splitRule[6]) && m.getWmc_Class() > Integer.parseInt(splitRule[10]) ) {
-						System.out.println("TRUE");
 						godValues.add("TRUE");
-			 
 					}else{
-						System.out.println("FALSE");
-				 
 						godValues.add("FALSE");
 					}
-
-
 				}
 			}
 
@@ -731,16 +541,10 @@ public class RulesGodClass {
 				for (Method m: a) {
 
 					if (m.getLoc_Class() > Integer.parseInt(splitRule[2]) && m.getNom_Class() > Integer.parseInt(splitRule[6]) && m.getWmc_Class() < Integer.parseInt(splitRule[10]) ) {
-						System.out.println("TRUE");
 						godValues.add("TRUE");
-				 
 					}else{
-						System.out.println("FALSE");
-					 
 						godValues.add("FALSE");
 					}
-
-
 				}
 			}
 
@@ -758,20 +562,13 @@ public class RulesGodClass {
 					splitRule[0].equals(wmcC) && splitRule[1].equals(maior) && splitRule[3].equals(and) && splitRule[4].equals(locC) &&
 					splitRule[5].equals(maior) && splitRule[7].equals(and) && splitRule[8].equals(nomC) && splitRule[9].equals(menor)) {
 
-
 				for (Method m: a) {
 
 					if (m.getLoc_Class() > Integer.parseInt(splitRule[2]) && m.getNom_Class() < Integer.parseInt(splitRule[6]) && m.getWmc_Class() > Integer.parseInt(splitRule[10]) ) {
-						System.out.println("TRUE");
 						godValues.add("TRUE");
-						 
 					}else{
-						System.out.println("FALSE");
-					 
 						godValues.add("FALSE");
 					}
-
-
 				}
 			}
 
@@ -789,20 +586,13 @@ public class RulesGodClass {
 					splitRule[0].equals(wmcC) && splitRule[1].equals(maior) && splitRule[3].equals(and) && splitRule[4].equals(locC) &&
 					splitRule[5].equals(menor) && splitRule[7].equals(and) && splitRule[8].equals(nomC) && splitRule[9].equals(maior)) {
 
-
 				for (Method m: a) {
 
 					if (m.getLoc_Class() < Integer.parseInt(splitRule[2]) && m.getNom_Class() > Integer.parseInt(splitRule[6]) && m.getWmc_Class() > Integer.parseInt(splitRule[10]) ) {
-						System.out.println("TRUE");
 						godValues.add("TRUE");
-		 
 					}else{
-						System.out.println("FALSE");
-					 
 						godValues.add("FALSE");
 					}
-
-
 				}
 			}
 
@@ -820,20 +610,12 @@ public class RulesGodClass {
 					splitRule[0].equals(wmcC) && splitRule[1].equals(menor) && splitRule[3].equals(and) && splitRule[4].equals(locC) &&
 					splitRule[5].equals(menor) && splitRule[7].equals(and) && splitRule[8].equals(nomC) && splitRule[9].equals(menor)) {
 
-
 				for (Method m: a) {
-
 					if (m.getLoc_Class() < Integer.parseInt(splitRule[2]) && m.getNom_Class() < Integer.parseInt(splitRule[6]) && m.getWmc_Class() < Integer.parseInt(splitRule[10]) ) {
-						System.out.println("TRUE");
 						godValues.add("TRUE");
-						 
 					}else{
-						System.out.println("FALSE");
-					 
 						godValues.add("FALSE");
 					}
-
-
 				}
 			}
 
@@ -855,16 +637,10 @@ public class RulesGodClass {
 				for (Method m: a) {
 
 					if (m.getLoc_Class() > Integer.parseInt(splitRule[2]) && m.getNom_Class() < Integer.parseInt(splitRule[6]) && m.getWmc_Class() < Integer.parseInt(splitRule[10]) ) {
-						System.out.println("TRUE");
 						godValues.add("TRUE");
-						 
 					}else{
-						System.out.println("FALSE");
-				 
 						godValues.add("FALSE");
 					}
-
-
 				}
 			}
 
@@ -882,20 +658,13 @@ public class RulesGodClass {
 					splitRule[0].equals(wmcC) && splitRule[1].equals(menor) && splitRule[3].equals(and) && splitRule[4].equals(locC) &&
 					splitRule[5].equals(menor) && splitRule[7].equals(and) && splitRule[8].equals(nomC) && splitRule[9].equals(maior)) {
 
-
 				for (Method m: a) {
 
 					if (m.getLoc_Class() < Integer.parseInt(splitRule[2]) && m.getNom_Class() > Integer.parseInt(splitRule[6]) && m.getWmc_Class() < Integer.parseInt(splitRule[10]) ) {
-						System.out.println("TRUE");
 						godValues.add("TRUE");
-				 
 					}else{
-						System.out.println("FALSE");
-						 
 						godValues.add("FALSE");
 					}
-
-
 				}
 			}
 
@@ -913,25 +682,15 @@ public class RulesGodClass {
 					splitRule[0].equals(wmcC) && splitRule[1].equals(maior) && splitRule[3].equals(and) && splitRule[4].equals(locC) &&
 					splitRule[5].equals(menor) && splitRule[7].equals(and) && splitRule[8].equals(nomC) && splitRule[9].equals(menor)) {
 
-
 				for (Method m: a) {
 
 					if (m.getLoc_Class() < Integer.parseInt(splitRule[2]) && m.getNom_Class() < Integer.parseInt(splitRule[6]) && m.getWmc_Class() > Integer.parseInt(splitRule[10]) ) {
-						System.out.println("TRUE");
 						godValues.add("TRUE");
-			 
 					}else{
-						System.out.println("FALSE");
- 
 						godValues.add("FALSE");
 					}
-
-
 				}
 			}
-
-
-
 
 			// locC > ... || nomC > ... || wmcC > ... done done
 			if (splitRule[0].equals(locC) && splitRule[1].equals(maior) && splitRule[3].equals(or) && splitRule[4].equals(nomC) &&
@@ -947,20 +706,13 @@ public class RulesGodClass {
 					splitRule[0].equals(wmcC) && splitRule[1].equals(maior) && splitRule[3].equals(or) && splitRule[4].equals(locC) &&
 					splitRule[5].equals(maior) && splitRule[7].equals(or) && splitRule[8].equals(nomC) && splitRule[9].equals(maior)) {
 
-
 				for (Method m: a) {
 
 					if (m.getLoc_Class() > Integer.parseInt(splitRule[2]) || m.getNom_Class() > Integer.parseInt(splitRule[6]) || m.getWmc_Class() > Integer.parseInt(splitRule[10]) ) {
-						System.out.println("TRUE");
 						godValues.add("TRUE");
-				
 					}else{
-						System.out.println("FALSE");
-			 
 						godValues.add("FALSE");
 					}
-
-
 				}
 			}
 
@@ -978,20 +730,13 @@ public class RulesGodClass {
 					splitRule[0].equals(wmcC) && splitRule[1].equals(menor) && splitRule[3].equals(or) && splitRule[4].equals(locC) &&
 					splitRule[5].equals(maior) && splitRule[7].equals(or) && splitRule[8].equals(nomC) && splitRule[9].equals(maior)) {
 
-
 				for (Method m: a) {
 
 					if (m.getLoc_Class() > Integer.parseInt(splitRule[2]) || m.getNom_Class() > Integer.parseInt(splitRule[6]) || m.getWmc_Class() < Integer.parseInt(splitRule[10]) ) {
-						System.out.println("TRUE");
 						godValues.add("TRUE");
- 
 					}else{
-						System.out.println("FALSE");
-				 
 						godValues.add("FALSE");
 					}
-
-
 				}
 			}
 
@@ -1009,20 +754,13 @@ public class RulesGodClass {
 					splitRule[0].equals(wmcC) && splitRule[1].equals(maior) && splitRule[3].equals(or) && splitRule[4].equals(locC) &&
 					splitRule[5].equals(maior) && splitRule[7].equals(or) && splitRule[8].equals(nomC) && splitRule[9].equals(menor)) {
 
-
 				for (Method m: a) {
 
 					if (m.getLoc_Class() > Integer.parseInt(splitRule[2]) || m.getNom_Class() < Integer.parseInt(splitRule[6]) || m.getWmc_Class() > Integer.parseInt(splitRule[10]) ) {
-						System.out.println("TRUE");
 						godValues.add("TRUE");
-				 
 					}else{
-						System.out.println("FALSE");
-			 
 						godValues.add("FALSE");
 					}
-
-
 				}
 			}
 
@@ -1044,16 +782,10 @@ public class RulesGodClass {
 				for (Method m: a) {
 
 					if (m.getLoc_Class() < Integer.parseInt(splitRule[2]) || m.getNom_Class() > Integer.parseInt(splitRule[6]) || m.getWmc_Class() > Integer.parseInt(splitRule[10]) ) {
-						System.out.println("TRUE");
 						godValues.add("TRUE");
-		 
 					}else{
-						System.out.println("FALSE");
-					 
 						godValues.add("FALSE");
 					}
-
-
 				}
 			}
 
@@ -1070,21 +802,12 @@ public class RulesGodClass {
 					splitRule[5].equals(menor) && splitRule[7].equals(or) && splitRule[8].equals(locC) && splitRule[9].equals(menor) ||
 					splitRule[0].equals(wmcC) && splitRule[1].equals(menor) && splitRule[3].equals(or) && splitRule[4].equals(locC) &&
 					splitRule[5].equals(menor) && splitRule[7].equals(or) && splitRule[8].equals(nomC) && splitRule[9].equals(menor)) {
-
-
 				for (Method m: a) {
-
 					if (m.getLoc_Class() < Integer.parseInt(splitRule[2]) || m.getNom_Class() < Integer.parseInt(splitRule[6]) || m.getWmc_Class() < Integer.parseInt(splitRule[10]) ) {
-						System.out.println("TRUE");
 						godValues.add("TRUE");
-					 
 					}else{
-						System.out.println("FALSE");
-				 
 						godValues.add("FALSE");
 					}
-
-
 				}
 			}
 
@@ -1106,16 +829,10 @@ public class RulesGodClass {
 				for (Method m: a) {
 
 					if (m.getLoc_Class() > Integer.parseInt(splitRule[2]) || m.getNom_Class() < Integer.parseInt(splitRule[6]) || m.getWmc_Class() < Integer.parseInt(splitRule[10]) ) {
-						System.out.println("TRUE");
 						godValues.add("TRUE");
-				 
 					}else{
-						System.out.println("FALSE");
-					 
 						godValues.add("FALSE");
 					}
-
-
 				}
 			}
 
@@ -1137,16 +854,10 @@ public class RulesGodClass {
 				for (Method m: a) {
 
 					if (m.getLoc_Class() < Integer.parseInt(splitRule[2]) || m.getNom_Class() > Integer.parseInt(splitRule[6]) || m.getWmc_Class() < Integer.parseInt(splitRule[10]) ) {
-						System.out.println("TRUE");
 						godValues.add("TRUE");
-			 
 					}else{
-						System.out.println("FALSE");
-					 
 						godValues.add("FALSE");
 					}
-
-
 				}
 			}
 
@@ -1168,44 +879,26 @@ public class RulesGodClass {
 				for (Method m: a) {
 
 					if (m.getLoc_Class() < Integer.parseInt(splitRule[2]) || m.getNom_Class() < Integer.parseInt(splitRule[6]) || m.getWmc_Class() > Integer.parseInt(splitRule[10]) ) {
-						System.out.println("TRUE");
 						godValues.add("TRUE");
-						 
 					}else{
-						System.out.println("FALSE");
-				 
 						godValues.add("FALSE");
 					}
-
-
 				}
 			}
-
-
-
 			//OR AND
-
-
 			// locC > ... || nomC > ... && wmcC > ... done done
 			if (splitRule[0].equals(locC) && splitRule[1].equals(maior) && splitRule[3].equals(or) && splitRule[4].equals(nomC) &&
 					splitRule[5].equals(maior) && splitRule[7].equals(and) && splitRule[8].equals(wmcC) && splitRule[9].equals(maior) ||
 					splitRule[0].equals(wmcC) && splitRule[1].equals(maior) && splitRule[3].equals(and) && splitRule[4].equals(locC) &&
 					splitRule[5].equals(maior) && splitRule[7].equals(or) && splitRule[8].equals(nomC) && splitRule[9].equals(maior)) {
 
-
 				for (Method m: a) {
 
 					if (m.getLoc_Class() > Integer.parseInt(splitRule[2]) || m.getNom_Class() > Integer.parseInt(splitRule[6]) && m.getWmc_Class() > Integer.parseInt(splitRule[10]) ) {
-						System.out.println("TRUE");
 						godValues.add("TRUE");
-				 
 					}else{
-						System.out.println("FALSE");
-				 
 						godValues.add("FALSE");
 					}
-
-
 				}
 			}
 
@@ -1219,16 +912,10 @@ public class RulesGodClass {
 				for (Method m: a) {
 
 					if (m.getLoc_Class() > Integer.parseInt(splitRule[2]) || m.getNom_Class() > Integer.parseInt(splitRule[6]) && m.getWmc_Class() < Integer.parseInt(splitRule[10]) ) {
-						System.out.println("TRUE");
 						godValues.add("TRUE");
-				 
 					}else{
-						System.out.println("FALSE");
-				 
 						godValues.add("FALSE");
 					}
-
-
 				}
 			}
 
@@ -1238,20 +925,13 @@ public class RulesGodClass {
 					splitRule[0].equals(wmcC) && splitRule[1].equals(maior) && splitRule[3].equals(and) && splitRule[4].equals(locC) &&
 					splitRule[5].equals(maior) && splitRule[7].equals(or) && splitRule[8].equals(nomC) && splitRule[9].equals(menor)) {
 
-
 				for (Method m: a) {
 
 					if (m.getLoc_Class() > Integer.parseInt(splitRule[2]) || m.getNom_Class() < Integer.parseInt(splitRule[6]) && m.getWmc_Class() > Integer.parseInt(splitRule[10]) ) {
-						System.out.println("TRUE");
 						godValues.add("TRUE");
-				 
 					}else{
-						System.out.println("FALSE");
-				 
 						godValues.add("FALSE");
 					}
-
-
 				}
 			}
 
@@ -1261,20 +941,13 @@ public class RulesGodClass {
 					splitRule[0].equals(wmcC) && splitRule[1].equals(maior) && splitRule[3].equals(and) && splitRule[4].equals(locC) &&
 					splitRule[5].equals(menor) && splitRule[7].equals(or) && splitRule[8].equals(nomC) && splitRule[9].equals(maior)) {
 
-
 				for (Method m: a) {
 
 					if (m.getLoc_Class() < Integer.parseInt(splitRule[2]) || m.getNom_Class() > Integer.parseInt(splitRule[6]) && m.getWmc_Class() > Integer.parseInt(splitRule[10]) ) {
-						System.out.println("TRUE");
 						godValues.add("TRUE");
-						 
 					}else{
-						System.out.println("FALSE");
-					 
 						godValues.add("FALSE");
 					}
-
-
 				}
 			}
 
@@ -1284,20 +957,13 @@ public class RulesGodClass {
 					splitRule[0].equals(wmcC) && splitRule[1].equals(menor) && splitRule[3].equals(and) && splitRule[4].equals(locC) &&
 					splitRule[5].equals(menor) && splitRule[7].equals(or) && splitRule[8].equals(nomC) && splitRule[9].equals(menor)) {
 
-
 				for (Method m: a) {
 
 					if (m.getLoc_Class() < Integer.parseInt(splitRule[2]) || m.getNom_Class() < Integer.parseInt(splitRule[6]) && m.getWmc_Class() < Integer.parseInt(splitRule[10]) ) {
-						System.out.println("TRUE");
 						godValues.add("TRUE");
-			 
 					}else{
-						System.out.println("FALSE");
-					 
 						godValues.add("FALSE");
 					}
-
-
 				}
 			}
 
@@ -1307,20 +973,13 @@ public class RulesGodClass {
 					splitRule[0].equals(wmcC) && splitRule[1].equals(menor) && splitRule[3].equals(and) && splitRule[4].equals(locC) &&
 					splitRule[5].equals(maior) && splitRule[7].equals(or) && splitRule[8].equals(nomC) && splitRule[9].equals(menor)) {
 
-
 				for (Method m: a) {
 
 					if (m.getLoc_Class() > Integer.parseInt(splitRule[2]) || m.getNom_Class() < Integer.parseInt(splitRule[6]) && m.getWmc_Class() < Integer.parseInt(splitRule[10]) ) {
-						System.out.println("TRUE");
 						godValues.add("TRUE");
-					 
 					}else{
-						System.out.println("FALSE");
-					 
 						godValues.add("FALSE");
 					}
-
-
 				}
 			}
 
@@ -1330,20 +989,13 @@ public class RulesGodClass {
 					splitRule[0].equals(wmcC) && splitRule[1].equals(menor) && splitRule[3].equals(and) && splitRule[4].equals(locC) &&
 					splitRule[5].equals(menor) && splitRule[7].equals(or) && splitRule[8].equals(nomC) && splitRule[9].equals(maior)) {
 
-
 				for (Method m: a) {
 
 					if (m.getLoc_Class() < Integer.parseInt(splitRule[2]) || m.getNom_Class() > Integer.parseInt(splitRule[6]) && m.getWmc_Class() < Integer.parseInt(splitRule[10]) ) {
-						System.out.println("TRUE");
 						godValues.add("TRUE");
-					 
 					}else{
-						System.out.println("FALSE");
-						 
 						godValues.add("FALSE");
 					}
-
-
 				}
 			}
 
@@ -1353,46 +1005,30 @@ public class RulesGodClass {
 					splitRule[0].equals(wmcC) && splitRule[1].equals(maior) && splitRule[3].equals(and) && splitRule[4].equals(locC) &&
 					splitRule[5].equals(menor) && splitRule[7].equals(or) && splitRule[8].equals(nomC) && splitRule[9].equals(menor)) {
 
-
 				for (Method m: a) {
 
 					if (m.getLoc_Class() < Integer.parseInt(splitRule[2]) || m.getNom_Class() < Integer.parseInt(splitRule[6]) && m.getWmc_Class() > Integer.parseInt(splitRule[10]) ) {
-						System.out.println("TRUE");
 						godValues.add("TRUE");
-				 
 					}else{
-						System.out.println("FALSE");
-			 
 						godValues.add("FALSE");
 					}
-
-
 				}
 			}
 
-
 			//AND OR
-
 			// locC > ... && nomC > ... || wmcC > ... done done
 			if (splitRule[0].equals(locC) && splitRule[1].equals(maior) && splitRule[3].equals(and) && splitRule[4].equals(nomC) &&
 					splitRule[5].equals(maior) && splitRule[7].equals(or) && splitRule[8].equals(wmcC) && splitRule[9].equals(maior) ||
 					splitRule[0].equals(nomC) && splitRule[1].equals(maior) && splitRule[3].equals(or) && splitRule[4].equals(wmcC) &&
 					splitRule[5].equals(maior) && splitRule[7].equals(and) && splitRule[8].equals(locC) && splitRule[9].equals(maior)) {
 
-
 				for (Method m: a) {
 
 					if (m.getLoc_Class() > Integer.parseInt(splitRule[2]) && m.getNom_Class() > Integer.parseInt(splitRule[6]) || m.getWmc_Class() > Integer.parseInt(splitRule[10]) ) {
-						System.out.println("TRUE");
 						godValues.add("TRUE");
-					 
 					}else{
-						System.out.println("FALSE");
-				 
 						godValues.add("FALSE");
 					}
-
-
 				}
 			}
 
@@ -1405,16 +1041,10 @@ public class RulesGodClass {
 				for (Method m: a) {
 
 					if (m.getLoc_Class() > Integer.parseInt(splitRule[2]) && m.getNom_Class() > Integer.parseInt(splitRule[6]) || m.getWmc_Class() < Integer.parseInt(splitRule[10]) ) {
-						System.out.println("TRUE");
 						godValues.add("TRUE");
-					 
 					}else{
-						System.out.println("FALSE");
-				 
 						godValues.add("FALSE");
 					}
-
-
 				}
 			}
 
@@ -1424,21 +1054,13 @@ public class RulesGodClass {
 					splitRule[0].equals(nomC) && splitRule[1].equals(menor) && splitRule[3].equals(or) && splitRule[4].equals(wmcC) &&
 					splitRule[5].equals(maior) && splitRule[7].equals(and) && splitRule[8].equals(locC) && splitRule[9].equals(maior)) {
 
-
-
 				for (Method m: a) {
 
 					if (m.getLoc_Class() > Integer.parseInt(splitRule[2]) || m.getNom_Class() < Integer.parseInt(splitRule[6]) && m.getWmc_Class() > Integer.parseInt(splitRule[10]) ) {
-						System.out.println("TRUE");
 						godValues.add("TRUE");
-						 
 					}else{
-						System.out.println("FALSE");
-				 
 						godValues.add("FALSE");
 					}
-
-
 				}
 			}
 
@@ -1448,20 +1070,13 @@ public class RulesGodClass {
 					splitRule[0].equals(nomC) && splitRule[1].equals(maior) && splitRule[3].equals(or) && splitRule[4].equals(wmcC) &&
 					splitRule[5].equals(maior) && splitRule[7].equals(and) && splitRule[8].equals(locC) && splitRule[9].equals(menor)) {
 
-
 				for (Method m: a) {
 
 					if (m.getLoc_Class() < Integer.parseInt(splitRule[2]) && m.getNom_Class() > Integer.parseInt(splitRule[6]) || m.getWmc_Class() > Integer.parseInt(splitRule[10]) ) {
-						System.out.println("TRUE");
 						godValues.add("TRUE");
-				 
 					}else{
-						System.out.println("FALSE");
-			 
 						godValues.add("FALSE");
 					}
-
-
 				}
 			}
 
@@ -1474,16 +1089,10 @@ public class RulesGodClass {
 				for (Method m: a) {
 
 					if (m.getLoc_Class() < Integer.parseInt(splitRule[2]) && m.getNom_Class() < Integer.parseInt(splitRule[6]) || m.getWmc_Class() < Integer.parseInt(splitRule[10]) ) {
-						System.out.println("TRUE");
 						godValues.add("TRUE");
-		
 					}else{
-						System.out.println("FALSE");
-					 
 						godValues.add("FALSE");
 					}
-
-
 				}
 			}
 
@@ -1493,20 +1102,13 @@ public class RulesGodClass {
 					splitRule[0].equals(nomC) && splitRule[1].equals(menor) && splitRule[3].equals(or) && splitRule[4].equals(wmcC) &&
 					splitRule[5].equals(menor) && splitRule[7].equals(and) && splitRule[8].equals(locC) && splitRule[9].equals(maior)) {
 
-
 				for (Method m: a) {
 
 					if (m.getLoc_Class() > Integer.parseInt(splitRule[2]) && m.getNom_Class() < Integer.parseInt(splitRule[6]) || m.getWmc_Class() < Integer.parseInt(splitRule[10]) ) {
-						System.out.println("TRUE");
 						godValues.add("TRUE");
-					 
 					}else{
-						System.out.println("FALSE");
-			 
 						godValues.add("FALSE");
 					}
-
-
 				}
 			}
 
@@ -1516,20 +1118,13 @@ public class RulesGodClass {
 					splitRule[0].equals(nomC) && splitRule[1].equals(maior) && splitRule[3].equals(or) && splitRule[4].equals(wmcC) &&
 					splitRule[5].equals(menor) && splitRule[7].equals(and) && splitRule[8].equals(locC) && splitRule[9].equals(menor)) {
 
-
 				for (Method m: a) {
 
 					if (m.getLoc_Class() < Integer.parseInt(splitRule[2]) && m.getNom_Class() > Integer.parseInt(splitRule[6]) || m.getWmc_Class() < Integer.parseInt(splitRule[10]) ) {
-						System.out.println("TRUE");
 						godValues.add("TRUE");
-					 
 					}else{
-						System.out.println("FALSE");
-					 
 						godValues.add("FALSE");
 					}
-
-
 				}
 			}
 
@@ -1542,21 +1137,12 @@ public class RulesGodClass {
 				for (Method m: a) {
 
 					if (m.getLoc_Class() < Integer.parseInt(splitRule[2]) && m.getNom_Class() < Integer.parseInt(splitRule[6]) || m.getWmc_Class() > Integer.parseInt(splitRule[10]) ) {
-						System.out.println("TRUE");
 						godValues.add("TRUE");
-					 
 					}else{
-						System.out.println("FALSE");
-					 
 						godValues.add("FALSE");
 					}
-
-
 				}
 			}	
-
 		}
-
-
 	}
 }

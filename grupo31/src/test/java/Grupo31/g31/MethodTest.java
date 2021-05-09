@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import Support.Method;
+
 class MethodTest {
 	protected Method m= new Method(1,"a","a","a",1,1,1,1,1);
 	@Test
@@ -51,6 +53,8 @@ class MethodTest {
 		assertEquals(1,m.getCYCLO_method());
 	}
 
-	
+	@Test
+	void testMethod() {
 
+	}
 }

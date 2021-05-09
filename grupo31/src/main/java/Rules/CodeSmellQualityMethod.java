@@ -1,6 +1,7 @@
-package Grupo31.g31;
+package Rules;
 
 import java.io.File;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,30 +11,53 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import Rules.RulesGodClass;
 import Support.Create_Method;
 import Support.Method;
 
-public class CodeSmellQualityClass {
+// TODO: Auto-generated Javadoc
+//@author grupo 31
 
-	static ArrayList<String> nameCT ;
-	static ArrayList<String> nameCO ;
-	static ArrayList<String> godT;
-	static ArrayList<String> godO ;
+public class CodeSmellQualityMethod {
 
+	/** The name MT. */
+	static ArrayList<String> nameMT ;
+	
+	/** The name MO. */
+	static ArrayList<String> nameMO ;
+	
+	/** The long MT. */
+	static ArrayList<String> longMT;
+	
+	/** The long MO. */
+	static ArrayList<String> longMO ;
 
-	static int VP;
-	static int VN;
-	static int FP;
-	static int FN;
+	/** The vp. */
+	public static int VP;
+	
+	/** The vn. */
+	public static int VN;
+	
+	/** The fp. */
+	public static int FP;
+	
+	/** The fn. */
+	public static int FN;
 
+	/** The a. */
 	static ArrayList<Method> a = Create_Method.a;
 
+	/**
+	 * Gets the theirs.
+	 *
+	 * @param path the path
+	 * @return the theirs
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static void getTheirs(String path) throws IOException {
 
-		nameCT = new ArrayList<String>();
-		godT= new ArrayList<String>();
-		String envFilePath =path;
+		nameMT = new ArrayList<String>();
+		longMT= new ArrayList<String>();
+		String envFilePath =(path);
 
 
 		FileInputStream fileName = new FileInputStream(new File(path));
@@ -44,15 +68,13 @@ public class CodeSmellQualityClass {
 		// Get the first sheet.
 		Sheet sheet = workbook.getSheetAt(0);
 
-
 		//theirs
 		//we will search for column index containing string "Your Column Name" in the row 0 (which is first row of a worksheet
-		String columnWanted = "class";
+		String columnWanted = "method";
 		Integer columnNo = null;
 
-		String columnWanted2 = "is_God_Class";
+		String columnWanted2 = "is_Long_Method";
 		Integer columnNo2 = null;
-
 
 		// Get the first cell.
 		Row row = sheet.getRow(0);
@@ -72,17 +94,13 @@ public class CodeSmellQualityClass {
 				if (c == null) {
 					// Nothing in the cell in this row, skip it
 				} else {
-					nameCT.add(c.toString());
-					nameCT.set(it, c.toString());
+					nameMT.add(c.toString());
+					nameMT.set(it, c.toString());
 					//System.out.println(c);
 				}
 				it++;
 			}
-
-
-			System.out.println("nameT" + nameCT);
 		}
-
 
 		// Get the first cell.
 		Row rowCode = sheet.getRow(0);
@@ -102,32 +120,26 @@ public class CodeSmellQualityClass {
 				if (c == null) {
 					// Nothing in the cell in this row, skip it
 				} else {
-					godT.add(c.toString());
-					godT.set(it, c.toString());
+					longMT.add(c.toString());
+					longMT.set(it, c.toString());
 					//System.out.println(c);
 				}
 				it++;
 			}
-
-
-			System.out.println("GodT" + godT);
 		}
-
-		//				for (int i=0; i < godT.size(); i++ ) {
-		//					theirs.put(nameCT.get(i), godT.get(i));
-		//				}
-		//				return theirs;
 	}
 
-
-
-
-
+	/**
+	 * Gets the ours.
+	 *
+	 * @param path the path
+	 * @return the ours
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static void getOurs(String path) throws IOException {
 
-
-		nameCO = new ArrayList<String>();
-		FileInputStream fileName = new FileInputStream(new File(path));
+		nameMO = new ArrayList<String>();
+		FileInputStream fileName = new FileInputStream(new File("C:\\Users\\inesv\\Desktop\\src_metrics.xlsx"));
 		//int masterSheetColumnIndex = 0;
 
 		XSSFWorkbook workbook = new XSSFWorkbook (fileName);
@@ -135,15 +147,10 @@ public class CodeSmellQualityClass {
 		// Get the first sheet.
 		Sheet sheet = workbook.getSheetAt(0);
 
-
 		//theirs
 		//we will search for column index containing string "Your Column Name" in the row 0 (which is first row of a worksheet
-		String columnWanted = "class";
+		String columnWanted = "method";
 		Integer columnNo = null;
-		String columnWanted2 = "is_God_Class";
-		Integer columnNo2 = null;
-		//output all not null values to the list
-
 
 		// Get the first cell.
 		Row row = sheet.getRow(0);
@@ -163,60 +170,55 @@ public class CodeSmellQualityClass {
 				if (c == null) {
 					// Nothing in the cell in this row, skip it
 				} else {
-					nameCO.add(c.toString());
-					nameCO.set(it, c.toString());
+					nameMO.add(c.toString());
+					nameMO.set(it, c.toString());
 					//System.out.println(c);
 				}
 				it++;
 			}
-			System.out.println("name Ours" + nameCO);
 		}	
 
 	}
 
+	/**
+	 * Compare values.
+	 *
+	 * @param path the path
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static void compareValues(String path) throws IOException {
-
 
 		getOurs(path);
 		getTheirs(path);
-		ArrayList<String> godO = RulesGodClass.godValues;
+		ArrayList<String> longMO = RulesLongMethod.longValues;
 		VP = 0;
 		VN = 0;
 		FP = 0; 
 		FN = 0;
-		System.out.println("god values : " + godO);
-		System.out.println("nome deles : " + nameCT);
-		System.out.println("nome nosso : " + nameCO);
 
-		
-		System.out.println("tamanho da lista " + nameCO.size());
-	
-		for (int i=0; i< nameCO.size(); i++) {
-			
+		for (int i=0; i< nameMO.size(); i++) {
+
 			boolean limite = true;
-			
-				for (int j = 1; j< nameCT.size(); j++) {
+
+			for (int j = 1; j< nameMT.size(); j++) {
 
 				if(limite) {
-					
-					if(nameCO.get(i).contains(nameCT.get(j))) {
-						
-						
-						System.out.println();
-						if(godO.get(i).equals(godT.get(j)) && godO.get(i).equals("TRUE")) {
+
+					if(nameMO.get(i).contains(nameMT.get(j))) {
+
+						if(longMO.get(i).equals(longMT.get(j)) && longMO.get(i).equals("TRUE")) {
 							VP+=1;
 							limite = false;
-
 						}
-						if(godO.get(i).equals(godT.get(j)) && godO.get(i).equals("FALSE")) {
+						if(longMO.get(i).equals(longMT.get(j)) && longMO.get(i).equals("FALSE")) {
 							FP+=1;
 							limite =false;
 						}
-						if(!godO.get(i).equals(godT.get(j)) && godO.get(i).equals("TRUE")) {
+						if(!longMO.get(i).equals(longMT.get(j)) && longMO.get(i).equals("TRUE")) {
 							VN+=1;
 							limite=false;
 						}
-						if(!godO.get(i).equals(godT.get(j)) && godO.get(i).equals("FALSE")) {
+						if(!longMO.get(i).equals(longMT.get(j)) && longMO.get(i).equals("FALSE")) {
 							FN+=1;
 							limite = false;
 						}
@@ -224,9 +226,5 @@ public class CodeSmellQualityClass {
 				}
 			}
 		}
-
-		System.out.println("VN = " + VN + "VP = " + VP + "FN = " + FN + "FP = " + FP);
 	}
 }
-
-

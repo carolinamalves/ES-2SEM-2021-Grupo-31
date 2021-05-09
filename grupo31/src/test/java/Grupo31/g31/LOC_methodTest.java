@@ -9,18 +9,20 @@ import org.junit.jupiter.api.Test;
 
 import com.github.javaparser.ParseException;
 
+import Metrics.LOC_method;
+
 class LOC_methodTest {
 	protected String file;
 	protected LOC_method lM;
 	protected ArrayList<Integer> a;
 	@Test
 	void testLOC_method() {
-	
+
 	}
 
 	@Test
 	void testGetMethodLineNumbers() {
-		
+
 	}
 
 	@Test
@@ -29,7 +31,4 @@ class LOC_methodTest {
 		lM=new LOC_method(file);
 		assertEquals(a,lM.getList());
 	}
-
-
-
 }

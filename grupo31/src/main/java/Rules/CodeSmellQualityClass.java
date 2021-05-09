@@ -1,35 +1,72 @@
-package Grupo31.g31;
+package Rules;
 
 import java.io.File;
+
 import java.io.FileInputStream;
 import java.io.IOException;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
+
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-public class CodeSmellQualityMethod {
+import Support.Create_Method;
+import Support.Method;
 
-	static ArrayList<String> nameMT ;
-	static ArrayList<String> nameMO ;
-	static ArrayList<String> longMT;
-	static ArrayList<String> longMO ;
+// TODO: Auto-generated Javadoc
+//@author grupo 31
 
-	static int VP;
-	static int VN;
-	static int FP;
-	static int FN;
+public class CodeSmellQualityClass {
 
+	/** The name CT. */
+	static ArrayList<String> nameCT ;
+	
+	/** The name CO. */
+	static ArrayList<String> nameCO ;
+	
+	/** The god T. */
+	static ArrayList<String> godT;
+	
+	/** The god O. */
+	static ArrayList<String> godO ;
+
+	/** The theirs. */
+	static HashMap <String, String> theirs = new HashMap<>();
+	
+	/** The ours. */
+	static HashMap <String, String> ours= new HashMap<>();
+
+	/** The vp. */
+	public static int VP;
+	
+	/** The vn. */
+	public static int VN;
+	
+	/** The fp. */
+	public static int FP;
+	
+	/** The fn. */
+	public static int FN;
+
+	/** The a. */
 	static ArrayList<Method> a = Create_Method.a;
 
+	/**
+	 * Gets the theirs.
+	 *
+	 * @param path the path
+	 * @return the theirs
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static void getTheirs(String path) throws IOException {
 
-		nameMT = new ArrayList<String>();
-		longMT= new ArrayList<String>();
-		String envFilePath =(path);
-
+		nameCT = new ArrayList<String>();
+		godT= new ArrayList<String>();
+		String envFilePath =path;
 
 		FileInputStream fileName = new FileInputStream(new File(path));
 		//int masterSheetColumnIndex = 0;
@@ -39,22 +76,19 @@ public class CodeSmellQualityMethod {
 		// Get the first sheet.
 		Sheet sheet = workbook.getSheetAt(0);
 
-
 		//theirs
 		//we will search for column index containing string "Your Column Name" in the row 0 (which is first row of a worksheet
-		String columnWanted = "method";
+		String columnWanted = "class";
 		Integer columnNo = null;
 
-		String columnWanted2 = "is_Long_Method";
+		String columnWanted2 = "is_God_Class";
 		Integer columnNo2 = null;
-
 
 		// Get the first cell.
 		Row row = sheet.getRow(0);
 		//Cell cell = row.getCell(0);
 		for (Cell cell : row) {
-			// Column header names.
-			//System.out.println(cell.toString());  
+			// Column header names. 
 			if (cell.getStringCellValue().equals(columnWanted)){
 				columnNo = cell.getColumnIndex();
 			}
@@ -67,21 +101,18 @@ public class CodeSmellQualityMethod {
 				if (c == null) {
 					// Nothing in the cell in this row, skip it
 				} else {
-					nameMT.add(c.toString());
-					nameMT.set(it, c.toString());
-					//System.out.println(c);
+					nameCT.add(c.toString());
+					nameCT.set(it, c.toString());
 				}
 				it++;
 			}
 		}
 
-
 		// Get the first cell.
 		Row rowCode = sheet.getRow(0);
 		//Cell cell = row.getCell(0);
 		for (Cell cell : rowCode) {
-			// Column header names.
-			//System.out.println(cell.toString());  
+			// Column header names.  
 			if (cell.getStringCellValue().equals(columnWanted2)){
 				columnNo2 = cell.getColumnIndex();
 			}
@@ -94,25 +125,25 @@ public class CodeSmellQualityMethod {
 				if (c == null) {
 					// Nothing in the cell in this row, skip it
 				} else {
-					longMT.add(c.toString());
-					longMT.set(it, c.toString());
-					//System.out.println(c);
+					godT.add(c.toString());
+					godT.set(it, c.toString());
 				}
 				it++;
 			}
 		}
- 
 	}
 
-
-
-
-
+	/**
+	 * Gets the ours.
+	 *
+	 * @param path the path
+	 * @return the ours
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static void getOurs(String path) throws IOException {
 
-
-		nameMO = new ArrayList<String>();
-		FileInputStream fileName = new FileInputStream(new File("C:\\Users\\inesv\\Desktop\\src_metrics.xlsx"));
+		nameCO = new ArrayList<String>();
+		FileInputStream fileName = new FileInputStream(new File(path));
 		//int masterSheetColumnIndex = 0;
 
 		XSSFWorkbook workbook = new XSSFWorkbook (fileName);
@@ -120,21 +151,18 @@ public class CodeSmellQualityMethod {
 		// Get the first sheet.
 		Sheet sheet = workbook.getSheetAt(0);
 
-
-		//theirs
 		//we will search for column index containing string "Your Column Name" in the row 0 (which is first row of a worksheet
-		String columnWanted = "method";
+		String columnWanted = "class";
 		Integer columnNo = null;
-		
+		String columnWanted2 = "is_God_Class";
+		Integer columnNo2 = null;
 		//output all not null values to the list
-
 
 		// Get the first cell.
 		Row row = sheet.getRow(0);
 		//Cell cell = row.getCell(0);
 		for (Cell cell : row) {
 			// Column header names.
-			//System.out.println(cell.toString());  
 			if (cell.getStringCellValue().equals(columnWanted)){
 				columnNo = cell.getColumnIndex();
 			}
@@ -145,58 +173,55 @@ public class CodeSmellQualityMethod {
 				int it=0;
 				Cell c = row1.getCell(columnNo);
 				if (c == null) {
-					// Nothing in the cell in this row, skip it
 				} else {
-					nameMO.add(c.toString());
-					nameMO.set(it, c.toString());
-					//System.out.println(c);
+					nameCO.add(c.toString());
+					nameCO.set(it, c.toString());
 				}
 				it++;
 			}
 		}	
-
 	}
 
+	/**
+	 * Compare values.
+	 *
+	 * @param path the path
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static void compareValues(String path) throws IOException {
-
 
 		getOurs(path);
 		getTheirs(path);
-		ArrayList<String> longMO = RulesLongMethod.longValues;
+		ArrayList<String> godO = RulesGodClass.godValues;
 		VP = 0;
 		VN = 0;
 		FP = 0; 
 		FN = 0;
 
-
-		System.out.println("tamanho da lista " + nameMO.size());
-
-		for (int i=0; i< nameMO.size(); i++) {
+		for (int i=0; i< nameCO.size(); i++) {
 
 			boolean limite = true;
 
-			for (int j = 1; j< nameMT.size(); j++) {
+			for (int j = 1; j< nameCT.size(); j++) {
 
 				if(limite) {
 
-					if(nameMO.get(i).contains(nameMT.get(j))) {
+					if(nameCO.get(i).contains(nameCT.get(j))) {
 
-
-						System.out.println();
-						if(longMO.get(i).equals(longMT.get(j)) && longMO.get(i).equals("TRUE")) {
+						if(godO.get(i).equals(godT.get(j)) && godO.get(i).equals("TRUE")) {
 							VP+=1;
 							limite = false;
 
 						}
-						if(longMO.get(i).equals(longMT.get(j)) && longMO.get(i).equals("FALSE")) {
+						if(godO.get(i).equals(godT.get(j)) && godO.get(i).equals("FALSE")) {
 							FP+=1;
 							limite =false;
 						}
-						if(!longMO.get(i).equals(longMT.get(j)) && longMO.get(i).equals("TRUE")) {
+						if(!godO.get(i).equals(godT.get(j)) && godO.get(i).equals("TRUE")) {
 							VN+=1;
 							limite=false;
 						}
-						if(!longMO.get(i).equals(longMT.get(j)) && longMO.get(i).equals("FALSE")) {
+						if(!godO.get(i).equals(godT.get(j)) && godO.get(i).equals("FALSE")) {
 							FN+=1;
 							limite = false;
 						}
@@ -204,8 +229,5 @@ public class CodeSmellQualityMethod {
 				}
 			}
 		}
-
-		System.out.println("VN = " + VN + "VP = " + VP + "FN = " + FN + "FP = " + FP);
 	}
 }
-

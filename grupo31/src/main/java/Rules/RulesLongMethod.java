@@ -1,103 +1,100 @@
-package Grupo31.g31;
+package Rules;
 
 import java.util.ArrayList;
 
+import Support.Create_Method;
+import Support.Method;
+
+// TODO: Auto-generated Javadoc
+//@author grupo 31
+
 public class RulesLongMethod {
 
-		static ArrayList<Method> a = Create_Method.a;
-		static String locM = "LOC_method";
-		static String cycM = "CYCLO_method";
-		
-		static String maior = ">";
-		static String menor = "<";
-		static String and = "AND";
-		static String or = "OR";
+	/** The a. */
+	static ArrayList<Method> a = Create_Method.a;
+	
+	/** The loc M. */
+	static String locM = "LOC_method";
+	
+	/** The cyc M. */
+	static String cycM = "CYCLO_method";
 
-		static ArrayList<String> longValues = new ArrayList<>();
+	/** The maior. */
+	static String maior = ">";
+	
+	/** The menor. */
+	static String menor = "<";
+	
+	/** The and. */
+	static String and = "AND";
+	
+	/** The or. */
+	static String or = "OR";
 
-		public static void rules(String rule) {
+	/** The long values. */
+	static ArrayList<String> longValues = new ArrayList<>();
 
-			String [] splitRule = rule.split(" ");
-			System.out.println("REGRA" + splitRule.length);
+	/**
+	 * Rules.
+	 *
+	 * @param rule the rule
+	 */
+	public static void rules(String rule) {
+
+		String [] splitRule = rule.split(" ");
+		System.out.println("REGRA" + splitRule.length);
 
 
-			//so com uma metrica
-			if (splitRule.length == 3) {
+		//so com uma metrica
+		if (splitRule.length == 3) {
 
-				//locEthod > ...
-				if (splitRule[0].equals(locM) && splitRule[1].equals(maior)) {
+			//locEthod > ...
+			if (splitRule[0].equals(locM) && splitRule[1].equals(maior)) {
 
-					for (Method m : a) { 
-
-
-						if( m.getLoc_Method() > Integer.parseInt(splitRule[2])) {
-							System.out.println(m.getName_class() + ":" + "TRUEEEE");
-							longValues.add("TRUE");
-						}else {
-							System.out.println(m.getName_class() + ":" + "FALSEEEE");
-					
-							longValues.add("FALSE");
-						}
+				for (Method m : a) { 
+					if( m.getLoc_Method() > Integer.parseInt(splitRule[2])) {
+						longValues.add("TRUE");
+					}else {
+						longValues.add("FALSE");
 					}
 				}
+			}
+			//locMethod < ..
+			if(splitRule[0].equals(locM) && splitRule[1].equals(menor)){
 
-				//locMethod < ..
-				if(splitRule[0].equals(locM) && splitRule[1].equals(menor)){
+				for (Method m : a) { 
 
-					for (Method m : a) { 
+					if( m.getLoc_Method() < Integer.parseInt(splitRule[2])) {
+						longValues.add("TRUE");
+					}else {
+						longValues.add("FALSE");
+					}
+				}	
+			}
+			//cycMethod >...
+			if(splitRule[0].equals(cycM) && splitRule[1].equals(maior)){
 
-						if( m.getLoc_Method() < Integer.parseInt(splitRule[2])) {
-							System.out.println(m.getName_class() + ":" + "TRUEEEE");
-							longValues.add("TRUE");
-						 
+				for (Method m : a) { 
 
-						}else {
-							System.out.println(m.getName_class() + ":" + "FALSEEEE");
-					
-							longValues.add("FALSE");
-						}
+					if( m.getCYCLO_method() > Integer.parseInt(splitRule[2])) {
+						longValues.add("TRUE");
+					}else {
+						longValues.add("FALSE");
+					}
+				}	
+			}
+			//cyclo Method <...
+			if(splitRule[0].equals(cycM) && splitRule[1].equals(menor)){
 
-					}	
-				}
+				for (Method m : a) { 
 
-				//cycMethod >...
-				if(splitRule[0].equals(cycM) && splitRule[1].equals(maior)){
-
-					for (Method m : a) { 
-
-						if( m.getCYCLO_method() > Integer.parseInt(splitRule[2])) {
-							System.out.println(m.getName_class() + ":" + "TRUEEEE");
-							longValues.add("TRUE");
-						 
-
-						}else {
-							System.out.println(m.getName_class() + ":" + "FALSEEEE");
-						 
-							longValues.add("FALSE");
-						}
-
-					}	
-				}
-
-				//cyclo Method <...
-				if(splitRule[0].equals(cycM) && splitRule[1].equals(menor)){
-
-					for (Method m : a) { 
-
-						if( m.getCYCLO_method() < Integer.parseInt(splitRule[2])) {
-							System.out.println(m.getName_class() + ":" + "TRUEEEE");
-							longValues.add("TRUE");
-							 
-
-						}else {
-							System.out.println(m.getName_class() + ":" + "FALSEEEE");
-					 
-							longValues.add("FALSE");
-						}
-
-					}	
-				}
-
+					if( m.getCYCLO_method() < Integer.parseInt(splitRule[2])) {
+						longValues.add("TRUE");
+					}else {
+						longValues.add("FALSE");
+					}
+				}	
+			}
 
 			//duas metricas
 			if (splitRule.length == 7) {
@@ -110,20 +107,12 @@ public class RulesLongMethod {
 					for (Method m : a) {
 
 						if( m.getLoc_Method() > Integer.parseInt(splitRule[2]) && m.getCYCLO_method() > Integer.parseInt(splitRule[6])) {
-							System.out.println(m.getName_class() + ":" + "TRUEEEE");
 							longValues.add("TRUE");
-						 
-
 						}else {
-							System.out.println(m.getName_class() + ":" + "FALSEEEE");
-							 
 							longValues.add("FALSE");
 						}
-
 					}
-
 				}
-
 				//locMethod > .. && cycMethod < ...
 				if(splitRule[0].equals(locM) && splitRule[1].equals(maior) &&
 						splitRule[3].equals(and) && splitRule[4].equals(cycM) && splitRule[5].equals(menor) || splitRule[0].equals(cycM) && splitRule[1].equals(menor) &&  
@@ -132,18 +121,11 @@ public class RulesLongMethod {
 					for (Method m : a) {
 
 						if( m.getLoc_Method() > Integer.parseInt(splitRule[2]) && m.getCYCLO_method() < Integer.parseInt(splitRule[6])) {
-							System.out.println(m.getName_class() + ":" + "TRUEEEE");
 							longValues.add("TRUE");
-						
-
 						}else{
-							System.out.println(m.getName_class() + ":" + "FALSEEEE");
-							 
 							longValues.add("FALSE");
 						}
-
 					}
-
 				}
 
 				//locMethod < ... && cycloMethod > ...
@@ -154,18 +136,11 @@ public class RulesLongMethod {
 					for (Method m : a) {
 
 						if( m.getLoc_Method() < Integer.parseInt(splitRule[2]) && m.getCYCLO_method() > Integer.parseInt(splitRule[6])) {
-							System.out.println(m.getName_class() + ":" + "TRUEEEE");
 							longValues.add("TRUE");
-					 
-
 						}else {
-							System.out.println(m.getName_class() + ":" + "FALSEEEE");
-						 
 							longValues.add("FALSE");
 						}
-
 					}
-
 				}
 
 				// locMethod < ... && cycloMethod < ... 
@@ -176,20 +151,12 @@ public class RulesLongMethod {
 					for (Method m : a) {
 
 						if( m.getLoc_Method() < Integer.parseInt(splitRule[2]) && m.getCYCLO_method() < Integer.parseInt(splitRule[6])) {
-							System.out.println(m.getName_class() + ":" + "TRUEEEE");
 							longValues.add("TRUE");
-					 
-
 						}else {
-							System.out.println(m.getName_class() + ":" + "FALSEEEE");
-							 
 							longValues.add("FALSE");
 						}
-
 					}
-
 				} 
-
 				//locMethod > ... || cycM > ...
 				if(splitRule[0].equals(locM) && splitRule[1].equals(maior) && splitRule[3].equals(or) 
 						&& splitRule[4].equals(cycM) && splitRule[5].equals(maior) || splitRule[0].equals(cycM) && splitRule[1].equals(maior) 
@@ -198,20 +165,12 @@ public class RulesLongMethod {
 					for (Method m : a) {
 
 						if( m.getLoc_Method() > Integer.parseInt(splitRule[2]) || m.getCYCLO_method() > Integer.parseInt(splitRule[6])) {
-							System.out.println(m.getName_class() + ":" + "TRUEEEE");
 							longValues.add("TRUE");
-						 
-
 						}else {
-							System.out.println(m.getName_class() + ":" + "FALSEEEE");
-						 
 							longValues.add("FALSE");
 						}
-
 					}
-
 				}
-
 				//locMethod > .. || cycloMethod < ...
 				if(splitRule[0].equals(locM) && splitRule[1].equals(maior) &&
 						splitRule[3].equals(or) && splitRule[4].equals(cycM) && splitRule[5].equals(menor) || splitRule[0].equals(cycM) && splitRule[1].equals(menor) &&  
@@ -220,18 +179,11 @@ public class RulesLongMethod {
 					for (Method m : a) {
 
 						if( m.getLoc_Method() > Integer.parseInt(splitRule[2]) || m.getCYCLO_method() < Integer.parseInt(splitRule[6])) {
-							System.out.println(m.getName_class() + ":" + "TRUEEEE");
 							longValues.add("TRUE");
-						 
-
 						}else {
-							System.out.println(m.getName_class() + ":" + "FALSEEEE");
-							 
 							longValues.add("FALSE");
 						}
-
 					}
-
 				}
 
 				//locMethod < ... || cycMethod > ...
@@ -242,18 +194,11 @@ public class RulesLongMethod {
 					for (Method m : a) {
 
 						if( m.getLoc_Method() < Integer.parseInt(splitRule[2]) || m.getCYCLO_method() > Integer.parseInt(splitRule[6])) {
-							System.out.println(m.getName_class() + ":" + "TRUEEEE");
 							longValues.add("TRUE");
-						 
-
 						}else {
-							System.out.println(m.getName_class() + ":" + "FALSEEEE");
-						 
 							longValues.add("FALSE");
 						}
-
 					}
-
 				}
 
 				// locMethod < ... || cycloMethod < ... 
@@ -264,20 +209,13 @@ public class RulesLongMethod {
 					for (Method m : a) {
 
 						if( m.getLoc_Method() < Integer.parseInt(splitRule[2]) || m.getCYCLO_method() < Integer.parseInt(splitRule[6])) {
-							System.out.println(m.getName_class() + ":" + "TRUEEEE");
 							longValues.add("TRUE");
-						 
-
 						}else {
-							System.out.println(m.getName_class() + ":" + "FALSEEEE");
-						 
 							longValues.add("FALSE");
 						}
-
 					}
-
 				}
 			}
-			}
 		}
+	}
 }
