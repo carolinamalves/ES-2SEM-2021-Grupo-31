@@ -20,7 +20,8 @@ import Support.Method;
 // TODO: Auto-generated Javadoc
 //@author grupo 31
 
-public class CodeSmellQualityClass {
+
+public class CodeSmellQualityClass { //Testa Qualidade da Class
 
 	/** The name CT. */
 	static ArrayList<String> nameCT ;
@@ -59,7 +60,7 @@ public class CodeSmellQualityClass {
 	 * Gets the theirs.
 	 *
 	 * @param path the path
-	 * @return the theirs
+
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public static void getTheirs(String path) throws IOException {
@@ -137,7 +138,6 @@ public class CodeSmellQualityClass {
 	 * Gets the ours.
 	 *
 	 * @param path the path
-	 * @return the ours
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public static void getOurs(String path) throws IOException {

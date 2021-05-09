@@ -3,6 +3,7 @@ package Support;
 // TODO: Auto-generated Javadoc
 //@author grupo 31
 
+//Cria métodos
 public class Method {
 
 	/** The name package. */
