@@ -25,7 +25,7 @@ class LOC_classTest {
 
 	@Test
 	void testContar() {
-		file="C:\\Users\\admin\\Desktop\\jasml\\jasml_0.10\\src\\com\\jasml\\classes\\Attribute.java";
+		file="C:\\Users\\Admin\\Desktop\\jasml_0.10\\src\\com\\jasml\\classes\\Attribute.java";
 		lC= new LOC_class(file);
 		assertEquals(38,lC.Contar());
 	}

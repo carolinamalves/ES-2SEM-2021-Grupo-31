@@ -55,7 +55,10 @@ public class history {
 		catch (IOException e) {
 			e.printStackTrace();
 		}
+		System.out.println(historic);
 		return historic;
+		
 	}
 
+	
 }

@@ -24,9 +24,7 @@ public class Leitura_Projetos {
 	public static int contadorClasses;
 	static ArrayList <File> file = new ArrayList<>();
 
-	public static ArrayList<File> getFicheiro() {
-		return ficheiro;
-	}
+	
 
 	public static String getDirName() { 
 		return dirName;

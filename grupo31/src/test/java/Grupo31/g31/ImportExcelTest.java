@@ -11,7 +11,7 @@ class ImportExcelTest {
 	protected File file;
 	@Test
 	void testFillData() {
-		file= new File("C:\\Users\\admin\\Desktop\\jasml\\jasml_0.10\\src\\com\\jasml\\classes\\Attribute.java");
+		file= new File("C:\\Users\\Admin\\Desktop\\src_metrics.xlsx");
 		iE=new ImportExcel();
 		iE.fillData(file);
 	}

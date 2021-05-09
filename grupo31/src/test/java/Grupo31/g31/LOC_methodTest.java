@@ -3,6 +3,7 @@ package Grupo31.g31;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
@@ -11,6 +12,7 @@ import com.github.javaparser.ParseException;
 class LOC_methodTest {
 	protected String file;
 	protected LOC_method lM;
+	protected ArrayList<Integer> a;
 	@Test
 	void testLOC_method() {
 	
@@ -22,10 +24,10 @@ class LOC_methodTest {
 	}
 
 	@Test
-	void testGetTotal() throws ParseException, IOException {
-		file="C:\\Users\\admin\\Desktop\\jasml\\jasml_0.10\\src\\com\\jasml\\classes\\Attribute.java";
+	public void testGetTotal() throws ParseException, IOException {
+		file="C:\\Users\\Admin\\Desktop\\jasml_0.10\\src\\com\\jasml\\classes\\Attribute.java";
 		lM=new LOC_method(file);
-		assertEquals(0,lM.getTotal());
+		assertEquals(a,lM.getList());
 	}
 
 

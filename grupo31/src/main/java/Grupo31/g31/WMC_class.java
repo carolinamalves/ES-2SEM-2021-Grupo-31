@@ -28,11 +28,11 @@ public class  WMC_class {
 			if (i.isExpressionStmt() || i.isIfStmt() || i.isForStmt()||i.isWhileStmt()||i.isForEachStmt())
 				contador++;
 		}
+		System.out.println(contador);
 		return contador;
+		
 	}	
 
-	public int getWMC_class() {
-		System.out.println("WMC" + contador);
-		return contador;
-	}
+	
+	
 }

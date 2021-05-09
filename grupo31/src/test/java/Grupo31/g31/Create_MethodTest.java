@@ -11,7 +11,7 @@ class Create_MethodTest {
 	protected Create_Method cm;
 	@Test
 	void testFillmethod() {
-		file= new File("C:\\Users\\admin\\Desktop\\jasml\\jasml_0.10\\src\\com\\jasml\\classes\\Attribute.java");
+		file= new File("C:\\Users\\Admin\\Desktop\\jasml_0.10\\src\\com\\jasml\\classes\\Attribute.java");
 		cm.fillmethod(file);
 	}
 

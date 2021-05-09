@@ -25,8 +25,6 @@ public class CodeSmellQualityClass {
 	static ArrayList<String> godT;
 	static ArrayList<String> godO ;
 
-	static HashMap <String, String> theirs = new HashMap<>();
-	static HashMap <String, String> ours= new HashMap<>();
 
 	static int VP;
 	static int VN;
