@@ -211,7 +211,6 @@ public class CodeSmellQualityClass {
 						if(godO.get(i).equals(godT.get(j)) && godO.get(i).equals("TRUE")) {
 							VP+=1;
 							limite = false;
-
 						}
 						if(godO.get(i).equals(godT.get(j)) && godO.get(i).equals("FALSE")) {
 							FP+=1;

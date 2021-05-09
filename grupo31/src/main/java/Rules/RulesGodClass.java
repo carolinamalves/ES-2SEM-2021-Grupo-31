@@ -12,34 +12,34 @@ public class RulesGodClass {
 
 	/** The a. */
 	static ArrayList<Method> a = Create_Method.a;
-	
+
 	/** The loc C. */
 	static String locC = "LOC_class";
-	
+
 	/** The nom C. */
 	static String nomC = "NOM_class";
-	
+
 	/** The wmc C. */
 	static String wmcC = "WMC_class";
-	
+
 	/** The maior. */
 	static String maior = ">";
-	
+
 	/** The menor. */
 	static String menor = "<";
-	
+
 	/** The and. */
 	static String and = "AND";
-	
+
 	/** The or. */
 	static String or = "OR";
-	
+
 	/** The god values. */
 	public static ArrayList <String> godValues = new ArrayList <String> (); 
-	
+
 	/** The it. */
 	static int it;
-	
+
 	/**
 	 * Rules.
 	 *
@@ -72,7 +72,6 @@ public class RulesGodClass {
 			if(splitRule[0].equals(locC) && splitRule[1].equals(menor)){
 
 				for (Method m : a) { 
-
 					if( m.getLoc_Class() < Integer.parseInt(splitRule[2])) {
 						godValues.add("TRUE");
 					}else {	
@@ -88,7 +87,6 @@ public class RulesGodClass {
 
 					if( m.getNom_Class() > Integer.parseInt(splitRule[2])) {
 						godValues.add("TRUE");
-						 
 					}else {					  
 						godValues.add("FALSE");
 					}
@@ -101,7 +99,7 @@ public class RulesGodClass {
 				for (Method m : a) { 
 					if( m.getNom_Class() < Integer.parseInt(splitRule[2])) {
 						godValues.add("TRUE");
-				
+
 					}else {	
 						godValues.add("FALSE");
 					}

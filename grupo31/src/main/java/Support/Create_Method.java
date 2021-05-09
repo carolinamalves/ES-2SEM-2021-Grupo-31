@@ -30,31 +30,31 @@ public class Create_Method {
 
 	/** The teste N. */
 	static int testeN;
-	
+
 	/** The teste loc. */
 	static int testeLoc;
 
 	/** The iterator. */
 	static int iterator = 1;
-	
+
 	/** The id. */
 	static int id = 1;
-	
+
 	/** The rownum. */
 	static int rownum = 1;
-	
+
 	/** The nom C. */
 	static int nomC;
-	
+
 	/** The workbook. */
 	static XSSFWorkbook workbook = new XSSFWorkbook();
-	
+
 	/** The sh. */
 	static XSSFSheet sh = workbook.createSheet("Metodo");
 
 	/** The row. */
 	static Row row; 
-	
+
 	/** The number of classes. */
 	static int numberOfClasses;
 
@@ -127,7 +127,6 @@ public class Create_Method {
 
 				Row row = sh.createRow(rownum++);
 				row.createCell(0).setCellValue(f.getMethodId());
-				System.out.println(f.getMethodId());
 				row.createCell(1).setCellValue(f.getName_package());
 				row.createCell(2).setCellValue(f.getName_class());
 				row.createCell(3).setCellValue(f.getName_method());
@@ -148,7 +147,6 @@ public class Create_Method {
 			workbook.write(out);
 			out.close();
 			workbook.close();
-			System.out.println("done");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -171,8 +169,6 @@ public class Create_Method {
 	locList, ArrayList<Integer> cycloList ) {
 
 		for (int t = 0; t < nomC ; t++) {
-
-			System.out.println("T:" + t + "  nom " + nomC);
 
 			Method m;
 

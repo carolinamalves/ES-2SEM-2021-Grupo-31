@@ -15,28 +15,28 @@ public class Leitura_Projetos {
 
 	/** The ficheiro. */
 	static ArrayList <File> ficheiro = new ArrayList<>();
-	
+
 	/** The dir name. */
 	static String dirName;
-	
+
 	/** The fimdojava. */
 	static ArrayList <String> fimdojava = new ArrayList<>();
-	
+
 	/** The cm. */
 	static Create_Method cm = new Create_Method();
-	
+
 	/** The pack name. */
 	static ArrayList <String> packName = new ArrayList <String>();
-	
+
 	/** The it. */
 	static int it;
-	
+
 	/** The packages. */
 	public static ArrayList <String> packages = new ArrayList<>();
-	
+
 	/** The contador classes. */
 	public static int contadorClasses;
-	
+
 	/** The file. */
 	static ArrayList <File> file = new ArrayList<>();
 
@@ -83,7 +83,6 @@ public class Leitura_Projetos {
 
 			} else if (i.isDirectory()) {
 				ficheiro.addAll(lista(i.getAbsolutePath()));
-				System.out.println("ficheiro"+ficheiro);
 			}
 		}
 		return ficheiro;

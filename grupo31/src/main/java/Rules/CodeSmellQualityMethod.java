@@ -21,25 +21,25 @@ public class CodeSmellQualityMethod {
 
 	/** The name MT. */
 	static ArrayList<String> nameMT ;
-	
+
 	/** The name MO. */
 	static ArrayList<String> nameMO ;
-	
+
 	/** The long MT. */
 	static ArrayList<String> longMT;
-	
+
 	/** The long MO. */
 	static ArrayList<String> longMO ;
 
 	/** The vp. */
 	public static int VP;
-	
+
 	/** The vn. */
 	public static int VN;
-	
+
 	/** The fp. */
 	public static int FP;
-	
+
 	/** The fn. */
 	public static int FN;
 
@@ -58,7 +58,6 @@ public class CodeSmellQualityMethod {
 		nameMT = new ArrayList<String>();
 		longMT= new ArrayList<String>();
 		String envFilePath =(path);
-
 
 		FileInputStream fileName = new FileInputStream(new File(path));
 		//int masterSheetColumnIndex = 0;
@@ -81,7 +80,6 @@ public class CodeSmellQualityMethod {
 		//Cell cell = row.getCell(0);
 		for (Cell cell : row) {
 			// Column header names.
-			//System.out.println(cell.toString());  
 			if (cell.getStringCellValue().equals(columnWanted)){
 				columnNo = cell.getColumnIndex();
 			}
@@ -96,7 +94,6 @@ public class CodeSmellQualityMethod {
 				} else {
 					nameMT.add(c.toString());
 					nameMT.set(it, c.toString());
-					//System.out.println(c);
 				}
 				it++;
 			}
@@ -107,7 +104,6 @@ public class CodeSmellQualityMethod {
 		//Cell cell = row.getCell(0);
 		for (Cell cell : rowCode) {
 			// Column header names.
-			//System.out.println(cell.toString());  
 			if (cell.getStringCellValue().equals(columnWanted2)){
 				columnNo2 = cell.getColumnIndex();
 			}
@@ -122,7 +118,6 @@ public class CodeSmellQualityMethod {
 				} else {
 					longMT.add(c.toString());
 					longMT.set(it, c.toString());
-					//System.out.println(c);
 				}
 				it++;
 			}
@@ -157,7 +152,6 @@ public class CodeSmellQualityMethod {
 		//Cell cell = row.getCell(0);
 		for (Cell cell : row) {
 			// Column header names.
-			//System.out.println(cell.toString());  
 			if (cell.getStringCellValue().equals(columnWanted)){
 				columnNo = cell.getColumnIndex();
 			}
@@ -172,12 +166,10 @@ public class CodeSmellQualityMethod {
 				} else {
 					nameMO.add(c.toString());
 					nameMO.set(it, c.toString());
-					//System.out.println(c);
 				}
 				it++;
 			}
 		}	
-
 	}
 
 	/**
