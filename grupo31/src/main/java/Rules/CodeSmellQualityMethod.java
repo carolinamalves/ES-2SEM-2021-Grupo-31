@@ -16,7 +16,7 @@ import Support.Method;
 
 // TODO: Auto-generated Javadoc
 //@author grupo 31
-
+//Testa Qualidade do método
 public class CodeSmellQualityMethod {
 
 	/** The name MT. */
@@ -50,7 +50,6 @@ public class CodeSmellQualityMethod {
 	 * Gets the theirs.
 	 *
 	 * @param path the path
-	 * @return the theirs
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public static void getTheirs(String path) throws IOException {
@@ -128,7 +127,6 @@ public class CodeSmellQualityMethod {
 	 * Gets the ours.
 	 *
 	 * @param path the path
-	 * @return the ours
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public static void getOurs(String path) throws IOException {

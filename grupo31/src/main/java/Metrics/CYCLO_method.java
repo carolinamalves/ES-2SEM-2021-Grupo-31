@@ -17,6 +17,7 @@ import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 // TODO: Auto-generated Javadoc
 //@author grupo 31
 
+//Complexidade ciclomática
 public class CYCLO_method {
 
 	/** The contador. */

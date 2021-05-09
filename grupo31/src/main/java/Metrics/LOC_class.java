@@ -6,6 +6,7 @@ import java.util.ArrayList;
 // TODO: Auto-generated Javadoc
 //@author grupo 31
 
+//Linhas de código da class
 public class LOC_class {
 
 	/** The file. */

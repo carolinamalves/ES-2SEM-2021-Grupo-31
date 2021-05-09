@@ -12,6 +12,7 @@ import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 // TODO: Auto-generated Javadoc
 //@author grupo 31
 
+//Linhas de código do Método
 public class LOC_method{
 
 	/** The ficheiro. */

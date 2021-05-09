@@ -8,6 +8,7 @@ import Support.Method;
 // TODO: Auto-generated Javadoc
 //@author grupo 31
 
+//Deteta a existência do codesmell GodClass
 public class RulesGodClass {
 
 	/** The a. */

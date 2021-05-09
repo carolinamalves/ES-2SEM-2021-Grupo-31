@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"Grupo31.g31"}];updateSearchResults();
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"Grupo31.g31"},{"l":"Metrics"},{"l":"Rules"},{"l":"Support"}];updateSearchResults();
